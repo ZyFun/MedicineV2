@@ -4,42 +4,44 @@
 //
 //  Created by Дмитрий Данилин on 05.11.2021.
 //
+// TODO: Добавить на экран кнопки добавления и сохранения новых данных и протестировать
+// TODO: ПРодолжить смотреть обучающий урок по кордате
 
 import UIKit
 
 class FirstAidKitsViewController: UITableViewController {
+    
+    // TODO: Удалить это свойство после добавления базы данных
+    var testFirstAidKit = ["Домашняя аптечка", "Аптечка в машине"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        testFirstAidKit.count
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
+        let cell = tableView.dequeueReusableCell(withIdentifier: "firstAidKit", for: indexPath)
+        
+        let firstAidKit = testFirstAidKit[indexPath.row]
+        
+        if #available(iOS 14.0, *) {
+            var content = cell.defaultContentConfiguration()
+            content.text = firstAidKit
+            
+            cell.contentConfiguration = content
+        } else {
+            // TODO: Установить симулятор 10 айфона с версией iOS 13 для проверки работоспособности этого блока кода
+            cell.textLabel?.text = firstAidKit
+        }
 
         return cell
     }
-    */
+
 
     /*
     // Override to support conditional editing of the table view.
