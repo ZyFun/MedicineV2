@@ -9,6 +9,7 @@ import CoreData
 
 final class StorageManager {
     
+    /// Глобальная точка доступа к созданному экземпляру класса (pattern Singleton)
     static let shared = StorageManager()
     
     // MARK: - Core Data stack
@@ -22,6 +23,7 @@ final class StorageManager {
         return container
     }()
     
+    // Предотвращает возможность создания других экземпляров класса, кроме той, что создана в классе (pattern Singleton)
     private init() {}
 
 }
@@ -34,8 +36,6 @@ extension StorageManager {
             do {
                 try context.save()
             } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
