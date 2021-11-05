@@ -14,6 +14,7 @@
 		2C52BDC7273540F600356A63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C52BDC6273540F600356A63 /* Assets.xcassets */; };
 		2C52BDCA273540F600356A63 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C52BDC8273540F600356A63 /* LaunchScreen.storyboard */; };
 		2C52BDD52735481400356A63 /* FirstAidKitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C52BDD42735481400356A63 /* FirstAidKitsViewController.swift */; };
+		2C60890927356B6400E66081 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60890827356B6400E66081 /* StorageManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		2C52BDC9273540F600356A63 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2C52BDCB273540F600356A63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C52BDD42735481400356A63 /* FirstAidKitsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAidKitsViewController.swift; sourceTree = "<group>"; };
+		2C60890827356B6400E66081 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 		2C52BDD927355DEE00356A63 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				2C60890827356B6400E66081 /* StorageManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -199,6 +202,7 @@
 			files = (
 				2C52BDC5273540F400356A63 /* MedicineV2.xcdatamodeld in Sources */,
 				2C52BDBB273540F400356A63 /* AppDelegate.swift in Sources */,
+				2C60890927356B6400E66081 /* StorageManager.swift in Sources */,
 				2C52BDD52735481400356A63 /* FirstAidKitsViewController.swift in Sources */,
 				2C52BDBD273540F400356A63 /* SceneDelegate.swift in Sources */,
 			);
