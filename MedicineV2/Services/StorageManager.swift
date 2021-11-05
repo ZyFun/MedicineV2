@@ -24,8 +24,10 @@ final class StorageManager {
     
     private init() {}
 
-    // MARK: - Core Data Saving support
+}
 
+// MARK: - Core Data Saving support
+extension StorageManager {
     func saveContext () {
         let context = persistentContainer.viewContext
         if context.hasChanges {
