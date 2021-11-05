@@ -25,8 +25,14 @@ final class StorageManager {
         return container
     }()
     
-    // Предотвращает возможность создания других экземпляров класса, кроме той, что создана в классе (pattern Singleton)
-    private init() {}
+    ///  Область для работы с данными базы данных, в оперативной памяти
+    private let viewContext: NSManagedObjectContext
+    
+    // Предотвращаем возможность создания других экземпляров класса, кроме той, что создана в классе (pattern Singleton)
+    private init() {
+        // Обращаемся к контейнеру, чтобы получить данные из базы
+        viewContext = persistentContainer.viewContext
+    }
 
 }
 
