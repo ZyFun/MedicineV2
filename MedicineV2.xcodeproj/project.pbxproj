@@ -10,7 +10,7 @@
 		2C52BDBB273540F400356A63 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C52BDBA273540F400356A63 /* AppDelegate.swift */; };
 		2C52BDBD273540F400356A63 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C52BDBC273540F400356A63 /* SceneDelegate.swift */; };
 		2C52BDC2273540F400356A63 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C52BDC0273540F400356A63 /* Main.storyboard */; };
-		2C52BDC5273540F400356A63 /* MedicineV2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2C52BDC3273540F400356A63 /* MedicineV2.xcdatamodeld */; };
+		2C52BDC5273540F400356A63 /* Medicine.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2C52BDC3273540F400356A63 /* Medicine.xcdatamodeld */; };
 		2C52BDC7273540F600356A63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C52BDC6273540F600356A63 /* Assets.xcassets */; };
 		2C52BDCA273540F600356A63 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C52BDC8273540F600356A63 /* LaunchScreen.storyboard */; };
 		2C52BDD52735481400356A63 /* FirstAidKitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C52BDD42735481400356A63 /* FirstAidKitsViewController.swift */; };
@@ -82,7 +82,7 @@
 		2C52BDD727355CA600356A63 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				2C52BDC3273540F400356A63 /* MedicineV2.xcdatamodeld */,
+				2C52BDC3273540F400356A63 /* Medicine.xcdatamodeld */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -200,7 +200,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C52BDC5273540F400356A63 /* MedicineV2.xcdatamodeld in Sources */,
+				2C52BDC5273540F400356A63 /* Medicine.xcdatamodeld in Sources */,
 				2C52BDBB273540F400356A63 /* AppDelegate.swift in Sources */,
 				2C60890927356B6400E66081 /* StorageManager.swift in Sources */,
 				2C52BDD52735481400356A63 /* FirstAidKitsViewController.swift in Sources */,
@@ -430,13 +430,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		2C52BDC3273540F400356A63 /* MedicineV2.xcdatamodeld */ = {
+		2C52BDC3273540F400356A63 /* Medicine.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				2C52BDC4273540F400356A63 /* MedicineV2.xcdatamodel */,
 			);
 			currentVersion = 2C52BDC4273540F400356A63 /* MedicineV2.xcdatamodel */;
-			path = MedicineV2.xcdatamodeld;
+			path = Medicine.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
