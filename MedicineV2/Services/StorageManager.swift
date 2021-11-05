@@ -7,6 +7,13 @@
 
 import CoreData
 
+protocol StorageManagerProtocol {
+    func saveData()
+    func fetchData()
+    func editData()
+    func deleteData()
+}
+
 /// Все действия с базой данных происходят через экземпляр этого класса (Singleton)
 final class StorageManager {
     
