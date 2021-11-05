@@ -9,23 +9,23 @@
 /* Begin PBXBuildFile section */
 		2C52BDBB273540F400356A63 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C52BDBA273540F400356A63 /* AppDelegate.swift */; };
 		2C52BDBD273540F400356A63 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C52BDBC273540F400356A63 /* SceneDelegate.swift */; };
-		2C52BDBF273540F400356A63 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C52BDBE273540F400356A63 /* ViewController.swift */; };
 		2C52BDC2273540F400356A63 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C52BDC0273540F400356A63 /* Main.storyboard */; };
 		2C52BDC5273540F400356A63 /* MedicineV2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2C52BDC3273540F400356A63 /* MedicineV2.xcdatamodeld */; };
 		2C52BDC7273540F600356A63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C52BDC6273540F600356A63 /* Assets.xcassets */; };
 		2C52BDCA273540F600356A63 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C52BDC8273540F600356A63 /* LaunchScreen.storyboard */; };
+		2C52BDD52735481400356A63 /* FirstAidKitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C52BDD42735481400356A63 /* FirstAidKitsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2C52BDB7273540F400356A63 /* MedicineV2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MedicineV2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C52BDBA273540F400356A63 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2C52BDBC273540F400356A63 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		2C52BDBE273540F400356A63 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2C52BDC1273540F400356A63 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2C52BDC4273540F400356A63 /* MedicineV2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MedicineV2.xcdatamodel; sourceTree = "<group>"; };
 		2C52BDC6273540F600356A63 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2C52BDC9273540F600356A63 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2C52BDCB273540F600356A63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2C52BDD42735481400356A63 /* FirstAidKitsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAidKitsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,16 +58,72 @@
 		2C52BDB9273540F400356A63 /* MedicineV2 */ = {
 			isa = PBXGroup;
 			children = (
-				2C52BDBA273540F400356A63 /* AppDelegate.swift */,
-				2C52BDBC273540F400356A63 /* SceneDelegate.swift */,
-				2C52BDBE273540F400356A63 /* ViewController.swift */,
-				2C52BDC0273540F400356A63 /* Main.storyboard */,
-				2C52BDC6273540F600356A63 /* Assets.xcassets */,
-				2C52BDC8273540F600356A63 /* LaunchScreen.storyboard */,
-				2C52BDCB273540F600356A63 /* Info.plist */,
-				2C52BDC3273540F400356A63 /* MedicineV2.xcdatamodeld */,
+				2C52BDD627355C2C00356A63 /* ViewControllers */,
+				2C52BDD727355CA600356A63 /* Models */,
+				2C52BDD927355DEE00356A63 /* Services */,
+				2C52BDD827355DA400356A63 /* Supports */,
+				2C52BDDA27355E0900356A63 /* Views */,
+				2C52BDDC27355E3600356A63 /* Recources */,
+				2C52BDDB27355E1700356A63 /* Screenshots */,
 			);
 			path = MedicineV2;
+			sourceTree = "<group>";
+		};
+		2C52BDD627355C2C00356A63 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				2C52BDD42735481400356A63 /* FirstAidKitsViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		2C52BDD727355CA600356A63 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2C52BDC3273540F400356A63 /* MedicineV2.xcdatamodeld */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		2C52BDD827355DA400356A63 /* Supports */ = {
+			isa = PBXGroup;
+			children = (
+				2C52BDBA273540F400356A63 /* AppDelegate.swift */,
+				2C52BDBC273540F400356A63 /* SceneDelegate.swift */,
+				2C52BDCB273540F600356A63 /* Info.plist */,
+			);
+			path = Supports;
+			sourceTree = "<group>";
+		};
+		2C52BDD927355DEE00356A63 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		2C52BDDA27355E0900356A63 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2C52BDC0273540F400356A63 /* Main.storyboard */,
+				2C52BDC8273540F600356A63 /* LaunchScreen.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2C52BDDB27355E1700356A63 /* Screenshots */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Screenshots;
+			sourceTree = "<group>";
+		};
+		2C52BDDC27355E3600356A63 /* Recources */ = {
+			isa = PBXGroup;
+			children = (
+				2C52BDC6273540F600356A63 /* Assets.xcassets */,
+			);
+			path = Recources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,9 +197,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C52BDBF273540F400356A63 /* ViewController.swift in Sources */,
 				2C52BDC5273540F400356A63 /* MedicineV2.xcdatamodeld in Sources */,
 				2C52BDBB273540F400356A63 /* AppDelegate.swift in Sources */,
+				2C52BDD52735481400356A63 /* FirstAidKitsViewController.swift in Sources */,
 				2C52BDBD273540F400356A63 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
