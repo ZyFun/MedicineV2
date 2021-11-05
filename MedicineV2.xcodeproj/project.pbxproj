@@ -355,7 +355,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B66N983M7Q;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MedicineV2/Info.plist;
+				INFOPLIST_FILE = MedicineV2/Supports/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Аптечка";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -385,7 +385,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B66N983M7Q;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MedicineV2/Info.plist;
+				INFOPLIST_FILE = MedicineV2/Supports/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Аптечка";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
