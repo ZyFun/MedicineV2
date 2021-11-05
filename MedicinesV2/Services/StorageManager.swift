@@ -23,7 +23,7 @@ final class StorageManager {
     // MARK: - Core Data stack
     /// Это точка входа в базу данных. Все действия с базой происходят через это свойство
     var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "Medicine")
+        let container = NSPersistentContainer(name: "Medicines")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
