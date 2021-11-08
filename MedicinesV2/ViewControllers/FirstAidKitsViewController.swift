@@ -6,6 +6,7 @@
 //
 // TODO: Добавить на экран кнопки добавления и сохранения новых данных и протестировать
 // TODO: ПРодолжить смотреть обучающий урок по кордате
+// TODO: Перенести настройки лаунч скрина с прошлого проекта. Но цвета взять из примера подборки
 
 import UIKit
 
@@ -35,7 +36,6 @@ class FirstAidKitsViewController: UITableViewController {
             
             cell.contentConfiguration = content
         } else {
-            // TODO: Установить симулятор 10 айфона с версией iOS 13 для проверки работоспособности этого блока кода
             cell.textLabel?.text = firstAidKit
         }
 
