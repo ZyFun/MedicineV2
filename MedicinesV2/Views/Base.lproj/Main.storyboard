@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,7 +12,7 @@
         <!--Аптечки-->
         <scene sceneID="Lgd-lV-KcP">
             <objects>
-                <tableViewController id="ZVA-ue-WwT" customClass="FirstAidKitsViewController" customModule="MedicineV2" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="ZVA-ue-WwT" customClass="FirstAidKitsViewController" customModule="MedicinesV2" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="Whi-eb-PdI">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -40,11 +41,54 @@
                             <outlet property="delegate" destination="ZVA-ue-WwT" id="jtn-fL-L48"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Аптечки" id="bw1-SN-UmR"/>
+                    <navigationItem key="navigationItem" title="Аптечки" id="bw1-SN-UmR">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="f3s-rS-3ip">
+                            <connections>
+                                <segue destination="RKd-Ha-EFz" kind="show" id="HzN-fc-czI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IZC-2d-21q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="823" y="159"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="bPM-s4-eZQ">
+            <objects>
+                <viewController id="RKd-Ha-EFz" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="18z-4g-kX8">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QM1-7t-xrM">
+                                <rect key="frame" x="30" y="431" width="354" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="klM-ml-Y9L">
+                                <rect key="frame" x="145.5" y="481" width="123" height="38"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Сохранить">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="20"/>
+                                </buttonConfiguration>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="2hv-hw-KK9"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="klM-ml-Y9L" firstAttribute="top" secondItem="QM1-7t-xrM" secondAttribute="bottom" constant="16" id="AEf-pk-CHn"/>
+                            <constraint firstItem="klM-ml-Y9L" firstAttribute="centerX" secondItem="18z-4g-kX8" secondAttribute="centerX" id="TJE-dF-mOE"/>
+                            <constraint firstItem="2hv-hw-KK9" firstAttribute="trailing" secondItem="QM1-7t-xrM" secondAttribute="trailing" constant="30" id="YwE-GI-ZP5"/>
+                            <constraint firstItem="QM1-7t-xrM" firstAttribute="leading" secondItem="2hv-hw-KK9" secondAttribute="leading" constant="30" id="e9R-nA-Qcb"/>
+                            <constraint firstItem="QM1-7t-xrM" firstAttribute="centerY" secondItem="18z-4g-kX8" secondAttribute="centerY" id="jtn-iB-ZBI"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="RNX-gs-dVj"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="448-8D-7As" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1652" y="159"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="8kd-y4-2XJ">
