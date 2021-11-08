@@ -4,7 +4,6 @@
 //
 //  Created by Дмитрий Данилин on 05.11.2021.
 //
-// TODO: Добавить на экран кнопки добавления и сохранения новых данных, а так же тестовый экран добавления задачи и протестировать
 // TODO: ПРодолжить смотреть обучающий урок по кордате
 // TODO: Перенести настройки лаунч скрина с прошлого проекта. Но цвета взять из примера подборки
 
@@ -18,6 +17,12 @@ class FirstAidKitsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+    }
+    
+    // Использую только в случае добавления данных на стороннем экране.
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
     }
 
     // MARK: - Table view data source
@@ -78,14 +83,10 @@ class FirstAidKitsViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        guard let addNewAidKit = segue.destination as? NewFirstAidKitViewController else { return }
+        addNewAidKit.newAidKit = testFirstAidKit
     }
-    */
 
 }
