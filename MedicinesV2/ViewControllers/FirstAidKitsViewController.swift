@@ -4,14 +4,13 @@
 //
 //  Created by Дмитрий Данилин on 05.11.2021.
 //
-// TODO: ПРодолжить смотреть обучающий урок по кордате
+// TODO: Продолжить смотреть обучающий урок по кордате
 // TODO: Перенести настройки лаунч скрина с прошлого проекта. Но цвета взять из примера подборки
 
 import UIKit
 
 class FirstAidKitsViewController: UITableViewController {
     
-    // TODO: Удалить это свойство после добавления базы данных
     var firstAidKits: [FirstAidKit] = []
 
     override func viewDidLoad() {

@@ -83,7 +83,7 @@ extension StorageManager: StorageManagerProtocol {
     }
     
     /// Метод загрузки данных из базы в память устройства
-    /// - Parameter completion: загружает данные из базы данных и сохраняет их в массив, с обработкой возможных ошибок
+    /// - Parameter completion: загружает данные из базы данных и сохраняет их в массив, возвращая экземпляр перечислений с обработкой ошибок, где в ответе приходит массив аптечек из базы
     func fetchData(completion: (Result<[FirstAidKit], Error>) -> Void) {
         let fetchRequest = FirstAidKit.fetchRequest()
         
