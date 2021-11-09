@@ -12,7 +12,7 @@ import UIKit
 class FirstAidKitsViewController: UITableViewController {
     
     // TODO: Удалить это свойство после добавления базы данных
-    var testFirstAidKit = ["Домашняя аптечка", "Аптечка в машине"]
+    var firstAidKits: [FirstAidKit] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,26 +22,26 @@ class FirstAidKitsViewController: UITableViewController {
     // Использую только в случае добавления данных на стороннем экране.
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        getFirstAidKits()
         tableView.reloadData()
     }
 
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        testFirstAidKit.count
+        firstAidKits.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "firstAidKit", for: indexPath)
-        
-        let firstAidKit = testFirstAidKit[indexPath.row]
+        let firstAidKit = firstAidKits[indexPath.row]
         
         if #available(iOS 14.0, *) {
             var content = cell.defaultContentConfiguration()
-            content.text = firstAidKit
+            content.text = firstAidKit.title
             
             cell.contentConfiguration = content
         } else {
-            cell.textLabel?.text = firstAidKit
+            cell.textLabel?.text = firstAidKit.title
         }
 
         return cell
@@ -86,7 +86,21 @@ class FirstAidKitsViewController: UITableViewController {
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let addNewAidKit = segue.destination as? NewFirstAidKitViewController else { return }
-        addNewAidKit.newAidKit = testFirstAidKit
+        addNewAidKit.newAidKit = firstAidKits
     }
 
+}
+
+// MARK: Работа с базой данных
+private extension FirstAidKitsViewController {
+    func getFirstAidKits() {
+        StorageManager.shared.fetchData { result in
+            switch result {
+            case .success(let firstAidKits):
+                self.firstAidKits = firstAidKits
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
 }
