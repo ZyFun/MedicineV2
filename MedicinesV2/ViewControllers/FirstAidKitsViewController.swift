@@ -83,15 +83,21 @@ class FirstAidKitsViewController: UITableViewController {
     }
     */
 
-    // MARK: - Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let addNewAidKit = segue.destination as? NewFirstAidKitViewController else { return }
-        addNewAidKit.newAidKit = firstAidKits
+//    // MARK: - Navigation
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        guard let addNewAidKit = segue.destination as? NewFirstAidKitViewController else { return }
+//        addNewAidKit.newAidKit = firstAidKits
+//    }
+    
+    // MARK: - IBActions
+    @IBAction func addNewFirstAidKit() {
+        showAlert(title: "Добавить аптечку",
+                  message: "Введите название или расположение новой аптечки")
     }
 
 }
 
-// MARK: Работа с базой данных
+// MARK: - Работа с базой данных
 private extension FirstAidKitsViewController {
     func getFirstAidKits() {
         StorageManager.shared.fetchData { result in
@@ -102,5 +108,39 @@ private extension FirstAidKitsViewController {
                 print(error)
             }
         }
+    }
+    
+    
+    /// Сохранение новой аптечки
+    /// - Parameter firstAidKitName: свойство принимает название добавляемой аптечки, для его дальнейшего сохранения в базу.
+    func save(_ firstAidKitName: String) {
+        StorageManager.shared.saveData(firstAidKitName) { firstAidKit in
+            firstAidKits.append(firstAidKit)
+        }
+        /// Индекс строки последней ячейки в таблице
+        let cellIndex = IndexPath(row: firstAidKits.count - 1, section: 0)
+        tableView.insertRows(at: [cellIndex], with: .automatic)
+    }
+}
+
+// MARK: - Работа с alert controller для добавления новых аптечек
+private extension FirstAidKitsViewController {
+    func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let saveAction = UIAlertAction(title: "Сохранить", style: .default) { [unowned self] _ in
+            guard let firstAidKit = alert.textFields?.first?.text,
+                  !firstAidKit.isEmpty else { return }
+            save(firstAidKit)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Отмена", style: .destructive)
+        
+        alert.addAction(saveAction)
+        alert.addAction(cancelAction)
+        alert.addTextField { textField in
+            textField.placeholder = "Название новой аптечки"
+        }
+        
+        present(alert, animated: true)
     }
 }
