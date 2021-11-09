@@ -11,8 +11,8 @@ import CoreData
 protocol StorageManagerProtocol {
     func saveData(_ firstAidKitName: String, completion: (FirstAidKit) -> Void)
     func fetchData(completion: (Result<[FirstAidKit], Error>) -> Void)
-    func editData()
-    func deleteData()
+    func editData(_ firstAidKit: FirstAidKit, newName: String)
+    func deleteData(_ firstAidKit: FirstAidKit)
 }
 
 /// Все действия с базой данных происходят через экземпляр этого класса (Singleton)
@@ -47,7 +47,7 @@ final class StorageManager {
 // MARK: - Core Data Saving support
 extension StorageManager {
     
-    /// Метод, который производит сохранение данных, если были какие либо изменения в данных
+    /// Метод, который производит сохранение данных, если были какие либо изменения в данных. Хороший способ применения, сохранение при закрытии приложения.
     func saveContext () {
         let context = persistentContainer.viewContext
         if context.hasChanges {
@@ -61,16 +61,29 @@ extension StorageManager {
     }
 }
 
-// MARK: - Методы для всех действий с базой данных
+// MARK: - Методы для действий с базой данных
 extension StorageManager: StorageManagerProtocol {
+    /// Метод для сохранения данных в базу данных
+    /// - Parameters:
+    ///   - firstAidKitName: принимает название аптечки, которое будет сохранено в базу
+    ///   - completion: возвращает вновь созданный объект, для его присвоения массиву аптечек и отображения в таблице
     func saveData(_ firstAidKitName: String, completion: (FirstAidKit) -> Void) {
+        
+        // Этот код предпочтительнее использовать, если работа идет с множеством различных контекстов и типов данных, чтобы подтянуть всю необходимую информацию.
+        // Но как применять всё это на практике, я пока не знаю.
+        /*
         guard let entityDescription = NSEntityDescription.entity(forEntityName: "FirstAidKit", in: viewContext) else { return }
         guard let firstAidKit = NSManagedObject(entity: entityDescription, insertInto: viewContext) as? FirstAidKit else { return }
+        */
+        
+        let firstAidKit = FirstAidKit(context: viewContext)
         firstAidKit.title = firstAidKitName
         completion(firstAidKit)
         saveContext()
     }
     
+    /// Метод загрузки данных из базы в память устройства
+    /// - Parameter completion: загружает данные из базы данных и сохраняет их в массив, с обработкой возможных ошибок
     func fetchData(completion: (Result<[FirstAidKit], Error>) -> Void) {
         let fetchRequest = FirstAidKit.fetchRequest()
         
@@ -82,12 +95,20 @@ extension StorageManager: StorageManagerProtocol {
         }
     }
     
-    func editData() {
-        
+    /// Метод для изменения значения аптечки
+    /// - Parameters:
+    ///   - firstAidKit: принимает аптечку со старым названием
+    ///   - newName: принимает новое название аптечки и заменяет старое
+    func editData(_ firstAidKit: FirstAidKit, newName: String) {
+        firstAidKit.title = newName
+        saveContext()
     }
     
-    func deleteData() {
-        
+    /// Метод для удаления аптечки из базы
+    /// - Parameter firstAidKit: принимает аптечку, которая будет удалена из базы
+    func deleteData(_ firstAidKit: FirstAidKit) {
+        viewContext.delete(firstAidKit)
+        saveContext()
     }
     
 }
