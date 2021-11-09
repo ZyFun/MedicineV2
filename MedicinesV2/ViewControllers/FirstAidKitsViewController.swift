@@ -45,6 +45,11 @@ class FirstAidKitsViewController: UITableViewController {
 
         return cell
     }
+    
+    // Работа с нажатием на ячейку
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 
 
     /*
