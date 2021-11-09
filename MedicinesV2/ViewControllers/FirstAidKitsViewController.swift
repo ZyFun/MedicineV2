@@ -11,18 +11,16 @@ import UIKit
 
 class FirstAidKitsViewController: UITableViewController {
     
-    var firstAidKits: [FirstAidKit] = []
+    private var firstAidKits: [FirstAidKit] = []
 
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-    }
-    
-    // Использую только в случае добавления данных на стороннем экране.
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         getFirstAidKits()
-        tableView.reloadData()
+        
+        // MARK: Актуально для iOS ниже 15 версии. Удалить после прекращения поддержки этих версий
+        tableView.tableFooterView = UIView()
     }
 
     // MARK: - Table view data source
