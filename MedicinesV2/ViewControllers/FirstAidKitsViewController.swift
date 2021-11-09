@@ -19,7 +19,7 @@ class FirstAidKitsViewController: UITableViewController {
 
         getFirstAidKits()
         
-        // MARK: Актуально для iOS ниже 15 версии. Удалить после прекращения поддержки этих версий
+        // MARK: Актуально для iOS ниже 15 версии. Можно удалить после прекращения поддержки этих версий
         tableView.tableFooterView = UIView()
     }
 
