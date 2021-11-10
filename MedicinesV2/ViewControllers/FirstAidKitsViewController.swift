@@ -17,10 +17,8 @@ class FirstAidKitsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupTableView()
         getFirstAidKits()
-        
-        // MARK: Актуально для iOS ниже 15 версии. Можно удалить после прекращения поддержки этих версий
-        tableView.tableFooterView = UIView()
     }
 
     // MARK: - Table view data source
@@ -110,6 +108,14 @@ class FirstAidKitsViewController: UITableViewController {
                   message: "Введите название или расположение новой аптечки")
     }
 
+}
+
+// MARK: - Настройки таблицы
+private extension FirstAidKitsViewController {
+    func setupTableView() {
+        // MARK: Актуально для iOS ниже 15 версии. Можно удалить после прекращения поддержки этих версий
+        tableView.tableFooterView = UIView()
+    }
 }
 
 // MARK: - Работа с базой данных
