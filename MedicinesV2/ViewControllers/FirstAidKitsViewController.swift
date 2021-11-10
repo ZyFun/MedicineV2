@@ -4,7 +4,6 @@
 //
 //  Created by Дмитрий Данилин on 05.11.2021.
 //
-// TODO: Продолжить смотреть обучающий урок по кордате
 // TODO: Перенести настройки лаунч скрина с прошлого проекта. Но цвета взять из примера подборки
 
 import UIKit
@@ -137,6 +136,28 @@ private extension FirstAidKitsViewController {
     }
 }
 
+// MARK: - Работа с alert controller для добавления новых аптечек
+private extension FirstAidKitsViewController {
+    /// Метод для отображения кастомного алерт контроллера добавления или редактирования аптечки
+    /// - Parameters:
+    ///   - firstAidKit: принимает аптечку (опционально)
+    ///   - completion: используется для вызова перезагрузки таблицы (опционально)
+    func showAlert(firstAidKit: FirstAidKit? = nil, completion: (() -> Void)? = nil) {
+        let title = firstAidKit == nil ? "Добавить аптечку" : "Изменить название"
+        let alert = UIAlertController.createAlertController(with: title)
+        
+        alert.action(firstAidKit: firstAidKit) { [unowned self] firstAidKitName in
+            if let firstAidKit = firstAidKit, let completion = completion {
+                StorageManager.shared.editData(firstAidKit, newName: firstAidKitName)
+                completion()
+            } else {
+                save(firstAidKitName)
+            }
+        }
+        present(alert, animated: true)
+    }
+}
+
 // MARK: - Работа с базой данных
 private extension FirstAidKitsViewController {
     /// Метод для загрузки данных из базы данных в оперативную память
@@ -161,27 +182,5 @@ private extension FirstAidKitsViewController {
         /// Индекс строки последней ячейки в таблице
         let cellIndex = IndexPath(row: firstAidKits.count - 1, section: 0)
         tableView.insertRows(at: [cellIndex], with: .automatic)
-    }
-}
-
-// MARK: - Работа с alert controller для добавления новых аптечек
-private extension FirstAidKitsViewController {
-    /// Метод для отображения кастомного алерт контроллера добавления или редактирования аптечки
-    /// - Parameters:
-    ///   - firstAidKit: принимает аптечку (опционально)
-    ///   - completion: используется для вызова перезагрузки таблицы (опционально)
-    func showAlert(firstAidKit: FirstAidKit? = nil, completion: (() -> Void)? = nil) {
-        let title = firstAidKit == nil ? "Добавить аптечку" : "Изменить название"
-        let alert = UIAlertController.createAlertController(with: title)
-        
-        alert.action(firstAidKit: firstAidKit) { [unowned self] firstAidKitName in
-            if let firstAidKit = firstAidKit, let completion = completion {
-                StorageManager.shared.editData(firstAidKit, newName: firstAidKitName)
-                completion()
-            } else {
-                save(firstAidKitName)
-            }
-        }
-        present(alert, animated: true)
     }
 }
