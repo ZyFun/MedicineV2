@@ -48,6 +48,20 @@ class FirstAidKitsViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    // TODO: Использовать этот метод, когда потребуется дополнительный функционал свайпа по ячейке
+    /*
+    // Метод позволяет настроить пользовательские действия, при свайпе ячейки с права на лево
+    // Настроено только удаление ячейки
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Удалить") { [unowned self] _, _, _ in
+            let firstAidKit = firstAidKits[indexPath.row]
+            StorageManager.shared.deleteData(firstAidKit)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+        return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
+     */
 
 
     /*
@@ -58,17 +72,16 @@ class FirstAidKitsViewController: UITableViewController {
     }
     */
 
-    /*
-    // Override to support editing the table view.
+    // Удаление аптечки
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
+            // TODO: После добавления уведомлений, не забыть добавить очистку очереди (посмотреть код из аналогичного метода старой версии)
+            let firstAidKit = firstAidKits[indexPath.row]
+            firstAidKits.remove(at: indexPath.row)
+            StorageManager.shared.deleteData(firstAidKit)
             tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
     }
-    */
 
     /*
     // Override to support rearranging the table view.
