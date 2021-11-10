@@ -8,8 +8,10 @@
 
 import UIKit
 
+/// Класс viewController-а для экрана со списком аптечек
 class FirstAidKitsViewController: UITableViewController {
     
+    // MARK: - Private Properties
     private var firstAidKits: [FirstAidKit] = []
 
     // MARK: - Life Cycle
@@ -140,7 +142,7 @@ private extension FirstAidKitsViewController {
 private extension FirstAidKitsViewController {
     /// Метод для отображения кастомного алерт контроллера добавления или редактирования аптечки
     /// - Parameters:
-    ///   - firstAidKit: принимает аптечку (опционально)
+    ///   - firstAidKit: принимает аптечку (опционально). Заголовок алерта зависит от того была инициализирована аптечка или нет
     ///   - completion: используется для вызова перезагрузки таблицы (опционально)
     func showAlert(firstAidKit: FirstAidKit? = nil, completion: (() -> Void)? = nil) {
         let title = firstAidKit == nil ? "Добавить аптечку" : "Изменить название"

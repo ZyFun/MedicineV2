@@ -8,6 +8,7 @@
 
 import CoreData
 
+/// Протокол для работы с базой данных
 protocol StorageManagerProtocol {
     func saveData(_ firstAidKitName: String, completion: (FirstAidKit) -> Void)
     func fetchData(completion: (Result<[FirstAidKit], Error>) -> Void)
