@@ -114,6 +114,7 @@ class FirstAidKitsViewController: UITableViewController {
 
 // MARK: - Работа с базой данных
 private extension FirstAidKitsViewController {
+    /// Метод для загрузки данных из базы данных в оперативную память
     func getFirstAidKits() {
         StorageManager.shared.fetchData { result in
             switch result {
@@ -140,6 +141,10 @@ private extension FirstAidKitsViewController {
 
 // MARK: - Работа с alert controller для добавления новых аптечек
 private extension FirstAidKitsViewController {
+    /// Отображение алерта для добавления аптечки
+    /// - Parameters:
+    ///   - title: Заголовок алерта
+    ///   - message: Сообщение для пользователя
     func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let saveAction = UIAlertAction(title: "Сохранить", style: .default) { [unowned self] _ in
