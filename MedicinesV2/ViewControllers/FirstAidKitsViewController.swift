@@ -60,6 +60,23 @@ class FirstAidKitsViewController: UITableViewController {
         return UISwipeActionsConfiguration(actions: [deleteAction])
     }
      */
+    
+    // Редактирование названия
+    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let firstAidKit = firstAidKits[indexPath.row]
+        
+        let editAction = UIContextualAction(style: .normal, title: "Изменить") { [unowned self] _, _, _ in
+            showAlert(firstAidKit: firstAidKit) {
+                tableView.reloadRows(at: [indexPath], with: .automatic)
+            }
+        }
+        
+        // Настройка конпок действий
+        editAction.backgroundColor = .systemOrange
+        
+        return UISwipeActionsConfiguration(actions: [editAction])
+    }
 
 
     /*
@@ -104,8 +121,7 @@ class FirstAidKitsViewController: UITableViewController {
     
     // MARK: - IBActions
     @IBAction func addNewFirstAidKit() {
-        showAlert(title: "Добавить аптечку",
-                  message: "Введите название или расположение новой аптечки")
+        showAlert()
     }
 
 }
@@ -147,26 +163,22 @@ private extension FirstAidKitsViewController {
 
 // MARK: - Работа с alert controller для добавления новых аптечек
 private extension FirstAidKitsViewController {
-    /// Отображение алерта для добавления аптечки
+    /// Метод для отображения кастомного алерт контроллера добавления или редактирования аптечки
     /// - Parameters:
-    ///   - title: Заголовок алерта
-    ///   - message: Сообщение для пользователя
-    func showAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let saveAction = UIAlertAction(title: "Сохранить", style: .default) { [unowned self] _ in
-            guard let firstAidKit = alert.textFields?.first?.text,
-                  !firstAidKit.isEmpty else { return }
-            save(firstAidKit)
+    ///   - firstAidKit: принимает аптечку (опционально)
+    ///   - completion: используется для вызова перезагрузки таблицы (опционально)
+    func showAlert(firstAidKit: FirstAidKit? = nil, completion: (() -> Void)? = nil) {
+        let title = firstAidKit == nil ? "Добавить аптечку" : "Изменить название"
+        let alert = UIAlertController.createAlertController(with: title)
+        
+        alert.action(firstAidKit: firstAidKit) { [unowned self] firstAidKitName in
+            if let firstAidKit = firstAidKit, let completion = completion {
+                StorageManager.shared.editData(firstAidKit, newName: firstAidKitName)
+                completion()
+            } else {
+                save(firstAidKitName)
+            }
         }
-        
-        let cancelAction = UIAlertAction(title: "Отмена", style: .destructive)
-        
-        alert.addAction(saveAction)
-        alert.addAction(cancelAction)
-        alert.addTextField { textField in
-            textField.placeholder = "Название новой аптечки"
-        }
-        
         present(alert, animated: true)
     }
 }
