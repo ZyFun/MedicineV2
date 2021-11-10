@@ -66,10 +66,13 @@ class FirstAidKitsViewController: UITableViewController {
         
         let firstAidKit = firstAidKits[indexPath.row]
         
-        let editAction = UIContextualAction(style: .normal, title: "Изменить") { [unowned self] _, _, _ in
+        let editAction = UIContextualAction(style: .normal, title: "Изменить") { [unowned self] _, _, isDone in
             showAlert(firstAidKit: firstAidKit) {
                 tableView.reloadRows(at: [indexPath], with: .automatic)
             }
+            
+            // Возвращаем значение в убегающее замыкание, чтобы отпустить интерфейс при пользовательских действиях с ячейкой
+            isDone(true)
         }
         
         // Настройка конпок действий
