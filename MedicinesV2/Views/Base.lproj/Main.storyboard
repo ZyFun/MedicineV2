@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -34,7 +35,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="NvC-sp-wje" kind="show" id="Vjd-0F-wR4"/>
+                                    <segue destination="H53-Bb-kUQ" kind="show" id="SGu-gR-6j6"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -56,33 +57,32 @@
             <point key="canvasLocation" x="823" y="159"/>
         </scene>
         <!--Название аптечки-->
-        <scene sceneID="ncA-cl-mtv">
+        <scene sceneID="5Vn-WA-Ah6">
             <objects>
-                <tableViewController id="NvC-sp-wje" customClass="MedicinesTableViewController" customModule="MedicinesV2" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="tHa-qh-i3L">
+                <viewController id="H53-Bb-kUQ" customClass="MedicinesViewController" customModule="MedicinesV2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="s99-TM-e1v">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="QjF-04-4Wy">
+                                <rect key="frame" x="0.0" y="140" width="414" height="722"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ycX-77-IKH"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Medicine" id="Eet-hc-wY6">
-                                <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Eet-hc-wY6" id="AUh-JC-PFs">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="NvC-sp-wje" id="9BB-Db-uwh"/>
-                            <outlet property="delegate" destination="NvC-sp-wje" id="LAE-Xi-rUp"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Название аптечки" id="SU0-Lw-1hs"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tkt-Hy-ZNc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                        <constraints>
+                            <constraint firstItem="QjF-04-4Wy" firstAttribute="leading" secondItem="ycX-77-IKH" secondAttribute="leading" id="7mL-JX-Cvx"/>
+                            <constraint firstItem="QjF-04-4Wy" firstAttribute="top" secondItem="ycX-77-IKH" secondAttribute="top" id="WwT-KS-C0T"/>
+                            <constraint firstItem="QjF-04-4Wy" firstAttribute="bottom" secondItem="ycX-77-IKH" secondAttribute="bottom" id="may-Fv-Gm2"/>
+                            <constraint firstItem="QjF-04-4Wy" firstAttribute="trailing" secondItem="ycX-77-IKH" secondAttribute="trailing" id="rT5-XB-03k"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Название аптечки" id="hNd-h0-6FP"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dZs-bH-pve" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1688" y="159"/>
+            <point key="canvasLocation" x="1692.753623188406" y="158.70535714285714"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="8kd-y4-2XJ">

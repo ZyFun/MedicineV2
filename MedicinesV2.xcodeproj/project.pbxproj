@@ -15,8 +15,8 @@
 		2C52BDCA273540F600356A63 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C52BDC8273540F600356A63 /* LaunchScreen.storyboard */; };
 		2C52BDD52735481400356A63 /* FirstAidKitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C52BDD42735481400356A63 /* FirstAidKitsViewController.swift */; };
 		2C60890927356B6400E66081 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60890827356B6400E66081 /* StorageManager.swift */; };
-		2C925714273D478D00DA7284 /* MedicinesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C925712273D478D00DA7284 /* MedicinesTableViewController.swift */; };
-		2C925715273D478D00DA7284 /* MedicinesTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C925713273D478D00DA7284 /* MedicinesTableViewController.xib */; };
+		2C925715273D478D00DA7284 /* MedicinesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C925713273D478D00DA7284 /* MedicinesViewController.xib */; };
+		2C925717273D4DE800DA7284 /* MedicinesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C925716273D4DE800DA7284 /* MedicinesViewController.swift */; };
 		2CA75457273BED4100B147B7 /* UIAlerController+CustomController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA75456273BED4100B147B7 /* UIAlerController+CustomController.swift */; };
 /* End PBXBuildFile section */
 
@@ -31,8 +31,8 @@
 		2C52BDCB273540F600356A63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C52BDD42735481400356A63 /* FirstAidKitsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAidKitsViewController.swift; sourceTree = "<group>"; };
 		2C60890827356B6400E66081 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
-		2C925712273D478D00DA7284 /* MedicinesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicinesTableViewController.swift; sourceTree = "<group>"; };
-		2C925713273D478D00DA7284 /* MedicinesTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MedicinesTableViewController.xib; sourceTree = "<group>"; };
+		2C925713273D478D00DA7284 /* MedicinesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MedicinesViewController.xib; sourceTree = "<group>"; };
+		2C925716273D4DE800DA7284 /* MedicinesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicinesViewController.swift; sourceTree = "<group>"; };
 		2CA75456273BED4100B147B7 /* UIAlerController+CustomController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlerController+CustomController.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -148,8 +148,8 @@
 		2C925709273D45CD00DA7284 /* FirstAidKit */ = {
 			isa = PBXGroup;
 			children = (
-				2C925712273D478D00DA7284 /* MedicinesTableViewController.swift */,
-				2C925713273D478D00DA7284 /* MedicinesTableViewController.xib */,
+				2C925716273D4DE800DA7284 /* MedicinesViewController.swift */,
+				2C925713273D478D00DA7284 /* MedicinesViewController.xib */,
 			);
 			path = FirstAidKit;
 			sourceTree = "<group>";
@@ -222,7 +222,7 @@
 			files = (
 				2C52BDCA273540F600356A63 /* LaunchScreen.storyboard in Resources */,
 				2C52BDC7273540F600356A63 /* Assets.xcassets in Resources */,
-				2C925715273D478D00DA7284 /* MedicinesTableViewController.xib in Resources */,
+				2C925715273D478D00DA7284 /* MedicinesViewController.xib in Resources */,
 				2C52BDC2273540F400356A63 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -234,8 +234,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C925717273D4DE800DA7284 /* MedicinesViewController.swift in Sources */,
 				2C52BDC5273540F400356A63 /* Medicines.xcdatamodeld in Sources */,
-				2C925714273D478D00DA7284 /* MedicinesTableViewController.swift in Sources */,
 				2C52BDBB273540F400356A63 /* AppDelegate.swift in Sources */,
 				2C60890927356B6400E66081 /* StorageManager.swift in Sources */,
 				2C52BDD52735481400356A63 /* FirstAidKitsViewController.swift in Sources */,
