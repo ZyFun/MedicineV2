@@ -10,4 +10,12 @@ import Foundation
 final class MedicinesInteractor {
     
     var presenter: MedicinesPresenter?
+    
+    let data = ["Анальгин", "Аспирин", "Маалокс", "Карбамазепин", "Парацетамол"]
+    
+    func requestData() {
+        // TODO: тут прописать обращение к базе данных
+        // Заглушка
+        presenter?.presentData(data)
+    }
 }
