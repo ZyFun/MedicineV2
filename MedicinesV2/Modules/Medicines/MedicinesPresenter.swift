@@ -7,16 +7,30 @@
 
 import Foundation
 
+/// Логика получения данных
+protocol EventIntercepter {
+    func requestData()
+}
+
+/// Логика подготовки данных для презентации
+protocol PresentationLogik: AnyObject {
+    func presentData(_ data: [String])
+}
+
 final class MedicinesPresenter {
     
-    var view: MedicinesViewController?
-    var interactor: MedicinesInteractor?
+    weak var view: DisplayLogic?
+    var interactor: BusinessLogic?
     var router: MedicinesRouter?
-    
+}
+
+extension MedicinesPresenter: EventIntercepter {
     func requestData() {
         interactor?.requestData()
     }
-    
+}
+
+extension MedicinesPresenter: PresentationLogik {
     func presentData(_ data: [String]) {
         // Заглушка. Эмитация получения DTO и сбор модели данных из них
         let viewModels = data.map({ $0 })

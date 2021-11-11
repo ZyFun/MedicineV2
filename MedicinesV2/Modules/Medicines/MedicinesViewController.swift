@@ -7,11 +7,16 @@
 
 import UIKit
 
+/// Логика отображения данных на вью
+protocol DisplayLogic: AnyObject {
+    func display(_ viewModels: [String])
+}
+
 class MedicinesViewController: UIViewController {
     
     // MARK: Public properties
     /// Ссылка на presenter
-    var presenter: MedicinesPresenter?
+    var presenter: EventIntercepter?
     
     // MARK: ViewModels
     private var viewModels: [String] = [] {
@@ -40,10 +45,6 @@ class MedicinesViewController: UIViewController {
 //
 //        presenter?.requestData()
 //    }
-    
-    func display(_ viewModels: [String]) {
-        self.viewModels = viewModels
-    }
 
 }
 
@@ -66,6 +67,13 @@ private extension MedicinesViewController {
                                     forCellReuseIdentifier: String(describing: MedicineTableViewCell.self))
     }
 
+}
+
+// MARK: - Логика обновления данных View
+extension MedicinesViewController: DisplayLogic {
+    func display(_ viewModels: [String]) {
+        self.viewModels = viewModels
+    }
 }
 
 // MARK: - UITableViewDelegate
