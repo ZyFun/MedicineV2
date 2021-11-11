@@ -164,8 +164,14 @@ private extension FirstAidKitsViewController {
 // Всё это нужно для подготовки к уходу от сторибордов и написанию интерфейса кодом.
 private extension FirstAidKitsViewController {
     func createMedicinesVC() {
+        // Создание ViewController
         let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
         guard let medicinesVC = storyboard.instantiateViewController(withIdentifier: "Medicines") as? MedicinesViewController else { return }
+        
+        // Конфигурирация VIPER модуля для инжектирования зависимостей
+        MedicinesConfigurator().config(view: medicinesVC, navigationController: navigationController)
+        
+        // Навигация
         navigationController?.pushViewController(medicinesVC, animated: true)
     }
 }

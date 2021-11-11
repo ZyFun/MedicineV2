@@ -17,6 +17,10 @@
 		2C60890927356B6400E66081 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60890827356B6400E66081 /* StorageManager.swift */; };
 		2C925715273D478D00DA7284 /* MedicinesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C925713273D478D00DA7284 /* MedicinesViewController.xib */; };
 		2C925717273D4DE800DA7284 /* MedicinesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C925716273D4DE800DA7284 /* MedicinesViewController.swift */; };
+		2C925719273D5C4400DA7284 /* MedicinesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C925718273D5C4400DA7284 /* MedicinesPresenter.swift */; };
+		2C92571B273D5C9A00DA7284 /* MedicinesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C92571A273D5C9A00DA7284 /* MedicinesInteractor.swift */; };
+		2C92571D273D5CBF00DA7284 /* MedicinesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C92571C273D5CBF00DA7284 /* MedicinesRouter.swift */; };
+		2C92571F273D611800DA7284 /* MedicinesConfigurator.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C92571E273D611800DA7284 /* MedicinesConfigurator.swift.swift */; };
 		2CA75457273BED4100B147B7 /* UIAlerController+CustomController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA75456273BED4100B147B7 /* UIAlerController+CustomController.swift */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +37,10 @@
 		2C60890827356B6400E66081 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		2C925713273D478D00DA7284 /* MedicinesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MedicinesViewController.xib; sourceTree = "<group>"; };
 		2C925716273D4DE800DA7284 /* MedicinesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicinesViewController.swift; sourceTree = "<group>"; };
+		2C925718273D5C4400DA7284 /* MedicinesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicinesPresenter.swift; sourceTree = "<group>"; };
+		2C92571A273D5C9A00DA7284 /* MedicinesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicinesInteractor.swift; sourceTree = "<group>"; };
+		2C92571C273D5CBF00DA7284 /* MedicinesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicinesRouter.swift; sourceTree = "<group>"; };
+		2C92571E273D611800DA7284 /* MedicinesConfigurator.swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicinesConfigurator.swift.swift; sourceTree = "<group>"; };
 		2CA75456273BED4100B147B7 /* UIAlerController+CustomController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlerController+CustomController.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -140,18 +148,22 @@
 		2C925708273D45B500DA7284 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				2C925709273D45CD00DA7284 /* FirstAidKit */,
+				2C925709273D45CD00DA7284 /* Medicines */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
 		};
-		2C925709273D45CD00DA7284 /* FirstAidKit */ = {
+		2C925709273D45CD00DA7284 /* Medicines */ = {
 			isa = PBXGroup;
 			children = (
+				2C92571E273D611800DA7284 /* MedicinesConfigurator.swift.swift */,
 				2C925716273D4DE800DA7284 /* MedicinesViewController.swift */,
+				2C925718273D5C4400DA7284 /* MedicinesPresenter.swift */,
+				2C92571A273D5C9A00DA7284 /* MedicinesInteractor.swift */,
+				2C92571C273D5CBF00DA7284 /* MedicinesRouter.swift */,
 				2C925713273D478D00DA7284 /* MedicinesViewController.xib */,
 			);
-			path = FirstAidKit;
+			path = Medicines;
 			sourceTree = "<group>";
 		};
 		2CA75455273BECDA00B147B7 /* Extensions */ = {
@@ -235,12 +247,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C925717273D4DE800DA7284 /* MedicinesViewController.swift in Sources */,
+				2C92571B273D5C9A00DA7284 /* MedicinesInteractor.swift in Sources */,
 				2C52BDC5273540F400356A63 /* Medicines.xcdatamodeld in Sources */,
 				2C52BDBB273540F400356A63 /* AppDelegate.swift in Sources */,
 				2C60890927356B6400E66081 /* StorageManager.swift in Sources */,
 				2C52BDD52735481400356A63 /* FirstAidKitsViewController.swift in Sources */,
 				2CA75457273BED4100B147B7 /* UIAlerController+CustomController.swift in Sources */,
+				2C925719273D5C4400DA7284 /* MedicinesPresenter.swift in Sources */,
+				2C92571D273D5CBF00DA7284 /* MedicinesRouter.swift in Sources */,
 				2C52BDBD273540F400356A63 /* SceneDelegate.swift in Sources */,
+				2C92571F273D611800DA7284 /* MedicinesConfigurator.swift.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
