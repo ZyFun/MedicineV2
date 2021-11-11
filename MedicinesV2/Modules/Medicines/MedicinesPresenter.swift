@@ -12,4 +12,14 @@ final class MedicinesPresenter {
     var view: MedicinesViewController?
     var interactor: MedicinesInteractor?
     var router: MedicinesRouter?
+    
+    func requestData() {
+        interactor?.requestData()
+    }
+    
+    func presentData(_ data: [String]) {
+        // Заглушка. Эмитация получения DTO и сбор модели данных из них
+        let viewModels = data.map({ $0 })
+        view?.display(viewModels)
+    }
 }
