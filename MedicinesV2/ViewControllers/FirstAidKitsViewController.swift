@@ -46,6 +46,7 @@ class FirstAidKitsViewController: UITableViewController {
     // Работа с нажатием на ячейку
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        createMedicinesVC()
     }
     
     // TODO: Использовать этот метод, когда потребуется дополнительный функционал свайпа по ячейке
@@ -117,10 +118,9 @@ class FirstAidKitsViewController: UITableViewController {
     }
     */
 
-//    // MARK: - Navigation
+    // MARK: - Navigation
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        guard let addNewAidKit = segue.destination as? NewFirstAidKitViewController else { return }
-//        addNewAidKit.newAidKit = firstAidKits
+//        guard let medicineVC = segue.destination as? MedicinesViewController else { return }
 //    }
     
     // MARK: - IBActions
@@ -157,6 +157,16 @@ private extension FirstAidKitsViewController {
             }
         }
         present(alert, animated: true)
+    }
+}
+
+// MARK: - Инициализация вью Medicines
+// Всё это нужно для подготовки к уходу от сторибордов и написанию интерфейса кодом.
+private extension FirstAidKitsViewController {
+    func createMedicinesVC() {
+        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        guard let medicinesVC = storyboard.instantiateViewController(withIdentifier: "Medicines") as? MedicinesViewController else { return }
+        navigationController?.pushViewController(medicinesVC, animated: true)
     }
 }
 
