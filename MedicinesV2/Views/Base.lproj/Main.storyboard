@@ -53,7 +53,7 @@
             </objects>
             <point key="canvasLocation" x="823" y="159"/>
         </scene>
-        <!--Название аптечки-->
+        <!--Medicines View Controller-->
         <scene sceneID="5Vn-WA-Ah6">
             <objects>
                 <viewController storyboardIdentifier="Medicines" id="H53-Bb-kUQ" customClass="MedicinesViewController" customModule="MedicinesV2" customModuleProvider="target" sceneMemberID="viewController">
@@ -75,7 +75,9 @@
                             <constraint firstItem="QjF-04-4Wy" firstAttribute="trailing" secondItem="ycX-77-IKH" secondAttribute="trailing" id="rT5-XB-03k"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Название аптечки" id="hNd-h0-6FP"/>
+                    <connections>
+                        <outlet property="medicinesTableView" destination="QjF-04-4Wy" id="I8n-Sh-YZ7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dZs-bH-pve" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

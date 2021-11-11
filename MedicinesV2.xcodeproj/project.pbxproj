@@ -21,6 +21,8 @@
 		2C92571B273D5C9A00DA7284 /* MedicinesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C92571A273D5C9A00DA7284 /* MedicinesInteractor.swift */; };
 		2C92571D273D5CBF00DA7284 /* MedicinesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C92571C273D5CBF00DA7284 /* MedicinesRouter.swift */; };
 		2C92571F273D611800DA7284 /* MedicinesConfigurator.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C92571E273D611800DA7284 /* MedicinesConfigurator.swift.swift */; };
+		2C925723273D80DD00DA7284 /* MedicineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C925721273D80DD00DA7284 /* MedicineTableViewCell.swift */; };
+		2C925724273D80DD00DA7284 /* MedicineTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C925722273D80DD00DA7284 /* MedicineTableViewCell.xib */; };
 		2CA75457273BED4100B147B7 /* UIAlerController+CustomController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA75456273BED4100B147B7 /* UIAlerController+CustomController.swift */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +43,8 @@
 		2C92571A273D5C9A00DA7284 /* MedicinesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicinesInteractor.swift; sourceTree = "<group>"; };
 		2C92571C273D5CBF00DA7284 /* MedicinesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicinesRouter.swift; sourceTree = "<group>"; };
 		2C92571E273D611800DA7284 /* MedicinesConfigurator.swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicinesConfigurator.swift.swift; sourceTree = "<group>"; };
+		2C925721273D80DD00DA7284 /* MedicineTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineTableViewCell.swift; sourceTree = "<group>"; };
+		2C925722273D80DD00DA7284 /* MedicineTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MedicineTableViewCell.xib; sourceTree = "<group>"; };
 		2CA75456273BED4100B147B7 /* UIAlerController+CustomController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlerController+CustomController.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -156,6 +160,7 @@
 		2C925709273D45CD00DA7284 /* Medicines */ = {
 			isa = PBXGroup;
 			children = (
+				2C925720273D808600DA7284 /* Cells */,
 				2C92571E273D611800DA7284 /* MedicinesConfigurator.swift.swift */,
 				2C925716273D4DE800DA7284 /* MedicinesViewController.swift */,
 				2C925718273D5C4400DA7284 /* MedicinesPresenter.swift */,
@@ -164,6 +169,15 @@
 				2C925713273D478D00DA7284 /* MedicinesViewController.xib */,
 			);
 			path = Medicines;
+			sourceTree = "<group>";
+		};
+		2C925720273D808600DA7284 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				2C925721273D80DD00DA7284 /* MedicineTableViewCell.swift */,
+				2C925722273D80DD00DA7284 /* MedicineTableViewCell.xib */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		2CA75455273BECDA00B147B7 /* Extensions */ = {
@@ -233,6 +247,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C52BDCA273540F600356A63 /* LaunchScreen.storyboard in Resources */,
+				2C925724273D80DD00DA7284 /* MedicineTableViewCell.xib in Resources */,
 				2C52BDC7273540F600356A63 /* Assets.xcassets in Resources */,
 				2C925715273D478D00DA7284 /* MedicinesViewController.xib in Resources */,
 				2C52BDC2273540F400356A63 /* Main.storyboard in Resources */,
@@ -253,6 +268,7 @@
 				2C60890927356B6400E66081 /* StorageManager.swift in Sources */,
 				2C52BDD52735481400356A63 /* FirstAidKitsViewController.swift in Sources */,
 				2CA75457273BED4100B147B7 /* UIAlerController+CustomController.swift in Sources */,
+				2C925723273D80DD00DA7284 /* MedicineTableViewCell.swift in Sources */,
 				2C925719273D5C4400DA7284 /* MedicinesPresenter.swift in Sources */,
 				2C92571D273D5CBF00DA7284 /* MedicinesRouter.swift in Sources */,
 				2C52BDBD273540F400356A63 /* SceneDelegate.swift in Sources */,
