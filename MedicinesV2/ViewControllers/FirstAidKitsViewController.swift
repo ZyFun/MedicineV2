@@ -21,28 +21,8 @@ class FirstAidKitsViewController: UITableViewController {
         setupTableView()
         getFirstAidKits()
     }
-
-    // MARK: - Table view data source
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        firstAidKits.count
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "firstAidKit", for: indexPath)
-        let firstAidKit = firstAidKits[indexPath.row]
-        
-        if #available(iOS 14.0, *) {
-            var content = cell.defaultContentConfiguration()
-            content.text = firstAidKit.title
-            
-            cell.contentConfiguration = content
-        } else {
-            cell.textLabel?.text = firstAidKit.title
-        }
-
-        return cell
-    }
     
+    // MARK: - Table view delegate
     // Работа с нажатием на ячейку
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -81,6 +61,27 @@ class FirstAidKitsViewController: UITableViewController {
         editAction.backgroundColor = .systemOrange
         
         return UISwipeActionsConfiguration(actions: [editAction])
+    }
+
+    // MARK: - Table view data source
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        firstAidKits.count
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "firstAidKit", for: indexPath)
+        let firstAidKit = firstAidKits[indexPath.row]
+        
+        if #available(iOS 14.0, *) {
+            var content = cell.defaultContentConfiguration()
+            content.text = firstAidKit.title
+            
+            cell.contentConfiguration = content
+        } else {
+            cell.textLabel?.text = firstAidKit.title
+        }
+
+        return cell
     }
 
 
