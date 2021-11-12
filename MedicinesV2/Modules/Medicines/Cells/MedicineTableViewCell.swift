@@ -15,6 +15,8 @@ class MedicineTableViewCell: UITableViewCell {
         medicineName.text = text
     }
     
+    // TODO: Разобраться, что это за метод
+    // Как я понял, служит для обнуления контента в ячейке, но не понял зачем
     override func prepareForReuse() {
         super.prepareForReuse()
         medicineName.text = ""

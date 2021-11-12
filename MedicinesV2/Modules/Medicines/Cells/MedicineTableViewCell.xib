@@ -10,22 +10,23 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="MedicineTableViewCell" customModule="MedicinesV2" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="KGk-i7-Jjw" customClass="MedicineTableViewCell" customModule="MedicinesV2" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="MedicineTableViewCell" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bwi-Yd-l3Z">
-                        <rect key="frame" x="16" y="11.5" width="288" height="21"/>
+                        <rect key="frame" x="16" y="16" width="288" height="28"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="bwi-Yd-l3Z" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Tew-1d-xWY"/>
+                    <constraint firstAttribute="bottom" secondItem="bwi-Yd-l3Z" secondAttribute="bottom" constant="16" id="HXY-TS-Hf8"/>
+                    <constraint firstItem="bwi-Yd-l3Z" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="IlK-OA-Wwn"/>
                     <constraint firstAttribute="trailingMargin" secondItem="bwi-Yd-l3Z" secondAttribute="trailing" id="ano-u5-gKU"/>
                     <constraint firstItem="bwi-Yd-l3Z" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="kmJ-UN-FLY"/>
                 </constraints>
@@ -34,7 +35,7 @@
             <connections>
                 <outlet property="medicineName" destination="bwi-Yd-l3Z" id="QmC-ot-qp6"/>
             </connections>
-            <point key="canvasLocation" x="139" y="121"/>
+            <point key="canvasLocation" x="137.68115942028987" y="125.89285714285714"/>
         </tableViewCell>
     </objects>
 </document>
