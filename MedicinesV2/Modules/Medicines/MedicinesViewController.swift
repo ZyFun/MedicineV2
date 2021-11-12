@@ -32,10 +32,7 @@ class MedicinesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupXibs()
-        setupTableView()
-        
-        // TODO: Разобраться, почему при вызове до появления вью, название не отображается
+        setup()
         presenter?.requestData()
     }
     
@@ -50,15 +47,27 @@ class MedicinesViewController: UIViewController {
 
 // MARK: - Конфигурирование ViewController
 private extension MedicinesViewController {
+    /// Метод инизиализации VC
+    func setup() {
+        setupNavBar()
+        setupTableView()
+        setupXibs()
+    }
+    
     func setupTableView() {
         medicinesTableView?.delegate = self
         medicinesTableView?.dataSource = self
         
-        // TODO: Загружать сюда название аптечки
-        title = "Название аптечки"
-        
         // MARK: Актуально для iOS ниже 15 версии. Можно удалить после прекращения поддержки этих версий
         medicinesTableView?.tableFooterView = UIView()
+        setupXibs()
+    }
+    
+    func setupNavBar() {
+        // Возможно потребуется, когда вход в приложение будет без сториборда, если нет, удалить
+//        navigationController?.navigationBar.prefersLargeTitles = true
+        // TODO: Загружать сюда название аптечки
+        title = "Название аптечки"
     }
     
     ///Инициализация Xibs
