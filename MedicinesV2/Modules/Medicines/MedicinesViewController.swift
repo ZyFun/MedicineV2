@@ -18,6 +18,10 @@ class MedicinesViewController: UIViewController {
     /// Ссылка на presenter
     var presenter: EventIntercepter?
     
+    // TODO: Временное решение для тестирования, до момента создания всей БД.
+    // MARK: Переданные данные с другого вью
+    var titleFirstAidKit: String = ""
+    
     // MARK: ViewModels
     private var viewModels: [String] = [] {
         didSet {
@@ -47,13 +51,15 @@ class MedicinesViewController: UIViewController {
 
 // MARK: - Конфигурирование ViewController
 private extension MedicinesViewController {
-    /// Метод инизиализации VC
+    
+    /// Метод инициализации VC
     func setup() {
         setupNavBar()
         setupTableView()
         setupXibs()
     }
     
+    /// Метод настройки таблицы
     func setupTableView() {
         medicinesTableView?.delegate = self
         medicinesTableView?.dataSource = self
@@ -63,11 +69,11 @@ private extension MedicinesViewController {
         setupXibs()
     }
     
+    /// Метод настройки Navigation Bar
     func setupNavBar() {
         // Возможно потребуется, когда вход в приложение будет без сториборда, если нет, удалить
 //        navigationController?.navigationBar.prefersLargeTitles = true
-        // TODO: Загружать сюда название аптечки
-        title = "Название аптечки"
+        title = titleFirstAidKit
     }
     
     ///Инициализация Xibs

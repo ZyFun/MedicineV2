@@ -26,7 +26,7 @@ class FirstAidKitsViewController: UITableViewController {
     // Работа с нажатием на ячейку
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        createMedicinesVC()
+        createMedicinesVC(with: indexPath)
     }
     
     // TODO: Использовать этот метод, когда потребуется дополнительный функционал свайпа по ячейке
@@ -118,11 +118,6 @@ class FirstAidKitsViewController: UITableViewController {
         return true
     }
     */
-
-    // MARK: - Navigation
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        guard let medicineVC = segue.destination as? MedicinesViewController else { return }
-//    }
     
     // MARK: - IBActions
     @IBAction func addNewFirstAidKit() {
@@ -164,10 +159,13 @@ private extension FirstAidKitsViewController {
 // MARK: - Инициализация вью Medicines
 // Всё это нужно для подготовки к уходу от сторибордов и написанию интерфейса кодом.
 private extension FirstAidKitsViewController {
-    func createMedicinesVC() {
+    func createMedicinesVC(with indexPath: IndexPath) {
         // Создание ViewController
         let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
         guard let medicinesVC = storyboard.instantiateViewController(withIdentifier: "medicines") as? MedicinesViewController else { return }
+        
+        // TODO: Эта передача данных возможно нарушает архитектуру VIPER, подумать как это можно исправить
+        medicinesVC.titleFirstAidKit = firstAidKits[indexPath.row].title ?? "Нет названия"
         
         // Конфигурирация VIPER модуля для инжектирования зависимостей
         MedicinesConfigurator().config(view: medicinesVC, navigationController: navigationController)
