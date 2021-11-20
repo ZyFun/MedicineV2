@@ -45,8 +45,8 @@ final class StorageManager {
 
 }
 
-// MARK: - Core Data Saving support
-extension StorageManager {
+// MARK: - CRUD
+extension StorageManager: StorageManagerProtocol {
     
     /// Метод, который производит сохранение данных, если были какие либо изменения в данных. Хороший способ применения, сохранение при закрытии приложения.
     func saveContext () {
@@ -60,10 +60,7 @@ extension StorageManager {
             }
         }
     }
-}
-
-// MARK: - Методы для действий с базой данных
-extension StorageManager: StorageManagerProtocol {
+    
     /// Метод для сохранения данных в базу данных
     /// - Parameters:
     ///   - firstAidKitName: принимает название аптечки, которое будет сохранено в базу
@@ -112,4 +109,16 @@ extension StorageManager: StorageManagerProtocol {
         saveContext()
     }
     
+//    func startingFirstAidKit() -> Medicine {
+//        let firstAidKit = FirstAidKit(context: viewContext)
+//        firstAidKit.title = "Ваша аптечка"
+//        
+//        let medicine = Medicine(context: viewContext)
+//        medicine.title = "Ваше лекарство"
+//        medicine.box = firstAidKit
+//        
+//        saveContext()
+//        
+//        return medicine
+//    }
 }
