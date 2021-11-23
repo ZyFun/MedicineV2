@@ -4,7 +4,7 @@
 //
 //  Created by Дмитрий Данилин on 05.11.2021.
 //
-// TODO: Посмотреть второй урок с разбором ДЗ, так как там будет объяснение работы замыкания. Я не понмю как точно это всё работает, переписал из своего прошлого кода
+// TODO: Посмотреть второй урок с разбором ДЗ по кордате, так как там будет объяснение работы замыкания. Я не понмю как точно это всё работает, переписал из своего прошлого кода
 
 import CoreData
 
@@ -13,7 +13,7 @@ protocol StorageManagerProtocol {
     func saveData(_ firstAidKitName: String, completion: (FirstAidKit) -> Void)
     func fetchData(completion: (Result<[FirstAidKit], Error>) -> Void)
     func editData(_ firstAidKit: FirstAidKit, newName: String)
-    func deleteData(_ firstAidKit: FirstAidKit)
+    func deleteData(_ entity: NSManagedObject) // Так можно передать любую сущность базы данных
 }
 
 /// Все действия с базой данных происходят через экземпляр этого класса (Singleton)
@@ -102,13 +102,14 @@ extension StorageManager: StorageManagerProtocol {
         saveContext()
     }
     
-    /// Метод для удаления аптечки из базы
-    /// - Parameter firstAidKit: принимает аптечку, которая будет удалена из базы
-    func deleteData(_ firstAidKit: FirstAidKit) {
-        viewContext.delete(firstAidKit)
+    /// Метод для удаления данных из базы
+    /// - Parameter entity: принимает entity, которая будет удалена из базы
+    func deleteData(_ entity: NSManagedObject) {
+        viewContext.delete(entity)
         saveContext()
     }
     
+    // Это тестовый метод для создания аптечки и лекарств при первом старте приложения. В данной реализации уже особо не работает, требуется переписать
 //    func startingFirstAidKit() -> Medicine {
 //        let firstAidKit = FirstAidKit(context: viewContext)
 //        firstAidKit.title = "Ваша аптечка"
