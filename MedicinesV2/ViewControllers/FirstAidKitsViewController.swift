@@ -13,10 +13,22 @@ class FirstAidKitsViewController: UITableViewController {
     
     // MARK: - Private Properties
     private var firstAidKits: [FirstAidKit] = []
+    
+    // Core Data Working
+    // TODO: Как я понимаю, это действие должен будет выполнять интерактор, передавая уже нужную модель данных дальше
+    // Имя и ключ, лучше всего будет передавать через перечисления, чтобы не ошибиться. Если имя это еще спорно, то ключ точно, так как в будущем ключ будет зависеть от выбора пользователя
+    private var fetchedResultsController = StorageManager.shared.fetchedResultsController(entityName: "FirstAidKit", keyForSort: "title")
 
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // TODO: Как я понимаю, это действие должен будет выполнять интерактор, передавая уже нужную модель данных дальше
+        do {
+            try fetchedResultsController.performFetch()
+        } catch {
+            print(error)
+        }
 
         setupTableView()
         getFirstAidKits()
@@ -65,12 +77,24 @@ class FirstAidKitsViewController: UITableViewController {
 
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        firstAidKits.count
+        // TODO: Удалить после того как перепишу все методы работы с базой данных
+//        firstAidKits.count
+        
+        if let sections = fetchedResultsController.sections {
+            // возвращаем количество объектов в текущей секции. На данном этапе разработки есть всего одна секция, поэтому все объекты будут находиться в одной единственной секции
+            // TODO: Изучить работу с секциями, с помощью fetchedResultsController
+            return sections[section].numberOfObjects
+        } else {
+            return 0
+        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "firstAidKit", for: indexPath)
-        let firstAidKit = firstAidKits[indexPath.row]
+        // TODO: Удалить после того как перепишу все методы работы с базой данных
+//        let firstAidKit = firstAidKits[indexPath.row]
+        
+        let firstAidKit = fetchedResultsController.object(at: indexPath) as! FirstAidKit
         
         if #available(iOS 14.0, *) {
             var content = cell.defaultContentConfiguration()

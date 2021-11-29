@@ -9,7 +9,7 @@ import UIKit
 
 /// Логика отображения данных на вью
 protocol DisplayLogic: AnyObject {
-    func display(_ viewModels: [String])
+    func display(_ viewModels: [FirstAidKit])
 }
 
 class MedicinesViewController: UIViewController {
@@ -23,7 +23,7 @@ class MedicinesViewController: UIViewController {
     var titleFirstAidKit: String = ""
     
     // MARK: ViewModels
-    private var viewModels: [String] = [] {
+    private var viewModels: [FirstAidKit] = [] {
         didSet {
             medicinesTableView?.reloadData()
         }
@@ -86,7 +86,7 @@ private extension MedicinesViewController {
 
 // MARK: - Логика обновления данных View
 extension MedicinesViewController: DisplayLogic {
-    func display(_ viewModels: [String]) {
+    func display(_ viewModels: [FirstAidKit]) {
         self.viewModels = viewModels
     }
 }
@@ -105,7 +105,7 @@ extension MedicinesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MedicineTableViewCell.self), for: indexPath) as! MedicineTableViewCell
         
-        cell.configure(text: viewModels[indexPath.row])
+        cell.configure(text: viewModels[indexPath.row].title ?? "")
         
         return cell
     }
