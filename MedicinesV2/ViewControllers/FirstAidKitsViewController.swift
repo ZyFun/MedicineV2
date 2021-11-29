@@ -7,14 +7,13 @@
 // TODO: Перенести настройки лаунч скрина с прошлого проекта. Но цвета взять из примера подборки
 
 import UIKit
+import CoreData
 
 /// Класс viewController-а для экрана со списком аптечек
 class FirstAidKitsViewController: UITableViewController {
     
     // MARK: - Private Properties
-    private var firstAidKits: [FirstAidKit] = []
-    
-    // Core Data Working
+    private var firstAidKit: FirstAidKit?
     // TODO: Как я понимаю, это действие должен будет выполнять интерактор, передавая уже нужную модель данных дальше
     // Имя и ключ, лучше всего будет передавать через перечисления, чтобы не ошибиться. Если имя это еще спорно, то ключ точно, так как в будущем ключ будет зависеть от выбора пользователя
     private var fetchedResultsController = StorageManager.shared.fetchedResultsController(entityName: "FirstAidKit", keyForSort: "title")
@@ -22,13 +21,6 @@ class FirstAidKitsViewController: UITableViewController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // TODO: Как я понимаю, это действие должен будет выполнять интерактор, передавая уже нужную модель данных дальше
-        do {
-            try fetchedResultsController.performFetch()
-        } catch {
-            print(error)
-        }
 
         setupTableView()
         getFirstAidKits()
@@ -58,12 +50,10 @@ class FirstAidKitsViewController: UITableViewController {
     // Редактирование названия
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        let firstAidKit = firstAidKits[indexPath.row]
+        let firstAidKit = fetchedResultsController.object(at: indexPath) as! FirstAidKit
         
         let editAction = UIContextualAction(style: .normal, title: "Изменить") { [unowned self] _, _, isDone in
-            showAlert(firstAidKit: firstAidKit) {
-                tableView.reloadRows(at: [indexPath], with: .automatic)
-            }
+            showAlert(for: firstAidKit)
             
             // Возвращаем значение в убегающее замыкание, чтобы отпустить интерфейс при пользовательских действиях с ячейкой
             isDone(true)
@@ -77,8 +67,6 @@ class FirstAidKitsViewController: UITableViewController {
 
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // TODO: Удалить после того как перепишу все методы работы с базой данных
-//        firstAidKits.count
         
         if let sections = fetchedResultsController.sections {
             // возвращаем количество объектов в текущей секции. На данном этапе разработки есть всего одна секция, поэтому все объекты будут находиться в одной единственной секции
@@ -91,8 +79,6 @@ class FirstAidKitsViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "firstAidKit", for: indexPath)
-        // TODO: Удалить после того как перепишу все методы работы с базой данных
-//        let firstAidKit = firstAidKits[indexPath.row]
         
         let firstAidKit = fetchedResultsController.object(at: indexPath) as! FirstAidKit
         
@@ -121,10 +107,8 @@ class FirstAidKitsViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // TODO: После добавления уведомлений, не забыть добавить очистку очереди (посмотреть код из аналогичного метода старой версии)
-            let firstAidKit = firstAidKits[indexPath.row]
-            firstAidKits.remove(at: indexPath.row)
-            StorageManager.shared.deleteData(firstAidKit)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            let firstAidKit = fetchedResultsController.object(at: indexPath) as! FirstAidKit
+            StorageManager.shared.deleteObject(firstAidKit)
         }
     }
 
@@ -162,18 +146,19 @@ private extension FirstAidKitsViewController {
 private extension FirstAidKitsViewController {
     /// Метод для отображения кастомного алерт контроллера добавления или редактирования аптечки
     /// - Parameters:
-    ///   - firstAidKit: принимает аптечку (опционально). Заголовок алерта зависит от того была инициализирована аптечка или нет
-    ///   - completion: используется для вызова перезагрузки таблицы (опционально)
-    func showAlert(firstAidKit: FirstAidKit? = nil, completion: (() -> Void)? = nil) {
-        let title = firstAidKit == nil ? "Добавить аптечку" : "Изменить название"
+    ///   - entity: принимает аптечку (опционально). Заголовок алерта зависит от того была инициализирована аптечка или нет
+    func showAlert(for entity: FirstAidKit? = nil) {
+        let title = entity == nil ? "Добавить аптечку" : "Изменить название"
         let alert = UIAlertController.createAlertController(with: title)
         
-        alert.action(firstAidKit: firstAidKit) { [unowned self] firstAidKitName in
-            if let firstAidKit = firstAidKit, let completion = completion {
-                StorageManager.shared.editData(firstAidKit, newName: firstAidKitName)
-                completion()
+        alert.action(firstAidKit: entity) { [unowned self] firstAidKitName in
+            if let firstAidKit = entity {
+                firstAidKit.title = firstAidKitName
+                StorageManager.shared.saveContext()
             } else {
-                save(firstAidKitName)
+                firstAidKit = FirstAidKit()
+                firstAidKit?.title = firstAidKitName
+                StorageManager.shared.saveContext()
             }
         }
         present(alert, animated: true)
@@ -189,7 +174,8 @@ private extension FirstAidKitsViewController {
         guard let medicinesVC = storyboard.instantiateViewController(withIdentifier: "medicines") as? MedicinesViewController else { return }
         
         // TODO: Эта передача данных возможно нарушает архитектуру VIPER, подумать как это можно исправить
-        medicinesVC.titleFirstAidKit = firstAidKits[indexPath.row].title ?? "Нет названия"
+        let firstAidKits = fetchedResultsController.object(at: indexPath) as! FirstAidKit
+        medicinesVC.titleFirstAidKit = firstAidKits.title ?? "Нет названия"
         
         // Конфигурирация VIPER модуля для инжектирования зависимостей
         MedicinesConfigurator().config(view: medicinesVC, navigationController: navigationController)
@@ -203,25 +189,63 @@ private extension FirstAidKitsViewController {
 private extension FirstAidKitsViewController {
     /// Метод для загрузки данных из базы данных в оперативную память
     func getFirstAidKits() {
-        StorageManager.shared.fetchData { result in
-            switch result {
-            case .success(let firstAidKits):
-                self.firstAidKits = firstAidKits
-            case .failure(let error):
-                print(error)
-            }
+        fetchedResultsController.delegate = self
+        // TODO: Как я понимаю, это действие должен будет выполнять интерактор, передавая уже нужную модель данных дальше
+        do {
+            try fetchedResultsController.performFetch()
+        } catch {
+            print(error)
         }
     }
+}
+
+// TODO: Скорее всего, эта штука должна быть в презентере
+// MARK: - Fetched Results Controller Delegate
+extension FirstAidKitsViewController: NSFetchedResultsControllerDelegate {
     
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
     
-    /// Сохранение новой аптечки
-    /// - Parameter firstAidKitName: свойство принимает название добавляемой аптечки, для его дальнейшего сохранения в базу.
-    func save(_ firstAidKitName: String) {
-        StorageManager.shared.saveData(firstAidKitName) { firstAidKit in
-            firstAidKits.append(firstAidKit)
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            if let indexPath = newIndexPath {
+                tableView.insertRows(at: [indexPath], with: .automatic)
+            }
+        case .delete:
+            if let indexPath = indexPath {
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+        case .move:
+            if let indexPath = indexPath {
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+            
+            if let newIndexPath = newIndexPath {
+                tableView.insertRows(at: [newIndexPath], with: .automatic)
+            }
+        case .update:
+            if let indexPath = indexPath {
+                let firstAidKit = fetchedResultsController.object(at: indexPath) as! FirstAidKit
+                let cell = tableView.cellForRow(at: indexPath)
+                
+                if #available(iOS 14.0, *) {
+                    var content = cell?.defaultContentConfiguration()
+                    content?.text = firstAidKit.title
+                } else {
+                    cell?.textLabel?.text = firstAidKit.title
+                }
+                
+                tableView.reloadRows(at: [indexPath], with: .automatic)
+                
+            }
+        @unknown default:
+            fatalError()
         }
-        /// Индекс строки последней ячейки в таблице
-        let cellIndex = IndexPath(row: firstAidKits.count - 1, section: 0)
-        tableView.insertRows(at: [cellIndex], with: .automatic)
+    }
+
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
     }
 }

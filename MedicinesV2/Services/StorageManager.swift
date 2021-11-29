@@ -10,12 +10,12 @@ import CoreData
 
 /// Протокол для работы с базой данных
 protocol StorageManagerProtocol {
-    func saveData(_ firstAidKitName: String, completion: (FirstAidKit) -> Void)
-    func fetchData(completion: (Result<[FirstAidKit], Error>) -> Void)
-    func editData(_ firstAidKit: FirstAidKit, newName: String)
-    func deleteData(_ entity: NSManagedObject) // Так можно передать любую сущность базы данных
+//    func saveData(_ firstAidKitName: String, completion: (FirstAidKit) -> Void)
+//    func fetchData(completion: (Result<[FirstAidKit], Error>) -> Void)
+//    func editData(_ firstAidKit: FirstAidKit, newName: String)
+    func deleteObject(_ entity: NSManagedObject) // Так можно передать любую сущность базы данных
 }
-
+ 
 /// Все действия с базой данных происходят через экземпляр этого класса (Singleton)
 final class StorageManager {
     
@@ -42,8 +42,10 @@ final class StorageManager {
         // Обращаемся к контейнеру, чтобы получить данные из базы
         viewContext = persistentContainer.viewContext
     }
-    
-    // TODO: Возможно он не нужен
+}
+
+// MARK: - Core Data stack methods
+extension StorageManager {
     /// Метод создаёт описание сущности. Используется в расширении для сущности, чтобы инициализировать описание, при инициализации самой сущности.
     /// - Parameter entityName: принимает название сущности, которое используется в базе данных
     /// - Returns: Entity Description
@@ -67,7 +69,6 @@ final class StorageManager {
         
         return fetchedResultsController
     }
-
 }
 
 // MARK: - CRUD
@@ -86,6 +87,14 @@ extension StorageManager: StorageManagerProtocol {
         }
     }
     
+    /// Метод для удаления данных из базы
+    /// - Parameter entity: принимает entity, которая будет удалена из базы
+    func deleteObject(_ entity: NSManagedObject) {
+        viewContext.delete(entity)
+        saveContext()
+    }
+    
+    /*
     /// Метод для сохранения данных в базу данных
     /// - Parameters:
     ///   - firstAidKitName: принимает название аптечки, которое будет сохранено в базу
@@ -126,13 +135,7 @@ extension StorageManager: StorageManagerProtocol {
         firstAidKit.title = newName
         saveContext()
     }
-    
-    /// Метод для удаления данных из базы
-    /// - Parameter entity: принимает entity, которая будет удалена из базы
-    func deleteData(_ entity: NSManagedObject) {
-        viewContext.delete(entity)
-        saveContext()
-    }
+     */
     
     // Это тестовый метод для создания аптечки и лекарств при первом старте приложения. В данной реализации уже особо не работает, требуется переписать
 //    func startingFirstAidKit() -> Medicine {
@@ -147,9 +150,4 @@ extension StorageManager: StorageManagerProtocol {
 //        
 //        return medicine
 //    }
-}
-
-// Переписанный способ для работы с БД не через массивы, а через встроенные методы. Интегрировать вместо прошлых методов
-extension StorageManager {
-    
 }
