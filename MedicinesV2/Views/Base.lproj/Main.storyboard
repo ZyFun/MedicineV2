@@ -83,6 +83,98 @@
             </objects>
             <point key="canvasLocation" x="1686.9565217391305" y="158.70535714285714"/>
         </scene>
+        <!--Medicine Table View Controller-->
+        <scene sceneID="aUu-IO-U4w">
+            <objects>
+                <tableViewController id="YNz-y4-AxW" customClass="MedicineTableViewController" customModule="MedicinesV2" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="ahl-eN-oUl">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <sections>
+                            <tableViewSection id="zV4-O5-cGt">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="75" id="qOZ-Ku-69P">
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="75"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qOZ-Ku-69P" id="Sht-9p-uMR">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="YAN-eL-szC" userLabel="Medicine name stack">
+                                                    <rect key="frame" x="20" y="4" width="374" height="67"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Название" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r5Q-gJ-h2w">
+                                                            <rect key="frame" x="0.0" y="0.0" width="374" height="31.5"/>
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" placeholder="Введите название лекарства*" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qKB-rG-1cI">
+                                                            <rect key="frame" x="0.0" y="37.5" width="374" height="29.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="YAN-eL-szC" firstAttribute="leading" secondItem="Sht-9p-uMR" secondAttribute="leadingMargin" id="7XI-Dx-bxM"/>
+                                                <constraint firstAttribute="bottom" secondItem="YAN-eL-szC" secondAttribute="bottom" constant="4" id="Vdw-6t-OJP"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="YAN-eL-szC" secondAttribute="trailing" id="cKm-5B-oLz"/>
+                                                <constraint firstItem="YAN-eL-szC" firstAttribute="top" secondItem="Sht-9p-uMR" secondAttribute="top" constant="4" id="fpZ-Rh-7u5"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="75" id="xa9-wG-K4v">
+                                        <rect key="frame" x="0.0" y="119.5" width="414" height="75"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xa9-wG-K4v" id="ah1-nL-0hv">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="VpW-it-PEF" userLabel="Medicine name stack">
+                                                    <rect key="frame" x="20" y="4" width="374" height="67"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Количество" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="abI-gL-TCI">
+                                                            <rect key="frame" x="0.0" y="0.0" width="374" height="31.5"/>
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" placeholder="Введите количество таблеток*" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vmw-rD-va7">
+                                                            <rect key="frame" x="0.0" y="37.5" width="374" height="29.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="VpW-it-PEF" firstAttribute="leading" secondItem="ah1-nL-0hv" secondAttribute="leadingMargin" id="6av-GU-roT"/>
+                                                <constraint firstAttribute="bottom" secondItem="VpW-it-PEF" secondAttribute="bottom" constant="4" id="Fti-Mf-HRC"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="VpW-it-PEF" secondAttribute="trailing" id="efT-N1-8tC"/>
+                                                <constraint firstItem="VpW-it-PEF" firstAttribute="top" secondItem="ah1-nL-0hv" secondAttribute="top" constant="4" id="j0f-mc-76I"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="YNz-y4-AxW" id="axs-WA-YM5"/>
+                            <outlet property="delegate" destination="YNz-y4-AxW" id="b0P-Yb-Yy2"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <outlet property="medicineAmountTextField" destination="vmw-rD-va7" id="Ufb-2b-MGy"/>
+                        <outlet property="medicineNameTextField" destination="qKB-rG-1cI" id="8Bs-60-e7f"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qEz-yl-7mL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2634.7826086956525" y="169.41964285714286"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="8kd-y4-2XJ">
             <objects>
