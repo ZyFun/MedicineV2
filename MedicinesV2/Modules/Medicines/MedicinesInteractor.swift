@@ -15,7 +15,7 @@ final class MedicinesInteractor {
     
     weak var presenter: PresentationLogik?
     
-    var data: [FirstAidKit] = []
+    var data: [String] = ["Test 1", "Test 2", "Test 3"]
 }
 
 // MARK: - BusinessLogic

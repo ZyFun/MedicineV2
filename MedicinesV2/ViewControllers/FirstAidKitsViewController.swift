@@ -173,7 +173,7 @@ private extension FirstAidKitsViewController {
         let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
         guard let medicinesVC = storyboard.instantiateViewController(withIdentifier: "medicines") as? MedicinesViewController else { return }
         
-        // TODO: Эта передача данных возможно нарушает архитектуру VIPER, подумать как это можно исправить
+        // TODO: Эта передача данных возможно нарушает архитектуру VIPER, подумать как это можно исправить. Скорее всего это должно быть в конфигураторе
         let firstAidKits = fetchedResultsController.object(at: indexPath) as! FirstAidKit
         medicinesVC.titleFirstAidKit = firstAidKits.title ?? "Нет названия"
         

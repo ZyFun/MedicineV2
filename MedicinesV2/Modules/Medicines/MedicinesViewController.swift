@@ -9,7 +9,7 @@ import UIKit
 
 /// Логика отображения данных на вью
 protocol DisplayLogic: AnyObject {
-    func display(_ viewModels: [FirstAidKit])
+    func display(_ viewModels: [String])
 }
 
 class MedicinesViewController: UIViewController {
@@ -23,7 +23,7 @@ class MedicinesViewController: UIViewController {
     var titleFirstAidKit: String = ""
     
     // MARK: ViewModels
-    private var viewModels: [FirstAidKit] = [] {
+    private var viewModels: [String] = [] {
         didSet {
             medicinesTableView?.reloadData()
         }
@@ -86,7 +86,7 @@ private extension MedicinesViewController {
 
 // MARK: - Логика обновления данных View
 extension MedicinesViewController: DisplayLogic {
-    func display(_ viewModels: [FirstAidKit]) {
+    func display(_ viewModels: [String]) {
         self.viewModels = viewModels
     }
 }
@@ -94,6 +94,9 @@ extension MedicinesViewController: DisplayLogic {
 // MARK: - UITableViewDelegate
 extension MedicinesViewController: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        createMedicineVC(with: indexPath)
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -105,10 +108,24 @@ extension MedicinesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MedicineTableViewCell.self), for: indexPath) as! MedicineTableViewCell
         
-        cell.configure(text: viewModels[indexPath.row].title ?? "")
+        cell.configure(text: viewModels[indexPath.row])
         
         return cell
     }
 }
 
-
+// MARK: - Инициализация вью Medicine
+extension MedicinesViewController {
+    // TODO: Это должно быть в роутере, но пока что делаю здесь, чтобы не перегружать мозг. Доработаю при рефакторинге под viper
+    
+    func createMedicineVC(with indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let medicineVC = storyboard.instantiateViewController(withIdentifier: "medicine") as? MedicineTableViewController else { return }
+        
+        // Тут я передаю данные до появления роутера и прочих модулей вайпера
+        let medicineName = viewModels[indexPath.row]
+        medicineVC.medicineName = medicineName
+        
+        navigationController?.pushViewController(medicineVC, animated: true)
+    }
+}

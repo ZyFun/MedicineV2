@@ -86,7 +86,7 @@
         <!--Medicine Table View Controller-->
         <scene sceneID="aUu-IO-U4w">
             <objects>
-                <tableViewController id="YNz-y4-AxW" customClass="MedicineTableViewController" customModule="MedicinesV2" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="medicine" id="YNz-y4-AxW" customClass="MedicineTableViewController" customModule="MedicinesV2" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="ahl-eN-oUl">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
