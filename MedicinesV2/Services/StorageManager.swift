@@ -87,6 +87,27 @@ extension StorageManager: StorageManagerProtocol {
         }
     }
     
+    /// Метод получения данных из базы
+    /// - Parameter entityName: имя сущности в базе данных
+    /// - Returns: Возвращает массив с результатом запроса данных
+    func fetchRequest(_ entityName: String) -> [NSFetchRequestResult] {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        
+        // Sort Descriptor
+        let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        // TODO: Не уверен что это должно быть в этом методе
+        var data = [NSFetchRequestResult]()
+        do {
+            data = try viewContext.fetch(fetchRequest)
+        } catch {
+            print(error)
+        }
+        
+        return data
+    }
+    
     /// Метод для удаления данных из базы
     /// - Parameter entity: принимает entity, которая будет удалена из базы
     func deleteObject(_ entity: NSManagedObject) {

@@ -14,7 +14,7 @@ protocol EventIntercepter {
 
 /// Логика подготовки данных для презентации
 protocol PresentationLogik: AnyObject {
-    func presentData(_ data: [String])
+    func presentData(_ data: [Medicine]?)
 }
 
 final class MedicinesPresenter {
@@ -31,9 +31,8 @@ extension MedicinesPresenter: EventIntercepter {
 }
 
 extension MedicinesPresenter: PresentationLogik {
-    func presentData(_ data: [String]) {
-        // Заглушка. Эмитация получения DTO и сбор модели данных из них
-        let viewModels = data.map({ $0 })
+    func presentData(_ data: [Medicine]?) {
+        guard let viewModels = data.map({ $0 }) else { return }
         view?.display(viewModels)
     }
 }

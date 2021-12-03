@@ -5,7 +5,7 @@
         <relationship name="medicines" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Medicine" inverseName="firstAidKit" inverseEntity="Medicine"/>
     </entity>
     <entity name="Medicine" representedClassName="Medicine" syncable="YES">
-        <attribute name="number" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="number" attributeType="Float" defaultValueString="0" usesScalarValueType="NO"/>
         <attribute name="title" attributeType="String"/>
         <relationship name="firstAidKit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FirstAidKit" inverseName="medicines" inverseEntity="FirstAidKit"/>
     </entity>

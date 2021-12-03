@@ -15,23 +15,15 @@ final class MedicinesInteractor {
     
     weak var presenter: PresentationLogik?
     
-    var data: [String] = ["Test 1", "Test 2", "Test 3"]
+    var data: [Medicine]?
 }
 
 // MARK: - BusinessLogic
 extension MedicinesInteractor: BusinessLogic {
-    func requestData() {
-        // TODO: тут прописать обращение к базе данных
-        // Заглушка
-//        StorageManager.shared.fetchData { result in
-//            switch result {
-//            case .success(let firstAidKits):
-//                data = firstAidKits
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
         
+    func requestData() {
+        // TODO:  Не уверен что запись получения данных правильная
+        data = StorageManager.shared.fetchRequest("Medicine") as? [Medicine]
         presenter?.presentData(data)
     }
 }

@@ -16,7 +16,7 @@ extension Medicine {
         return NSFetchRequest<Medicine>(entityName: "Medicine")
     }
 
-    @NSManaged public var number: Int64
+    @NSManaged public var number: Float
     @NSManaged public var title: String?
     @NSManaged public var firstAidKit: FirstAidKit?
 
