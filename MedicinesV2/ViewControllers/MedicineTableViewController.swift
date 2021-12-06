@@ -11,6 +11,7 @@ import UIKit
 class MedicineTableViewController: UITableViewController {
     
     var medicine: Medicine?
+    var currentFirstAidKit: FirstAidKit?
     
     // MARK: IB Outlets
     @IBOutlet weak var medicineNameTextField: UITextField!
@@ -86,6 +87,11 @@ private extension MedicineTableViewController {
         // Если лекарства нет в базе, создаём новое и далее присваиваем свойства его параметрам
         if medicine == nil {
             medicine = Medicine()
+        }
+        
+        // Создание связи лекарства к аптечке (это работает, осталось только понять как отфильтовать предикатом)
+        if let currentFirstAidKit = currentFirstAidKit {
+            medicine?.firstAidKit = currentFirstAidKit
         }
         
         // Если лекарство есть в базе, меняем его параметры

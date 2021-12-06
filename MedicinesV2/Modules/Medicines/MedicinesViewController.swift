@@ -20,7 +20,7 @@ class MedicinesViewController: UIViewController {
     
     // TODO: Временное решение для тестирования, до момента создания всей БД.
     // MARK: Переданные данные с другого вью
-    var titleFirstAidKit: String = ""
+    var currentFirstAidKit: FirstAidKit?
     
     // MARK: ViewModels
     // TODO: На данный момент модель никак не обновляется, так как я не передаю с щругого экрана информацию о том, что модель обновилась
@@ -38,14 +38,15 @@ class MedicinesViewController: UIViewController {
         super.viewDidLoad()
 
         setup()
-        presenter?.requestData()
+//        presenter?.requestData()
     }
     
     // TODO: Временное решение, пока нет передачи информации о том, что добавились новые данные. Отслеживание должно быть чререз специальный контроллер базы данных, так как аптечку и прочее я буду удалять. Нужно подумать как это записать
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        medicinesTableView?.reloadData()
+//        medicinesTableView?.reloadData()
+        presenter?.requestData()
     }
 }
 
@@ -79,7 +80,7 @@ private extension MedicinesViewController {
     func setupNavigationBar() {
         // Возможно потребуется, когда вход в приложение будет без сториборда, если нет, удалить
 //        navigationController?.navigationBar.prefersLargeTitles = true
-        title = titleFirstAidKit
+        title = currentFirstAidKit?.title
         addButtons()
     }
     
@@ -101,7 +102,10 @@ private extension MedicinesViewController {
 // MARK: - Логика обновления данных View
 extension MedicinesViewController: DisplayLogic {
     func display(_ viewModels: [Medicine]) {
-        self.viewModels = viewModels
+        // Выполняем фильтрацию в зависимости от выбранной аптечки и отображаем связанныее с ней лекарства
+        // TODO: Возможно логику подготовки к отображению и фильтрацию, стоит перенести в интерактор
+        self.viewModels = viewModels.filter({$0.firstAidKit == currentFirstAidKit})
+        
     }
 }
 
@@ -142,6 +146,7 @@ extension MedicinesViewController {
             medicineVC.medicine = medicineName
         }
         
+        medicineVC.currentFirstAidKit = currentFirstAidKit
         navigationController?.pushViewController(medicineVC, animated: true)
     }
 }

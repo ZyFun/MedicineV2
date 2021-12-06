@@ -21,6 +21,8 @@ final class MedicinesInteractor {
 // MARK: - BusinessLogic
 extension MedicinesInteractor: BusinessLogic {
         
+    // TODO: Внедрить сюда функцию для работы с кордатой на прямую. Работа с таблицей и вся информация по изменениям будет передаваться сюда
+    
     func requestData() {
         // TODO:  Не уверен что запись получения данных правильная
         data = StorageManager.shared.fetchRequest("Medicine") as? [Medicine]

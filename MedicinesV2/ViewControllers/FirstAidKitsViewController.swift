@@ -175,7 +175,7 @@ private extension FirstAidKitsViewController {
         
         // TODO: Эта передача данных возможно нарушает архитектуру VIPER, подумать как это можно исправить. Скорее всего это должно быть в конфигураторе
         let firstAidKits = fetchedResultsController.object(at: indexPath) as! FirstAidKit
-        medicinesVC.titleFirstAidKit = firstAidKits.title ?? "Нет названия"
+        medicinesVC.currentFirstAidKit = firstAidKits
         
         // Конфигурирация VIPER модуля для инжектирования зависимостей
         MedicinesConfigurator().config(view: medicinesVC, navigationController: navigationController)

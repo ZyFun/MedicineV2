@@ -17,4 +17,19 @@ public class Medicine: NSManagedObject {
         self.init(entity: StorageManager.shared.forEntityName("Medicine"),
                   insertInto: StorageManager.shared.viewContext)
     }
+    
+//    // TODO: разобраться с предикатом. Настроил работу и без него, но мне интересно
+//    class func getRowOfOrder(_ medicine: Medicine) -> NSFetchedResultsController<NSFetchRequestResult> {
+//        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "RowOfOrder")
+//
+//        let sortDescriptor = NSSortDescriptor(key: "medicine.title", ascending: true)
+//        fetchRequest.sortDescriptors = [sortDescriptor]
+//
+//        let predicate = NSPredicate(format: "%K == %@", "firstAidKit", medicine)
+//        fetchRequest.predicate = predicate
+//
+//        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: StorageManager.shared.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+//
+//        return fetchedResultsController
+//    }
 }
