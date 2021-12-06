@@ -26,7 +26,8 @@ class MedicinesViewController: UIViewController {
     // TODO: На данный момент модель никак не обновляется, так как я не передаю с щругого экрана информацию о том, что модель обновилась
     private var viewModels: [Medicine]? {
         didSet {
-            medicinesTableView?.reloadData()
+            // TODO: Временно отключил этот способ обработки, так как в текущей реализации он только портит обновление данных. ВОзможно я просто удалю этот способ обновления таблицы и буду обновлять его в ручную. Либо нужно прописать в неё логику, которая будет отрабатывать на обновление в зависимости от ситуации
+//            medicinesTableView?.reloadData()
         }
     }
 
@@ -45,8 +46,8 @@ class MedicinesViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-//        medicinesTableView?.reloadData()
         presenter?.requestData()
+        medicinesTableView?.reloadData()
     }
 }
 
@@ -129,6 +130,23 @@ extension MedicinesViewController: UITableViewDataSource {
         cell.configure(text: viewModels?[indexPath.row].title ?? "")
         
         return cell
+    }
+    
+    // Удаление лекарства
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // TODO: После добавления уведомлений, не забыть добавить очистку очереди (посмотреть код из аналогичного метода старой версии)
+            // TODO: Доработать в будущем на этот способ обработки удаления
+//            let medicine = fetchedResultsController.object(at: indexPath) as! Medicine
+            
+            guard let medicine = viewModels?[indexPath.row] else { return }
+
+            // TODO: Исправить после перехода с массивов на кордата контроллер. Так же тут всё нарушает архитектуру. Нужно доработать.
+            viewModels?.remove(at: indexPath.row)
+            medicinesTableView?.deleteRows(at: [indexPath], with: .fade)
+            StorageManager.shared.deleteObject(medicine)
+            
+        }
     }
 }
 
