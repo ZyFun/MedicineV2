@@ -2,7 +2,7 @@
 //  Medicine+CoreDataProperties.swift
 //  MedicinesV2
 //
-//  Created by Дмитрий Данилин on 29.11.2021.
+//  Created by Дмитрий Данилин on 07.12.2021.
 //
 //
 
@@ -16,8 +16,10 @@ extension Medicine {
         return NSFetchRequest<Medicine>(entityName: "Medicine")
     }
 
-    @NSManaged public var number: Float
+    @NSManaged public var amount: Float
     @NSManaged public var title: String?
+    @NSManaged public var type: String?
+    @NSManaged public var expiryDate: Date?
     @NSManaged public var firstAidKit: FirstAidKit?
 
 }
