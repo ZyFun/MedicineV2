@@ -130,24 +130,3 @@ private extension MedicineTableViewController {
         present(alert, animated: true, completion: nil)
     }
 }
-
-// TODO: Создать отдельный файл для глобальных расширений на примере тетери
-extension String {
-    // Для перевода текста в дату
-    func toDate(withFormat format: String = "dd.MM.yyyy") -> Date? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = format
-        let date = dateFormatter.date(from: self)
-        return date
-    }
-}
-
-extension Date {
-    // Для перевода даты в текст
-    func toString(format: String = "dd.MM.yyyy") -> String {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        formatter.dateFormat = format
-        return formatter.string(from: self)
-    }
-}
