@@ -126,23 +126,23 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="75" id="xa9-wG-K4v">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="75" id="jSs-OP-kQU">
                                         <rect key="frame" x="0.0" y="119.5" width="414" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xa9-wG-K4v" id="ah1-nL-0hv">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jSs-OP-kQU" id="9ZZ-GK-tiu">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="VpW-it-PEF" userLabel="Medicine name stack">
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="csa-Kf-PYm" userLabel="Medicine name stack">
                                                     <rect key="frame" x="20" y="4" width="374" height="67"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Количество" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="abI-gL-TCI">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Тип" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RQe-ne-fr4">
                                                             <rect key="frame" x="0.0" y="0.0" width="374" height="31.5"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" placeholder="Введите количество таблеток*" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vmw-rD-va7">
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" placeholder="Введите тип (спрей, таблетки, сироп)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6W6-xx-IPv">
                                                             <rect key="frame" x="0.0" y="37.5" width="374" height="29.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                             <textInputTraits key="textInputTraits"/>
@@ -151,10 +151,95 @@
                                                 </stackView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="csa-Kf-PYm" firstAttribute="top" secondItem="9ZZ-GK-tiu" secondAttribute="top" constant="4" id="RXX-ti-ldD"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="csa-Kf-PYm" secondAttribute="trailing" id="t6O-T1-mNe"/>
+                                                <constraint firstItem="csa-Kf-PYm" firstAttribute="leading" secondItem="9ZZ-GK-tiu" secondAttribute="leadingMargin" id="vH4-Dj-Iz4"/>
+                                                <constraint firstAttribute="bottom" secondItem="csa-Kf-PYm" secondAttribute="bottom" constant="4" id="zSx-0V-EXg"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="75" id="xa9-wG-K4v">
+                                        <rect key="frame" x="0.0" y="194.5" width="414" height="75"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xa9-wG-K4v" id="ah1-nL-0hv">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="VpW-it-PEF" userLabel="Medicine name stack">
+                                                    <rect key="frame" x="20" y="4" width="264" height="67"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Количество" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="abI-gL-TCI">
+                                                            <rect key="frame" x="0.0" y="0.0" width="264" height="31.5"/>
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" placeholder="Введите количество таблеток" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vmw-rD-va7">
+                                                            <rect key="frame" x="0.0" y="37.5" width="264" height="29.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
+                                                    </subviews>
+                                                </stackView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="u6S-0j-Mnh">
+                                                    <rect key="frame" x="300" y="2" width="94" height="71"/>
+                                                    <subviews>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="cPU-P0-o3s">
+                                                            <rect key="frame" x="0.0" y="0.0" width="94" height="34"/>
+                                                            <subviews>
+                                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qeq-Z1-OW3">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="94" height="34"/>
+                                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
+                                                                    <textInputTraits key="textInputTraits"/>
+                                                                </textField>
+                                                            </subviews>
+                                                        </stackView>
+                                                        <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="999" translatesAutoresizingMaskIntoConstraints="NO" id="TLf-PF-OnF">
+                                                            <rect key="frame" x="0.0" y="39" width="94" height="32"/>
+                                                        </stepper>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
                                                 <constraint firstItem="VpW-it-PEF" firstAttribute="leading" secondItem="ah1-nL-0hv" secondAttribute="leadingMargin" id="6av-GU-roT"/>
+                                                <constraint firstItem="u6S-0j-Mnh" firstAttribute="trailing" secondItem="ah1-nL-0hv" secondAttribute="trailingMargin" id="8EX-1n-w9g"/>
+                                                <constraint firstItem="u6S-0j-Mnh" firstAttribute="leading" secondItem="VpW-it-PEF" secondAttribute="trailing" constant="16" id="D8p-HT-Suf"/>
                                                 <constraint firstAttribute="bottom" secondItem="VpW-it-PEF" secondAttribute="bottom" constant="4" id="Fti-Mf-HRC"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="VpW-it-PEF" secondAttribute="trailing" id="efT-N1-8tC"/>
+                                                <constraint firstAttribute="bottom" secondItem="u6S-0j-Mnh" secondAttribute="bottom" constant="2" id="bGP-Is-3Cl"/>
                                                 <constraint firstItem="VpW-it-PEF" firstAttribute="top" secondItem="ah1-nL-0hv" secondAttribute="top" constant="4" id="j0f-mc-76I"/>
+                                                <constraint firstItem="u6S-0j-Mnh" firstAttribute="top" secondItem="ah1-nL-0hv" secondAttribute="top" constant="2" id="t7j-2I-i35"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="75" id="E8a-Rm-Lgo">
+                                        <rect key="frame" x="0.0" y="269.5" width="414" height="75"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="E8a-Rm-Lgo" id="HBJ-H7-Bd8">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="55b-Hf-hwX" userLabel="Medicine name stack">
+                                                    <rect key="frame" x="20" y="4" width="374" height="67"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Срок годности" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="esZ-7l-isv">
+                                                            <rect key="frame" x="0.0" y="0.0" width="374" height="31.5"/>
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" placeholder="Введите окончание срока годности" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tbc-Bj-hxQ">
+                                                            <rect key="frame" x="0.0" y="37.5" width="374" height="29.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="55b-Hf-hwX" secondAttribute="trailing" id="2Ia-f3-HF1"/>
+                                                <constraint firstAttribute="bottom" secondItem="55b-Hf-hwX" secondAttribute="bottom" constant="4" id="5ed-MX-vAE"/>
+                                                <constraint firstItem="55b-Hf-hwX" firstAttribute="top" secondItem="HBJ-H7-Bd8" secondAttribute="top" constant="4" id="7Or-fx-yzJ"/>
+                                                <constraint firstItem="55b-Hf-hwX" firstAttribute="leading" secondItem="HBJ-H7-Bd8" secondAttribute="leadingMargin" id="gcX-hO-db5"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
