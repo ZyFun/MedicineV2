@@ -15,7 +15,12 @@ class MedicineTableViewController: UITableViewController {
     
     // MARK: IB Outlets
     @IBOutlet weak var medicineNameTextField: UITextField!
+    @IBOutlet weak var medicineTypeTextField: UITextField!
     @IBOutlet weak var medicineAmountTextField: UITextField!
+    @IBOutlet weak var medicineCountStepsTextField: UITextField!
+    @IBOutlet weak var medicinesExpiryDataTextField: UITextField!
+    
+    @IBOutlet weak var medicineAmountStepsStepper: UIStepper!
     
     // MARK: Life Cycle
     override func viewDidLoad() {
@@ -62,7 +67,9 @@ private extension MedicineTableViewController {
     func loadMedicine() {
         if let medicine = medicine {
             medicineNameTextField.text = medicine.title
-            medicineAmountTextField.text = String(medicine.number)
+            medicineTypeTextField.text = medicine.type
+            medicineAmountTextField.text = String(medicine.amount)
+            medicinesExpiryDataTextField.text = "\(medicine.expiryDate?.toString() ?? Date().toString())"
         }
     }
     
@@ -97,7 +104,9 @@ private extension MedicineTableViewController {
         // Если лекарство есть в базе, меняем его параметры
         if let medicine = medicine {
             medicine.title = medicineNameTextField.text
-            medicine.number = Float(medicineAmountTextField.text!) ?? 0
+            medicine.type = medicineTypeTextField.text
+            medicine.amount = Float(medicineAmountTextField.text!) ?? 0
+            medicine.expiryDate = medicinesExpiryDataTextField.text?.toDate()
         }
         
         return true
@@ -110,7 +119,7 @@ private extension MedicineTableViewController {
     func showAlert() {
         let alert = UIAlertController(
             title: "Ошибка",
-            message: "Поле с названием лекарства не должно быть путсым",
+            message: "Поле с названием лекарства не должно быть пустым",
             preferredStyle: .alert
         )
         
@@ -119,5 +128,26 @@ private extension MedicineTableViewController {
         alert.addAction(actionOk)
         
         present(alert, animated: true, completion: nil)
+    }
+}
+
+// TODO: Создать отдельный файл для глобальных расширений на примере тетери
+extension String {
+    // Для перевода текста в дату
+    func toDate(withFormat format: String = "dd.MM.yyyy") -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        let date = dateFormatter.date(from: self)
+        return date
+    }
+}
+
+extension Date {
+    // Для перевода даты в текст
+    func toString(format: String = "dd.MM.yyyy") -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.dateFormat = format
+        return formatter.string(from: self)
     }
 }
