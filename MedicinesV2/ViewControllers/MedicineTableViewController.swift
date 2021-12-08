@@ -76,6 +76,8 @@ private extension MedicineTableViewController {
     /// Конфигурирование полей ввода текста
     func setupTextFields() {
         // Настройка поля ввода количества шагов, которое используется в степпере
+        medicineCountStepsTextField.delegate = self
+        medicineCountStepsTextField.clearsOnBeginEditing = true
         medicineCountStepsTextField.keyboardType = .numbersAndPunctuation
         medicineCountStepsTextField.returnKeyType = .done
     }
