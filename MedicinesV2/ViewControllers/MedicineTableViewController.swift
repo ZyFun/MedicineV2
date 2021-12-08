@@ -135,7 +135,7 @@ private extension MedicineTableViewController {
         // Извлекаем принудительно, так как в данном случае при пустом поле падения не будет
         // Проверяем на пустые поля
         if medicineNameTextField.text!.isEmpty {
-            showAlert()
+            showErrorAlert(errorMessage: "Поле с названием лекарства не должно быть пустым")
             return false
         }
         
@@ -161,13 +161,15 @@ private extension MedicineTableViewController {
     }
 }
 
-// MARK: Alert Controller
+// MARK: - Error Alert Controller
 private extension MedicineTableViewController {
-    /// Отображение алерта с ошибкой, при проверки полей на отсутствие значения
-    func showAlert() {
+    /// Алерт для отображения сообщения об ошибке.
+    /// - Parameter errorMessage: принимает сообщение об ошибке,
+    /// которое будет выведено на экран.
+    func showErrorAlert(errorMessage: String) {
         let alert = UIAlertController(
             title: "Ошибка",
-            message: "Поле с названием лекарства не должно быть пустым",
+            message: errorMessage,
             preferredStyle: .alert
         )
         
