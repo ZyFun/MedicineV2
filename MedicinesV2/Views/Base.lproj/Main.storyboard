@@ -196,6 +196,9 @@
                                                         </stackView>
                                                         <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="999" translatesAutoresizingMaskIntoConstraints="NO" id="TLf-PF-OnF">
                                                             <rect key="frame" x="0.0" y="39" width="94" height="32"/>
+                                                            <connections>
+                                                                <action selector="stepMedicineCount:" destination="YNz-y4-AxW" eventType="valueChanged" id="Iaz-dO-hXS"/>
+                                                            </connections>
                                                         </stepper>
                                                     </subviews>
                                                 </stackView>

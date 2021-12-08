@@ -13,6 +13,9 @@ class MedicineTableViewController: UITableViewController {
     var medicine: Medicine?
     var currentFirstAidKit: FirstAidKit?
     
+    /// Используется для хранения и передачи шага в степпер
+    private var stepsCount: Double = 1
+    
     // MARK: IB Outlets
     @IBOutlet weak var medicineNameTextField: UITextField!
     @IBOutlet weak var medicineTypeTextField: UITextField!
@@ -35,13 +38,26 @@ class MedicineTableViewController: UITableViewController {
 
 // MARK: - Table view delegate
 
+// MARK: - Text Field Delegate
+extension MedicineTableViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        medicineCountStepsTextField.resignFirstResponder()
+        doneButtonPressed()
+        return true
+    }
+}
+
 // MARK: - Инициализация ViewController
 private extension MedicineTableViewController {
     /// Метод инициализации VC
     func setup() {
+        medicineCountStepsTextField.delegate = self
+        
         setupNavigationBar()
         setupTableView()
+        setupTextFields()
         loadMedicine()
+        setupStepperMedicine()
     }
     
     /// Настройка navigation bar
@@ -57,10 +73,28 @@ private extension MedicineTableViewController {
         tableView.allowsSelection = false
     }
     
+    /// Конфигурирование полей ввода текста
+    func setupTextFields() {
+        // Настройка поля ввода количества шагов, которое используется в степпере
+        medicineCountStepsTextField.keyboardType = .numbersAndPunctuation
+        medicineCountStepsTextField.returnKeyType = .done
+    }
+    
     /// Добавление кнопок в navigation bar
     func addButtons() {
-        let saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButtonPressed))
+        let saveButton = UIBarButtonItem(barButtonSystemItem: .save,
+                                         target: self,
+                                         action: #selector(saveButtonPressed))
+        
         navigationItem.rightBarButtonItems = [saveButton]
+    }
+    
+    /// Конфигурирование степпера
+    func setupStepperMedicine() {
+        medicineAmountStepsStepper.value = Double(medicineAmountTextField.text!) ?? 0
+        medicineAmountStepsStepper.stepValue = Double(stepsCount)
+        medicineAmountStepsStepper.minimumValue = 0
+        medicineAmountStepsStepper.maximumValue = 999
     }
     
     /// Загрузка лекарства из базы
@@ -74,6 +108,20 @@ private extension MedicineTableViewController {
     }
     
     // MARK: Actions
+    @IBAction func stepMedicineCount(_ sender: UIStepper) {
+        medicineAmountTextField.text = String(sender.value)
+    }
+    
+    // Кнопка готово на родной клавиатуре
+    func doneButtonPressed() {
+        stepsCount = Double(medicineCountStepsTextField.text!) ?? 1
+        // TODO: Написать и вызвать алерт с ошибкой, что в поле должно быть только число
+        // Временный костыль. Эта строчка нужна для того, чтобы вернуть 1
+        // В том случае, если в поле были введены не цифры
+        medicineCountStepsTextField.text = String(stepsCount)
+        medicineAmountStepsStepper.stepValue = Double(stepsCount)
+    }
+    
     /// Кнопка сохранения
     @objc func saveButtonPressed() {
         if saveMedicine() {
