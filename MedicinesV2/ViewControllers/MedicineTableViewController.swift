@@ -13,8 +13,9 @@ class MedicineTableViewController: UITableViewController {
     var medicine: Medicine?
     var currentFirstAidKit: FirstAidKit?
     
+    // MARK: Private Properties
     /// Используется для хранения и передачи шага в степпер
-    private var stepsCount: Double = 1
+    private var stepCount: Double = 1
     
     // MARK: IB Outlets
     @IBOutlet weak var medicineNameTextField: UITextField!
@@ -23,7 +24,7 @@ class MedicineTableViewController: UITableViewController {
     @IBOutlet weak var medicineCountStepsTextField: UITextField!
     @IBOutlet weak var medicinesExpiryDataTextField: UITextField!
     
-    @IBOutlet weak var medicineAmountStepsStepper: UIStepper!
+    @IBOutlet weak var medicineAmountStepper: UIStepper!
     
     // MARK: Life Cycle
     override func viewDidLoad() {
@@ -34,16 +35,46 @@ class MedicineTableViewController: UITableViewController {
 
 }
 
-// MARK: - Table view data source
-
-// MARK: - Table view delegate
+//// MARK: - Table view data source
+//// MARK: - Table view delegate
 
 // MARK: - Text Field Delegate
 extension MedicineTableViewController: UITextFieldDelegate {
+    // Назначаю действия для кноаки Done на клавиатуре
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         medicineCountStepsTextField.resignFirstResponder()
         doneButtonPressed()
         return true
+    }
+    
+    // Функция для ограничения ввода символов и точек с запятыми
+    // Выглядит как костыль но работает.
+    // TODO: Нужно подумать как это можно улучшить.
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+
+        guard let currentText = textField.text else { return false }
+        guard let stringRange = Range(range, in: currentText) else { return false }
+
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+        
+        if updatedText.count <= 6 && string != "." && string != "," {
+            return true
+        } else {
+            if updatedText.count <= 4 && string == "." || string == "," {
+                let countDots = currentText.components(separatedBy: [".", ","]).count - 1
+                if countDots == 0 {
+                    return true
+                } else {
+                    if countDots > 0 || string == "." || string == "," {
+                        return false
+                    } else {
+                        return true
+                    }
+                }
+            } else {
+                return false
+            }
+        }
     }
 }
 
@@ -51,8 +82,6 @@ extension MedicineTableViewController: UITextFieldDelegate {
 private extension MedicineTableViewController {
     /// Метод инициализации VC
     func setup() {
-        medicineCountStepsTextField.delegate = self
-        
         setupNavigationBar()
         setupTableView()
         setupTextFields()
@@ -93,10 +122,10 @@ private extension MedicineTableViewController {
     
     /// Конфигурирование степпера
     func setupStepperMedicine() {
-        medicineAmountStepsStepper.value = Double(medicineAmountTextField.text!) ?? 0
-        medicineAmountStepsStepper.stepValue = Double(stepsCount)
-        medicineAmountStepsStepper.minimumValue = 0
-        medicineAmountStepsStepper.maximumValue = 999
+        medicineAmountStepper.value = Double(medicineAmountTextField.text!) ?? 0
+        medicineAmountStepper.stepValue = stepCount
+        medicineAmountStepper.minimumValue = 0
+        medicineAmountStepper.maximumValue = 999
     }
     
     /// Загрузка лекарства из базы
@@ -116,20 +145,19 @@ private extension MedicineTableViewController {
     
     // Кнопка готово на родной клавиатуре
     func doneButtonPressed() {
-        
         // Извлекаем принудительно, так как расширение в любом случае вернет 0
-        stepsCount = medicineCountStepsTextField.text!.doubleValue
+        stepCount = medicineCountStepsTextField.text!.doubleValue
         
         // Защита от введения нуля пользователем и расширением.
         // При значении 0 у степпера, приложение падает
-        if stepsCount == 0 {
-            stepsCount = 1
+        if stepCount == 0 {
+            stepCount = 1
             // Эта строчка нужна для того, чтобы отобразить в поле ввода 1
-            // в том случае, если в поле были введены не цифры или 0
-            medicineCountStepsTextField.text = String(stepsCount)
+            // в том случае, если в поле были введены не цифры, или 0.
+            // А так же отобразить введенноё число в формате с точкой
+            medicineCountStepsTextField.text = String(stepCount)
         }
-        
-        medicineAmountStepsStepper.stepValue = Double(stepsCount)
+        medicineAmountStepper.stepValue = stepCount
     }
     
     /// Кнопка сохранения

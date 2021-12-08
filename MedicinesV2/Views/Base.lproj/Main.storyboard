@@ -255,7 +255,7 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="medicineAmountStepsStepper" destination="TLf-PF-OnF" id="TQF-xO-0Bg"/>
+                        <outlet property="medicineAmountStepper" destination="TLf-PF-OnF" id="TQF-xO-0Bg"/>
                         <outlet property="medicineAmountTextField" destination="vmw-rD-va7" id="Ufb-2b-MGy"/>
                         <outlet property="medicineCountStepsTextField" destination="Qeq-Z1-OW3" id="mMB-pw-s3k"/>
                         <outlet property="medicineNameTextField" destination="qKB-rG-1cI" id="8Bs-60-e7f"/>
