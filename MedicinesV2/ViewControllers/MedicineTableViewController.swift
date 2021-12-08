@@ -114,11 +114,19 @@ private extension MedicineTableViewController {
     
     // Кнопка готово на родной клавиатуре
     func doneButtonPressed() {
-        stepsCount = Double(medicineCountStepsTextField.text!) ?? 1
-        // TODO: Написать и вызвать алерт с ошибкой, что в поле должно быть только число
-        // Временный костыль. Эта строчка нужна для того, чтобы вернуть 1
-        // В том случае, если в поле были введены не цифры
-        medicineCountStepsTextField.text = String(stepsCount)
+        
+        // Извлекаем принудительно, так как расширение в любом случае вернет 0
+        stepsCount = medicineCountStepsTextField.text!.doubleValue
+        
+        // Защита от введения нуля пользователем и расширением.
+        // При значении 0 у степпера, приложение падает
+        if stepsCount == 0 {
+            stepsCount = 1
+            // Эта строчка нужна для того, чтобы отобразить в поле ввода 1
+            // в том случае, если в поле были введены не цифры или 0
+            medicineCountStepsTextField.text = String(stepsCount)
+        }
+        
         medicineAmountStepsStepper.stepValue = Double(stepsCount)
     }
     
@@ -153,7 +161,8 @@ private extension MedicineTableViewController {
         if let medicine = medicine {
             medicine.title = medicineNameTextField.text
             medicine.type = medicineTypeTextField.text
-            medicine.amount = Float(medicineAmountTextField.text!) ?? 0
+            // Извлекаем принудительно, так как расширение в любом случае вернет 0
+            medicine.amount = medicineAmountTextField.text!.doubleValue
             medicine.expiryDate = medicinesExpiryDataTextField.text?.toDate()
         }
         
