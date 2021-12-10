@@ -13,10 +13,6 @@ class MedicineTableViewController: UITableViewController {
     var medicine: Medicine?
     var currentFirstAidKit: FirstAidKit?
     
-    // MARK: Private Properties
-    /// Используется для хранения и передачи шага в степпер
-    private var stepCount: Double = 1
-    
     // MARK: IB Outlets
     @IBOutlet weak var medicineNameTextField: UITextField!
     @IBOutlet weak var medicineTypeTextField: UITextField!
@@ -122,8 +118,9 @@ private extension MedicineTableViewController {
     
     /// Конфигурирование степпера
     func setupStepperMedicine() {
-        medicineAmountStepper.value = Double(medicineAmountTextField.text!) ?? 0
-        medicineAmountStepper.stepValue = stepCount
+        // Извлекаем принудительно, так как расширение в любом случае вернет 0
+        medicineAmountStepper.value = medicineAmountTextField.text!.doubleValue
+        medicineAmountStepper.stepValue = medicineCountStepsTextField.text!.doubleValue
         medicineAmountStepper.minimumValue = 0
         medicineAmountStepper.maximumValue = 999
     }
@@ -134,6 +131,7 @@ private extension MedicineTableViewController {
             medicineNameTextField.text = medicine.title
             medicineTypeTextField.text = medicine.type
             medicineAmountTextField.text = String(medicine.amount)
+            medicineCountStepsTextField.text = String(medicine.stepCountForStepper)
             medicinesExpiryDataTextField.text = "\(medicine.expiryDate?.toString() ?? Date().toString())"
         }
     }
@@ -143,20 +141,24 @@ private extension MedicineTableViewController {
         medicineAmountTextField.text = String(sender.value)
     }
     
-    // Кнопка готово на родной клавиатуре
+    /// Кнопка готово на родной клавиатуре
     func doneButtonPressed() {
         // Извлекаем принудительно, так как расширение в любом случае вернет 0
-        stepCount = medicineCountStepsTextField.text!.doubleValue
+        var stepCount = medicineCountStepsTextField.text!.doubleValue
         
-        // Защита от введения нуля пользователем и расширением.
-        // При значении 0 у степпера, приложение падает
+        // Защита от введения нуля пользователем и расширением NumberFormatter.
+        // При значении 0 у степпера, приложение падает.
         if stepCount == 0 {
             stepCount = 1
-            // Эта строчка нужна для того, чтобы отобразить в поле ввода 1
-            // в том случае, если в поле были введены не цифры, или 0.
-            // А так же отобразить введенноё число в формате с точкой
-            medicineCountStepsTextField.text = String(stepCount)
         }
+        // Нужно для того, чтобы сохранить значение в базу
+        // которое было введено в поле шага степпера.
+        medicine?.stepCountForStepper = stepCount
+        StorageManager.shared.saveContext()
+        // Эта строчка нужна для того, чтобы обновить значение в поле ввода
+        // и отобразить введенноё число в формате с точкой,
+        // если было введено целое число
+        medicineCountStepsTextField.text = String(stepCount)
         medicineAmountStepper.stepValue = stepCount
     }
     
@@ -187,7 +189,8 @@ private extension MedicineTableViewController {
             medicine?.firstAidKit = currentFirstAidKit
         }
         
-        // Если лекарство есть в базе, меняем его параметры
+        // Если лекарство есть в базе, меняем его параметры.
+        // Если это новое лекарство, сохраняем введенные значения.
         if let medicine = medicine {
             medicine.title = medicineNameTextField.text
             medicine.type = medicineTypeTextField.text
