@@ -38,8 +38,11 @@ class MedicineTableViewController: UITableViewController {
 extension MedicineTableViewController: UITextFieldDelegate {
     // Назначаю действия для кноаки Done на клавиатуре
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        medicineCountStepsTextField.resignFirstResponder()
-        doneButtonPressed()
+        // Выбрано поле ввода значения шага степпера
+        if medicineCountStepsTextField.resignFirstResponder() {
+            doneButtonPressed()
+            return true
+        }
         return true
     }
     
@@ -105,6 +108,10 @@ private extension MedicineTableViewController {
         medicineCountStepsTextField.clearsOnBeginEditing = true
         medicineCountStepsTextField.keyboardType = .numbersAndPunctuation
         medicineCountStepsTextField.returnKeyType = .done
+        
+        // Настройка поля ввода количества оставшихся лекарств
+        medicineAmountTextField.delegate = self
+        medicineAmountTextField.keyboardType = .numbersAndPunctuation
     }
     
     /// Добавление кнопок в navigation bar
