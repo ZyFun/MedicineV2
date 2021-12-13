@@ -36,6 +36,13 @@ class MedicineTableViewController: UITableViewController {
 
 // MARK: - Text Field Delegate
 extension MedicineTableViewController: UITextFieldDelegate {
+    // Назначаю действия по окончанию редактирования поля
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if medicineCountStepsTextField.resignFirstResponder() {
+            doneButtonPressed()
+        }
+    }
+    
     // Назначаю действия для кноаки Done на клавиатуре
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // Выбрано поле ввода значения шага степпера
