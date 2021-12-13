@@ -152,7 +152,7 @@ private extension MedicineTableViewController {
     
     // MARK: Actions
     @IBAction func stepMedicineCount(_ sender: UIStepper) {
-        medicineAmountTextField.text = String(sender.value)
+        medicineAmountTextField.text = String(format: "%.2f", sender.value)
     }
     
     /// Кнопка готово на родной клавиатуре
@@ -172,7 +172,7 @@ private extension MedicineTableViewController {
         // Эта строчка нужна для того, чтобы обновить значение в поле ввода
         // и отобразить введенноё число в формате с точкой,
         // если было введено целое число
-        medicineCountStepsTextField.text = String(stepCount)
+        medicineCountStepsTextField.text = String(format: "%.2f", stepCount)
         medicineAmountStepper.stepValue = stepCount
     }
     
@@ -210,6 +210,9 @@ private extension MedicineTableViewController {
             medicine.type = medicineTypeTextField.text
             // Извлекаем принудительно, так как расширение в любом случае вернет 0
             medicine.amount = medicineAmountTextField.text!.doubleValue
+            // Расширение возвращает 0, но с 0 будет краш приложения
+            // при открытии такого лекарства.
+            medicine.stepCountForStepper = medicineCountStepsTextField.text?.doubleValue ?? 1
             medicine.expiryDate = medicinesExpiryDataTextField.text?.toDate()
         }
         
