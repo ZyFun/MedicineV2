@@ -31,7 +31,7 @@ class MedicineTableViewController: UITableViewController {
 
 }
 
-// MARK: - Инициализация ViewController
+// MARK: - Настройки для ViewController
 private extension MedicineTableViewController {
     /// Метод инициализации VC
     func setup() {
@@ -57,15 +57,23 @@ private extension MedicineTableViewController {
     
     /// Конфигурирование полей ввода текста
     func setupTextFields() {
+        setupDelegateForTextFields()
+        
         // Настройка поля ввода количества шагов, которое используется в степпере
-        medicineCountStepsTextField.delegate = self
         medicineCountStepsTextField.clearsOnBeginEditing = true
         medicineCountStepsTextField.keyboardType = .decimalPad
         medicineCountStepsTextField.returnKeyType = .done
         
         // Настройка поля ввода количества оставшихся лекарств
-        medicineAmountTextField.delegate = self
         medicineAmountTextField.keyboardType = .decimalPad
+    }
+    
+    /// Настройка делегирования для полей ввода
+    func setupDelegateForTextFields() {
+        medicineNameTextField.delegate = self
+        medicineTypeTextField.delegate = self
+        medicineCountStepsTextField.delegate = self
+        medicineAmountTextField.delegate = self
     }
     
     /// Добавление кнопок в navigation bar
@@ -95,6 +103,35 @@ private extension MedicineTableViewController {
             medicineCountStepsTextField.text = String(medicine.stepCountForStepper)
             medicinesExpiryDataTextField.text = "\(medicine.expiryDate?.toString() ?? Date().toString())"
         }
+    }
+    
+    /// Метод добавляет тулбар на клавиатуру для определенного поля редактирования.
+    /// - Parameter textField: принимает поле, для клавиатуры которого
+    /// требуется добавить тулбар.
+    func addToolbarForKeyboard(for textField: UITextField) {
+        let toolbar = UIToolbar(
+            frame: CGRect(
+                x: 0,
+                y: 0,
+                width: view.bounds.width,
+                height: 44
+            )
+        )
+        
+        let leftSpeсing = UIBarButtonItem(
+            barButtonSystemItem: .flexibleSpace,
+            target: nil,
+            action: nil
+        )
+        
+        let doneButton = UIBarButtonItem(
+            barButtonSystemItem: .done,
+            target: self,
+            action: #selector(toolBarDoneButtonPressed)
+        )
+        
+        toolbar.setItems([leftSpeсing, doneButton], animated: false)
+        textField.inputAccessoryView = toolbar
     }
     
     // MARK: Actions
@@ -173,20 +210,21 @@ private extension MedicineTableViewController {
 
 // MARK: - Text Field Delegate
 extension MedicineTableViewController: UITextFieldDelegate {
-    // Назначаю действия по окончанию редактирования поля
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        if medicineCountStepsTextField.resignFirstResponder() {
-            doneButtonPressed()
+    // Используется для отображения тулбара
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == medicineCountStepsTextField {
+            addToolbarForKeyboard(for: textField)
         }
     }
     
-    // Назначаю действия для кноаки Done на клавиатуре
+    // Назначаю действия по окончанию редактирования поля
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        actionsEndEditing(for: textField)
+    }
+    
+    // Назначаю действия для кнопки Return на клавиатуре
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        // Выбрано поле ввода значения шага степпера
-        if medicineCountStepsTextField.resignFirstResponder() {
-            doneButtonPressed()
-            return true
-        }
+        textField.resignFirstResponder()
         return true
     }
     
