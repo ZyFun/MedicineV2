@@ -31,59 +31,6 @@ class MedicineTableViewController: UITableViewController {
 
 }
 
-//// MARK: - Table view data source
-//// MARK: - Table view delegate
-
-// MARK: - Text Field Delegate
-extension MedicineTableViewController: UITextFieldDelegate {
-    // Назначаю действия по окончанию редактирования поля
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        if medicineCountStepsTextField.resignFirstResponder() {
-            doneButtonPressed()
-        }
-    }
-    
-    // Назначаю действия для кноаки Done на клавиатуре
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        // Выбрано поле ввода значения шага степпера
-        if medicineCountStepsTextField.resignFirstResponder() {
-            doneButtonPressed()
-            return true
-        }
-        return true
-    }
-    
-    // Функция для ограничения ввода символов и точек с запятыми
-    // Выглядит как костыль но работает.
-    // TODO: Нужно подумать как это можно улучшить.
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-
-        guard let currentText = textField.text else { return false }
-        guard let stringRange = Range(range, in: currentText) else { return false }
-
-        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
-        
-        if updatedText.count <= 6 && string != "." && string != "," {
-            return true
-        } else {
-            if updatedText.count <= 4 && string == "." || string == "," {
-                let countDots = currentText.components(separatedBy: [".", ","]).count - 1
-                if countDots == 0 {
-                    return true
-                } else {
-                    if countDots > 0 || string == "." || string == "," {
-                        return false
-                    } else {
-                        return true
-                    }
-                }
-            } else {
-                return false
-            }
-        }
-    }
-}
-
 // MARK: - Инициализация ViewController
 private extension MedicineTableViewController {
     /// Метод инициализации VC
@@ -198,7 +145,8 @@ private extension MedicineTableViewController {
             medicine = Medicine()
         }
         
-        // Создание связи лекарства к аптечке (это работает, осталось только понять как отфильтовать предикатом)
+        // Создание связи лекарства к аптечке.
+        // Это работает, осталось только понять, как отфильтовать предикатом
         if let currentFirstAidKit = currentFirstAidKit {
             medicine?.firstAidKit = currentFirstAidKit
         }
@@ -217,6 +165,59 @@ private extension MedicineTableViewController {
         }
         
         return true
+    }
+}
+
+//// MARK: - Table view data source
+//// MARK: - Table view delegate
+
+// MARK: - Text Field Delegate
+extension MedicineTableViewController: UITextFieldDelegate {
+    // Назначаю действия по окончанию редактирования поля
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if medicineCountStepsTextField.resignFirstResponder() {
+            doneButtonPressed()
+        }
+    }
+    
+    // Назначаю действия для кноаки Done на клавиатуре
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        // Выбрано поле ввода значения шага степпера
+        if medicineCountStepsTextField.resignFirstResponder() {
+            doneButtonPressed()
+            return true
+        }
+        return true
+    }
+    
+    // Функция для ограничения ввода символов и точек с запятыми
+    // Выглядит как костыль но работает.
+    // TODO: Нужно подумать как это можно улучшить.
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+
+        guard let currentText = textField.text else { return false }
+        guard let stringRange = Range(range, in: currentText) else { return false }
+
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+        
+        if updatedText.count <= 6 && string != "." && string != "," {
+            return true
+        } else {
+            if updatedText.count <= 4 && string == "." || string == "," {
+                let countDots = currentText.components(separatedBy: [".", ","]).count - 1
+                if countDots == 0 {
+                    return true
+                } else {
+                    if countDots > 0 || string == "." || string == "," {
+                        return false
+                    } else {
+                        return true
+                    }
+                }
+            } else {
+                return false
+            }
+        }
     }
 }
 
