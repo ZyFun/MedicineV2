@@ -60,12 +60,12 @@ private extension MedicineTableViewController {
         // Настройка поля ввода количества шагов, которое используется в степпере
         medicineCountStepsTextField.delegate = self
         medicineCountStepsTextField.clearsOnBeginEditing = true
-        medicineCountStepsTextField.keyboardType = .numbersAndPunctuation
+        medicineCountStepsTextField.keyboardType = .decimalPad
         medicineCountStepsTextField.returnKeyType = .done
         
         // Настройка поля ввода количества оставшихся лекарств
         medicineAmountTextField.delegate = self
-        medicineAmountTextField.keyboardType = .numbersAndPunctuation
+        medicineAmountTextField.keyboardType = .decimalPad
     }
     
     /// Добавление кнопок в navigation bar
