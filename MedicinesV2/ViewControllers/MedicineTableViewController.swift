@@ -135,32 +135,44 @@ private extension MedicineTableViewController {
     }
     
     // MARK: Actions
+    /// Назначает действий при окончании редактирования в поле ввода
+    /// - Parameter textField: принимает поле ввода в котором необходимо применить
+    ///  действие по окончанию редактирования
+    func actionsEndEditing(for textField: UITextField) {
+        if textField == medicineCountStepsTextField {
+            // Извлекаем принудительно, так как расширение в любом случае вернет 0
+            var stepCount = textField.text!.doubleValue
+            
+            // Защита от введения нуля пользователем и расширением NumberFormatter.
+            // При значении 0 у степпера, приложение падает.
+            if stepCount == 0 {
+                stepCount = 1
+            }
+            // Нужно для того, чтобы сохранить значение в базу
+            // которое было введено в поле шага степпера.
+            medicine?.stepCountForStepper = stepCount
+            StorageManager.shared.saveContext()
+            // Эта строчка нужна для того, чтобы обновить значение в поле ввода
+            // и отобразить введенноё число в формате с точкой,
+            // если было введено целое число
+            textField.text = String(format: "%.2f", stepCount)
+            medicineAmountStepper.stepValue = stepCount
+            
+            return
+        }
+    }
+    
+    // Действия для степпера
     @IBAction func stepMedicineCount(_ sender: UIStepper) {
         medicineAmountTextField.text = String(format: "%.2f", sender.value)
     }
     
-    /// Кнопка готово на родной клавиатуре
-    func doneButtonPressed() {
-        // Извлекаем принудительно, так как расширение в любом случае вернет 0
-        var stepCount = medicineCountStepsTextField.text!.doubleValue
-        
-        // Защита от введения нуля пользователем и расширением NumberFormatter.
-        // При значении 0 у степпера, приложение падает.
-        if stepCount == 0 {
-            stepCount = 1
-        }
-        // Нужно для того, чтобы сохранить значение в базу
-        // которое было введено в поле шага степпера.
-        medicine?.stepCountForStepper = stepCount
-        StorageManager.shared.saveContext()
-        // Эта строчка нужна для того, чтобы обновить значение в поле ввода
-        // и отобразить введенноё число в формате с точкой,
-        // если было введено целое число
-        medicineCountStepsTextField.text = String(format: "%.2f", stepCount)
-        medicineAmountStepper.stepValue = stepCount
+    /// Действие кнопки готово для тулбара
+    @objc func toolBarDoneButtonPressed() {
+        actionsEndEditing(for: medicineCountStepsTextField)
     }
     
-    /// Кнопка сохранения
+    /// Действие сохранения для кнопки навигационной панели
     @objc func saveButtonPressed() {
         if saveMedicine() {
             StorageManager.shared.saveContext()
