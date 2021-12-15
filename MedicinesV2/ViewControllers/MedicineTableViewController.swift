@@ -262,6 +262,11 @@ extension MedicineTableViewController: UITextFieldDelegate {
     // TODO: Нужно подумать как это можно улучшить.
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 
+        if textField != medicineAmountTextField,
+           textField != medicineCountStepsTextField {
+            return true
+        }
+        
         guard let currentText = textField.text else { return false }
         guard let stringRange = Range(range, in: currentText) else { return false }
 
