@@ -139,26 +139,28 @@ private extension MedicineTableViewController {
     /// - Parameter textField: принимает поле ввода в котором необходимо применить
     ///  действие по окончанию редактирования
     func actionsEndEditing(for textField: UITextField) {
+        // Извлекаем принудительно, так как расширение в любом случае вернет 0
+        var amountMedicine = textField.text!.doubleValue
+        
         if textField == medicineCountStepsTextField {
-            // Извлекаем принудительно, так как расширение в любом случае вернет 0
-            var stepCount = textField.text!.doubleValue
-            
             // Защита от введения нуля пользователем и расширением NumberFormatter.
             // При значении 0 у степпера, приложение падает.
-            if stepCount == 0 {
-                stepCount = 1
+            if amountMedicine == 0 {
+                amountMedicine = 1
             }
             // Нужно для того, чтобы сохранить значение в базу
             // которое было введено в поле шага степпера.
-            medicine?.stepCountForStepper = stepCount
-            StorageManager.shared.saveContext()
+            medicine?.stepCountForStepper = amountMedicine
             // Эта строчка нужна для того, чтобы обновить значение в поле ввода
             // и отобразить введенноё число в формате с точкой,
             // если было введено целое число
-            textField.text = String(format: "%.2f", stepCount)
-            medicineAmountStepper.stepValue = stepCount
-            
-            return
+            textField.text = String(format: "%.2f", amountMedicine)
+            medicineAmountStepper.stepValue = amountMedicine
+        }
+        
+        if textField == medicineAmountTextField {
+            medicine?.amount = amountMedicine
+            textField.text = String(format: "%.2f", amountMedicine)
         }
     }
     
@@ -169,7 +171,16 @@ private extension MedicineTableViewController {
     
     /// Действие кнопки готово для тулбара
     @objc func toolBarDoneButtonPressed() {
-        actionsEndEditing(for: medicineCountStepsTextField)
+        if medicineAmountTextField.isFirstResponder {
+            actionsEndEditing(for: medicineAmountTextField)
+            return
+        }
+
+        if medicineCountStepsTextField.isFirstResponder {
+            actionsEndEditing(for: medicineCountStepsTextField)
+            return
+        }
+        
     }
     
     /// Действие сохранения для кнопки навигационной панели
@@ -208,7 +219,7 @@ private extension MedicineTableViewController {
             // Извлекаем принудительно, так как расширение в любом случае вернет 0
             medicine.amount = medicineAmountTextField.text!.doubleValue
             // Расширение возвращает 0, но с 0 будет краш приложения
-            // при открытии такого лекарства.
+            // при открытии такого лекарства. По этому, значение по умолчанию 1.
             medicine.stepCountForStepper = medicineCountStepsTextField.text?.doubleValue ?? 1
             medicine.expiryDate = medicinesExpiryDataTextField.text?.toDate()
         }
@@ -226,6 +237,12 @@ extension MedicineTableViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == medicineCountStepsTextField {
             addToolbarForKeyboard(for: textField)
+            return
+        }
+        
+        if textField == medicineAmountTextField {
+            addToolbarForKeyboard(for: textField)
+            return
         }
     }
     
