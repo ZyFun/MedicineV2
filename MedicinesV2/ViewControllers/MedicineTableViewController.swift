@@ -13,12 +13,15 @@ class MedicineTableViewController: UITableViewController {
     var medicine: Medicine?
     var currentFirstAidKit: FirstAidKit?
     
+    // MARK: Private Properties
+    private var datePicker: UIDatePicker!
+    
     // MARK: IB Outlets
     @IBOutlet weak var medicineNameTextField: UITextField!
     @IBOutlet weak var medicineTypeTextField: UITextField!
     @IBOutlet weak var medicineAmountTextField: UITextField!
     @IBOutlet weak var medicineCountStepsTextField: UITextField!
-    @IBOutlet weak var medicinesExpiryDataTextField: UITextField!
+    @IBOutlet weak var medicinesExpiryDateTextField: UITextField!
     
     @IBOutlet weak var medicineAmountStepper: UIStepper!
     
@@ -37,6 +40,7 @@ private extension MedicineTableViewController {
     func setup() {
         setupNavigationBar()
         setupTableView()
+        setupDataPicker()
         setupTextFields()
         loadMedicine()
         setupStepperMedicine()
@@ -47,7 +51,7 @@ private extension MedicineTableViewController {
         // Возможно потребуется, когда вход в приложение будет без сториборда, если нет, удалить
 //        self.navigationController?.navigationBar.prefersLargeTitles = true
         title = medicine?.title ?? "Новое лекарство"
-        addButtons()
+        addButtonsToNavigationBar()
     }
     
     /// Настройка внешнего вида таблицы
@@ -66,6 +70,9 @@ private extension MedicineTableViewController {
         
         // Настройка поля ввода количества оставшихся лекарств
         medicineAmountTextField.keyboardType = .decimalPad
+        
+        // Настройка поля ввода с кастомным способом выбора даты
+        medicinesExpiryDateTextField.inputView = datePicker
     }
     
     /// Настройка делегирования для полей ввода
@@ -74,10 +81,11 @@ private extension MedicineTableViewController {
         medicineTypeTextField.delegate = self
         medicineCountStepsTextField.delegate = self
         medicineAmountTextField.delegate = self
+        medicinesExpiryDateTextField.delegate = self
     }
     
     /// Добавление кнопок в navigation bar
-    func addButtons() {
+    func addButtonsToNavigationBar() {
         let saveButton = UIBarButtonItem(barButtonSystemItem: .save,
                                          target: self,
                                          action: #selector(saveButtonPressed))
@@ -94,6 +102,30 @@ private extension MedicineTableViewController {
         medicineAmountStepper.maximumValue = 999
     }
     
+    /// Настройка и конфигурации  кастомного datePicker для выбора даты с помощью барабана
+    func setupDataPicker() {
+        datePicker = UIDatePicker(
+            frame: CGRect(
+                x: 0,
+                y: 0,
+                width: self.view.bounds.width,
+                height: 280
+            )
+        )
+        
+        datePicker.datePickerMode = .date
+        datePicker.addTarget(
+            self,
+            action: #selector(dateChanged),
+            for: .allEvents
+        )
+        
+        // Выбираем стиль в виде барабана для новых версий iOS
+        if #available(iOS 13.4, *) {
+            datePicker.preferredDatePickerStyle = .wheels
+        }
+    }
+    
     /// Загрузка лекарства из базы
     func loadMedicine() {
         if let medicine = medicine {
@@ -101,7 +133,7 @@ private extension MedicineTableViewController {
             medicineTypeTextField.text = medicine.type
             medicineAmountTextField.text = String(medicine.amount)
             medicineCountStepsTextField.text = String(medicine.stepCountForStepper)
-            medicinesExpiryDataTextField.text = "\(medicine.expiryDate?.toString() ?? Date().toString())"
+            medicinesExpiryDateTextField.text = "\(medicine.expiryDate?.toString() ?? Date().toString())"
         }
     }
     
@@ -139,6 +171,13 @@ private extension MedicineTableViewController {
     /// - Parameter textField: принимает поле ввода в котором необходимо применить
     ///  действие по окончанию редактирования
     func actionsEndEditing(for textField: UITextField) {
+        // Делаю первой проверку именно на это поле, потому что
+        // нет необходимости в присвоении переменных
+        if textField == medicinesExpiryDateTextField {
+            textField.resignFirstResponder()
+            return
+        }
+        
         // Извлекаем принудительно, так как расширение в любом случае вернет 0
         var amountMedicine = textField.text!.doubleValue
         
@@ -162,6 +201,8 @@ private extension MedicineTableViewController {
             medicine?.amount = amountMedicine
             textField.text = String(format: "%.2f", amountMedicine)
         }
+        
+        textField.resignFirstResponder()
     }
     
     // Действия для степпера
@@ -181,6 +222,15 @@ private extension MedicineTableViewController {
             return
         }
         
+        if medicinesExpiryDateTextField.isFirstResponder {
+            actionsEndEditing(for: medicinesExpiryDateTextField)
+            return
+        }
+    }
+    
+    /// Изменение даты с помощью dataPicker
+    @objc private func dateChanged() {
+        medicinesExpiryDateTextField.text = datePicker.date.toString()
     }
     
     /// Действие сохранения для кнопки навигационной панели
@@ -221,7 +271,7 @@ private extension MedicineTableViewController {
             // Расширение возвращает 0, но с 0 будет краш приложения
             // при открытии такого лекарства. По этому, значение по умолчанию 1.
             medicine.stepCountForStepper = medicineCountStepsTextField.text?.doubleValue ?? 1
-            medicine.expiryDate = medicinesExpiryDataTextField.text?.toDate()
+            medicine.expiryDate = medicinesExpiryDateTextField.text?.toDate()
         }
         
         return true
@@ -242,6 +292,12 @@ extension MedicineTableViewController: UITextFieldDelegate {
         
         if textField == medicineAmountTextField {
             addToolbarForKeyboard(for: textField)
+            return
+        }
+        
+        if textField == medicinesExpiryDateTextField {
+            addToolbarForKeyboard(for: textField)
+            datePicker.date = medicinesExpiryDateTextField.text?.toDate() ?? Date()
             return
         }
     }
