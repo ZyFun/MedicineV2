@@ -187,9 +187,6 @@ private extension MedicineTableViewController {
             if amountMedicine == 0 {
                 amountMedicine = 1
             }
-            // Нужно для того, чтобы сохранить значение в базу
-            // которое было введено в поле шага степпера.
-            medicine?.stepCountForStepper = amountMedicine
             // Эта строчка нужна для того, чтобы обновить значение в поле ввода
             // и отобразить введенноё число в формате с точкой,
             // если было введено целое число
@@ -198,8 +195,8 @@ private extension MedicineTableViewController {
         }
         
         if textField == medicineAmountTextField {
-            medicine?.amount = amountMedicine
             textField.text = String(format: "%.2f", amountMedicine)
+            medicineAmountStepper.value = amountMedicine
         }
         
         textField.resignFirstResponder()
