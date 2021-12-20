@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="21A559" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="FirstAidKit" representedClassName="FirstAidKit" syncable="YES">
+        <attribute name="title" attributeType="String"/>
+        <relationship name="medicines" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Medicine" inverseName="firstAidKit" inverseEntity="Medicine"/>
+    </entity>
+    <entity name="Medicine" representedClassName="Medicine" syncable="YES">
+        <attribute name="amount" attributeType="Double" defaultValueString="0" usesScalarValueType="NO"/>
+        <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="expiryDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="stepCountForStepper" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO"/>
+        <attribute name="title" attributeType="String"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <relationship name="firstAidKit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FirstAidKit" inverseName="medicines" inverseEntity="FirstAidKit"/>
+    </entity>
+    <elements>
+        <element name="FirstAidKit" positionX="-6118.90185546875" positionY="-4556.860992431641" width="128" height="59"/>
+        <element name="Medicine" positionX="-5777.125915527344" positionY="-4395.899291992188" width="128" height="134"/>
+    </elements>
+</model>

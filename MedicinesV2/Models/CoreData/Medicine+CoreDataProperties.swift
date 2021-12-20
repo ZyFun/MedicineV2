@@ -21,6 +21,7 @@ extension Medicine {
     @NSManaged public var title: String?
     @NSManaged public var type: String?
     @NSManaged public var stepCountForStepper: Double
+    @NSManaged public var dateCreated: Date?
     @NSManaged public var firstAidKit: FirstAidKit?
 
 }

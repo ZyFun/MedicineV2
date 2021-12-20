@@ -261,6 +261,7 @@ private extension MedicineTableViewController {
         // Если лекарство есть в базе, меняем его параметры.
         // Если это новое лекарство, сохраняем введенные значения.
         if let medicine = medicine {
+            medicine.dateCreated = Date()
             medicine.title = medicineNameTextField.text
             medicine.type = medicineTypeTextField.text
             // Извлекаем принудительно, так как расширение в любом случае вернет 0
