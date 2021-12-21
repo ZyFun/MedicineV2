@@ -14,7 +14,7 @@ extension UIAlertController {
     /// - Returns: возвращает кастомный алерт контроллер
     static func createAlertController(with title: String) -> UIAlertController {
         UIAlertController(title: title,
-                          message: "Введите название или расположение новой аптечки",
+                          message: "Введите название или расположение аптечки",
                           preferredStyle: .alert)
     }
     
