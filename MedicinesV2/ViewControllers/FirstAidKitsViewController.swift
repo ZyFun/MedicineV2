@@ -78,7 +78,7 @@ class FirstAidKitsViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "firstAidKit", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "firstAidKitOld", for: indexPath)
         
         let firstAidKit = fetchedResultsController.object(at: indexPath) as! FirstAidKit
         

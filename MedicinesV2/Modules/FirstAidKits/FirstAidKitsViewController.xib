@@ -9,28 +9,31 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MedicinesTableViewController" customModule="MedicinesV2" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <viewController id="145-Yw-rJI">
-            <view key="view" contentMode="scaleToFill" id="Iw1-gc-3Rg">
+        <viewController id="tMV-vo-yZz" customClass="FirstAidKitsController" customModule="MedicinesV2" customModuleProvider="target">
+            <view key="view" contentMode="scaleToFill" id="NyN-yD-fPr">
                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="gZP-ze-K0L">
+                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="NSL-LC-818">
                         <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </tableView>
                 </subviews>
-                <viewLayoutGuide key="safeArea" id="K3u-fM-QAQ"/>
+                <viewLayoutGuide key="safeArea" id="wpI-q1-Hxl"/>
                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 <constraints>
-                    <constraint firstItem="K3u-fM-QAQ" firstAttribute="trailing" secondItem="gZP-ze-K0L" secondAttribute="trailing" id="W0G-iU-Gaq"/>
-                    <constraint firstItem="gZP-ze-K0L" firstAttribute="leading" secondItem="K3u-fM-QAQ" secondAttribute="leading" id="XRM-Wz-Soz"/>
-                    <constraint firstItem="K3u-fM-QAQ" firstAttribute="bottom" secondItem="gZP-ze-K0L" secondAttribute="bottom" id="diO-Ko-WDg"/>
-                    <constraint firstItem="gZP-ze-K0L" firstAttribute="top" secondItem="K3u-fM-QAQ" secondAttribute="top" id="gDG-Yf-9A1"/>
+                    <constraint firstItem="NSL-LC-818" firstAttribute="trailing" secondItem="wpI-q1-Hxl" secondAttribute="trailing" id="DOK-yv-jEx"/>
+                    <constraint firstItem="NSL-LC-818" firstAttribute="top" secondItem="wpI-q1-Hxl" secondAttribute="top" id="ReY-Jn-3iw"/>
+                    <constraint firstItem="NSL-LC-818" firstAttribute="bottom" secondItem="wpI-q1-Hxl" secondAttribute="bottom" id="eYG-aw-qir"/>
+                    <constraint firstItem="NSL-LC-818" firstAttribute="leading" secondItem="wpI-q1-Hxl" secondAttribute="leading" id="gjY-uj-E8P"/>
                 </constraints>
             </view>
-            <point key="canvasLocation" x="73" y="80"/>
+            <connections>
+                <outlet property="firstAidKitsTableView" destination="NSL-LC-818" id="D7t-vq-HcA"/>
+            </connections>
+            <point key="canvasLocation" x="128.98550724637681" y="59.598214285714285"/>
         </viewController>
     </objects>
     <resources>
