@@ -73,8 +73,13 @@ private extension MedicinesViewController {
     
     ///Инициализация Xibs
     func setupXibs() {
-        medicinesTableView?.register(UINib(nibName: String(describing: MedicineTableViewCell.self), bundle: nil),
-                                    forCellReuseIdentifier: String(describing: MedicineTableViewCell.self))
+        medicinesTableView?.register(
+            UINib(
+                nibName: String(describing: MedicineTableViewCell.self),
+                bundle: nil
+            ),
+            forCellReuseIdentifier: String(describing: MedicineTableViewCell.self)
+        )
     }
     
     /// Метод настройки Navigation Bar

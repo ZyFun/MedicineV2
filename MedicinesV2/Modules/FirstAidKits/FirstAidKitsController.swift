@@ -31,6 +31,38 @@ class FirstAidKitsController: UIViewController {
         
     }
 }
+// MARK: - Конфигурирование ViewController
+extension FirstAidKitsController {
+    /// Метод инициализации VC
+    func setup() {
+        setupNavigationBar()
+        setupTableView()
+        setupXib()
+    }
+    
+    /// Метод настройки Navigation Bar
+    func setupNavigationBar() {
+        // TODO: Произвести настройку
+    }
+    
+    /// Метод настройки таблицы
+    func setupTableView() {
+        firstAidKitsTableView.delegate = self
+        firstAidKitsTableView.dataSource = self
+    }
+    
+    /// Инициализация Xibs
+    func setupXib() {
+        // Регистрируем ячейку для таблицы аптечек
+        firstAidKitsTableView.register(
+            UINib(
+                nibName: String(describing: FirstAidKitTableViewCell.self),
+                bundle: nil
+            ),
+            forCellReuseIdentifier: String(describing: FirstAidKitTableViewCell.self)
+        )
+    }
+}
 
 // MARK: - Table view data source
 extension FirstAidKitsController: UITableViewDataSource {
