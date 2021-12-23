@@ -29,6 +29,7 @@ class FirstAidKitsController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setup()
     }
 }
 // MARK: - Конфигурирование ViewController
@@ -43,6 +44,8 @@ extension FirstAidKitsController {
     /// Метод настройки Navigation Bar
     func setupNavigationBar() {
         // TODO: Произвести настройку
+        navigationController?.navigationBar.prefersLargeTitles = true
+        title = "Аптечки"
     }
     
     /// Метод настройки таблицы
@@ -73,6 +76,7 @@ extension FirstAidKitsController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: FirstAidKitTableViewCell.self), for: indexPath) as! FirstAidKitTableViewCell
         
+        cell.accessoryType = .disclosureIndicator
         cell.configure(titleFirstAidKit: "Test", amountMedicines: "1")
         
         return cell

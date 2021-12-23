@@ -21,6 +21,7 @@
 		2C5F113627707CF60040536D /* Medicines.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F113327707CF60040536D /* Medicines.xcdatamodeld */; };
 		2C60890927356B6400E66081 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60890827356B6400E66081 /* StorageManager.swift */; };
 		2C6762892757A32300B46E21 /* MedicineTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6762882757A32300B46E21 /* MedicineTableViewController.swift */; };
+		2C7A5FB82774EFA9002C4702 /* FirstAidKitsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C7A5FB72774EFA9002C4702 /* FirstAidKitsViewController.xib */; };
 		2C925715273D478D00DA7284 /* MedicinesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C925713273D478D00DA7284 /* MedicinesViewController.xib */; };
 		2C925717273D4DE800DA7284 /* MedicinesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C925716273D4DE800DA7284 /* MedicinesViewController.swift */; };
 		2C925719273D5C4400DA7284 /* MedicinesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C925718273D5C4400DA7284 /* MedicinesPresenter.swift */; };
@@ -38,7 +39,6 @@
 		2CF1EE73277347700031D79D /* FirstAidKitsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF1EE72277347700031D79D /* FirstAidKitsPresenter.swift */; };
 		2CF1EE75277347800031D79D /* FirstAidKitsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF1EE74277347800031D79D /* FirstAidKitsInteractor.swift */; };
 		2CF1EE77277347980031D79D /* FirstAidKitsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF1EE76277347970031D79D /* FirstAidKitsRouter.swift */; };
-		2CF1EE79277348010031D79D /* FirstAidKitsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CF1EE78277348010031D79D /* FirstAidKitsViewController.xib */; };
 		2CF1EE7B277348330031D79D /* FirstAidKitsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF1EE7A277348330031D79D /* FirstAidKitsConfigurator.swift */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +60,7 @@
 		2C5F113527707CF60040536D /* Medicines v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Medicines v2.xcdatamodel"; sourceTree = "<group>"; };
 		2C60890827356B6400E66081 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		2C6762882757A32300B46E21 /* MedicineTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineTableViewController.swift; sourceTree = "<group>"; };
+		2C7A5FB72774EFA9002C4702 /* FirstAidKitsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FirstAidKitsViewController.xib; sourceTree = "<group>"; };
 		2C925713273D478D00DA7284 /* MedicinesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MedicinesViewController.xib; sourceTree = "<group>"; };
 		2C925716273D4DE800DA7284 /* MedicinesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicinesViewController.swift; sourceTree = "<group>"; };
 		2C925718273D5C4400DA7284 /* MedicinesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicinesPresenter.swift; sourceTree = "<group>"; };
@@ -77,7 +78,6 @@
 		2CF1EE72277347700031D79D /* FirstAidKitsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAidKitsPresenter.swift; sourceTree = "<group>"; };
 		2CF1EE74277347800031D79D /* FirstAidKitsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAidKitsInteractor.swift; sourceTree = "<group>"; };
 		2CF1EE76277347970031D79D /* FirstAidKitsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAidKitsRouter.swift; sourceTree = "<group>"; };
-		2CF1EE78277348010031D79D /* FirstAidKitsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FirstAidKitsViewController.xib; sourceTree = "<group>"; };
 		2CF1EE7A277348330031D79D /* FirstAidKitsConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAidKitsConfigurator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -256,7 +256,7 @@
 				2CF1EE74277347800031D79D /* FirstAidKitsInteractor.swift */,
 				2CF1EE76277347970031D79D /* FirstAidKitsRouter.swift */,
 				2CF1EE7A277348330031D79D /* FirstAidKitsConfigurator.swift */,
-				2CF1EE78277348010031D79D /* FirstAidKitsViewController.xib */,
+				2C7A5FB72774EFA9002C4702 /* FirstAidKitsViewController.xib */,
 			);
 			path = FirstAidKits;
 			sourceTree = "<group>";
@@ -325,7 +325,7 @@
 				2C52BDC7273540F600356A63 /* Assets.xcassets in Resources */,
 				2C925715273D478D00DA7284 /* MedicinesViewController.xib in Resources */,
 				2C52BDC2273540F400356A63 /* Main.storyboard in Resources */,
-				2CF1EE79277348010031D79D /* FirstAidKitsViewController.xib in Resources */,
+				2C7A5FB82774EFA9002C4702 /* FirstAidKitsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,7 +516,6 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "Аптечка";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -546,7 +545,6 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "Аптечка";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
