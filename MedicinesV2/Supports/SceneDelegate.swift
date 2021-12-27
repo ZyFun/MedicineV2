@@ -69,6 +69,6 @@ private extension SceneDelegate {
         
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = navigationController
-//        window?.makeKeyAndVisible()
+        window?.makeKeyAndVisible()
     }
 }

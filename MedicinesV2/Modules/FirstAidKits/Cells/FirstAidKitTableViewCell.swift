@@ -30,7 +30,7 @@ class FirstAidKitTableViewCell: UITableViewCell {
         amountMedicines.textColor = .lightGray
     }
     
-    func configure(titleFirstAidKit: String, amountMedicines: String) {
+    func configure(titleFirstAidKit: String?, amountMedicines: String) {
         self.titleFirstAidKit.text = titleFirstAidKit
         self.amountMedicines.text = amountMedicines
     }
