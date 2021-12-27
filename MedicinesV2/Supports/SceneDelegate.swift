@@ -58,7 +58,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 // MARK: - Initial application settings
 private extension SceneDelegate {
     func createAndShowStartVC(for windowScene: UIWindowScene) {
-        let mainVC = FirstAidKitsController(
+        let mainVC = FirstAidKitsViewController(
             nibName: String(describing: FirstAidKitsViewController.self),
             bundle: nil
         )

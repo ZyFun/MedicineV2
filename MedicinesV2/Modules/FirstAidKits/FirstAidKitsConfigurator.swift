@@ -9,7 +9,7 @@ import UIKit
 
 final class FirstAidKitsConfigurator {
     func config(view: UIViewController, navigationController: UINavigationController) {
-        guard let view = view as? FirstAidKitsController else { return }
+        guard let view = view as? FirstAidKitsViewController else { return }
         
         let presenter = FirstAidKitsPresenter()
         let interactor = FirstAidKitInteractor()

@@ -1,5 +1,5 @@
 //
-//  FirstAidKitsController.swift
+//  FirstAidKitsViewController.swift
 //  MedicinesV2
 //
 //  Created by Дмитрий Данилин on 22.12.2021.
@@ -14,61 +14,88 @@ protocol FirstAidKitsDisplayLogic: AnyObject {
     func display(_ viewModels: FirstAidKit?)
 }
 
-class FirstAidKitsController: UIViewController {
+class FirstAidKitsViewController: UIViewController {
     
     // MARK: Public properties
     /// Ссылка на presenter
     var presenter: FirstAidKitsViewControllerOutput?
     
     // MARK: Outlets
+    /// Таблица с аптечками
     @IBOutlet weak var firstAidKitsTableView: UITableView!
     
     // MARK: Private properties
+    /// Модель данных "Аптечка".
+    /// Содержит в себе все аптечки которые были сохранены в базу.
     private var viewModel: FirstAidKit?
     
     // MARK: - Старый способ, переписать.
+    /// Модель данных "Аптечка".
+    /// Содержит в себе все аптечки которые были сохранены в базу.
     private var firstAidKit: FirstAidKit?
     // TODO: Как я понимаю, это действие должен будет выполнять интерактор, передавая уже нужную модель данных дальше
     // Имя и ключ, лучше всего будет передавать через перечисления, чтобы не ошибиться. Если имя это еще спорно, то ключ точно, так как в будущем ключ будет зависеть от выбора пользователя
-    private var fetchedResultsController = StorageManager.shared.fetchedResultsController(entityName: "FirstAidKit", keyForSort: "title")
+    /// fetched Results Controller для аптечек
+    private var fetchedResultsController = StorageManager.shared.fetchedResultsController(
+        entityName: "FirstAidKit",
+        keyForSort: "title"
+    )
 
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setup()
+        getFirstAidKits()
     }
 }
 // MARK: - Конфигурирование ViewController
-extension FirstAidKitsController {
+extension FirstAidKitsViewController {
     /// Метод инициализации VC
     func setup() {
         setupNavigationBar()
         setupTableView()
-        setupXib()
-        getFirstAidKits()
     }
     
-    /// Метод настройки Navigation Bar
+    // MARK: Setup navigation bar
+    /// Метод настройки navigation bar
     func setupNavigationBar() {
-        // TODO: Произвести настройку
+        titleSetup()
+        addBarButtons()
+    }
+    
+    /// Метод для настройки заголовка navigation bar
+    func titleSetup() {
         navigationController?.navigationBar.prefersLargeTitles = true
         title = "Аптечки"
-        
-        addBarButton()
     }
     
+    /// Метод для добавления кнопок в navigation bar
+    func addBarButtons() {
+        let add = UIBarButtonItem(
+            barButtonSystemItem: .add,
+            target: self,
+            action: #selector(addNewFirstAidKit)
+        )
+        
+        // Тут будет несколько кнопок до появления отдельного меню настроек
+        navigationItem.rightBarButtonItems = [add]
+    }
+    
+    // MARK: Setup table view
     /// Метод настройки таблицы
     func setupTableView() {
         firstAidKitsTableView.delegate = self
         firstAidKitsTableView.dataSource = self
         
-        // MARK: Актуально для iOS ниже 15 версии. Можно удалить после прекращения поддержки этих версий
+        // TODO: Удалить после прекращения поддержки iOS ниже 15
         firstAidKitsTableView.tableFooterView = UIView()
+        
+        setupXibs()
     }
     
     /// Инициализация Xibs
-    func setupXib() {
+    func setupXibs() {
         // Регистрируем ячейку для таблицы аптечек
         firstAidKitsTableView.register(
             UINib(
@@ -79,16 +106,6 @@ extension FirstAidKitsController {
         )
     }
     
-    func addBarButton() {
-        let add = UIBarButtonItem(
-            barButtonSystemItem: .add,
-            target: self,
-            action: #selector(addNewFirstAidKit)
-        )
-        
-        navigationItem.rightBarButtonItem = add
-    }
-    
     // MARK: Actions
     @objc func addNewFirstAidKit() {
         showAlert()
@@ -96,8 +113,11 @@ extension FirstAidKitsController {
 }
 
 // MARK: - Table view data source
-extension FirstAidKitsController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension FirstAidKitsViewController: UITableViewDataSource {
+    func tableView(
+        _ tableView: UITableView,
+        numberOfRowsInSection section: Int
+    ) -> Int {
         if let sections = fetchedResultsController.sections {
             // возвращаем количество объектов в текущей секции. На данном этапе разработки есть всего одна секция, поэтому все объекты будут находиться в одной единственной секции
             // TODO: Изучить работу с секциями, с помощью fetchedResultsController
@@ -107,15 +127,26 @@ extension FirstAidKitsController: UITableViewDataSource {
         }
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: FirstAidKitTableViewCell.self), for: indexPath) as! FirstAidKitTableViewCell
+    func tableView(
+        _ tableView: UITableView,
+        cellForRowAt indexPath: IndexPath
+    ) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: String(describing: FirstAidKitTableViewCell.self),
+            for: indexPath
+        ) as! FirstAidKitTableViewCell
         
-        let firstAidKit = fetchedResultsController.object(at: indexPath) as! FirstAidKit
+        // TODO: сюда должна будет возвращаться модель данных
+        let firstAidKit = fetchedResultsController.object(
+            at: indexPath
+        ) as! FirstAidKit
+        
+        let currentAmountMedicines = "1" // TODO: Извлечь количество лекарств в текущей аптечке.
         
         cell.accessoryType = .disclosureIndicator
         cell.configure(
             titleFirstAidKit: firstAidKit.title,
-            amountMedicines: "1" // TODO: Извлечь количество лекарств в текущей аптечке.
+            amountMedicines: currentAmountMedicines
         )
         
         return cell
@@ -123,8 +154,11 @@ extension FirstAidKitsController: UITableViewDataSource {
 }
 
 // MARK: - Table view delegate
-extension FirstAidKitsController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+extension FirstAidKitsViewController: UITableViewDelegate {
+    func tableView(
+        _ tableView: UITableView,
+        didSelectRowAt indexPath: IndexPath
+    ) {
         tableView.deselectRow(at: indexPath, animated: true)
         createMedicinesVC(with: indexPath)
     }
@@ -143,14 +177,23 @@ extension FirstAidKitsController: UITableViewDelegate {
     }
      */
     
-    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    func tableView(
+        _ tableView: UITableView,
+        leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+    ) -> UISwipeActionsConfiguration? {
         
-        let firstAidKit = fetchedResultsController.object(at: indexPath) as! FirstAidKit
+        let firstAidKit = fetchedResultsController.object(
+            at: indexPath
+        ) as! FirstAidKit
         
-        let editAction = UIContextualAction(style: .normal, title: "Изменить") { [unowned self] _, _, isDone in
+        let editAction = UIContextualAction(
+            style: .normal,
+            title: "Изменить"
+        ) { [unowned self] _, _, isDone in
             showAlert(for: firstAidKit)
             
-            // Возвращаем значение в убегающее замыкание, чтобы отпустить интерфейс при пользовательских действиях с ячейкой
+            // Возвращаем значение в убегающее замыкание,
+            // чтобы отпустить интерфейс при пользовательских действиях с ячейкой
             isDone(true)
         }
         
@@ -160,7 +203,11 @@ extension FirstAidKitsController: UITableViewDelegate {
         return UISwipeActionsConfiguration(actions: [editAction])
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(
+        _ tableView: UITableView,
+        commit editingStyle: UITableViewCell.EditingStyle,
+        forRowAt indexPath: IndexPath
+    ) {
         if editingStyle == .delete {
             // TODO: После добавления уведомлений, не забыть добавить очистку очереди (посмотреть код из аналогичного метода старой версии)
             let firstAidKit = fetchedResultsController.object(at: indexPath) as! FirstAidKit
@@ -170,14 +217,14 @@ extension FirstAidKitsController: UITableViewDelegate {
 }
 
 // MARK: - Логика обновления данных View
-extension FirstAidKitsController: FirstAidKitsDisplayLogic {
+extension FirstAidKitsViewController: FirstAidKitsDisplayLogic {
     func display(_ viewModels: FirstAidKit?) {
         viewModel = viewModels
     }
 }
 
 // MARK: - Работа с alert controller для добавления новых аптечек
-private extension FirstAidKitsController {
+private extension FirstAidKitsViewController {
     /// Метод для отображения кастомного алерт контроллера добавления или редактирования аптечки
     /// - Parameters:
     ///   - entity: принимает аптечку (опционально). Заголовок алерта зависит от того была инициализирована аптечка или нет
@@ -201,18 +248,26 @@ private extension FirstAidKitsController {
 
 // MARK: - Инициализация вью Medicines
 // Всё это нужно для подготовки к уходу от сторибордов и написанию интерфейса кодом.
-private extension FirstAidKitsController {
+private extension FirstAidKitsViewController {
     func createMedicinesVC(with indexPath: IndexPath) {
         // Создание ViewController
         let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-        guard let medicinesVC = storyboard.instantiateViewController(withIdentifier: "medicines") as? MedicinesViewController else { return }
+        guard let medicinesVC = storyboard.instantiateViewController(
+            withIdentifier: "medicines"
+        ) as? MedicinesViewController else { return }
         
         // TODO: Эта передача данных возможно нарушает архитектуру VIPER, подумать как это можно исправить. Скорее всего это должно быть в конфигураторе
-        let firstAidKits = fetchedResultsController.object(at: indexPath) as! FirstAidKit
+        let firstAidKits = fetchedResultsController.object(
+            at: indexPath
+        ) as! FirstAidKit
+        
         medicinesVC.currentFirstAidKit = firstAidKits
         
         // Конфигурирация VIPER модуля для инжектирования зависимостей
-        MedicinesConfigurator().config(view: medicinesVC, navigationController: navigationController)
+        MedicinesConfigurator().config(
+            view: medicinesVC,
+            navigationController: navigationController
+        )
         
         // Навигация
         navigationController?.pushViewController(medicinesVC, animated: true)
@@ -221,13 +276,21 @@ private extension FirstAidKitsController {
 
 // TODO: Скорее всего, эта штука должна быть в презентере
 // MARK: - Fetched Results Controller Delegate
-extension FirstAidKitsController: NSFetchedResultsControllerDelegate {
+extension FirstAidKitsViewController: NSFetchedResultsControllerDelegate {
     
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    func controllerWillChangeContent(
+        _ controller: NSFetchedResultsController<NSFetchRequestResult>
+    ) {
         firstAidKitsTableView.beginUpdates()
     }
     
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+    func controller(
+        _ controller: NSFetchedResultsController<NSFetchRequestResult>,
+        didChange anObject: Any,
+        at indexPath: IndexPath?,
+        for type: NSFetchedResultsChangeType,
+        newIndexPath: IndexPath?
+    ) {
         switch type {
         case .insert:
             if let indexPath = newIndexPath {
@@ -265,14 +328,16 @@ extension FirstAidKitsController: NSFetchedResultsControllerDelegate {
         }
     }
 
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    func controllerDidChangeContent(
+        _ controller: NSFetchedResultsController<NSFetchRequestResult>
+    ) {
         firstAidKitsTableView.endUpdates()
     }
 }
 
 
 // MARK: - Работа с базой данных
-private extension FirstAidKitsController {
+private extension FirstAidKitsViewController {
     /// Метод для загрузки данных из базы данных в оперативную память
     func getFirstAidKits() {
         fetchedResultsController.delegate = self
