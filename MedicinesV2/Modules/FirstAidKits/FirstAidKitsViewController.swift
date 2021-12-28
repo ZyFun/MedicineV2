@@ -36,10 +36,7 @@ class FirstAidKitsViewController: UIViewController {
     // TODO: Как я понимаю, это действие должен будет выполнять интерактор, передавая уже нужную модель данных дальше
     // Имя и ключ, лучше всего будет передавать через перечисления, чтобы не ошибиться. Если имя это еще спорно, то ключ точно, так как в будущем ключ будет зависеть от выбора пользователя
     /// fetched Results Controller для аптечек
-    private var fetchedResultsController = StorageManager.shared.fetchedResultsController(
-        entityName: "FirstAidKit",
-        keyForSort: "title"
-    )
+    private var fetchedResultsController = NSFetchedResultsController<NSFetchRequestResult>()
 
     // MARK: - Life Cycle
     override func viewDidLoad() {
@@ -160,7 +157,7 @@ extension FirstAidKitsViewController: UITableViewDelegate {
         didSelectRowAt indexPath: IndexPath
     ) {
         tableView.deselectRow(at: indexPath, animated: true)
-        createMedicinesVC(with: indexPath)
+        presenter?.routeToMedicines(by: indexPath)
     }
     
     // TODO: Использовать этот метод, когда потребуется дополнительный функционал свайпа по ячейке
@@ -246,35 +243,9 @@ private extension FirstAidKitsViewController {
     }
 }
 
-// MARK: - Инициализация вью Medicines
-// Всё это нужно для подготовки к уходу от сторибордов и написанию интерфейса кодом.
-private extension FirstAidKitsViewController {
-    func createMedicinesVC(with indexPath: IndexPath) {
-        // Создание ViewController
-        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-        guard let medicinesVC = storyboard.instantiateViewController(
-            withIdentifier: "medicines"
-        ) as? MedicinesViewController else { return }
-        
-        // TODO: Эта передача данных возможно нарушает архитектуру VIPER, подумать как это можно исправить. Скорее всего это должно быть в конфигураторе
-        let firstAidKits = fetchedResultsController.object(
-            at: indexPath
-        ) as! FirstAidKit
-        
-        medicinesVC.currentFirstAidKit = firstAidKits
-        
-        // Конфигурирация VIPER модуля для инжектирования зависимостей
-        MedicinesConfigurator().config(
-            view: medicinesVC,
-            navigationController: navigationController
-        )
-        
-        // Навигация
-        navigationController?.pushViewController(medicinesVC, animated: true)
-    }
-}
-
-// TODO: Скорее всего, эта штука должна быть в презентере
+// TODO: Скорее всего, эта штука должна быть в презентере но я не знаю как от неё избавится
+// Вроде как по правилам VIPER мне вообще нельзя использовать этот способ и
+// нужно преобразовать все данные в массив и работать с ним, а не этим способом
 // MARK: - Fetched Results Controller Delegate
 extension FirstAidKitsViewController: NSFetchedResultsControllerDelegate {
     
@@ -311,14 +282,13 @@ extension FirstAidKitsViewController: NSFetchedResultsControllerDelegate {
         case .update:
             if let indexPath = indexPath {
                 let firstAidKit = fetchedResultsController.object(at: indexPath) as! FirstAidKit
-                let cell = firstAidKitsTableView.cellForRow(at: indexPath)
-                
-                if #available(iOS 14.0, *) {
-                    var content = cell?.defaultContentConfiguration()
-                    content?.text = firstAidKit.title
-                } else {
-                    cell?.textLabel?.text = firstAidKit.title
-                }
+                let currentAmountMedicines = "2" // TODO: Извлечь количество лекарств в текущей аптечке.
+                let cell = firstAidKitsTableView.cellForRow(at: indexPath) as! FirstAidKitTableViewCell
+
+                cell.configure(
+                    titleFirstAidKit: firstAidKit.title,
+                    amountMedicines: currentAmountMedicines
+                )
                 
                 firstAidKitsTableView.reloadRows(at: [indexPath], with: .automatic)
                 
@@ -340,6 +310,9 @@ extension FirstAidKitsViewController: NSFetchedResultsControllerDelegate {
 private extension FirstAidKitsViewController {
     /// Метод для загрузки данных из базы данных в оперативную память
     func getFirstAidKits() {
+        // TODO: Временное решение
+        fetchedResultsController = (presenter?.requestData())!
+        
         fetchedResultsController.delegate = self
         // TODO: Как я понимаю, это действие должен будет выполнять интерактор, передавая уже нужную модель данных дальше
         do {

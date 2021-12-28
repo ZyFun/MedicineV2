@@ -9,8 +9,16 @@ import UIKit
 
 /// Конфигурация VIPER модуля
 final class MedicinesConfigurator {
+    private let firstAidKit: FirstAidKit?
+
+    init(firstAidKit: FirstAidKit) {
+        self.firstAidKit = firstAidKit
+    }
+    
     func config(view: UIViewController, navigationController: UINavigationController?) {
         guard let view = view as? MedicinesViewController else { return }
+        
+        view.currentFirstAidKit = firstAidKit
         
         let presenter = MedicinesPresenter()
         let interactor = MedicinesInteractor()

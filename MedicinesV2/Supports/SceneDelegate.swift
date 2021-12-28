@@ -67,6 +67,9 @@ private extension SceneDelegate {
             rootViewController: mainVC
         )
         
+        // Конфигурирование VIPER модуля для инжектирования зависимостей
+        FirstAidKitsConfigurator().config(view: mainVC, navigationController: navigationController)
+        
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()

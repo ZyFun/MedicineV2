@@ -5,7 +5,6 @@
 //  Created by Дмитрий Данилин on 22.12.2021.
 //
 
-import Foundation
 import UIKit
 
 protocol FirstAidKitRoutingLogic {
@@ -21,14 +20,26 @@ final class FirstAidKitRouter: FirstAidKitRoutingLogic {
     }
     
     enum Targets {
-        case medicines
+        case medicines(FirstAidKit)
     }
     
     func routeTo(target: FirstAidKitRouter.Targets) {
         switch target {
-        case .medicines:
-            let medicinesVC = MedicinesViewController()
-//            let medicinesConfigurator = TODO: Дописать
+        case .medicines(let firstAidKit):
+            // Создание ViewController
+            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+            guard let medicinesVC = storyboard.instantiateViewController(
+                withIdentifier: "medicines"
+            ) as? MedicinesViewController else { return }
+            
+            // Конфигурирация VIPER модуля для инжектирования зависимостей
+            MedicinesConfigurator(firstAidKit: firstAidKit).config(
+                view: medicinesVC,
+                navigationController: navigationController
+            )
+            
+            // Навигация
+            navigationController?.pushViewController(medicinesVC, animated: true)
         }
     }
 }
