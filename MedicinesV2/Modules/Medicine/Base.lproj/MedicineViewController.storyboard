@@ -4,45 +4,14 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Medicines View Controller-->
-        <scene sceneID="jGr-5y-LU6">
-            <objects>
-                <viewController storyboardIdentifier="medicines" id="GVg-rh-ZiD" customClass="MedicinesViewController" customModule="MedicinesV2" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="5pB-Pw-E9d">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="bES-No-qyU">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </tableView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="Vlk-Xt-9f5"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstAttribute="bottom" secondItem="bES-No-qyU" secondAttribute="bottom" id="354-Ro-RCj"/>
-                            <constraint firstItem="bES-No-qyU" firstAttribute="top" secondItem="5pB-Pw-E9d" secondAttribute="top" id="94n-Dw-diQ"/>
-                            <constraint firstItem="bES-No-qyU" firstAttribute="leading" secondItem="Vlk-Xt-9f5" secondAttribute="leading" id="cxj-4I-Qnc"/>
-                            <constraint firstItem="bES-No-qyU" firstAttribute="trailing" secondItem="Vlk-Xt-9f5" secondAttribute="trailing" id="rnF-xX-ePG"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="medicinesTableView" destination="bES-No-qyU" id="uum-wH-uZZ"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qpo-hK-G15" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1686.9565217391305" y="158.70535714285714"/>
-        </scene>
-        <!--Medicine Table View Controller-->
+        <!--Medicine View Controller-->
         <scene sceneID="aUu-IO-U4w">
             <objects>
-                <tableViewController storyboardIdentifier="medicine" id="YNz-y4-AxW" customClass="MedicineTableViewController" customModule="MedicinesV2" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="medicine" id="YNz-y4-AxW" customClass="MedicineViewController" customModule="MedicinesV2" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="ahl-eN-oUl">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -221,7 +190,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qEz-yl-7mL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2634.7826086956525" y="169.41964285714286"/>
+            <point key="canvasLocation" x="367" y="53"/>
         </scene>
     </scenes>
     <resources>

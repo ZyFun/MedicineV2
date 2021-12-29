@@ -16,7 +16,7 @@ class MedicinesViewController: UIViewController {
     
     // MARK: Public properties
     /// Ссылка на presenter
-    var presenter: EventIntercepter?
+    var presenter: MedicinesViewControllerOutput?
     
     // TODO: Временное решение для тестирования, до момента создания всей БД.
     // MARK: Переданные данные с другого вью
@@ -32,6 +32,7 @@ class MedicinesViewController: UIViewController {
     }
 
     // MARK: IBOutlets
+    /// Таблица с лекарствами
     @IBOutlet weak var medicinesTableView: UITableView? // держим опционалом, чтобы не было крита в случае отсутствия данных
     
     // MARK: - Life Cycle
@@ -99,7 +100,7 @@ private extension MedicinesViewController {
     // MARK: Actions
     /// Сохранение всех данных лекарства
     @objc func addNewMedicine() {
-        createMedicineVC(with: nil)
+        presenter?.routeToMedicine(with: currentFirstAidKit, by: nil)
     }
     
 
@@ -119,7 +120,7 @@ extension MedicinesViewController: DisplayLogic {
 extension MedicinesViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        createMedicineVC(with: indexPath)
+        presenter?.routeToMedicine(with: currentFirstAidKit, by: viewModels?[indexPath.row])
     }
 }
 
@@ -152,24 +153,5 @@ extension MedicinesViewController: UITableViewDataSource {
             StorageManager.shared.deleteObject(medicine)
             
         }
-    }
-}
-
-// MARK: - Инициализация вью Medicine
-extension MedicinesViewController {
-    // TODO: Это должно быть в роутере, но пока что делаю здесь, чтобы не перегружать мозг. Доработаю при рефакторинге под viper
-    
-    func createMedicineVC(with indexPath: IndexPath?) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let medicineVC = storyboard.instantiateViewController(withIdentifier: "medicine") as? MedicineTableViewController else { return }
-        
-        if let indexPath = indexPath {
-            // Тут я передаю данные до появления роутера и прочих модулей вайпера
-            let medicineName = viewModels?[indexPath.row]
-            medicineVC.medicine = medicineName
-        }
-        
-        medicineVC.currentFirstAidKit = currentFirstAidKit
-        navigationController?.pushViewController(medicineVC, animated: true)
     }
 }

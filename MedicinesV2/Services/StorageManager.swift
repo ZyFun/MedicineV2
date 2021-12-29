@@ -46,7 +46,8 @@ final class StorageManager {
 
 // MARK: - Core Data stack methods
 extension StorageManager {
-    /// Метод создаёт описание сущности. Используется в расширении для сущности, чтобы инициализировать описание, при инициализации самой сущности.
+    /// Метод создаёт описание сущности. Используется в расширении для сущности,
+    /// чтобы инициализировать описание, при инициализации самой сущности.
     /// - Parameter entityName: принимает название сущности, которое используется в базе данных
     /// - Returns: Entity Description
     func forEntityName(_ entityName: String) -> NSEntityDescription {
@@ -59,13 +60,25 @@ extension StorageManager {
     ///   - entityName: принимает название сущности, которое используется в базе данных
     ///   - keyForSort: принимает ключ, по которому будет производится сортировка. Например по имени или по количеству
     /// - Returns: Fetched Results Controller
-    func fetchedResultsController(entityName: String, keyForSort: String) -> NSFetchedResultsController<NSFetchRequestResult> {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+    func fetchedResultsController(
+        entityName: String,
+        keyForSort: String
+    ) -> NSFetchedResultsController<NSFetchRequestResult> {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(
+            entityName: entityName
+        )
+        
         // TODO: Доработать сортировку в будущем, чтобы пользователь мог сам выбирать направление сортировки и выбирал, по какому параметру производить сортировку.
         let sortDescriptor = NSSortDescriptor(key: keyForSort, ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
+        
         // TODO: Разобраться с параметрами кеширования и научится с ними работать.
-        let fetchedResultsController = NSFetchedResultsController<NSFetchRequestResult>(fetchRequest: fetchRequest, managedObjectContext: viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        let fetchedResultsController = NSFetchedResultsController<NSFetchRequestResult>(
+            fetchRequest: fetchRequest,
+            managedObjectContext: viewContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil
+        )
         
         return fetchedResultsController
     }

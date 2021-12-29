@@ -7,14 +7,20 @@
 
 import Foundation
 
-/// Логика получения данных
-protocol EventIntercepter {
-    func requestData()
-}
-
 /// Логика подготовки данных для презентации
 protocol PresentationLogik: AnyObject {
     func presentData(_ data: [Medicine]?)
+}
+
+/// Логика получения данных
+protocol MedicinesViewControllerOutput {
+    func requestData()
+    
+    // TODO: Подумать как передать нил чтобы не плодить много методов
+    /// Метод для перехода к конкретному лекарству по индексу выбранного лекарства
+    /// для его редактирования.
+    /// - Parameter indexPath: принимает индекс лекарства
+    func routeToMedicine(with currentFirstAidKit: FirstAidKit?, by currentMedicine: Medicine?)
 }
 
 final class MedicinesPresenter {
@@ -24,9 +30,17 @@ final class MedicinesPresenter {
     var router: MedicinesRouter?
 }
 
-extension MedicinesPresenter: EventIntercepter {
+extension MedicinesPresenter: MedicinesViewControllerOutput {
     func requestData() {
         interactor?.requestData()
+    }
+    
+    // TODO: Подумать как передать нил чтобы не плодить много методов
+    /// Метод для перехода к конкретному лекарству по индексу выбранного лекарства
+    /// для его редактирования.
+    /// - Parameter indexPath: принимает индекс лекарства
+    func routeToMedicine(with currentFirstAidKit: FirstAidKit?, by currentMedicine: Medicine?) {
+        router?.routeTo(target: .medicine(currentFirstAidKit, currentMedicine))
     }
 }
 

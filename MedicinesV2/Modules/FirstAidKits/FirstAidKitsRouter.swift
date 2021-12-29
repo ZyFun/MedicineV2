@@ -27,16 +27,17 @@ final class FirstAidKitRouter: FirstAidKitRoutingLogic {
         switch target {
         case .medicines(let firstAidKit):
             // Создание ViewController
-            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-            guard let medicinesVC = storyboard.instantiateViewController(
-                withIdentifier: "medicines"
-            ) as? MedicinesViewController else { return }
+            let medicinesVC = MedicinesViewController(
+                nibName: String(describing: MedicinesViewController.self),
+                bundle: nil
+            )
             
             // Конфигурирация VIPER модуля для инжектирования зависимостей
-            MedicinesConfigurator(firstAidKit: firstAidKit).config(
-                view: medicinesVC,
-                navigationController: navigationController
-            )
+            MedicinesConfigurator(firstAidKit: firstAidKit)
+                .config(
+                    view: medicinesVC,
+                    navigationController: navigationController
+                )
             
             // Навигация
             navigationController?.pushViewController(medicinesVC, animated: true)

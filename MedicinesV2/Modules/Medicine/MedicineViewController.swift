@@ -1,5 +1,5 @@
 //
-//  MedicineTableViewController.swift
+//  MedicineViewController.swift
 //  MedicinesV2
 //
 //  Created by Дмитрий Данилин on 01.12.2021.
@@ -8,8 +8,15 @@
 
 import UIKit
 
-class MedicineTableViewController: UITableViewController {
+protocol MedicineDisplayLogic: AnyObject {
+    func display(_ viewModels: [Medicine])
+}
+
+class MedicineViewController: UITableViewController {
     
+    // MARK: Public properties
+    /// Ссылка на presenter
+    var preseter: MedicineViewControllerOutput?
     var medicine: Medicine?
     var currentFirstAidKit: FirstAidKit?
     
@@ -35,7 +42,7 @@ class MedicineTableViewController: UITableViewController {
 }
 
 // MARK: - Настройки для ViewController
-private extension MedicineTableViewController {
+private extension MedicineViewController {
     /// Метод инициализации VC
     func setup() {
         setupNavigationBar()
@@ -48,8 +55,6 @@ private extension MedicineTableViewController {
     
     /// Настройка navigation bar
     func setupNavigationBar() {
-        // Возможно потребуется, когда вход в приложение будет без сториборда, если нет, удалить
-//        self.navigationController?.navigationBar.prefersLargeTitles = true
         title = medicine?.title ?? "Новое лекарство"
         addButtonsToNavigationBar()
     }
@@ -280,7 +285,7 @@ private extension MedicineTableViewController {
 //// MARK: - Table view delegate
 
 // MARK: - Text Field Delegate
-extension MedicineTableViewController: UITextFieldDelegate {
+extension MedicineViewController: UITextFieldDelegate {
     // Используется для отображения тулбара
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == medicineCountStepsTextField {
@@ -348,7 +353,7 @@ extension MedicineTableViewController: UITextFieldDelegate {
 }
 
 // MARK: - Error Alert Controller
-private extension MedicineTableViewController {
+private extension MedicineViewController {
     /// Алерт для отображения сообщения об ошибке.
     /// - Parameter errorMessage: принимает сообщение об ошибке,
     /// которое будет выведено на экран.
@@ -364,5 +369,11 @@ private extension MedicineTableViewController {
         alert.addAction(actionOk)
         
         present(alert, animated: true, completion: nil)
+    }
+}
+
+extension MedicineViewController: MedicineDisplayLogic {
+    func display(_ viewModels: [Medicine]) {
+        // TODO: Доделать
     }
 }

@@ -22,10 +22,7 @@ final class MedicinesConfigurator {
         
         let presenter = MedicinesPresenter()
         let interactor = MedicinesInteractor()
-        
-        // TODO: На данном этапе проекта, этот модуль не нужен, но сделан для того, чтобы понимать как работает вся архитектура, реализовать подобное при инициализации модуля с аптечками
-        let router = MedicinesRouter()
-        router.navigationController = navigationController
+        let router = MedicinesRouter(withNavigationController: navigationController)
         
         view.presenter = presenter
         presenter.view = view
