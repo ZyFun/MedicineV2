@@ -37,6 +37,7 @@
 		2CBD2B1F277C7FA300F857C3 /* MedicineInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBD2B1E277C7FA300F857C3 /* MedicineInteractor.swift */; };
 		2CBD2B21277C7FAF00F857C3 /* MedicineRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBD2B20277C7FAF00F857C3 /* MedicineRouter.swift */; };
 		2CBD2B23277C7FC200F857C3 /* MedicineConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBD2B22277C7FC200F857C3 /* MedicineConfigurator.swift */; };
+		2CDB5E2027A538EF002361F2 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 2CDB5E1F27A538EF002361F2 /* README.md */; };
 		2CF1EE71277347580031D79D /* FirstAidKitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF1EE70277347580031D79D /* FirstAidKitsViewController.swift */; };
 		2CF1EE73277347700031D79D /* FirstAidKitsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF1EE72277347700031D79D /* FirstAidKitsPresenter.swift */; };
 		2CF1EE75277347800031D79D /* FirstAidKitsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF1EE74277347800031D79D /* FirstAidKitsInteractor.swift */; };
@@ -79,6 +80,7 @@
 		2CBD2B1E277C7FA300F857C3 /* MedicineInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineInteractor.swift; sourceTree = "<group>"; };
 		2CBD2B20277C7FAF00F857C3 /* MedicineRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineRouter.swift; sourceTree = "<group>"; };
 		2CBD2B22277C7FC200F857C3 /* MedicineConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineConfigurator.swift; sourceTree = "<group>"; };
+		2CDB5E1F27A538EF002361F2 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		2CF1EE70277347580031D79D /* FirstAidKitsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAidKitsViewController.swift; sourceTree = "<group>"; };
 		2CF1EE72277347700031D79D /* FirstAidKitsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAidKitsPresenter.swift; sourceTree = "<group>"; };
 		2CF1EE74277347800031D79D /* FirstAidKitsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAidKitsInteractor.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 		2C52BDAE273540F400356A63 = {
 			isa = PBXGroup;
 			children = (
+				2CDB5E1F27A538EF002361F2 /* README.md */,
 				2C52BDB9273540F400356A63 /* MedicinesV2 */,
 				2C52BDB8273540F400356A63 /* Products */,
 			);
@@ -334,6 +337,7 @@
 				2CF28A1E277CAF5E002536F7 /* MedicinesViewController.xib in Resources */,
 				2C52BDC7273540F600356A63 /* Assets.xcassets in Resources */,
 				2C52BDC2273540F400356A63 /* MedicineViewController.storyboard in Resources */,
+				2CDB5E2027A538EF002361F2 /* README.md in Resources */,
 				2C7A5FB82774EFA9002C4702 /* FirstAidKitsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
