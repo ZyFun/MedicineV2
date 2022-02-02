@@ -11,7 +11,7 @@ import CoreData
 /// Протокол отображения FirstAidKitController-а
 protocol FirstAidKitsDisplayLogic: AnyObject {
     /// Метод передаёт данные в модель данных
-    func display(_ viewModels: FirstAidKit?)
+    func display(_ viewModels: [FirstAidKit]?)
 }
 
 class FirstAidKitsViewController: UIViewController {
@@ -27,23 +27,14 @@ class FirstAidKitsViewController: UIViewController {
     // MARK: Private properties
     /// Модель данных "Аптечка".
     /// Содержит в себе все аптечки которые были сохранены в базу.
-    private var viewModel: FirstAidKit?
-    
-    // MARK: - Старый способ, переписать.
-    /// Модель данных "Аптечка".
-    /// Содержит в себе все аптечки которые были сохранены в базу.
-    private var firstAidKit: FirstAidKit?
-    // TODO: Как я понимаю, это действие должен будет выполнять интерактор, передавая уже нужную модель данных дальше
-    // Имя и ключ, лучше всего будет передавать через перечисления, чтобы не ошибиться. Если имя это еще спорно, то ключ точно, так как в будущем ключ будет зависеть от выбора пользователя
-    /// fetched Results Controller для аптечек
-    private var fetchedResultsController = NSFetchedResultsController<NSFetchRequestResult>()
+    private var viewModels: [FirstAidKit]?
 
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setup()
-        getFirstAidKits()
+        presenter?.requestData()
     }
 }
 // MARK: - Конфигурирование ViewController
@@ -115,13 +106,7 @@ extension FirstAidKitsViewController: UITableViewDataSource {
         _ tableView: UITableView,
         numberOfRowsInSection section: Int
     ) -> Int {
-        if let sections = fetchedResultsController.sections {
-            // возвращаем количество объектов в текущей секции. На данном этапе разработки есть всего одна секция, поэтому все объекты будут находиться в одной единственной секции
-            // TODO: Изучить работу с секциями, с помощью fetchedResultsController
-            return sections[section].numberOfObjects
-        } else {
-            return 0
-        }
+        viewModels?.count ?? 0
     }
 
     func tableView(
@@ -133,16 +118,13 @@ extension FirstAidKitsViewController: UITableViewDataSource {
             for: indexPath
         ) as! FirstAidKitTableViewCell
         
-        // TODO: сюда должна будет возвращаться модель данных
-        let firstAidKit = fetchedResultsController.object(
-            at: indexPath
-        ) as! FirstAidKit
+        let firstAidKit = viewModels?[indexPath.row]
         
         let currentAmountMedicines = "1" // TODO: Извлечь количество лекарств в текущей аптечке.
         
         cell.accessoryType = .disclosureIndicator
         cell.configure(
-            titleFirstAidKit: firstAidKit.title,
+            titleFirstAidKit: firstAidKit?.title,
             amountMedicines: currentAmountMedicines
         )
         
@@ -179,9 +161,7 @@ extension FirstAidKitsViewController: UITableViewDelegate {
         leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath
     ) -> UISwipeActionsConfiguration? {
         
-        let firstAidKit = fetchedResultsController.object(
-            at: indexPath
-        ) as! FirstAidKit
+        let firstAidKit = viewModels?[indexPath.row]
         
         let editAction = UIContextualAction(
             style: .normal,
@@ -207,7 +187,10 @@ extension FirstAidKitsViewController: UITableViewDelegate {
     ) {
         if editingStyle == .delete {
             // TODO: После добавления уведомлений, не забыть добавить очистку очереди (посмотреть код из аналогичного метода старой версии)
-            let firstAidKit = fetchedResultsController.object(at: indexPath) as! FirstAidKit
+            guard let firstAidKit = viewModels?[indexPath.row] else { return }
+            
+            viewModels?.remove(at: indexPath.row)
+            firstAidKitsTableView.deleteRows(at: [indexPath], with: .automatic)
             StorageManager.shared.deleteObject(firstAidKit)
         }
     }
@@ -215,8 +198,8 @@ extension FirstAidKitsViewController: UITableViewDelegate {
 
 // MARK: - Логика обновления данных View
 extension FirstAidKitsViewController: FirstAidKitsDisplayLogic {
-    func display(_ viewModels: FirstAidKit?) {
-        viewModel = viewModels
+    func display(_ viewModels: [FirstAidKit]?) {
+        self.viewModels = viewModels
     }
 }
 
@@ -234,91 +217,16 @@ private extension FirstAidKitsViewController {
                 firstAidKit.title = firstAidKitName
                 StorageManager.shared.saveContext()
             } else {
-                firstAidKit = FirstAidKit()
-                firstAidKit?.title = firstAidKitName
+                let firstAidKit = FirstAidKit()
+                firstAidKit.title = firstAidKitName
                 StorageManager.shared.saveContext()
             }
+            // TODO: сделать методы для добавления и удаления строк, чтобы было с красивой анимацией а не полное обновление таблицы. Для добавления нового элемента идея такая. Добавить его в базу, загрузить новые данные из базы, найти элемент и узнать его индекс через цикл, вернуть номер индекса и добавить элемент в таблицу по этому индексу (возможно это хрень)
+            // Запрос данных нужен для того, чтобы обновилась таблица
+            // после добавления новых данных
+            presenter?.requestData()
+            firstAidKitsTableView.reloadData()
         }
         present(alert, animated: true)
-    }
-}
-
-// TODO: Скорее всего, эта штука должна быть в презентере но я не знаю как от неё избавится
-// Вроде как по правилам VIPER мне вообще нельзя использовать этот способ и
-// нужно преобразовать все данные в массив и работать с ним, а не этим способом
-// MARK: - Fetched Results Controller Delegate
-extension FirstAidKitsViewController: NSFetchedResultsControllerDelegate {
-    
-    func controllerWillChangeContent(
-        _ controller: NSFetchedResultsController<NSFetchRequestResult>
-    ) {
-        firstAidKitsTableView.beginUpdates()
-    }
-    
-    func controller(
-        _ controller: NSFetchedResultsController<NSFetchRequestResult>,
-        didChange anObject: Any,
-        at indexPath: IndexPath?,
-        for type: NSFetchedResultsChangeType,
-        newIndexPath: IndexPath?
-    ) {
-        switch type {
-        case .insert:
-            if let indexPath = newIndexPath {
-                firstAidKitsTableView.insertRows(at: [indexPath], with: .automatic)
-            }
-        case .delete:
-            if let indexPath = indexPath {
-                firstAidKitsTableView.deleteRows(at: [indexPath], with: .automatic)
-            }
-        case .move:
-            if let indexPath = indexPath {
-                firstAidKitsTableView.deleteRows(at: [indexPath], with: .automatic)
-            }
-            
-            if let newIndexPath = newIndexPath {
-                firstAidKitsTableView.insertRows(at: [newIndexPath], with: .automatic)
-            }
-        case .update:
-            if let indexPath = indexPath {
-                let firstAidKit = fetchedResultsController.object(at: indexPath) as! FirstAidKit
-                let currentAmountMedicines = "2" // TODO: Извлечь количество лекарств в текущей аптечке.
-                let cell = firstAidKitsTableView.cellForRow(at: indexPath) as! FirstAidKitTableViewCell
-
-                cell.configure(
-                    titleFirstAidKit: firstAidKit.title,
-                    amountMedicines: currentAmountMedicines
-                )
-                
-                firstAidKitsTableView.reloadRows(at: [indexPath], with: .automatic)
-                
-            }
-        @unknown default:
-            fatalError()
-        }
-    }
-
-    func controllerDidChangeContent(
-        _ controller: NSFetchedResultsController<NSFetchRequestResult>
-    ) {
-        firstAidKitsTableView.endUpdates()
-    }
-}
-
-
-// MARK: - Работа с базой данных
-private extension FirstAidKitsViewController {
-    /// Метод для загрузки данных из базы данных в оперативную память
-    func getFirstAidKits() {
-        // TODO: Временное решение
-        fetchedResultsController = (presenter?.requestData())!
-        
-        fetchedResultsController.delegate = self
-        // TODO: Как я понимаю, это действие должен будет выполнять интерактор, передавая уже нужную модель данных дальше
-        do {
-            try fetchedResultsController.performFetch()
-        } catch {
-            print(error)
-        }
     }
 }

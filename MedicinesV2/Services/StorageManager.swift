@@ -54,34 +54,6 @@ extension StorageManager {
         // Извлекаю принудительно, так как сущность должна быть обязательной. Если её нет, то и в прод выпускать такое приложение нельзя. Если я ошибусь в названии на этапе разработки, приложение должно упасть.
         return NSEntityDescription.entity(forEntityName: entityName, in: viewContext)!
     }
-    
-    /// метод создаёт Fetched Results Controller для сущности БД
-    /// - Parameters:
-    ///   - entityName: принимает название сущности, которое используется в базе данных
-    ///   - keyForSort: принимает ключ, по которому будет производится сортировка. Например по имени или по количеству
-    /// - Returns: Fetched Results Controller
-    func fetchedResultsController(
-        entityName: String,
-        keyForSort: String
-    ) -> NSFetchedResultsController<NSFetchRequestResult> {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(
-            entityName: entityName
-        )
-        
-        // TODO: Доработать сортировку в будущем, чтобы пользователь мог сам выбирать направление сортировки и выбирал, по какому параметру производить сортировку.
-        let sortDescriptor = NSSortDescriptor(key: keyForSort, ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        
-        // TODO: Разобраться с параметрами кеширования и научится с ними работать.
-        let fetchedResultsController = NSFetchedResultsController<NSFetchRequestResult>(
-            fetchRequest: fetchRequest,
-            managedObjectContext: viewContext,
-            sectionNameKeyPath: nil,
-            cacheName: nil
-        )
-        
-        return fetchedResultsController
-    }
 }
 
 // MARK: - CRUD
@@ -107,6 +79,7 @@ extension StorageManager: StorageManagerProtocol {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         
         // Sort Descriptor
+        // TODO: Доработать сортировку в будущем, чтобы пользователь мог сам выбирать направление сортировки и выбирал, по какому параметру производить сортировку. По аналогии с методом выше fetchedResultsController.
         let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
         

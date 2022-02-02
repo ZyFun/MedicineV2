@@ -10,13 +10,13 @@ import CoreData
 
 /// Логика подготовки данных для презентации
 protocol FirstAidKitsPresentationLogic: AnyObject {
-    func presentData(_ data: FirstAidKit?)
+    func presentData(_ data: [FirstAidKit]?)
 }
 
 /// Логика получения данных
 protocol FirstAidKitsViewControllerOutput {
-    /// Временный метод для получения аптечек при первой загрузке
-    func requestData() -> NSFetchedResultsController<NSFetchRequestResult>
+    /// Метод для получения аптечек при первой загрузке и обновлении/добавлении данных
+    func requestData()
     
     /// Метод для перехода к лекартсвам в аптечке, по индексу аптечки
     /// - Parameter indexPath: принимает индекс аптечки
@@ -31,12 +31,10 @@ final class FirstAidKitsPresenter {
 
 extension FirstAidKitsPresenter: FirstAidKitsViewControllerOutput {
     /// Временный метод для получения аптечек при первой загрузке
-    func requestData() -> NSFetchedResultsController<NSFetchRequestResult> {
-        (interactor?.requestData())!
+    func requestData(){
+        interactor?.requestData()
     }
     
-    /// Метод для перехода к лекартсвам в аптечке, по индексу аптечки
-    /// - Parameter indexPath: принимает индекс аптечки
     func routeToMedicines(by indexPath: IndexPath) {
         if let object = interactor?.requestData(at: indexPath) {
             router?.routeTo(target: .medicines(object))
@@ -45,7 +43,7 @@ extension FirstAidKitsPresenter: FirstAidKitsViewControllerOutput {
 }
 
 extension FirstAidKitsPresenter: FirstAidKitsPresentationLogic {
-    func presentData(_ data: FirstAidKit?) {
+    func presentData(_ data: [FirstAidKit]?) {
         view?.display(data)
     }
 }

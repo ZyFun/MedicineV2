@@ -6,45 +6,34 @@
 //
 
 import Foundation
-import CoreData
 
 protocol FirstAidKitsBusinessLogic {
-    func requestData() -> NSFetchedResultsController<NSFetchRequestResult>
     
-    func requestData(at indexPath: IndexPath) -> FirstAidKit
+    /// Метод для перехода к лекартсвам в аптечке, по индексу аптечки
+    /// - Parameter indexPath: принимает индекс аптечки
+    func requestData(at indexPath: IndexPath) -> FirstAidKit?
+    
+    /// Метод для получения объектов из базы данных в виде массива
+    func requestData()
 }
 
 final class FirstAidKitInteractor {
     weak var presenter: FirstAidKitsPresentationLogic?
     
-    var dataModel = StorageManager.shared.fetchedResultsController(
-        entityName: "FirstAidKit",
-        keyForSort: "title"
-    )
+    var data: [FirstAidKit]?
 }
 
 extension FirstAidKitInteractor: FirstAidKitsBusinessLogic {
-    func requestData() -> NSFetchedResultsController<NSFetchRequestResult> {
-        // TODO: Должно быть обращение к презентеру
-        dataModel
+    func requestData() {
+        // TODO:  Не уверен что запись получения данных правильная. Имею в виду обращение к синглтону из интерактора.
+        data = StorageManager.shared.fetchRequest(String(describing: FirstAidKit.self)) as? [FirstAidKit]
+        presenter?.presentData(data)
     }
     
-    func requestData(at indexPath: IndexPath) -> FirstAidKit {
-        dataModel.object(at: indexPath) as! FirstAidKit
-    }
-    
-    // TODO: Извлеч данные в массив вот таким образом
-    func dataArray() {
-        let obgects = dataModel.fetchRequest
-        
-        do {
-            let results = try dataModel.managedObjectContext.execute(obgects)
-            let test = results as! [FirstAidKit]
-            for result in results as! [FirstAidKit] {
-                let data = result
-            }
-        } catch {
-            print(error)
-        }
+    func requestData(at indexPath: IndexPath) -> FirstAidKit? {
+        // Так как data инициализируется и заполняется еще при создании аптечки,
+        // повторно запрос к базе данных получать не нужно.
+        // Но по хорошему нужен прямой запрос к нужному объекту в базе
+        data?[indexPath.row]
     }
 }
