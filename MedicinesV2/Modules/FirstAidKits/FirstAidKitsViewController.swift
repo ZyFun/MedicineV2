@@ -166,7 +166,7 @@ extension FirstAidKitsViewController: UITableViewDelegate {
             style: .normal,
             title: "Изменить"
         ) { [unowned self] _, _, isDone in
-            showAlert(for: firstAidKit)
+            showAlert(for: firstAidKit, by: indexPath)
             
             // Возвращаем значение в убегающее замыкание,
             // чтобы отпустить интерфейс при пользовательских действиях с ячейкой
@@ -207,20 +207,47 @@ private extension FirstAidKitsViewController {
     /// Метод для отображения кастомного алерт контроллера добавления или редактирования аптечки
     /// - Parameters:
     ///   - entity: принимает аптечку (опционально). Заголовок алерта зависит от того была инициализирована аптечка или нет
-    func showAlert(for entity: FirstAidKit? = nil) {
+    ///   - index: принимает IndexPath  и используется для обновления конкретной ячейки в таблице
+    func showAlert(for entity: FirstAidKit? = nil, by index: IndexPath? = nil) {
         let title = entity == nil ? "Добавить аптечку" : "Изменить название"
         let alert = UIAlertController.createAlertController(with: title)
         
         alert.action(firstAidKit: entity) { [unowned self] firstAidKitName in
             if let firstAidKit = entity {
                 presenter?.updateData(firstAidKit, newName: firstAidKitName)
+                
+                // Используется для обновления строки после изменения имени
+                if let index = index {
+                    firstAidKitsTableView.reloadRows(
+                        at: [index],
+                        with: .automatic
+                    )
+                }
             } else {
                 presenter?.createData(firstAidKitName)
+                
+                // Эта логика используется для обновления данных в таблице
+                // вставкой в строку, без обновления всей таблицы.
+                // TODO: Но нужно отрефакторить и сделать всё по архитектуре
+                if let viewModels = viewModels {
+                    var count = 0
+                    
+                    // Ищем в обновленнном массиве, после добавления объекта,
+                    // текущий индекс объекта и вставляем по этому индексу новую
+                    // ячейку в таблице аптечек.
+                    for addObject in viewModels {
+                        if addObject.title == firstAidKitName {
+                            let index = IndexPath(row: count, section: 0)
+                            firstAidKitsTableView.insertRows(
+                                at: [index],
+                                with: .automatic
+                            )
+                            return
+                        }
+                        count += 1
+                    }
+                }
             }
-            // TODO: сделать методы для добавления и удаления строк, чтобы было с красивой анимацией а не полное обновление таблицы. Для добавления нового элемента идея такая. Добавить его в базу, загрузить новые данные из базы, найти элемент и узнать его индекс через цикл, вернуть номер индекса и добавить элемент в таблицу по этому индексу (возможно это хрень)
-            // Запрос данных нужен для того, чтобы обновилась таблица
-            // после добавления новых данных
-            firstAidKitsTableView.reloadData()
         }
         present(alert, animated: true)
     }
