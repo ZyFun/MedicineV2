@@ -12,7 +12,7 @@ import CoreData
 protocol StorageManagerProtocol {
 //    func saveData(_ firstAidKitName: String, completion: (FirstAidKit) -> Void)
 //    func fetchData(completion: (Result<[FirstAidKit], Error>) -> Void)
-//    func editData(_ firstAidKit: FirstAidKit, newName: String)
+//    func updateData(_ firstAidKit: FirstAidKit, newName: String)
     func deleteObject(_ entity: NSManagedObject) // Так можно передать любую сущность базы данных
 }
  
@@ -72,6 +72,24 @@ extension StorageManager: StorageManagerProtocol {
         }
     }
     
+    /// Метод для сохранения данных в базу данных
+    /// - Parameters:
+    ///   - firstAidKitName: принимает название аптечки, которое будет сохранено в базу
+    ///   - completion: возвращает вновь созданный объект, для его присвоения массиву аптечек и отображения в таблице
+    func createData(_ firstAidKitName: String) {
+        
+        // Этот код предпочтительнее использовать, если работа идет с множеством различных контекстов и типов данных, чтобы подтянуть всю необходимую информацию.
+        // Но как применять всё это на практике, я пока не знаю.
+        /*
+        guard let entityDescription = NSEntityDescription.entity(forEntityName: "FirstAidKit", in: viewContext) else { return }
+        guard let firstAidKit = NSManagedObject(entity: entityDescription, insertInto: viewContext) as? FirstAidKit else { return }
+        */
+        
+        let firstAidKit = FirstAidKit(context: viewContext)
+        firstAidKit.title = firstAidKitName
+        saveContext()
+    }
+    
     /// Метод получения данных из базы
     /// - Parameter entityName: имя сущности в базе данных
     /// - Returns: Возвращает массив с результатом запроса данных
@@ -83,7 +101,6 @@ extension StorageManager: StorageManagerProtocol {
         let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
         
-        // TODO: Не уверен что это должно быть в этом методе
         var data = [NSFetchRequestResult]()
         do {
             data = try viewContext.fetch(fetchRequest)
@@ -94,6 +111,24 @@ extension StorageManager: StorageManagerProtocol {
         return data
     }
     
+    /// Метод для редактирования сущности
+    /// - Parameters:
+    ///   - entity: принимает сущность базы данных со старым названием
+    ///   - newName: принимает новое название аптечки и заменяет старое
+    func updateData(_ entity: NSManagedObject, newName: String) {
+        if let entity = entity as? FirstAidKit {
+            entity.title = newName
+            saveContext()
+            return
+        }
+        
+        if let entity = entity as? Medicine {
+            entity.title = newName
+            saveContext()
+            return
+        }
+    }
+    
     /// Метод для удаления данных из базы
     /// - Parameter entity: принимает entity, которая будет удалена из базы
     func deleteObject(_ entity: NSManagedObject) {
@@ -102,25 +137,7 @@ extension StorageManager: StorageManagerProtocol {
     }
     
     /*
-    /// Метод для сохранения данных в базу данных
-    /// - Parameters:
-    ///   - firstAidKitName: принимает название аптечки, которое будет сохранено в базу
-    ///   - completion: возвращает вновь созданный объект, для его присвоения массиву аптечек и отображения в таблице
-    func saveData(_ firstAidKitName: String, completion: (FirstAidKit) -> Void) {
-        
-        // Этот код предпочтительнее использовать, если работа идет с множеством различных контекстов и типов данных, чтобы подтянуть всю необходимую информацию.
-        // Но как применять всё это на практике, я пока не знаю.
-        /*
-        guard let entityDescription = NSEntityDescription.entity(forEntityName: "FirstAidKit", in: viewContext) else { return }
-        guard let firstAidKit = NSManagedObject(entity: entityDescription, insertInto: viewContext) as? FirstAidKit else { return }
-        */
-        
-        let firstAidKit = FirstAidKit(context: viewContext)
-        firstAidKit.title = firstAidKitName
-        completion(firstAidKit)
-        saveContext()
-    }
-    
+    // Это метод показанный на курсе, но так как мне нужно будет получать сортированный массив, лучше это делать в другом методе который написан выше. Сейчас данный метод не используется.
     /// Метод загрузки данных из базы в память устройства
     /// - Parameter completion: загружает данные из базы данных и сохраняет их в массив, возвращая экземпляр перечислений с обработкой ошибок, где в ответе приходит массив аптечек из базы
     func fetchData(completion: (Result<[FirstAidKit], Error>) -> Void) {
@@ -132,15 +149,6 @@ extension StorageManager: StorageManagerProtocol {
         } catch let error {
             completion(.failure(error))
         }
-    }
-    
-    /// Метод для изменения значения аптечки
-    /// - Parameters:
-    ///   - firstAidKit: принимает аптечку со старым названием
-    ///   - newName: принимает новое название аптечки и заменяет старое
-    func editData(_ firstAidKit: FirstAidKit, newName: String) {
-        firstAidKit.title = newName
-        saveContext()
     }
      */
     

@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import CoreData
 
 /// Логика подготовки данных для презентации
 protocol FirstAidKitsPresentationLogic: AnyObject {
@@ -15,8 +14,23 @@ protocol FirstAidKitsPresentationLogic: AnyObject {
 
 /// Логика получения данных
 protocol FirstAidKitsViewControllerOutput {
+    
+    /// Метод для создания новой аптечки
+    /// - Parameter firstAidKitName: принимает пользовательское имя аптечки
+    func createData(_ firstAidKitName: String)
+    
     /// Метод для получения аптечек при первой загрузке и обновлении/добавлении данных
     func requestData()
+    
+    /// Метод для редактирования аптечки
+    /// - Parameters:
+    ///   - firstAidKit: принимает аптечку, которую необходимо отредактировать
+    ///   - newName: принимает новое пользовательское имя для аптечки
+    func updateData(_ firstAidKit: FirstAidKit, newName: String)
+    
+    /// Метод для удаления данных из БД
+    /// - Parameter firstAidKit: принимает аптечку, которую необходимо удалить из БД
+    func deleteData(_ firstAidKit: FirstAidKit)
     
     /// Метод для перехода к лекартсвам в аптечке, по индексу аптечки
     /// - Parameter indexPath: принимает индекс аптечки
@@ -30,11 +44,24 @@ final class FirstAidKitsPresenter {
 }
 
 extension FirstAidKitsPresenter: FirstAidKitsViewControllerOutput {
-    /// Временный метод для получения аптечек при первой загрузке
+    // MARK: CRUD methods
+    func createData(_ firstAidKitName: String) {
+        interactor?.createData(firstAidKitName)
+    }
+    
     func requestData(){
         interactor?.requestData()
     }
     
+    func updateData(_ firstAidKit: FirstAidKit, newName: String) {
+        interactor?.updateData(firstAidKit, newName: newName)
+    }
+    
+    func deleteData(_ firstAidKit: FirstAidKit) {
+        interactor?.deleteData(firstAidKit: firstAidKit)
+    }
+    
+    // MARK: Routing
     func routeToMedicines(by indexPath: IndexPath) {
         if let object = interactor?.requestData(at: indexPath) {
             router?.routeTo(target: .medicines(object))

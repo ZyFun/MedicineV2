@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import CoreData
 
 /// Протокол отображения FirstAidKitController-а
 protocol FirstAidKitsDisplayLogic: AnyObject {
@@ -120,7 +119,7 @@ extension FirstAidKitsViewController: UITableViewDataSource {
         
         let firstAidKit = viewModels?[indexPath.row]
         
-        let currentAmountMedicines = "1" // TODO: Извлечь количество лекарств в текущей аптечке.
+        let currentAmountMedicines = "1" // TODO: Извлечь количество лекарств в текущей аптечке. Посчитать количество в переданном и отфильтрованном массиве
         
         cell.accessoryType = .disclosureIndicator
         cell.configure(
@@ -191,7 +190,7 @@ extension FirstAidKitsViewController: UITableViewDelegate {
             
             viewModels?.remove(at: indexPath.row)
             firstAidKitsTableView.deleteRows(at: [indexPath], with: .automatic)
-            StorageManager.shared.deleteObject(firstAidKit)
+            presenter?.deleteData(firstAidKit)
         }
     }
 }
@@ -214,17 +213,13 @@ private extension FirstAidKitsViewController {
         
         alert.action(firstAidKit: entity) { [unowned self] firstAidKitName in
             if let firstAidKit = entity {
-                firstAidKit.title = firstAidKitName
-                StorageManager.shared.saveContext()
+                presenter?.updateData(firstAidKit, newName: firstAidKitName)
             } else {
-                let firstAidKit = FirstAidKit()
-                firstAidKit.title = firstAidKitName
-                StorageManager.shared.saveContext()
+                presenter?.createData(firstAidKitName)
             }
             // TODO: сделать методы для добавления и удаления строк, чтобы было с красивой анимацией а не полное обновление таблицы. Для добавления нового элемента идея такая. Добавить его в базу, загрузить новые данные из базы, найти элемент и узнать его индекс через цикл, вернуть номер индекса и добавить элемент в таблицу по этому индексу (возможно это хрень)
             // Запрос данных нужен для того, чтобы обновилась таблица
             // после добавления новых данных
-            presenter?.requestData()
             firstAidKitsTableView.reloadData()
         }
         present(alert, animated: true)
