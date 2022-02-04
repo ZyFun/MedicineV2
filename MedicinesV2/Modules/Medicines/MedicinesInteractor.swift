@@ -9,23 +9,29 @@ import Foundation
 
 protocol BusinessLogic {
     func requestData()
+    
+    /// Метод для удаления данных из БД
+    /// Запрос на обновление данных должен происходить
+    /// в момент возврата на экран со списком лекарств.
+    /// - Parameter medicine: принимает лекарство, которое необходимо удалить из БД
+    func deleteData(medicine: Medicine)
 }
 
 final class MedicinesInteractor {
     
-    weak var presenter: PresentationLogik?
+    weak var presenter: PresentationLogiс?
     
     var data: [Medicine]?
 }
 
 // MARK: - BusinessLogic
 extension MedicinesInteractor: BusinessLogic {
-        
-    // TODO: Внедрить сюда функцию для работы с кордатой на прямую. Работа с таблицей и вся информация по изменениям будет передаваться сюда
+    func deleteData(medicine: Medicine) {
+        StorageManager.shared.deleteObject(medicine)
+    }
     
     func requestData() {
-        // TODO:  Не уверен что запись получения данных правильная
-        data = StorageManager.shared.fetchRequest("Medicine") as? [Medicine]
+        data = StorageManager.shared.fetchRequest(String(describing: Medicine.self)) as? [Medicine]
         presenter?.presentData(data)
     }
 }

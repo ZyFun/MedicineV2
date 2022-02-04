@@ -17,19 +17,11 @@ class MedicinesViewController: UIViewController {
     // MARK: Public properties
     /// Ссылка на presenter
     var presenter: MedicinesViewControllerOutput?
-    
-    // TODO: Временное решение для тестирования, до момента создания всей БД.
-    // MARK: Переданные данные с другого вью
+    /// Содержит в себе выбранную аптечку, для её связи с лекарствами
     var currentFirstAidKit: FirstAidKit?
     
     // MARK: ViewModels
-    // TODO: На данный момент модель никак не обновляется, так как я не передаю с щругого экрана информацию о том, что модель обновилась
-    private var viewModels: [Medicine]? {
-        didSet {
-            // TODO: Временно отключил этот способ обработки, так как в текущей реализации он только портит обновление данных. ВОзможно я просто удалю этот способ обновления таблицы и буду обновлять его в ручную. Либо нужно прописать в неё логику, которая будет отрабатывать на обновление в зависимости от ситуации
-//            medicinesTableView?.reloadData()
-        }
-    }
+    private var viewModels: [Medicine]?
 
     // MARK: IBOutlets
     /// Таблица с лекарствами
@@ -40,10 +32,8 @@ class MedicinesViewController: UIViewController {
         super.viewDidLoad()
 
         setup()
-//        presenter?.requestData()
     }
     
-    // TODO: Временное решение, пока нет передачи информации о том, что добавились новые данные. Отслеживание должно быть чререз специальный контроллер базы данных, так как аптечку и прочее я буду удалять. Нужно подумать как это записать
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
@@ -85,8 +75,6 @@ private extension MedicinesViewController {
     
     /// Метод настройки Navigation Bar
     func setupNavigationBar() {
-        // Возможно потребуется, когда вход в приложение будет без сториборда, если нет, удалить
-//        navigationController?.navigationBar.prefersLargeTitles = true
         title = currentFirstAidKit?.title
         addButtons()
     }
@@ -110,7 +98,7 @@ private extension MedicinesViewController {
 extension MedicinesViewController: DisplayLogic {
     func display(_ viewModels: [Medicine]) {
         // Выполняем фильтрацию в зависимости от выбранной аптечки и отображаем связанныее с ней лекарства
-        // TODO: Возможно логику подготовки к отображению и фильтрацию, стоит перенести в интерактор
+        // TODO: Возможно логику подготовки к отображению и фильтрацию, стоит перенести в презентер
         self.viewModels = viewModels.filter({$0.firstAidKit == currentFirstAidKit})
         
     }
@@ -142,16 +130,11 @@ extension MedicinesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // TODO: После добавления уведомлений, не забыть добавить очистку очереди (посмотреть код из аналогичного метода старой версии)
-            // TODO: Доработать в будущем на этот способ обработки удаления
-//            let medicine = fetchedResultsController.object(at: indexPath) as! Medicine
-            
             guard let medicine = viewModels?[indexPath.row] else { return }
 
-            // TODO: Исправить после перехода с массивов на кордата контроллер. Так же тут всё нарушает архитектуру. Нужно доработать.
             viewModels?.remove(at: indexPath.row)
             medicinesTableView?.deleteRows(at: [indexPath], with: .fade)
-            StorageManager.shared.deleteObject(medicine)
-            
+            presenter?.deleteData(medicine)
         }
     }
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 /// Логика подготовки данных для презентации
-protocol PresentationLogik: AnyObject {
+protocol PresentationLogiс: AnyObject {
     func presentData(_ data: [Medicine]?)
 }
 
@@ -16,10 +16,15 @@ protocol PresentationLogik: AnyObject {
 protocol MedicinesViewControllerOutput {
     func requestData()
     
-    // TODO: Подумать как передать нил чтобы не плодить много методов
-    /// Метод для перехода к конкретному лекарству по индексу выбранного лекарства
-    /// для его редактирования.
-    /// - Parameter indexPath: принимает индекс лекарства
+    /// Метод для удаления данных из БД
+    /// - Parameter medicine: принимает лекарство, которое необходимо удалить из БД
+    func deleteData(_ medicine: Medicine)
+    
+    /// Метод для перехода к конкретному лекарству, или созданию нового
+    /// с передачей текущей аптечки, для привязки лекарства к ней.
+    /// - Parameters:
+    ///   - currentFirstAidKit: принимает текущую аптечку, для привязки к ней лекарства
+    ///   - currentMedicine: принимает текущее лекарство, для его редактирования
     func routeToMedicine(with currentFirstAidKit: FirstAidKit?, by currentMedicine: Medicine?)
 }
 
@@ -35,16 +40,16 @@ extension MedicinesPresenter: MedicinesViewControllerOutput {
         interactor?.requestData()
     }
     
-    // TODO: Подумать как передать нил чтобы не плодить много методов
-    /// Метод для перехода к конкретному лекарству по индексу выбранного лекарства
-    /// для его редактирования.
-    /// - Parameter indexPath: принимает индекс лекарства
+    func deleteData(_ medicine: Medicine) {
+        interactor?.deleteData(medicine: medicine)
+    }
+    
     func routeToMedicine(with currentFirstAidKit: FirstAidKit?, by currentMedicine: Medicine?) {
         router?.routeTo(target: .medicine(currentFirstAidKit, currentMedicine))
     }
 }
 
-extension MedicinesPresenter: PresentationLogik {
+extension MedicinesPresenter: PresentationLogiс {
     func presentData(_ data: [Medicine]?) {
         guard let viewModels = data.map({ $0 }) else { return }
         view?.display(viewModels)
