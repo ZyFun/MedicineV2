@@ -238,8 +238,7 @@ private extension MedicineViewController {
     /// Действие сохранения для кнопки навигационной панели
     @objc func saveButtonPressed() {
         if saveMedicine() {
-            StorageManager.shared.saveContext()
-            navigationController?.popViewController(animated: true)
+            preseter?.saveMedicine()
         }
     }
     
@@ -252,13 +251,15 @@ private extension MedicineViewController {
             return false
         }
         
-        // Если лекарства нет в базе, создаём новое и далее присваиваем свойства его параметрам
+        // Если переход на экран был не тапом по ячейке с лекарством,
+        // создаём новое и далее присваиваем свойства его параметрам.
         if medicine == nil {
             medicine = Medicine()
         }
         
         // Создание связи лекарства к аптечке.
-        // Это работает, осталось только понять, как отфильтовать предикатом
+        // Нужно понять, как делать фильтрацию предикатом, отображая лекарства
+        // которые были привязаны к конкретной аптечке.
         if let currentFirstAidKit = currentFirstAidKit {
             medicine?.firstAidKit = currentFirstAidKit
         }

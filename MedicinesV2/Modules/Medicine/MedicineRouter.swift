@@ -8,7 +8,8 @@
 import UIKit
 
 protocol MedicineRoutingLogic {
-    // Пока что не нужно, используется только для конфигуратора
+    /// Метод для возврата на предыдущий экран
+    func routeToBack()
 }
 
 final class MedicineRouter {
@@ -20,5 +21,7 @@ final class MedicineRouter {
 }
 
 extension MedicineRouter: MedicineRoutingLogic {
-    // Пока что не нужно, используется только для конфигуратора
+    func routeToBack() {
+        navigationController?.popViewController(animated: true)
+    }
 }

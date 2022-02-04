@@ -8,6 +8,9 @@
 import Foundation
 
 protocol MedicineBusinessLogic {
+    /// Метод для сохранения всех изменений в БД
+    func saveMedicine()
+    
     func requestData(at indexPath: IndexPath)
 }
 
@@ -16,6 +19,10 @@ final class MedicineInteractor {
 }
 
 extension MedicineInteractor: MedicineBusinessLogic {
+    func saveMedicine() {
+        StorageManager.shared.saveContext()
+    }
+    
     func requestData(at indexPath: IndexPath) {
         // TODO: Доделать
     }
