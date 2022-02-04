@@ -4,7 +4,6 @@
 //
 //  Created by Дмитрий Данилин on 01.12.2021.
 //
-// TODO: Навигейшн контроллер дублируется. Возможно это связано с тем, что нарушена архитектура. Разобраться с этим после того, как перепишу код под полноценную работу VIPER и вход будет осуществляться через AppDelegate
 
 import UIKit
 
@@ -38,7 +37,6 @@ class MedicineViewController: UITableViewController {
         
         setup()
     }
-
 }
 
 // MARK: - Настройки для ViewController
@@ -46,6 +44,7 @@ private extension MedicineViewController {
     /// Метод инициализации VC
     func setup() {
         setupNavigationBar()
+        setupGestureRecognizer()
         setupTableView()
         setupDataPicker()
         setupTextFields()
@@ -57,6 +56,19 @@ private extension MedicineViewController {
     func setupNavigationBar() {
         title = medicine?.title ?? "Новое лекарство"
         addButtonsToNavigationBar()
+    }
+    
+    /// Настройка распознавания жестов
+    /// На данный момент используется для скрытия клавиатуры при тапе не по ячейке ввода.
+    /// По каким то причинам более простой способ метода touchesBegan не работает
+    func setupGestureRecognizer() {
+        /// Жест, тап по экрану
+        let tap = UITapGestureRecognizer(
+            target: self,
+            action: #selector(dismissKeyboard)
+        )
+        
+        view.addGestureRecognizer(tap)
     }
     
     /// Настройка внешнего вида таблицы
@@ -172,6 +184,11 @@ private extension MedicineViewController {
     }
     
     // MARK: Actions
+    /// Метод для скрытия клавиатуры при окончании редактирования данных
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
     /// Назначает действий при окончании редактирования в поле ввода
     /// - Parameter textField: принимает поле ввода в котором необходимо применить
     ///  действие по окончанию редактирования
