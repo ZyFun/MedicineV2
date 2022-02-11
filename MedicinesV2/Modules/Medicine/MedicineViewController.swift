@@ -74,6 +74,9 @@ private extension MedicineViewController {
     /// Настройка внешнего вида таблицы
     func setupTableView() {
         tableView.allowsSelection = false
+        
+        // TODO: Удалить после прекращения поддержки iOS ниже 15
+        tableView.tableFooterView = UIView()
     }
     
     /// Конфигурирование полей ввода текста
@@ -304,6 +307,16 @@ private extension MedicineViewController {
 
 // MARK: - Text Field Delegate
 extension MedicineViewController: UITextFieldDelegate {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        // TODO: Непонятный баг, без этого отображаются заголовки которых нет
+        CGFloat.leastNonzeroMagnitude
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        // TODO: Непонятный баг, без этого отображаются заголовки которых нет
+        CGFloat.leastNonzeroMagnitude
+    }
+    
     // Используется для отображения тулбара
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == medicineCountStepsTextField {
