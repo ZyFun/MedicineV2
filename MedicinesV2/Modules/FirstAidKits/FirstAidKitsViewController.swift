@@ -35,6 +35,13 @@ class FirstAidKitsViewController: UIViewController {
         setup()
         presenter?.requestData()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // TODO: Сделать перезагрузку данных по запросу при возврате с экрана лекарств и сохранении данных (это оптимизирует приложение)
+        firstAidKitsTableView.reloadData()
+    }
 }
 // MARK: - Конфигурирование ViewController
 extension FirstAidKitsViewController {
@@ -119,12 +126,12 @@ extension FirstAidKitsViewController: UITableViewDataSource {
         
         let firstAidKit = viewModels?[indexPath.row]
         
-        let currentAmountMedicines = "1" // TODO: Извлечь количество лекарств в текущей аптечке. Посчитать количество в переданном и отфильтрованном массиве
+        let currentAmountMedicines = firstAidKit?.medicines?.count // TODO: Извлечь количество лекарств в текущей аптечке. Посчитать количество в переданном и отфильтрованном массиве
         
         cell.accessoryType = .disclosureIndicator
         cell.configure(
             titleFirstAidKit: firstAidKit?.title,
-            amountMedicines: currentAmountMedicines
+            amountMedicines: String(currentAmountMedicines ?? 0)
         )
         
         return cell
