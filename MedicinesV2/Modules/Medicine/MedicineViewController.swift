@@ -84,6 +84,8 @@ private extension MedicineViewController {
         setupDelegateForTextFields()
         
         // Настройка поля ввода количества шагов, которое используется в степпере
+        // Полное очищение поля нужно для удобства пользователя,
+        // так-как значение этого поля при редактировании будет меняться полностью
         medicineCountStepsTextField.clearsOnBeginEditing = true
         medicineCountStepsTextField.keyboardType = .decimalPad
         medicineCountStepsTextField.returnKeyType = .done
@@ -203,15 +205,20 @@ private extension MedicineViewController {
             return
         }
         
-        // Извлекаем принудительно, так как расширение в любом случае вернет 0
-        var amountMedicine = textField.text!.doubleValue
-        
         if textField == medicineCountStepsTextField {
+            // Извлекаем принудительно, так как расширение в любом случае вернет 0
+            var amountMedicine = textField.text!.doubleValue
+            
             // Защита от введения нуля пользователем и расширением NumberFormatter.
             // При значении 0 у степпера, приложение падает.
             if amountMedicine == 0 {
-                amountMedicine = 1
+                // Извлечение из переданного с другого экрана значения,
+                // нужно для того, чтобы не возвращать 1 всегда,
+                // при защите от нулевого значения,
+                // так как поле ввода очищается для удобства пользователя.
+                amountMedicine = medicine?.stepCountForStepper ?? 1
             }
+            
             // Эта строчка нужна для того, чтобы обновить значение в поле ввода
             // и отобразить введенноё число в формате с точкой,
             // если было введено целое число
@@ -220,6 +227,8 @@ private extension MedicineViewController {
         }
         
         if textField == medicineAmountTextField {
+            // Извлекаем принудительно, так как расширение в любом случае вернет 0
+            let amountMedicine = textField.text!.doubleValue
             textField.text = String(format: "%.2f", amountMedicine)
             medicineAmountStepper.value = amountMedicine
         }
