@@ -121,7 +121,14 @@ extension MedicinesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MedicineTableViewCell.self), for: indexPath) as! MedicineTableViewCell
         
-        cell.configure(text: viewModels?[indexPath.row].title ?? "")
+        let medicine = viewModels?[indexPath.row]
+        
+        cell.configure(
+            name: medicine?.title ?? "",
+            type: medicine?.type ?? "",
+            expiryDate: medicine?.expiryDate?.toString() ?? "",
+            amount: String(medicine?.amount ?? 0)
+        )
         
         return cell
     }

@@ -155,7 +155,7 @@ private extension MedicineViewController {
             medicineTypeTextField.text = medicine.type
             medicineAmountTextField.text = String(medicine.amount)
             medicineCountStepsTextField.text = String(medicine.stepCountForStepper)
-            medicinesExpiryDateTextField.text = "\(medicine.expiryDate?.toString() ?? Date().toString())"
+            medicinesExpiryDateTextField.text = "\(medicine.expiryDate?.toString() ?? "")"
         }
     }
     

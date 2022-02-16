@@ -9,17 +9,46 @@ import UIKit
 
 class MedicineTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var medicineName: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var typeLabel: UILabel!
+    @IBOutlet weak var expiryDateLabel: UILabel!
+    @IBOutlet weak var trashLabel: UILabel!
+    @IBOutlet weak var amountLabel: UILabel!
     
-    func configure (text: String) {
-        medicineName.text = text
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        setup()
+    }
+}
+
+// MARK: - Public method
+extension MedicineTableViewCell {
+    func configure (
+        name: String,
+        type: String,
+        expiryDate: String,
+        amount: String
+    ) {
+        nameLabel.text = name
+        typeLabel.text = type
+        expiryDateLabel.text = expiryDate
+        amountLabel.text = "\(amount) шт"
+    }
+}
+
+// MARK: Конфигурирование ячейки
+private extension MedicineTableViewCell {
+    ///  Метод инициализации настроек
+    func setup() {
+        setupLabels()
     }
     
-    // TODO: Разобраться, что это за метод
-    // Как я понял, служит для обнуления контента в ячейке, но не понял зачем
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        medicineName.text = ""
+    /// Метод для настройки лейблов
+    func setupLabels() {
+        // TODO: Временно скрыл пока нет логики сверки даты
+        trashLabel.isHidden = true
+        trashLabel.layer.cornerRadius = 5
+        trashLabel.clipsToBounds = true
     }
-    
 }
