@@ -119,20 +119,20 @@ extension MedicinesViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MedicineTableViewCell.self), for: indexPath) as! MedicineTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MedicineTableViewCell.self), for: indexPath) as? MedicineTableViewCell else { return UITableViewCell() }
         
-        let medicine = viewModels?[indexPath.row]
+        guard let medicine = viewModels?[indexPath.row] else { return UITableViewCell() }
         
         cell.configure(
-            name: medicine?.title ?? "",
-            type: medicine?.type ?? "",
-            expiryDate: medicine?.expiryDate?.toString() ?? "",
-            amount: String(medicine?.amount ?? 0)
+            name: medicine.title ?? "",
+            type: medicine.type ?? "",
+            expiryDate: medicine.expiryDate?.toString() ?? "",
+            amount: String(medicine.amount)
         )
         
         // TODO: Все вычисления нужно вынести в другое место, а не писать это в вызове ячеек. Например в конфигурировании ячейки создать параметр принимающий булево значение и функцию с рассчетом, которая будет возвращать его в эту ячейку, по умолчанию информация о просрочек должна быть скрытой.
         // Показываем иконку просроченного лекарства, если не просрочено и не указана дата, оставляем иконку скрытой
-        if Date() >= medicine?.expiryDate ?? Date() {
+        if Date() >= medicine.expiryDate ?? Date() {
             cell.configureAlertLabel(
                 title: "В мусор",
                 isAlertLabelPresent: true
@@ -140,7 +140,7 @@ extension MedicinesViewController: UITableViewDataSource {
         }
         
         // Показывает иконку о необходимости покупки лекарств
-        if medicine?.amount ?? 0 <= 0 {
+        if medicine.amount <= 0 {
             cell.configureAlertLabel(
                 title: "Купить",
                 isAlertLabelPresent: true
