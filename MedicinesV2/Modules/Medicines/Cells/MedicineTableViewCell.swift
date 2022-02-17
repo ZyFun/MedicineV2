@@ -20,6 +20,14 @@ class MedicineTableViewCell: UITableViewCell {
         
         setup()
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        // Без этого, при возврате с предыдущего экрана начинает отображаться
+        // лейбл о просрочке, там где это не нужно.
+        trashLabel.isHidden = true
+    }
 }
 
 // MARK: - Public method

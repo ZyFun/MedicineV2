@@ -136,6 +136,12 @@ extension MedicinesViewController: UITableViewDataSource {
             cell.trashLabel.isHidden = false
         }
         
+        // Показывает иконку о необходимости покупки лекарств
+        if medicine?.amount ?? 0 <= 0 {
+            cell.trashLabel.isHidden = false
+            cell.trashLabel.text = "Купить"
+        }
+        
         return cell
     }
     
