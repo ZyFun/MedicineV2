@@ -46,7 +46,7 @@ private extension MedicineTableViewCell {
     
     /// Метод для настройки лейблов
     func setupLabels() {
-        // TODO: Временно скрыл пока нет логики сверки даты
+        trashLabel.text = "В мусор"
         trashLabel.isHidden = true
         trashLabel.layer.cornerRadius = 5
         trashLabel.clipsToBounds = true
