@@ -32,6 +32,13 @@ class MedicineTableViewCell: UITableViewCell {
 
 // MARK: - Public method
 extension MedicineTableViewCell {
+    
+    /// Настройка информации, которая будет отображаться в ячейке лекарства
+    /// - Parameters:
+    ///   - name: принимает название лекарства
+    ///   - type: принимает тип лекарства
+    ///   - expiryDate: принимает дату срока годности лекарства
+    ///   - amount: принимает количество оставшегося лекарства
     func configure (
         name: String,
         type: String,
@@ -42,6 +49,18 @@ extension MedicineTableViewCell {
         typeLabel.text = type
         expiryDateLabel.text = expiryDate
         amountLabel.text = "\(amount) шт"
+    }
+    
+    /// Настройка лейбла предупреждения
+    /// - Parameters:
+    ///   - title: принимает заголовок, который будет отображаться в лейбле предупреждения
+    ///   - alertLabelPresent: при значении true выводит лейбл предупреждения из скрытия
+    func configureAlertLabel(
+        title: String,
+        isAlertLabelPresent: Bool
+    ) {
+        trashLabel.text = title
+        trashLabel.isHidden = !isAlertLabelPresent
     }
 }
 
@@ -54,7 +73,6 @@ private extension MedicineTableViewCell {
     
     /// Метод для настройки лейблов
     func setupLabels() {
-        trashLabel.text = "В мусор"
         trashLabel.isHidden = true
         trashLabel.layer.cornerRadius = 5
         trashLabel.clipsToBounds = true

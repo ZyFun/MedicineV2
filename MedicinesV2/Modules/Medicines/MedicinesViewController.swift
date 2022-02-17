@@ -133,13 +133,18 @@ extension MedicinesViewController: UITableViewDataSource {
         // TODO: Все вычисления нужно вынести в другое место, а не писать это в вызове ячеек. Например в конфигурировании ячейки создать параметр принимающий булево значение и функцию с рассчетом, которая будет возвращать его в эту ячейку, по умолчанию информация о просрочек должна быть скрытой.
         // Показываем иконку просроченного лекарства, если не просрочено и не указана дата, оставляем иконку скрытой
         if Date() >= medicine?.expiryDate ?? Date() {
-            cell.trashLabel.isHidden = false
+            cell.configureAlertLabel(
+                title: "В мусор",
+                isAlertLabelPresent: true
+            )
         }
         
         // Показывает иконку о необходимости покупки лекарств
         if medicine?.amount ?? 0 <= 0 {
-            cell.trashLabel.isHidden = false
-            cell.trashLabel.text = "Купить"
+            cell.configureAlertLabel(
+                title: "Купить",
+                isAlertLabelPresent: true
+            )
         }
         
         return cell
