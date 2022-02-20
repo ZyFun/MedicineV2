@@ -9,11 +9,12 @@ import UIKit
 
 /// Протокол отображения FirstAidKitController-а
 protocol FirstAidKitsDisplayLogic: AnyObject {
-    /// Метод передаёт данные в модель данных
+    /// Метод для передачи данных в модель данных
     func display(_ viewModels: [FirstAidKit]?)
 }
 
-class FirstAidKitsViewController: UIViewController {
+
+final class FirstAidKitsViewController: UIViewController {
     
     // MARK: Public properties
     /// Ссылка на presenter
@@ -25,7 +26,7 @@ class FirstAidKitsViewController: UIViewController {
     
     // MARK: Private properties
     /// Модель данных "Аптечка".
-    /// Содержит в себе все аптечки которые были сохранены в базу.
+    /// - Содержит в себе все аптечки которые были сохранены в базу.
     private var viewModels: [FirstAidKit]?
 
     // MARK: - Life Cycle
@@ -101,6 +102,8 @@ extension FirstAidKitsViewController {
     }
     
     // MARK: Actions
+    /// Метод для добавления новой аптечки.
+    /// - Вызывает алерт контроллер, с помощью которого будет производится добавление аптечки
     @objc func addNewFirstAidKit() {
         showAlert()
     }
@@ -119,18 +122,17 @@ extension FirstAidKitsViewController: UITableViewDataSource {
         _ tableView: UITableView,
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(
+        guard let cell = tableView.dequeueReusableCell(
             withIdentifier: String(describing: FirstAidKitTableViewCell.self),
             for: indexPath
-        ) as! FirstAidKitTableViewCell
+        ) as? FirstAidKitTableViewCell else { return UITableViewCell() }
         
-        let firstAidKit = viewModels?[indexPath.row]
+        guard let firstAidKit = viewModels?[indexPath.row] else { return UITableViewCell() }
         
-        let currentAmountMedicines = firstAidKit?.medicines?.count // TODO: Извлечь количество лекарств в текущей аптечке. Посчитать количество в переданном и отфильтрованном массиве
+        let currentAmountMedicines = firstAidKit.medicines?.count
         
-        cell.accessoryType = .disclosureIndicator
         cell.configure(
-            titleFirstAidKit: firstAidKit?.title,
+            titleFirstAidKit: firstAidKit.title,
             amountMedicines: String(currentAmountMedicines ?? 0)
         )
         
@@ -148,26 +150,12 @@ extension FirstAidKitsViewController: UITableViewDelegate {
         presenter?.routeToMedicines(by: indexPath)
     }
     
-    // TODO: Использовать этот метод, когда потребуется дополнительный функционал свайпа по ячейке
-    /*
-    // Метод позволяет настроить пользовательские действия, при свайпе ячейки с права на лево
-    // Настроено только удаление ячейки
-    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .destructive, title: "Удалить") { [unowned self] _, _, _ in
-            let firstAidKit = firstAidKits[indexPath.row]
-            StorageManager.shared.deleteData(firstAidKit)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-        }
-        return UISwipeActionsConfiguration(actions: [deleteAction])
-    }
-     */
-    
     func tableView(
         _ tableView: UITableView,
         leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath
     ) -> UISwipeActionsConfiguration? {
         
-        let firstAidKit = viewModels?[indexPath.row]
+        guard let firstAidKit = viewModels?[indexPath.row] else { return nil}
         
         let editAction = UIContextualAction(
             style: .normal,
@@ -192,7 +180,7 @@ extension FirstAidKitsViewController: UITableViewDelegate {
         forRowAt indexPath: IndexPath
     ) {
         if editingStyle == .delete {
-            // TODO: После добавления уведомлений, не забыть добавить очистку очереди (посмотреть код из аналогичного метода старой версии)
+            // TODO: После добавления уведомлений, не забыть добавить очистку очереди (посмотреть код из аналогичного метода старой версии) Нужно будет пройтись циклом по всем лекарствам и удалить каждое из очереди.
             guard let firstAidKit = viewModels?[indexPath.row] else { return }
             
             viewModels?.remove(at: indexPath.row)
@@ -239,7 +227,7 @@ private extension FirstAidKitsViewController {
                 if let viewModels = viewModels {
                     var count = 0
                     
-                    // Ищем в обновленнном массиве, после добавления объекта,
+                    // Ищем в обновленном массиве, после добавления объекта,
                     // текущий индекс объекта и вставляем по этому индексу новую
                     // ячейку в таблице аптечек.
                     for addObject in viewModels {

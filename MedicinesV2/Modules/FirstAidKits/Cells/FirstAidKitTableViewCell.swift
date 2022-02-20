@@ -8,7 +8,7 @@
 import UIKit
 
 /// Ячейка для аптечки
-class FirstAidKitTableViewCell: UITableViewCell {
+final class FirstAidKitTableViewCell: UITableViewCell {
 
     // MARK: - Outlets
     @IBOutlet weak var titleFirstAidKit: UILabel!
@@ -31,6 +31,7 @@ private extension FirstAidKitTableViewCell {
     /// Метод для настройки отображения элементов
     func setupUI() {
         amountMedicines.textColor = .lightGray
+        accessoryType = .disclosureIndicator
     }
 }
 
