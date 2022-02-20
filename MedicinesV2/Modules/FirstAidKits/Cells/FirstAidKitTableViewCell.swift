@@ -7,29 +7,39 @@
 
 import UIKit
 
+/// Ячейка для аптечки
 class FirstAidKitTableViewCell: UITableViewCell {
 
-    // MARK: Outlets
+    // MARK: - Outlets
     @IBOutlet weak var titleFirstAidKit: UILabel!
     @IBOutlet weak var amountMedicines: UILabel!
     
+    // MARK: - Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
+        setup()
+    }
+}
+
+// MARK: - Конфигурирование ячейки
+private extension FirstAidKitTableViewCell {
+    /// Метод инициализации настроек ячейки
+    func setup() {
         setupUI()
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
     
-    // MARK: Setup
     /// Метод для настройки отображения элементов
     func setupUI() {
         amountMedicines.textColor = .lightGray
     }
-    
+}
+
+// MARK: - Publik Methods
+extension FirstAidKitTableViewCell {
+    /// Метод для конфигурирования отображаемой информации в ячейке.
+    /// - Parameters:
+    ///   - titleFirstAidKit: принимает название аптечки.
+    ///   - amountMedicines: принимает количество лекарств, хранящихся  в аптечке.
     func configure(titleFirstAidKit: String?, amountMedicines: String) {
         self.titleFirstAidKit.text = titleFirstAidKit
         self.amountMedicines.text = amountMedicines
