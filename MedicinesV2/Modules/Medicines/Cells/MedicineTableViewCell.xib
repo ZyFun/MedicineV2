@@ -59,6 +59,7 @@
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="dzN-s5-iHm" firstAttribute="top" relation="greaterThanOrEqual" secondItem="dgI-c2-cjS" secondAttribute="bottom" constant="30" id="DcD-dp-FPe"/>
                     <constraint firstAttribute="trailing" secondItem="dgI-c2-cjS" secondAttribute="trailing" constant="16" id="HoZ-Xb-nnK"/>
                     <constraint firstAttribute="bottom" secondItem="dzN-s5-iHm" secondAttribute="bottom" constant="8" id="Jlw-8x-o8l"/>
                     <constraint firstItem="Pas-YO-QSt" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="RRC-6h-ktE"/>
