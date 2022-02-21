@@ -9,6 +9,7 @@
 
 import Foundation
 
+/// Протокол для работы с бизнес логикой модуля
 protocol FirstAidKitsBusinessLogic {
     /// Метод для создания новой аптечки.
     /// - Метод запрашивает обновленные данные из БД для обновления массива data
@@ -18,7 +19,7 @@ protocol FirstAidKitsBusinessLogic {
     /// - Parameter firstAidKit: принимает имя аптечки.
     func createData(_ firstAidKitName: String)
     
-    /// Метод для перехода к лекартсвам в аптечке, по индексу аптечки.
+    /// Метод для перехода к лекартсвам в аптечке, по индексу текущей (выбранной)  аптечки.
     /// - Parameter indexPath: принимает индекс аптечки
     func requestData(at indexPath: IndexPath) -> FirstAidKit?
     

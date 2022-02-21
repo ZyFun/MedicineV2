@@ -24,6 +24,7 @@ final class FirstAidKitRouter: FirstAidKitRoutingLogic {
     
     /// Кейсы с экранами, на которые возможно сделать переход по таргету
     enum Targets {
+        /// Таргет на экран с лекарствами, с передачей текущей (выбранной) аптечки.
         case medicines(FirstAidKit)
     }
     

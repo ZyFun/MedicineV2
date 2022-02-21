@@ -7,7 +7,7 @@
 
 import UIKit
 
-/// Протокол отображения FirstAidKitController-а
+/// Протокол отображения ViewCintroller-a
 protocol FirstAidKitsDisplayLogic: AnyObject {
     /// Метод для передачи данных в модель данных
     func display(_ viewModels: [FirstAidKit]?)
