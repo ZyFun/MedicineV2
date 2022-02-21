@@ -7,7 +7,10 @@
 
 import UIKit
 
+/// Протокол логики роутера
 protocol FirstAidKitRoutingLogic {
+    /// Переход к определенному экрану по таргету
+    /// - Parameter target: таргет экрана, на который будет осуществлен переход
     func routeTo(target: FirstAidKitRouter.Targets)
 }
 
@@ -19,6 +22,7 @@ final class FirstAidKitRouter: FirstAidKitRoutingLogic {
         navigationController = withNavigationController
     }
     
+    /// Кейсы с экранами, на которые возможно сделать переход по таргету
     enum Targets {
         case medicines(FirstAidKit)
     }
