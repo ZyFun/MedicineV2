@@ -7,13 +7,14 @@
 
 import UIKit
 
+/// Протокол логики роутера
 protocol MedicineRoutingLogic {
     /// Метод для возврата на предыдущий экран
     func routeToBack()
 }
 
 final class MedicineRouter {
-    weak var navigationController: UINavigationController?
+    private var navigationController: UINavigationController?
     
     init(withNavigationController: UINavigationController?) {
         navigationController = withNavigationController

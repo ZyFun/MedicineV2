@@ -7,16 +7,22 @@
 
 import UIKit
 
+/// Протокол отображения ViewCintroller-a
 protocol MedicineDisplayLogic: AnyObject {
+    /// Метод для передачи данных в модель данных
     func display(_ viewModels: [Medicine])
 }
 
-class MedicineViewController: UITableViewController {
+final class MedicineViewController: UITableViewController {
     
     // MARK: Public properties
     /// Ссылка на presenter
     var preseter: MedicineViewControllerOutput?
+    /// Свойство содержащее в себе текущее лекарство
+    /// - Если лекарство было передано в свойство, оно будет редактироваться
+    /// - Если лекарства не было и это новое, будет создано новое
     var medicine: Medicine?
+    /// Содержит в себе выбранную аптечку, для её связи с лекарствами
     var currentFirstAidKit: FirstAidKit?
     
     // MARK: Private Properties
@@ -52,13 +58,24 @@ private extension MedicineViewController {
         setupStepperMedicine()
     }
     
+    // MARK: Setup navigation bar
     /// Настройка navigation bar
     func setupNavigationBar() {
         title = medicine?.title ?? "Новое лекарство"
         addButtonsToNavigationBar()
     }
     
-    /// Настройка распознавания жестов
+    /// Добавление кнопок в navigation bar
+    func addButtonsToNavigationBar() {
+        let saveButton = UIBarButtonItem(barButtonSystemItem: .save,
+                                         target: self,
+                                         action: #selector(saveButtonPressed))
+        
+        navigationItem.rightBarButtonItems = [saveButton]
+    }
+    
+    // MARK: Setup gesture recognizer
+    /// Настройка распознавания жестов.
     /// На данный момент используется для скрытия клавиатуры при тапе не по ячейке ввода.
     /// По каким то причинам более простой способ метода touchesBegan не работает
     func setupGestureRecognizer() {
@@ -71,6 +88,12 @@ private extension MedicineViewController {
         view.addGestureRecognizer(tap)
     }
     
+    /// Метод для скрытия клавиатуры при окончании редактирования данных
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+    // MARK: Setup table view
     /// Настройка внешнего вида таблицы
     func setupTableView() {
         tableView.allowsSelection = false
@@ -79,6 +102,7 @@ private extension MedicineViewController {
         tableView.tableFooterView = UIView()
     }
     
+    // MARK: Setup text fields
     /// Конфигурирование полей ввода текста
     func setupTextFields() {
         setupDelegateForTextFields()
@@ -106,15 +130,7 @@ private extension MedicineViewController {
         medicinesExpiryDateTextField.delegate = self
     }
     
-    /// Добавление кнопок в navigation bar
-    func addButtonsToNavigationBar() {
-        let saveButton = UIBarButtonItem(barButtonSystemItem: .save,
-                                         target: self,
-                                         action: #selector(saveButtonPressed))
-        
-        navigationItem.rightBarButtonItems = [saveButton]
-    }
-    
+    // MARK: Setup stepper
     /// Конфигурирование степпера
     func setupStepperMedicine() {
         // Извлекаем принудительно, так как расширение в любом случае вернет 0
@@ -124,6 +140,7 @@ private extension MedicineViewController {
         medicineAmountStepper.maximumValue = 999
     }
     
+    // MARK: Setup data picker
     /// Настройка и конфигурации  кастомного datePicker для выбора даты с помощью барабана
     func setupDataPicker() {
         datePicker = UIDatePicker(
@@ -148,17 +165,12 @@ private extension MedicineViewController {
         }
     }
     
-    /// Загрузка лекарства из базы
-    func loadMedicine() {
-        if let medicine = medicine {
-            medicineNameTextField.text = medicine.title
-            medicineTypeTextField.text = medicine.type
-            medicineAmountTextField.text = String(medicine.amount)
-            medicineCountStepsTextField.text = String(medicine.stepCountForStepper)
-            medicinesExpiryDateTextField.text = "\(medicine.expiryDate?.toString() ?? "")"
-        }
+    /// Изменение даты с помощью dataPicker
+    @objc private func dateChanged() {
+        medicinesExpiryDateTextField.text = datePicker.date.toString()
     }
     
+    // MARK: Keyboard tools
     /// Метод добавляет тулбар на клавиатуру для определенного поля редактирования.
     /// - Parameter textField: принимает поле, для клавиатуры которого
     /// требуется добавить тулбар.
@@ -188,12 +200,13 @@ private extension MedicineViewController {
         textField.inputAccessoryView = toolbar
     }
     
-    // MARK: Actions
-    /// Метод для скрытия клавиатуры при окончании редактирования данных
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
+    // MARK: IB Actions
+    // Действия для степпера
+    @IBAction func stepMedicineCount(_ sender: UIStepper) {
+        medicineAmountTextField.text = String(format: "%.2f", sender.value)
     }
     
+    // MARK: Actions
     /// Назначает действий при окончании редактирования в поле ввода
     /// - Parameter textField: принимает поле ввода в котором необходимо применить
     ///  действие по окончанию редактирования
@@ -236,11 +249,6 @@ private extension MedicineViewController {
         textField.resignFirstResponder()
     }
     
-    // Действия для степпера
-    @IBAction func stepMedicineCount(_ sender: UIStepper) {
-        medicineAmountTextField.text = String(format: "%.2f", sender.value)
-    }
-    
     /// Действие кнопки готово для тулбара
     @objc func toolBarDoneButtonPressed() {
         if medicineAmountTextField.isFirstResponder {
@@ -259,11 +267,6 @@ private extension MedicineViewController {
         }
     }
     
-    /// Изменение даты с помощью dataPicker
-    @objc private func dateChanged() {
-        medicinesExpiryDateTextField.text = datePicker.date.toString()
-    }
-    
     /// Действие сохранения для кнопки навигационной панели
     @objc func saveButtonPressed() {
         if saveMedicine() {
@@ -271,6 +274,8 @@ private extension MedicineViewController {
         }
     }
     
+    // MARK: - CRUD methods
+    // TODO: Это должно быть в интеракторе. Наверно
     /// Метод для сохранения всех свойств лекарства
     func saveMedicine() -> Bool {
         // Извлекаем принудительно, так как в данном случае при пустом поле падения не будет
@@ -308,6 +313,17 @@ private extension MedicineViewController {
         }
         
         return true
+    }
+    
+    /// Загрузка лекарства из базы
+    func loadMedicine() {
+        if let medicine = medicine {
+            medicineNameTextField.text = medicine.title
+            medicineTypeTextField.text = medicine.type
+            medicineAmountTextField.text = String(medicine.amount)
+            medicineCountStepsTextField.text = String(medicine.stepCountForStepper)
+            medicinesExpiryDateTextField.text = "\(medicine.expiryDate?.toString() ?? "")"
+        }
     }
 }
 

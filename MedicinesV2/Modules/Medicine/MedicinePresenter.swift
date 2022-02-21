@@ -7,13 +7,14 @@
 
 import Foundation
 
-/// Логика подготовки данных для презентации
+/// Протокол логики презентации данных
 protocol MedicinePresentationLogic: AnyObject {
-    
+    /// Логика передачи подготовленных данных на экран
+    /// - Parameter data: принимает массив лекарств
     func presentData(_ data: Medicine?)
 }
 
-/// Логика получения данных
+/// Протокол взаимодействия ViewController-a с презенетром
 protocol MedicineViewControllerOutput {
     /// Метод для сохранения всех изменений в БД
     /// c переходом на предыдущий экран после  сохранения.
