@@ -7,13 +7,16 @@
 
 import Foundation
 
-/// Логика подготовки данных для презентации
-protocol PresentationLogiс: AnyObject {
+/// Протокол логики презентации данных
+protocol MedicinesPresentationLogiс: AnyObject {
+    /// Логика передачи подготовленных данных на экран
+    /// - Parameter data: принимает массив лекарств
     func presentData(_ data: [Medicine]?)
 }
 
-/// Логика получения данных
+/// Протокол взаимодействия ViewController-a с презенетром
 protocol MedicinesViewControllerOutput {
+    /// Метод для получения лекарств при первой загрузке и обновлении/добавлении данных
     func requestData()
     
     /// Метод для удаления данных из БД
@@ -24,14 +27,15 @@ protocol MedicinesViewControllerOutput {
     /// с передачей текущей аптечки, для привязки лекарства к ней.
     /// - Parameters:
     ///   - currentFirstAidKit: принимает текущую аптечку, для привязки к ней лекарства
-    ///   - currentMedicine: принимает текущее лекарство, для его редактирования
+    ///   - currentMedicine: принимает текущее лекарство, для его редактирования.
+    ///   Если оно nil, то будет создано новое лекарство
     func routeToMedicine(with currentFirstAidKit: FirstAidKit?, by currentMedicine: Medicine?)
 }
 
 final class MedicinesPresenter {
     
     weak var view: DisplayLogic?
-    var interactor: BusinessLogic?
+    var interactor: MedicinesBusinessLogic?
     var router: MedicinesRouter?
 }
 
@@ -49,7 +53,7 @@ extension MedicinesPresenter: MedicinesViewControllerOutput {
     }
 }
 
-extension MedicinesPresenter: PresentationLogiс {
+extension MedicinesPresenter: MedicinesPresentationLogiс {
     func presentData(_ data: [Medicine]?) {
         guard let viewModels = data.map({ $0 }) else { return }
         view?.display(viewModels)

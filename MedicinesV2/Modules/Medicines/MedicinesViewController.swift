@@ -7,12 +7,13 @@
 
 import UIKit
 
-/// Логика отображения данных на вью
+/// Протокол отображения ViewCintroller-a
 protocol DisplayLogic: AnyObject {
+    /// Метод для передачи данных в модель данных
     func display(_ viewModels: [Medicine])
 }
 
-class MedicinesViewController: UIViewController {
+final class MedicinesViewController: UIViewController {
     
     // MARK: Public properties
     /// Ссылка на presenter
@@ -21,6 +22,8 @@ class MedicinesViewController: UIViewController {
     var currentFirstAidKit: FirstAidKit?
     
     // MARK: ViewModels
+    /// Модель данных "Лекарство"
+    /// - содержит в себе лекарства, отфильтрованные по текущей (выбранной) аптечке.
     private var viewModels: [Medicine]?
 
     // MARK: IBOutlets
@@ -52,6 +55,7 @@ private extension MedicinesViewController {
         setupXibs()
     }
     
+    // MARK: Setup table view
     /// Метод настройки таблицы
     func setupTableView() {
         medicinesTableView?.delegate = self
@@ -73,6 +77,7 @@ private extension MedicinesViewController {
         )
     }
     
+    // MARK: Setup navigation bar
     /// Метод настройки Navigation Bar
     func setupNavigationBar() {
         title = currentFirstAidKit?.title
@@ -86,7 +91,7 @@ private extension MedicinesViewController {
     }
     
     // MARK: Actions
-    /// Сохранение всех данных лекарства
+    /// Добавление нового лекарства
     @objc func addNewMedicine() {
         presenter?.routeToMedicine(with: currentFirstAidKit, by: nil)
     }
@@ -100,7 +105,6 @@ extension MedicinesViewController: DisplayLogic {
         // Выполняем фильтрацию в зависимости от выбранной аптечки и отображаем связанныее с ней лекарства
         // TODO: Возможно логику подготовки к отображению и фильтрацию, стоит перенести в презентер
         self.viewModels = viewModels.filter({$0.firstAidKit == currentFirstAidKit})
-        
     }
 }
 

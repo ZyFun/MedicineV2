@@ -7,25 +7,31 @@
 
 import UIKit
 
-protocol MedicinesRoutingLogik {
+/// Протокол логики роутера
+protocol MedicinesRoutingLogiс {
+    /// Переход к определенному экрану по таргету
+    /// - Parameter target: таргет экрана, на который будет осуществлен переход
     func routeTo(target: MedicinesRouter.Target)
 }
 
 final class MedicinesRouter {
     
-    weak var navigationController: UINavigationController?
+    private var navigationController: UINavigationController?
     
     init(withNavigationController: UINavigationController?) {
         navigationController = withNavigationController
     }
     
+    /// Кейсы с экранами, на которые возможно сделать переход по таргету
     enum Target {
+        /// Таргет на экран с лекарством, с передачей текущих (выбранных) аптечкой и лекарством
+        /// - передача свойств нужна, для определения связи лекарства с аптечкой.
         case medicine(FirstAidKit?, Medicine?)
     }
     
 }
 
-extension MedicinesRouter: MedicinesRoutingLogik {
+extension MedicinesRouter: MedicinesRoutingLogiс {
     func routeTo(target: MedicinesRouter.Target) {
         switch target {
         case .medicine(let currentFirstAidKit, let currentMedicine):

@@ -7,7 +7,11 @@
 
 import Foundation
 
-protocol BusinessLogic {
+/// Протокол для работы с бизнес логикой модуля
+protocol MedicinesBusinessLogic {
+    /// Метод для получения объектов из БД в виде массива.
+    /// - Запрос должен происходить при первичной загрузке приложения,
+    /// и при создании или удалении данных (для корректной работы с массивом в таблице)
     func requestData()
     
     /// Метод для удаления данных из БД
@@ -18,14 +22,18 @@ protocol BusinessLogic {
 }
 
 final class MedicinesInteractor {
+    /// Ссылка на презентер
+    weak var presenter: MedicinesPresentationLogiс?
     
-    weak var presenter: PresentationLogiс?
-    
+    // TODO: На данный момент остальные методы еще не перенесены, по этому кажется что он тут не нужен. Будет нужен как только всё будет правильно переписано под архитектуру.
+    /// Данные с массивом аптечек.
+    ///  - Используется для того, чтобы хранить в себе текущие данные после запроса к базе
+    ///  данных, и уменьшить количество обращений к базе.
     var data: [Medicine]?
 }
 
 // MARK: - BusinessLogic
-extension MedicinesInteractor: BusinessLogic {
+extension MedicinesInteractor: MedicinesBusinessLogic {
     func deleteData(medicine: Medicine) {
         StorageManager.shared.deleteObject(medicine)
     }
