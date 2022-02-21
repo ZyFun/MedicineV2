@@ -7,12 +7,14 @@
 
 import Foundation
 
-/// Логика подготовки данных для презентации
+/// Протокол логики презентации данных
 protocol FirstAidKitsPresentationLogic: AnyObject {
+    /// Логика передачи подготовленных данных на экран
+    /// - Parameter data: принимает массив аптечек
     func presentData(_ data: [FirstAidKit]?)
 }
 
-/// Логика получения данных
+/// Протокол взаимодействия ViewController-a с презенетром
 protocol FirstAidKitsViewControllerOutput {
     
     /// Метод для создания новой аптечки
