@@ -9,6 +9,12 @@ import UIKit
 
 extension UIAlertController {
     
+    /// Кейсы с сообщениями об ошибке
+    enum ErrorMessage: String {
+        /// Отображает сообщение, о том что поле с названием необходимо заполнить
+        case noNameMedicine = "Поле с названием лекарства не должно быть пустым"
+    }
+    
     /// Метод для создания кастомного алерт контроллера. Используется для работы с  добавлением и редактированием названия аптечки
     /// - Parameter title: принимает заголовок для алерта
     /// - Returns: возвращает кастомный алерт контроллер
@@ -16,6 +22,27 @@ extension UIAlertController {
         UIAlertController(title: title,
                           message: "Введите название или расположение аптечки",
                           preferredStyle: .alert)
+    }
+    
+    /// Алерт для отображения сообщения об ошибке.
+    /// - Parameter errorMessage: принимает кейс с ошибкой,
+    /// для отображения нужного сообщения
+    static func createErrorAlertController(
+        errorMessage: UIAlertController.ErrorMessage
+    ) -> UIAlertController {
+        
+        UIAlertController(
+            title: "Ошибка",
+            message: errorMessage.rawValue,
+            preferredStyle: .alert
+        )
+    }
+    
+    /// Действия для алерта с выводом сообщения об ошибке.
+    func actionError() {
+        let actionOk = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+        
+        addAction(actionOk)
     }
     
     /// Метод действий для алерт контроллера

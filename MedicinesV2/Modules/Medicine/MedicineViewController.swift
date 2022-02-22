@@ -11,6 +11,9 @@ import UIKit
 protocol MedicineDisplayLogic: AnyObject {
     /// Метод для передачи данных в модель данных
     func display(_ viewModels: [Medicine])
+    /// Алерт для отображения сообщения об ошибке.
+    /// - Parameter errorMessage: принимает кейс с ошибкой.
+    func showErrorAlert(errorMessage: UIAlertController.ErrorMessage)
 }
 
 final class MedicineViewController: UITableViewController {
@@ -200,6 +203,24 @@ private extension MedicineViewController {
         textField.inputAccessoryView = toolbar
     }
     
+    /// Действие кнопки готово для тулбара
+    @objc func toolBarDoneButtonPressed() {
+        if medicineAmountTextField.isFirstResponder {
+            actionsEndEditing(for: medicineAmountTextField)
+            return
+        }
+
+        if medicineCountStepsTextField.isFirstResponder {
+            actionsEndEditing(for: medicineCountStepsTextField)
+            return
+        }
+        
+        if medicinesExpiryDateTextField.isFirstResponder {
+            actionsEndEditing(for: medicinesExpiryDateTextField)
+            return
+        }
+    }
+    
     // MARK: IB Actions
     // Действия для степпера
     @IBAction func stepMedicineCount(_ sender: UIStepper) {
@@ -249,73 +270,21 @@ private extension MedicineViewController {
         textField.resignFirstResponder()
     }
     
-    /// Действие кнопки готово для тулбара
-    @objc func toolBarDoneButtonPressed() {
-        if medicineAmountTextField.isFirstResponder {
-            actionsEndEditing(for: medicineAmountTextField)
-            return
-        }
-
-        if medicineCountStepsTextField.isFirstResponder {
-            actionsEndEditing(for: medicineCountStepsTextField)
-            return
-        }
-        
-        if medicinesExpiryDateTextField.isFirstResponder {
-            actionsEndEditing(for: medicinesExpiryDateTextField)
-            return
-        }
-    }
-    
     /// Действие сохранения для кнопки навигационной панели
     @objc func saveButtonPressed() {
-        if saveMedicine() {
-            preseter?.saveMedicine()
-        }
+        preseter?.createMedicine(
+            name: medicineNameTextField.text,
+            type: medicineTypeTextField.text,
+            amount: medicineAmountTextField.text,
+            countSteps: medicineCountStepsTextField.text,
+            expiryDate: medicinesExpiryDateTextField.text,
+            currentFirstAidKit: currentFirstAidKit,
+            medicine: &medicine
+        )
     }
-    
-    // MARK: - CRUD methods
-    // TODO: Это должно быть в интеракторе. Наверно
-    /// Метод для сохранения всех свойств лекарства
-    func saveMedicine() -> Bool {
-        // Извлекаем принудительно, так как в данном случае при пустом поле падения не будет
-        // Проверяем на пустые поля
-        if medicineNameTextField.text!.isEmpty {
-            showErrorAlert(errorMessage: "Поле с названием лекарства не должно быть пустым")
-            return false
-        }
-        
-        // Если переход на экран был не тапом по ячейке с лекарством,
-        // создаём новое и далее присваиваем свойства его параметрам.
-        if medicine == nil {
-            medicine = Medicine()
-        }
-        
-        // Создание связи лекарства к аптечке.
-        // Нужно понять, как делать фильтрацию предикатом, отображая лекарства
-        // которые были привязаны к конкретной аптечке.
-        if let currentFirstAidKit = currentFirstAidKit {
-            medicine?.firstAidKit = currentFirstAidKit
-        }
-        
-        // Если лекарство есть в базе, меняем его параметры.
-        // Если это новое лекарство, сохраняем введенные значения.
-        if let medicine = medicine {
-            medicine.dateCreated = Date()
-            medicine.title = medicineNameTextField.text
-            medicine.type = medicineTypeTextField.text
-            // Извлекаем принудительно, так как расширение в любом случае вернет 0
-            medicine.amount = medicineAmountTextField.text!.doubleValue
-            // Расширение возвращает 0, но с 0 будет краш приложения
-            // при открытии такого лекарства. По этому, значение по умолчанию 1.
-            medicine.stepCountForStepper = medicineCountStepsTextField.text?.doubleValue ?? 1
-            medicine.expiryDate = medicinesExpiryDateTextField.text?.toDate()
-        }
-        
-        return true
-    }
-    
-    /// Загрузка лекарства из базы
+
+    // TODO: Должно быть в Display Logic
+    /// Заполнение свойств в поля лекарства из существующего выбранного лекарства
     func loadMedicine() {
         if let medicine = medicine {
             medicineNameTextField.text = medicine.title
@@ -408,28 +377,18 @@ extension MedicineViewController: UITextFieldDelegate {
     }
 }
 
-// MARK: - Error Alert Controller
-private extension MedicineViewController {
-    /// Алерт для отображения сообщения об ошибке.
-    /// - Parameter errorMessage: принимает сообщение об ошибке,
-    /// которое будет выведено на экран.
-    func showErrorAlert(errorMessage: String) {
-        let alert = UIAlertController(
-            title: "Ошибка",
-            message: errorMessage,
-            preferredStyle: .alert
-        )
-        
-        let actionOk = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
-        
-        alert.addAction(actionOk)
-        
-        present(alert, animated: true, completion: nil)
-    }
-}
-
+// MARK: - Medicine Display Logic
 extension MedicineViewController: MedicineDisplayLogic {
     func display(_ viewModels: [Medicine]) {
         // TODO: Доделать
+    }
+    
+    func showErrorAlert(errorMessage: UIAlertController.ErrorMessage) {
+        let alert = UIAlertController
+            .createErrorAlertController(errorMessage: errorMessage)
+        
+        alert.actionError()
+        
+        present(alert, animated: true)
     }
 }
