@@ -70,9 +70,12 @@ private extension MedicineViewController {
     
     /// Добавление кнопок в navigation bar
     func addButtonsToNavigationBar() {
-        let saveButton = UIBarButtonItem(barButtonSystemItem: .save,
-                                         target: self,
-                                         action: #selector(saveButtonPressed))
+        let saveButton = UIBarButtonItem(
+            title: "Сохранить",
+            style: .done,
+            target: self,
+            action: #selector(saveButtonPressed)
+        )
         
         navigationItem.rightBarButtonItems = [saveButton]
     }
@@ -301,11 +304,14 @@ private extension MedicineViewController {
 
 // MARK: - Text Field Delegate
 extension MedicineViewController: UITextFieldDelegate {
+    
+    // TODO: Размещен не там, это делегат таблицы
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         // TODO: Непонятный баг, без этого отображаются заголовки которых нет
         CGFloat.leastNonzeroMagnitude
     }
     
+    // TODO: Размещен не там, это делегат таблицы
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         // TODO: Непонятный баг, без этого отображаются заголовки которых нет
         CGFloat.leastNonzeroMagnitude
