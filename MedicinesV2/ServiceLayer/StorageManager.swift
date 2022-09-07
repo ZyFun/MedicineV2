@@ -105,7 +105,7 @@ extension StorageManager: StorageManagerProtocol {
         do {
             data = try viewContext.fetch(fetchRequest)
         } catch {
-            print(error)
+            Logger.error(error.localizedDescription)
         }
         
         return data

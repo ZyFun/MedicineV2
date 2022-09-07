@@ -7,7 +7,7 @@
 
 /// Переопределенный метод, который выводит печать в консоль только при использовании дебага.
 /// Это позволяет расходовать меньше ресурсов айфона, если не убрать принты из кода.
-public func print(_ items: Any...) {
+public func printDebug(_ items: Any...) {
     #if DEBUG
     for item in items {
         Swift.print(item)
