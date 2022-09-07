@@ -38,7 +38,10 @@ final class FirstAidKitRouter: FirstAidKitRoutingLogic {
             )
             
             // Конфигурирация VIPER модуля для инжектирования зависимостей
-            MedicinesConfigurator(firstAidKit: firstAidKit)
+            MedicinesConfigurator(
+                notificationService: NotificationService(),
+                firstAidKit: firstAidKit
+            )
                 .config(
                     view: medicinesVC,
                     navigationController: navigationController

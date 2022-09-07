@@ -11,12 +11,17 @@ import UIKit
 final class MedicinesConfigurator {
     /// Свойство для передачи аптечки на экран лекарств
     private let firstAidKit: FirstAidKit?
+    private let notificationService: NotificationService
     
     /// Передача текущей аптечки на экран с лекарствами
     /// - Используется для привязки лекарства к аптечке и фильтрации лекарств привязанных к
     /// аптечке
     /// - Parameter firstAidKit: принимает текущую аптечку
-    init(firstAidKit: FirstAidKit) {
+    init(
+        notificationService: NotificationService,
+        firstAidKit: FirstAidKit
+    ) {
+        self.notificationService = notificationService
         self.firstAidKit = firstAidKit
     }
     
@@ -35,5 +40,6 @@ final class MedicinesConfigurator {
         presenter.interactor = interactor
         presenter.router = router
         interactor.presenter = presenter
+        interactor.notificationService = notificationService
     }
 }

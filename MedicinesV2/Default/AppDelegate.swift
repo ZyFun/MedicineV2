@@ -9,9 +9,17 @@ import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    let notificationService = NotificationService()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        // Вызываем метод для запроса на отправку уведомлений
+        notificationService.requestAuthorisation()
+        
+        // Назначаем делегата, чтобы уведомление отображалось при активном приложении
+        notificationService.notificationCenter.delegate = notificationService
+        
         return true
     }
 
