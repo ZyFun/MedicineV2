@@ -11,7 +11,7 @@ import Foundation
 protocol MedicinePresentationLogic: AnyObject {
     /// Логика передачи подготовленных данных на экран
     /// - Parameter data: принимает массив лекарств
-    func presentData(_ data: Medicine?)
+    func presentData(_ data: DBMedicine?)
     ///  Логика отображения сообщения об ошибке
     func showError()
 }
@@ -37,8 +37,8 @@ protocol MedicineViewControllerOutput {
         amount: String?,
         countSteps: String?,
         expiryDate: String?,
-        currentFirstAidKit: FirstAidKit?,
-        medicine: inout Medicine?
+        currentFirstAidKit: DBFirstAidKit?,
+        medicine: DBMedicine?
     )
 }
 
@@ -55,8 +55,8 @@ extension MedicinePresenter: MedicineViewControllerOutput {
         amount: String?,
         countSteps: String?,
         expiryDate: String?,
-        currentFirstAidKit: FirstAidKit?,
-        medicine: inout Medicine?
+        currentFirstAidKit: DBFirstAidKit?,
+        medicine: DBMedicine?
     ) {
         interactor?.createMedicine(
             name: name,
@@ -65,7 +65,7 @@ extension MedicinePresenter: MedicineViewControllerOutput {
             countSteps: countSteps,
             expiryDate: expiryDate,
             currentFirstAidKit: currentFirstAidKit,
-            medicine: &medicine
+            dbMedicine: medicine
         )
         
         router?.routeToBack()
@@ -78,7 +78,7 @@ extension MedicinePresenter: MedicinePresentationLogic {
     }
     
     
-    func presentData(_ data: Medicine?) {
+    func presentData(_ data: DBMedicine?) {
         // TODO: Доделать
     }
 }

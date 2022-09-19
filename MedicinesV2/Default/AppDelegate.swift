@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // Вызывается при каждой выгрузке приложения из памяти. Срабатывает даже в момент падения приложения.
     func applicationWillTerminate(_ application: UIApplication) {
-        StorageManager.shared.saveContext()
+//        CoreDataService.shared.saveContext()
     }
 
 }

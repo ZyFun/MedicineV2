@@ -25,7 +25,7 @@ final class FirstAidKitRouter: FirstAidKitRoutingLogic {
     /// Кейсы с экранами, на которые возможно сделать переход по таргету
     enum Targets {
         /// Таргет на экран с лекарствами, с передачей текущей (выбранной) аптечки.
-        case medicines(FirstAidKit)
+        case medicines(DBFirstAidKit)
     }
     
     func routeTo(target: FirstAidKitRouter.Targets) {
@@ -40,11 +40,12 @@ final class FirstAidKitRouter: FirstAidKitRoutingLogic {
             // Конфигурирация VIPER модуля для инжектирования зависимостей
             MedicinesConfigurator(
                 notificationService: NotificationService(),
-                firstAidKit: firstAidKit
+                coreDataService: CoreDataService.shared
             )
                 .config(
                     view: medicinesVC,
-                    navigationController: navigationController
+                    navigationController: navigationController,
+                    currentFirstAidKit: firstAidKit
                 )
             
             // Навигация

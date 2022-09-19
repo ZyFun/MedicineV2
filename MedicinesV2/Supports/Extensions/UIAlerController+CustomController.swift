@@ -49,7 +49,7 @@ extension UIAlertController {
     /// - Parameters:
     ///   - firstAidKit: принимает аптечку для редактирования названия или сохранения новой
     ///   - completion: возвращает новое значение названия для аптечки
-    func action(firstAidKit: FirstAidKit?, completion: @escaping (String) -> Void) {
+    func action(firstAidKit: DBFirstAidKit?, completion: @escaping (String) -> Void) {
         let buttonTitle = firstAidKit == nil ? "Сохранить" : "Обновить"
         
         let saveAction = UIAlertAction(title: buttonTitle, style: .default) { [unowned self] _ in

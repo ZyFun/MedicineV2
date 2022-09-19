@@ -9,12 +9,13 @@ import UIKit
 
 /// Конфигурация VIPER модуля
 final class MedicineConfigurator {
+    private let coreDataService: ICoreDataService
     /// Свойство для передачи аптечки на экран лекарства, используется для привяки лекарства
     /// к аптечке.
-    private let firstAidKit: FirstAidKit?
+    private let firstAidKit: DBFirstAidKit?
     /// Свойство для текущего лекарства на экран лекарств. Если лекарство nil,
     /// срабатывает логика для создание нового лекарства.
-    private let medicine: Medicine?
+    private let medicine: DBMedicine?
     
     /// Передача текущей аптечки и лекарства на экран с лекарством
     /// - Аптечка используется для привязки лекарства к аптечке.
@@ -22,7 +23,12 @@ final class MedicineConfigurator {
     /// - Parameters:
     ///   - firstAidKit: принимает текущую аптечку в которой хранится выбранное лекарство
     ///   - medicine: принимает текущее лекарство
-    init(firstAidKit: FirstAidKit?, medicine: Medicine?) {
+    init(
+        coreDataService: ICoreDataService,
+        firstAidKit: DBFirstAidKit?,
+        medicine: DBMedicine?
+    ) {
+        self.coreDataService = coreDataService
         self.firstAidKit = firstAidKit
         self.medicine = medicine
     }
@@ -43,5 +49,6 @@ final class MedicineConfigurator {
         presenter.interactor = interactor
         presenter.router = router
         interactor.presenter = presenter
+        interactor.coreDataService = coreDataService
     }
 }

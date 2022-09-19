@@ -26,7 +26,7 @@ final class MedicinesRouter {
     enum Target {
         /// Таргет на экран с лекарством, с передачей текущих (выбранных) аптечкой и лекарством
         /// - передача свойств нужна, для определения связи лекарства с аптечкой.
-        case medicine(FirstAidKit?, Medicine?)
+        case medicine(DBFirstAidKit?, DBMedicine?)
     }
     
 }
@@ -44,6 +44,7 @@ extension MedicinesRouter: MedicinesRoutingLogiс {
                     ) as? MedicineViewController else { return }
             
             MedicineConfigurator(
+                coreDataService: CoreDataService.shared,
                 firstAidKit: currentFirstAidKit,
                 medicine: currentMedicine
             )

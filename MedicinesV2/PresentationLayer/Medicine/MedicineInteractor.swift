@@ -30,14 +30,15 @@ protocol MedicineBusinessLogic {
         amount: String?,
         countSteps: String?,
         expiryDate: String?,
-        currentFirstAidKit: FirstAidKit?,
-        medicine: inout Medicine?
+        currentFirstAidKit: DBFirstAidKit?,
+        dbMedicine: DBMedicine?
     )
 }
 
 final class MedicineInteractor {
     /// Ссылка на презентер
     weak var presenter: MedicinePresentationLogic?
+    var coreDataService: ICoreDataService?
 }
 
 extension MedicineInteractor: MedicineBusinessLogic {
@@ -47,43 +48,65 @@ extension MedicineInteractor: MedicineBusinessLogic {
         amount: String?,
         countSteps: String?,
         expiryDate: String?,
-        currentFirstAidKit: FirstAidKit?,
-        medicine: inout Medicine?
+        currentFirstAidKit: DBFirstAidKit?,
+        dbMedicine: DBMedicine?
     ) {
             
-        // Проверяем на отсутствие значения
-        if name == nil {
+        // Защита на отсутствие значения
+        if name == nil || name == "" {
             presenter?.showError()
             return
         }
         
-        // Проверяем на попытку создания нового лекарства
-        if medicine == nil {
-            medicine = Medicine()
+        guard let currentFirstAidKitID = currentFirstAidKit?.objectID else {
+            Logger.error("Не удалось найти ID объекта")
+            return
         }
         
-        // Создание связи лекарства к аптечке.
-        // Нужно понять, как делать фильтрацию предикатом, отображая лекарства
-        // которые были привязаны к конкретной аптечке.
-        if let currentFirstAidKit = currentFirstAidKit {
-            medicine?.firstAidKit = currentFirstAidKit
+        coreDataService?.performSave { [weak self] context in
+            // TODO: Сделать получение текущей аптечки в нужном контексте на примере кода ниже
+            var currentFirstAidKit: DBFirstAidKit?
+            
+            self?.coreDataService?.fetchFirstAidKits(from: context, completion: { result in
+                switch result {
+                case .success(let firstAidKits):
+                    if let firstAidKit = firstAidKits.filter({ $0.objectID == currentFirstAidKitID }).first {
+                        currentFirstAidKit = firstAidKit
+                    } else {
+                        Logger.warning("Объект не найден")
+                    }
+                case .failure(let error):
+                    Logger.error(error.localizedDescription)
+                }
+            })
+            
+            // Расширение doubleValue возвращает 0, но с 0 будет краш приложения
+            // при открытии такого лекарства. По этому, значение по умолчанию
+            // для stepCountForStepper равняется 1.
+            let medicine = MedicineModel(
+                dateCreated: Date(),
+                title: name ?? "",
+                type: type ?? "",
+                amount: amount?.doubleValue ?? 0,
+                stepCountForStepper: countSteps?.doubleValue ?? 1,
+                expiryDate: expiryDate?.toDate()
+            )
+            
+            // Проверяем на попытку создания нового лекарства
+            if let dbMedicine = dbMedicine {
+                self?.coreDataService?.updateMedicine(
+                    dbMedicine,
+                    newData: medicine,
+                    context: context
+                )
+            } else {
+                self?.coreDataService?.createMedicine(
+                    medicine,
+                    currentFirstAidKit: currentFirstAidKit,
+                    context: context
+                )
+            }
         }
-        
-        // Если лекарство есть в базе, меняем его параметры.
-        // Если это новое лекарство, сохраняем введенные значения.
-        if let medicine = medicine {
-            medicine.dateCreated = Date()
-            medicine.title = name
-            medicine.type = type
-            medicine.amount = amount?.doubleValue ?? 0
-            // Расширение возвращает 0, но с 0 будет краш приложения
-            // при открытии такого лекарства. По этому, значение по умолчанию 1.
-            medicine.stepCountForStepper = countSteps?.doubleValue ?? 1
-            medicine.expiryDate = expiryDate?.toDate()
-        }
-        
-        // Сохраняем все изменения в базе
-        StorageManager.shared.saveContext()
     }
     
     func requestData(at indexPath: IndexPath) {

@@ -10,7 +10,7 @@ import UIKit
 /// Протокол отображения ViewCintroller-a
 protocol MedicineDisplayLogic: AnyObject {
     /// Метод для передачи данных в модель данных
-    func display(_ viewModels: [Medicine])
+    func display(_ viewModels: [DBMedicine])
     /// Алерт для отображения сообщения об ошибке.
     /// - Parameter errorMessage: принимает кейс с ошибкой.
     func showErrorAlert(errorMessage: UIAlertController.ErrorMessage)
@@ -24,9 +24,9 @@ final class MedicineViewController: UITableViewController {
     /// Свойство содержащее в себе текущее лекарство
     /// - Если лекарство было передано в свойство, оно будет редактироваться
     /// - Если лекарства не было и это новое, будет создано новое
-    var medicine: Medicine?
+    var medicine: DBMedicine?
     /// Содержит в себе выбранную аптечку, для её связи с лекарствами
-    var currentFirstAidKit: FirstAidKit?
+    var currentFirstAidKit: DBFirstAidKit?
     
     // MARK: Private Properties
     private var datePicker: UIDatePicker!
@@ -253,7 +253,7 @@ private extension MedicineViewController {
                 // нужно для того, чтобы не возвращать 1 всегда,
                 // при защите от нулевого значения,
                 // так как поле ввода очищается для удобства пользователя.
-                amountMedicine = medicine?.stepCountForStepper ?? 1
+                amountMedicine = Double(truncating: medicine?.stepCountForStepper ?? 1)
             }
             
             // Эта строчка нужна для того, чтобы обновить значение в поле ввода
@@ -282,7 +282,7 @@ private extension MedicineViewController {
             countSteps: medicineCountStepsTextField.text,
             expiryDate: medicinesExpiryDateTextField.text,
             currentFirstAidKit: currentFirstAidKit,
-            medicine: &medicine
+            medicine: medicine
         )
     }
 
@@ -292,8 +292,8 @@ private extension MedicineViewController {
         if let medicine = medicine {
             medicineNameTextField.text = medicine.title
             medicineTypeTextField.text = medicine.type
-            medicineAmountTextField.text = String(medicine.amount)
-            medicineCountStepsTextField.text = String(medicine.stepCountForStepper)
+            medicineAmountTextField.text = "\(medicine.amount ?? 0)"
+            medicineCountStepsTextField.text = "\(medicine.stepCountForStepper ?? 1)"
             medicinesExpiryDateTextField.text = "\(medicine.expiryDate?.toString() ?? "")"
         }
     }
@@ -385,7 +385,7 @@ extension MedicineViewController: UITextFieldDelegate {
 
 // MARK: - Medicine Display Logic
 extension MedicineViewController: MedicineDisplayLogic {
-    func display(_ viewModels: [Medicine]) {
+    func display(_ viewModels: [DBMedicine]) {
         // TODO: Доделать
     }
     

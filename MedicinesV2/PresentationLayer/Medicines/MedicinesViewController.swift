@@ -9,8 +9,7 @@ import UIKit
 
 /// Протокол отображения ViewCintroller-a
 protocol DisplayLogic: AnyObject {
-    /// Метод для передачи данных в модель данных
-    func display(_ viewModels: [Medicine])
+    
 }
 
 final class MedicinesViewController: UIViewController {
@@ -18,13 +17,9 @@ final class MedicinesViewController: UIViewController {
     // MARK: Public properties
     /// Ссылка на presenter
     var presenter: MedicinesViewControllerOutput?
+    var fetchedResultManager: IMedicinesFetchedResultsManager?
     /// Содержит в себе выбранную аптечку, для её связи с лекарствами
-    var currentFirstAidKit: FirstAidKit?
-    
-    // MARK: ViewModels
-    /// Модель данных "Лекарство"
-    /// - содержит в себе лекарства, отфильтрованные по текущей (выбранной) аптечке.
-    private var viewModels: [Medicine]?
+    var currentFirstAidKit: DBFirstAidKit?
 
     // MARK: IBOutlets
     /// Таблица с лекарствами
@@ -40,8 +35,8 @@ final class MedicinesViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        // FIXME: Сейчас служит только для обновления центра уведомлений, переделать
         presenter?.requestData()
-        medicinesTableView?.reloadData()
     }
 }
 
@@ -61,8 +56,11 @@ private extension MedicinesViewController {
         medicinesTableView?.delegate = self
         medicinesTableView?.dataSource = self
         
+        fetchedResultManager?.tableView = medicinesTableView
+        
         // MARK: Актуально для iOS ниже 15 версии. Можно удалить после прекращения поддержки этих версий
         medicinesTableView?.tableFooterView = UIView()
+        
         setupXibs()
     }
     
@@ -101,10 +99,8 @@ private extension MedicinesViewController {
 
 // MARK: - Логика обновления данных View
 extension MedicinesViewController: DisplayLogic {
-    func display(_ viewModels: [Medicine]) {
-        // Выполняем фильтрацию в зависимости от выбранной аптечки и отображаем связанныее с ней лекарства
-        // TODO: Возможно логику подготовки к отображению и фильтрацию, стоит перенести в презентер
-        self.viewModels = viewModels.filter({$0.firstAidKit == currentFirstAidKit})
+    func display(_ viewModels: [DBMedicine]) {
+        
     }
 }
 
@@ -112,26 +108,41 @@ extension MedicinesViewController: DisplayLogic {
 extension MedicinesViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter?.routeToMedicine(with: currentFirstAidKit, by: viewModels?[indexPath.row])
+        guard let currentMedicine = fetchedResultManager?.fetchedResultsController.object(
+            at: indexPath
+        ) as? DBMedicine else {
+            Logger.error("Ошибка каста object к DBMedicine")
+            return
+        }
+        presenter?.routeToMedicine(with: currentFirstAidKit, by: currentMedicine)
     }
 }
 
 // MARK: - UITableViewDataSource
 extension MedicinesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModels?.count ?? 0
+        if let sections = fetchedResultManager?.fetchedResultsController.sections {
+            return sections[section].numberOfObjects
+        } else {
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MedicineTableViewCell.self), for: indexPath) as? MedicineTableViewCell else { return UITableViewCell() }
         
-        guard let medicine = viewModels?[indexPath.row] else { return UITableViewCell() }
+        guard let medicine = fetchedResultManager?.fetchedResultsController.object(
+            at: indexPath
+        ) as? DBMedicine else {
+            Logger.error("Ошибка каста object к DBMedicine")
+            return UITableViewCell()
+        }
         
         cell.configure(
             name: medicine.title ?? "",
             type: medicine.type ?? "",
             expiryDate: medicine.expiryDate?.toString() ?? "",
-            amount: String(medicine.amount)
+            amount: "\(medicine.amount ?? 0)"
         )
         
         // TODO: Все вычисления нужно вынести в другое место, а не писать это в вызове ячеек. Например в конфигурировании ячейки создать параметр принимающий булево значение и функцию с рассчетом, которая будет возвращать его в эту ячейку, по умолчанию информация о просрочек должна быть скрытой.
@@ -144,7 +155,7 @@ extension MedicinesViewController: UITableViewDataSource {
         }
         
         // Показывает иконку о необходимости покупки лекарств
-        if medicine.amount <= 0 {
+        if (medicine.amount as? Int ?? 0) <= 0 {
             cell.configureAlertLabel(
                 title: "Купить",
                 isAlertLabelPresent: true
@@ -154,15 +165,17 @@ extension MedicinesViewController: UITableViewDataSource {
         return cell
     }
     
-    // Удаление лекарства
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // TODO: После добавления уведомлений, не забыть добавить очистку очереди (посмотреть код из аналогичного метода старой версии)
-            guard let medicine = viewModels?[indexPath.row] else { return }
-
-            viewModels?.remove(at: indexPath.row)
-            medicinesTableView?.deleteRows(at: [indexPath], with: .fade)
-            presenter?.deleteData(medicine)
+            guard let medicine = fetchedResultManager?.fetchedResultsController.object(
+                at: indexPath
+            ) as? DBMedicine else {
+                Logger.error("Ошибка каста object к DBMedicine")
+                return
+            }
+            
+            presenter?.delete(medicine)
         }
     }
 }

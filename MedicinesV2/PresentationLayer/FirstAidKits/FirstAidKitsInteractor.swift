@@ -12,71 +12,42 @@ import Foundation
 /// Протокол для работы с бизнес логикой модуля
 protocol FirstAidKitsBusinessLogic {
     /// Метод для создания новой аптечки.
-    /// - Метод запрашивает обновленные данные из БД для обновления массива data
-    /// и отправляет его в презентер, чтобы на вью обновилась модель данных,
-    /// для корректной работы после создания аптечки в БД.
-    /// - В запросе на создание новой аптечки должен присутствовать метод на обновление tableView.
     /// - Parameter firstAidKit: принимает имя аптечки.
     func createData(_ firstAidKitName: String)
-    
-    /// Метод для перехода к лекартсвам в аптечке, по индексу текущей (выбранной)  аптечки.
-    /// - Parameter indexPath: принимает индекс аптечки
-    func requestData(at indexPath: IndexPath) -> FirstAidKit?
-    
-    /// Метод для получения объектов из БД в виде массива.
-    /// - Запрос должен происходить при первичной загрузке приложения,
-    /// и при создании или удалении данных (для корректной работы с массивом в таблице)
-    func requestData()
-    
     /// Метод для редактирования аптечки
     /// - Parameters:
     ///   - firstAidKit: принимает аптечку, которую необходимо отредактировать
     ///   - newName: принимает новое имя для аптечки
-    func updateData(_ firstAidKit: FirstAidKit, newName: String)
-    
+    func updateData(_ firstAidKit: DBFirstAidKit, newName: String)
     /// Метод для удаления данных из БД
-    /// - Метод запрашивает обновленные данные из БД для обновления массива data
-    /// и отправляет их в презентер, чтобы на вью обновилась модель данных,
-    /// для корректной работы после удаления из БД.
-    /// - В запросе на удаление аптечки должен присутствовать метод на обновление tableView
     /// - Parameter firstAidKit: принимает аптечку, которую необходимо удалить из БД
-    func deleteData(firstAidKit: FirstAidKit)
+    func delete(firstAidKit: DBFirstAidKit)
 }
 
 final class FirstAidKitInteractor {
     /// Ссылка на презентер
     weak var presenter: FirstAidKitsPresentationLogic?
-    
-    /// Данные с массивом аптечек.
-    ///  - Используется для того, чтобы хранить в себе текущие данные после запроса к базе
-    ///  данных, и уменьшить количество обращений к базе.
-    private var data: [FirstAidKit]?
+    var coreDataService: ICoreDataService?
+    var fetchedResultManager: IFirstAidKitsFetchedResultsManager?
 }
 
 extension FirstAidKitInteractor: FirstAidKitsBusinessLogic {
-    func deleteData(firstAidKit: FirstAidKit) {
-        StorageManager.shared.deleteObject(firstAidKit)
-        requestData()
-    }
     
     func createData(_ firstAidKitName: String) {
-        StorageManager.shared.createData(firstAidKitName)
-        requestData()
+        coreDataService?.performSave({ [weak self] context in
+            self?.coreDataService?.createFirstAidKit(firstAidKitName, context: context)
+        })
     }
 
-    func updateData(_ firstAidKit: FirstAidKit, newName: String) {
-        StorageManager.shared.updateData(firstAidKit, newName: newName)
+    func updateData(_ firstAidKit: DBFirstAidKit, newName: String) {
+        coreDataService?.performSave({ context in
+            self.coreDataService?.updateFirstAidKit(firstAidKit, newName: newName, context: context)
+        })
     }
     
-    func requestData() {
-        data = StorageManager.shared.fetchRequest(String(describing: FirstAidKit.self)) as? [FirstAidKit]
-        presenter?.presentData(data)
-    }
-    
-    func requestData(at indexPath: IndexPath) -> FirstAidKit? {
-        // Так как data инициализируется и заполняется еще при создании аптечки,
-        // повторно запрос к базе данных получать не нужно.
-        // Но по хорошему нужен прямой запрос к нужному объекту в базе
-        data?[indexPath.row]
+    func delete(firstAidKit: DBFirstAidKit) {
+        coreDataService?.performSave { [weak self] context in
+            self?.coreDataService?.delete(firstAidKit, context: context)
+        }
     }
 }

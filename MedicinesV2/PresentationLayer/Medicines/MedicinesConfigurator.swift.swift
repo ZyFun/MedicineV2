@@ -9,9 +9,9 @@ import UIKit
 
 /// Конфигурация VIPER модуля
 final class MedicinesConfigurator {
-    /// Свойство для передачи аптечки на экран лекарств
-    private let firstAidKit: FirstAidKit?
+    
     private let notificationService: NotificationService
+    private let coreDataService: ICoreDataService
     
     /// Передача текущей аптечки на экран с лекарствами
     /// - Используется для привязки лекарства к аптечке и фильтрации лекарств привязанных к
@@ -19,27 +19,40 @@ final class MedicinesConfigurator {
     /// - Parameter firstAidKit: принимает текущую аптечку
     init(
         notificationService: NotificationService,
-        firstAidKit: FirstAidKit
+        coreDataService: ICoreDataService
     ) {
+        self.coreDataService = coreDataService
         self.notificationService = notificationService
-        self.firstAidKit = firstAidKit
     }
     
-    func config(view: UIViewController, navigationController: UINavigationController?) {
+    func config(
+        view: UIViewController,
+        navigationController: UINavigationController?,
+        currentFirstAidKit: DBFirstAidKit?
+    ) {
+        guard let currentFirstAidKit = currentFirstAidKit else { return }
         guard let view = view as? MedicinesViewController else { return }
-        
-        // Передача выбранной аптечки на новый экран
-        view.currentFirstAidKit = firstAidKit
         
         let presenter = MedicinesPresenter()
         let interactor = MedicinesInteractor()
         let router = MedicinesRouter(withNavigationController: navigationController)
+        let fetchedResultManager = MedicinesFetchedResultsManager(
+            fetchedResultsController: coreDataService.fetchResultController(
+                entityName: String(describing: DBMedicine.self),
+                keyForSort: #keyPath(DBMedicine.title),
+                sortAscending: true,
+                currentFirstAidKit: currentFirstAidKit
+            )
+        )
         
         view.presenter = presenter
+        view.currentFirstAidKit = currentFirstAidKit
+        view.fetchedResultManager = fetchedResultManager
         presenter.view = view
         presenter.interactor = interactor
         presenter.router = router
         interactor.presenter = presenter
         interactor.notificationService = notificationService
+        interactor.coreDataService = coreDataService
     }
 }

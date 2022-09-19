@@ -9,39 +9,34 @@ import UIKit
 
 /// Протокол отображения ViewCintroller-a
 protocol FirstAidKitsDisplayLogic: AnyObject {
-    /// Метод для передачи данных в модель данных
-    func display(_ viewModels: [FirstAidKit]?)
+    
 }
-
 
 final class FirstAidKitsViewController: UIViewController {
     
     // MARK: Public properties
     /// Ссылка на presenter
     var presenter: FirstAidKitsViewControllerOutput?
+    var fetchedResultManager: IFirstAidKitsFetchedResultsManager?
     
     // MARK: Outlets
     /// Таблица с аптечками
     @IBOutlet weak var firstAidKitsTableView: UITableView!
     
     // MARK: Private properties
-    /// Модель данных "Аптечка".
-    /// - Содержит в себе все аптечки которые были сохранены в базу.
-    private var viewModels: [FirstAidKit]?
 
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setup()
-        presenter?.requestData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         // TODO: Сделать перезагрузку данных по запросу при возврате с экрана лекарств и сохранении данных (это оптимизирует приложение)
-        firstAidKitsTableView.reloadData()
+//        firstAidKitsTableView.reloadData()
     }
 }
 // MARK: - Конфигурирование ViewController
@@ -86,6 +81,8 @@ extension FirstAidKitsViewController {
         // TODO: Удалить после прекращения поддержки iOS ниже 15
         firstAidKitsTableView.tableFooterView = UIView()
         
+        fetchedResultManager?.tableView = firstAidKitsTableView
+        
         setupXibs()
     }
     
@@ -115,7 +112,11 @@ extension FirstAidKitsViewController: UITableViewDataSource {
         _ tableView: UITableView,
         numberOfRowsInSection section: Int
     ) -> Int {
-        viewModels?.count ?? 0
+        if let sections = fetchedResultManager?.fetchedResultsController.sections {
+            return sections[section].numberOfObjects
+        } else {
+            return 0
+        }
     }
 
     func tableView(
@@ -127,7 +128,12 @@ extension FirstAidKitsViewController: UITableViewDataSource {
             for: indexPath
         ) as? FirstAidKitTableViewCell else { return UITableViewCell() }
         
-        guard let firstAidKit = viewModels?[indexPath.row] else { return UITableViewCell() }
+        guard let firstAidKit = fetchedResultManager?.fetchedResultsController.object(
+            at: indexPath
+        ) as? DBFirstAidKit else {
+            Logger.error("Ошибка каста object к DBFirstAidKit")
+            return UITableViewCell()
+        }
         
         let currentAmountMedicines = firstAidKit.medicines?.count
         
@@ -141,13 +147,21 @@ extension FirstAidKitsViewController: UITableViewDataSource {
 }
 
 // MARK: - Table view delegate
+
 extension FirstAidKitsViewController: UITableViewDelegate {
     func tableView(
         _ tableView: UITableView,
         didSelectRowAt indexPath: IndexPath
     ) {
+        guard let currentFirstAidKit = fetchedResultManager?.fetchedResultsController.object(
+            at: indexPath
+        ) as? DBFirstAidKit else {
+            Logger.error("Ошибка каста до DBConversation")
+            return
+        }
+        
         tableView.deselectRow(at: indexPath, animated: true)
-        presenter?.routeToMedicines(by: indexPath)
+        presenter?.routeToMedicines(with: currentFirstAidKit)
     }
     
     func tableView(
@@ -155,7 +169,12 @@ extension FirstAidKitsViewController: UITableViewDelegate {
         leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath
     ) -> UISwipeActionsConfiguration? {
         
-        guard let firstAidKit = viewModels?[indexPath.row] else { return nil}
+        guard let firstAidKit = fetchedResultManager?.fetchedResultsController.object(
+            at: indexPath
+        ) as? DBFirstAidKit else {
+            Logger.error("Ошибка каста object к DBConversation")
+            return nil
+        }
         
         let editAction = UIContextualAction(
             style: .normal,
@@ -179,22 +198,25 @@ extension FirstAidKitsViewController: UITableViewDelegate {
         commit editingStyle: UITableViewCell.EditingStyle,
         forRowAt indexPath: IndexPath
     ) {
+        
         if editingStyle == .delete {
             // TODO: После добавления уведомлений, не забыть добавить очистку очереди (посмотреть код из аналогичного метода старой версии) Нужно будет пройтись циклом по всем лекарствам и удалить каждое из очереди.
-            guard let firstAidKit = viewModels?[indexPath.row] else { return }
+            guard let firstAidKit = fetchedResultManager?.fetchedResultsController.object(
+                at: indexPath
+            ) as? DBFirstAidKit else {
+                Logger.error("Ошибка каста object к DBConversation")
+                return
+            }
             
-            viewModels?.remove(at: indexPath.row)
-            firstAidKitsTableView.deleteRows(at: [indexPath], with: .automatic)
-            presenter?.deleteData(firstAidKit)
+            presenter?.delete(firstAidKit)
         }
     }
 }
 
 // MARK: - Логика обновления данных View
+
 extension FirstAidKitsViewController: FirstAidKitsDisplayLogic {
-    func display(_ viewModels: [FirstAidKit]?) {
-        self.viewModels = viewModels
-    }
+    
 }
 
 // MARK: - Работа с alert controller для добавления новых аптечек
@@ -203,7 +225,7 @@ private extension FirstAidKitsViewController {
     /// - Parameters:
     ///   - entity: принимает аптечку (опционально). Заголовок алерта зависит от того была инициализирована аптечка или нет
     ///   - index: принимает IndexPath  и используется для обновления конкретной ячейки в таблице
-    func showAlert(for entity: FirstAidKit? = nil, by index: IndexPath? = nil) {
+    func showAlert(for entity: DBFirstAidKit? = nil, by index: IndexPath? = nil) {
         let title = entity == nil ? "Добавить аптечку" : "Изменить название"
         let alert = UIAlertController.createAlertController(with: title)
         
@@ -211,7 +233,8 @@ private extension FirstAidKitsViewController {
             if let firstAidKit = entity {
                 presenter?.updateData(firstAidKit, newName: firstAidKitName)
                 
-                // Используется для обновления строки после изменения имени
+                // Используется для плавного обновления строки после изменения имени
+                // в fetchResultsController обновление происходит резко
                 if let index = index {
                     firstAidKitsTableView.reloadRows(
                         at: [index],
@@ -220,28 +243,6 @@ private extension FirstAidKitsViewController {
                 }
             } else {
                 presenter?.createData(firstAidKitName)
-                
-                // Эта логика используется для обновления данных в таблице
-                // вставкой в строку, без обновления всей таблицы.
-                // TODO: Но нужно отрефакторить и сделать всё по архитектуре
-                if let viewModels = viewModels {
-                    var count = 0
-                    
-                    // Ищем в обновленном массиве, после добавления объекта,
-                    // текущий индекс объекта и вставляем по этому индексу новую
-                    // ячейку в таблице аптечек.
-                    for addObject in viewModels {
-                        if addObject.title == firstAidKitName {
-                            let index = IndexPath(row: count, section: 0)
-                            firstAidKitsTableView.insertRows(
-                                at: [index],
-                                with: .automatic
-                            )
-                            return
-                        }
-                        count += 1
-                    }
-                }
             }
         }
         present(alert, animated: true)
