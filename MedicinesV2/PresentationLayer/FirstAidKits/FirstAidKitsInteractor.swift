@@ -5,8 +5,6 @@
 //  Created by Дмитрий Данилин on 22.12.2021.
 //
 
-// TODO: Я не уверен что интерактор должен на прямую обращаться к синглтону БД нужно будет уточнить это у более опытных разработчиков
-
 import Foundation
 
 /// Протокол для работы с бизнес логикой модуля
@@ -25,11 +23,36 @@ protocol FirstAidKitsBusinessLogic {
 }
 
 final class FirstAidKitInteractor {
+    
+    // MARK: - Public properties
+    
     /// Ссылка на презентер
     weak var presenter: FirstAidKitsPresentationLogic?
+    var notificationService: INotificationService?
     var coreDataService: ICoreDataService?
     var fetchedResultManager: IFirstAidKitsFetchedResultsManager?
+    
+    // MARK: - Private methods
+    
+    /// Метод для очистки очереди уведомлений
+    /// - Parameter firstAidKit: принимает аптечку, уведомления для которой будут удалены.
+    private func deleteNotifications(for firstAidKit: DBFirstAidKit) {
+        firstAidKit.medicines?.forEach { medicine in
+            guard let medicine = medicine as? DBMedicine else {
+                Logger.error("Ошибка каста до DBMedicine")
+                return
+            }
+            
+            if let medicineName = medicine.title {
+                notificationService?.notificationCenter.removePendingNotificationRequests(withIdentifiers: [medicineName])
+                
+                Logger.info("Уведомление для лекарства \(medicineName) удалено из очереди")
+            }
+        }
+    }
 }
+
+// MARK: - Бизнес логика модуля
 
 extension FirstAidKitInteractor: FirstAidKitsBusinessLogic {
     
@@ -47,6 +70,7 @@ extension FirstAidKitInteractor: FirstAidKitsBusinessLogic {
     
     func delete(firstAidKit: DBFirstAidKit) {
         coreDataService?.performSave { [weak self] context in
+            self?.deleteNotifications(for: firstAidKit)
             self?.coreDataService?.delete(firstAidKit, context: context)
         }
     }

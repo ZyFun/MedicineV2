@@ -22,9 +22,9 @@ final class FirstAidKitRouter: FirstAidKitRoutingLogic {
         navigationController = withNavigationController
     }
     
-    /// Кейсы с экранами, на которые возможно сделать переход по таргету
+    /// Таргет для перехода на другой экран
     enum Targets {
-        /// Таргет на экран с лекарствами, с передачей текущей (выбранной) аптечки.
+        /// Экран с лекарствами, с передачей текущей (выбранной) аптечки.
         case medicines(DBFirstAidKit)
     }
     

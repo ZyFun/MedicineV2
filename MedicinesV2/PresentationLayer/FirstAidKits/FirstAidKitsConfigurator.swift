@@ -30,8 +30,13 @@ final class FirstAidKitsConfigurator {
         let presenter = FirstAidKitsPresenter()
         let interactor = FirstAidKitInteractor()
         let router = FirstAidKitRouter(withNavigationController: navigationController)
+        let dataSourceProvider = FirstAidKitsDataSourceProvider(
+            presenter: presenter,
+            resultManager: fetchedResultManager
+        )
         
         view.presenter = presenter
+        view.dataSourceProvider = dataSourceProvider
         view.fetchedResultManager = fetchedResultManager
         presenter.view = view
         presenter.interactor = interactor

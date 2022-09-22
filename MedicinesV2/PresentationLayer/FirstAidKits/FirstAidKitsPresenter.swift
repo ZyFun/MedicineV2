@@ -14,7 +14,13 @@ protocol FirstAidKitsPresentationLogic: AnyObject {
 
 /// Протокол взаимодействия ViewController-a с презенетром
 protocol FirstAidKitsViewControllerOutput {
-    
+    /// Метод для отображения кастомного алерт контроллера добавления или редактирования аптечки
+    /// - Parameters:
+    ///   - entity: Принимает аптечку
+    ///   - index: принимает IndexPath  и используется для обновления конкретной ячейки в таблице
+    /// - Метод с входящими данными редактирует выбранную аптечку.
+    /// - Метод без входящих данных, создаёт новую аптечку.
+    func showAlert(for entity: DBFirstAidKit?, by indexPath: IndexPath?)
     /// Метод для создания новой аптечки.
     /// - Parameter firstAidKit: принимает имя аптечки.
     func createData(_ firstAidKitName: String)
@@ -40,7 +46,14 @@ final class FirstAidKitsPresenter {
 
 extension FirstAidKitsPresenter: FirstAidKitsViewControllerOutput {
     
+    // MARK: - Alerts
+    
+    func showAlert(for entity: DBFirstAidKit?, by indexPath: IndexPath?) {
+        view?.showAlert(for: entity, by: indexPath)
+    }
+    
     // MARK: - CRUD methods
+    
     func createData(_ firstAidKitName: String) {
         interactor?.createData(firstAidKitName)
     }
