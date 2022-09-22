@@ -17,6 +17,7 @@ protocol ICoreDataService {
         sortAscending: Bool,
         currentFirstAidKit: DBFirstAidKit?
     ) -> NSFetchedResultsController<NSFetchRequestResult>
+    func fetchRequest(_ entityName: String) -> [NSFetchRequestResult]
     func fetchFirstAidKits(from context: NSManagedObjectContext, completion: (Result<[DBFirstAidKit], Error>) -> Void)
     func createFirstAidKit(_ firstAidKitName: String, context: NSManagedObjectContext)
     func createMedicine(_ medicine: MedicineModel, currentFirstAidKit: DBFirstAidKit?, context: NSManagedObjectContext)

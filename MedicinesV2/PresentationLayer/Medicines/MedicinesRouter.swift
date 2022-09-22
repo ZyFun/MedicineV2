@@ -37,22 +37,22 @@ extension MedicinesRouter: MedicinesRoutingLogiс {
         case .medicine(let currentFirstAidKit, let currentMedicine):
             // TODO: Переход так и будет идти к сториборду, потому что в xib нельзя сделать статические ячейки
             // Как вариант, в будущем использовать множество кастомных ячеек и каждую пихать по своему индексу.
+            // Создание ViewController
             let storyboard = UIStoryboard(name: "MedicineViewController", bundle: nil)
             guard let medicineVC = storyboard
                     .instantiateViewController(
                         withIdentifier: "medicine"
                     ) as? MedicineViewController else { return }
             
-            MedicineConfigurator(
-                coreDataService: CoreDataService.shared,
+            // Конфигурация VIPER модуля для инжектирования зависимостей
+            PresentationAssembly().medicine.config(
+                view: medicineVC,
+                navigationController: navigationController,
                 firstAidKit: currentFirstAidKit,
                 medicine: currentMedicine
             )
-                .config(
-                    view: medicineVC,
-                    navigationController: navigationController
-                )
             
+            // Навигация
             navigationController?.pushViewController(medicineVC, animated: true)
         }
     }

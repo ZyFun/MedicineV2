@@ -57,6 +57,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 // MARK: - Initial application settings
 private extension SceneDelegate {
+    /// Создание и отображение стартового ViewController
     func createAndShowStartVC(for windowScene: UIWindowScene) {
         let mainVC = FirstAidKitsViewController(
             nibName: String(describing: FirstAidKitsViewController.self),
@@ -68,11 +69,10 @@ private extension SceneDelegate {
         )
         
         // Конфигурирование VIPER модуля для инжектирования зависимостей
-        FirstAidKitsConfigurator()
-            .config(
-                view: mainVC,
-                navigationController: navigationController
-            )
+        PresentationAssembly().firstAidKits.config(
+            view: mainVC,
+            navigationController: navigationController
+        )
         
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = navigationController

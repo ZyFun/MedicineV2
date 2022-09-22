@@ -10,12 +10,6 @@ import UIKit
 /// Конфигурация VIPER модуля
 final class MedicineConfigurator {
     private let coreDataService: ICoreDataService
-    /// Свойство для передачи аптечки на экран лекарства, используется для привяки лекарства
-    /// к аптечке.
-    private let firstAidKit: DBFirstAidKit?
-    /// Свойство для текущего лекарства на экран лекарств. Если лекарство nil,
-    /// срабатывает логика для создание нового лекарства.
-    private let medicine: DBMedicine?
     
     /// Передача текущей аптечки и лекарства на экран с лекарством
     /// - Аптечка используется для привязки лекарства к аптечке.
@@ -24,27 +18,33 @@ final class MedicineConfigurator {
     ///   - firstAidKit: принимает текущую аптечку в которой хранится выбранное лекарство
     ///   - medicine: принимает текущее лекарство
     init(
-        coreDataService: ICoreDataService,
+        coreDataService: ICoreDataService
+    ) {
+        self.coreDataService = coreDataService
+    }
+    
+    func config(
+        view: UIViewController,
+        navigationController: UINavigationController?,
         firstAidKit: DBFirstAidKit?,
         medicine: DBMedicine?
     ) {
-        self.coreDataService = coreDataService
-        self.firstAidKit = firstAidKit
-        self.medicine = medicine
-    }
-    
-    func config(view: UIViewController, navigationController: UINavigationController?) {
-        guard let view = view as? MedicineViewController else { return }
+        /// Свойство для передачи аптечки на экран лекарства, используется для привяки лекарства
+        /// к аптечке.
+        let firstAidKit = firstAidKit
+        /// Свойство для текущего лекарства на экран лекарств. Если лекарство nil,
+        /// срабатывает логика для создание нового лекарства.
+        let medicine = medicine
         
-        // Передача лекарства и аптечки на экран лекарства
-        view.currentFirstAidKit = firstAidKit
-        view.medicine = medicine
+        guard let view = view as? MedicineViewController else { return }
         
         let presenter = MedicinePresenter()
         let interactor = MedicineInteractor()
         let router = MedicineRouter(withNavigationController: navigationController)
         
         view.preseter = presenter
+        view.currentFirstAidKit = firstAidKit
+        view.medicine = medicine
         presenter.view = view
         presenter.interactor = interactor
         presenter.router = router

@@ -9,10 +9,18 @@
 import UIKit
 import UserNotifications
 
-class NotificationService: NSObject, UNUserNotificationCenterDelegate {
+protocol INotificationService {
+    var notificationCenter: UNUserNotificationCenter { get }
+    func requestAuthorisation()
+    func sendNotificationExpiredMedicine(reminder: Date?, nameMedicine: String)
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void)
+    func setupBadge(count: Int)
+}
+
+final class NotificationService: NSObject, UNUserNotificationCenterDelegate {
     
     // Создаём экземпляр класса, для управлением уведомлениями. current возвращет обект для центра уведомлений
-    let notificationCenter = UNUserNotificationCenter.current()
+    var notificationCenter = UNUserNotificationCenter.current()
     
     // Метод получения запроса у пользователя для разрешения на отправку уведомлений
     func requestAuthorisation() {
@@ -40,7 +48,7 @@ class NotificationService: NSObject, UNUserNotificationCenterDelegate {
     }
     
     // Создаём метод для получения даты из базы данных и получения уведомления
-    func sendNotificationExpiredMedicine(reminder: Date?, nameMedicine: String){
+    func sendNotificationExpiredMedicine(reminder: Date?, nameMedicine: String) {
         
         // Безопасно извлекаем дату, и если не получилосб, выходим из функйии
         guard var date = reminder else { return }
@@ -111,7 +119,10 @@ class NotificationService: NSObject, UNUserNotificationCenterDelegate {
     
     // Метод для отображения бейджев на иконке приложения с количеством просроченных лекарств
     func setupBadge(count: Int) {
-            UIApplication.shared.applicationIconBadgeNumber = count
-        }
+        UIApplication.shared.applicationIconBadgeNumber = count
+    }
+}
+
+extension NotificationService: INotificationService {
     
 }

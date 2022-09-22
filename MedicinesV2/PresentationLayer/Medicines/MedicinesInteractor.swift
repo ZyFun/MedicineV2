@@ -24,7 +24,7 @@ final class MedicinesInteractor {
     /// Ссылка на презентер
     weak var presenter: MedicinesPresentationLogiс?
     var coreDataService: ICoreDataService?
-    var notificationService: NotificationService? // TODO: ([07.09.2022]) Сделать зависимость от протокола
+    var notificationService: INotificationService?
 }
 
 // MARK: - BusinessLogic
@@ -41,7 +41,7 @@ extension MedicinesInteractor: MedicinesBusinessLogic {
     }
     
     func requestData() {
-        let data = CoreDataService.shared.fetchRequest(String(describing: DBMedicine.self)) as? [DBMedicine]
+        let data = coreDataService?.fetchRequest(String(describing: DBMedicine.self)) as? [DBMedicine]
         setupBadgeForAppIcon(data: data) // TODO: Должно вызываться в момент сохранения
         updateNotificationQueueExpiredMedicine(data: data) // TODO: Должно вызываться в момент сохранения
     }

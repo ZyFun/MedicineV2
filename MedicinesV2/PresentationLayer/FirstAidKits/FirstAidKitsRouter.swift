@@ -37,16 +37,12 @@ final class FirstAidKitRouter: FirstAidKitRoutingLogic {
                 bundle: nil
             )
             
-            // Конфигурирация VIPER модуля для инжектирования зависимостей
-            MedicinesConfigurator(
-                notificationService: NotificationService(),
-                coreDataService: CoreDataService.shared
+            // Конфигурация VIPER модуля для инжектирования зависимостей
+            PresentationAssembly().medicines.config(
+                view: medicinesVC,
+                navigationController: navigationController,
+                currentFirstAidKit: firstAidKit
             )
-                .config(
-                    view: medicinesVC,
-                    navigationController: navigationController,
-                    currentFirstAidKit: firstAidKit
-                )
             
             // Навигация
             navigationController?.pushViewController(medicinesVC, animated: true)

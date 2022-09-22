@@ -12,8 +12,8 @@ final class FirstAidKitsConfigurator {
     private let coreDataService: ICoreDataService
     private let fetchedResultManager: IFirstAidKitsFetchedResultsManager
     
-    init() {
-        coreDataService = CoreDataService.shared
+    init(coreDataService: ICoreDataService) {
+        self.coreDataService = coreDataService
         fetchedResultManager = FirstAidKitsFetchedResultsManager(
             fetchedResultsController: coreDataService.fetchResultController(
                 entityName: String(describing: DBFirstAidKit.self),
