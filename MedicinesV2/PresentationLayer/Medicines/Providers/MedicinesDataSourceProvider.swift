@@ -103,6 +103,8 @@ extension MedicinesDataSourceProvider: UITableViewDataSource {
 extension MedicinesDataSourceProvider: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
         guard let currentMedicine = fetchMedicine(at: indexPath) else { return }
         presenter?.routeToMedicine(with: currentFirstAidKit, by: currentMedicine)
     }
