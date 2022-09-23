@@ -69,9 +69,9 @@ extension FirstAidKitsDataSourceProvider: UITableViewDataSource {
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: String(describing: FirstAidKitTableViewCell.self),
+            withIdentifier: String(describing: FirstAidKitCell.self),
             for: indexPath
-        ) as? FirstAidKitTableViewCell else { return UITableViewCell() }
+        ) as? FirstAidKitCell else { return UITableViewCell() }
         
         guard let firstAidKit = fetchFirstAidKit(at: indexPath) else {
             return UITableViewCell()

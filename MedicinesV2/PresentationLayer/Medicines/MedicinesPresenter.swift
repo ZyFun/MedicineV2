@@ -30,7 +30,7 @@ protocol MedicinesViewControllerOutput {
 
 final class MedicinesPresenter {
     
-    weak var view: DisplayLogic?
+    weak var view: MedicinesDisplayLogic?
     var interactor: MedicinesBusinessLogic?
     var router: MedicinesRouter?
 }
@@ -41,7 +41,7 @@ extension MedicinesPresenter: MedicinesViewControllerOutput {
     }
     
     func delete(_ medicine: DBMedicine) {
-        interactor?.deleteData(medicine: medicine)
+        interactor?.delete(medicine: medicine)
     }
     
     func routeToMedicine(with currentFirstAidKit: DBFirstAidKit?, by currentMedicine: DBMedicine?) {

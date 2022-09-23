@@ -13,10 +13,6 @@ final class MedicinesConfigurator {
     private let notificationService: INotificationService
     private let coreDataService: ICoreDataService
     
-    /// Передача текущей аптечки на экран с лекарствами
-    /// - Используется для привязки лекарства к аптечке и фильтрации лекарств привязанных к
-    /// аптечке
-    /// - Parameter firstAidKit: принимает текущую аптечку
     init(
         notificationService: INotificationService,
         coreDataService: ICoreDataService
@@ -25,6 +21,12 @@ final class MedicinesConfigurator {
         self.notificationService = notificationService
     }
     
+    /// Конфигурирование модуля
+    /// - Parameters:
+    ///   - view: <#view description#>
+    ///   - navigationController: <#navigationController description#>
+    ///   - currentFirstAidKit: принимает текущую аптечку. Используется для привязки
+    ///    лекарства к аптечке.
     func config(
         view: UIViewController,
         navigationController: UINavigationController?,
@@ -44,9 +46,15 @@ final class MedicinesConfigurator {
                 currentFirstAidKit: currentFirstAidKit
             )
         )
+        let dataSourceProvider = MedicinesDataSourceProvider(
+            presenter: presenter,
+            resultManager: fetchedResultManager,
+            currentFirstAidKit: currentFirstAidKit
+        )
         
         view.presenter = presenter
         view.currentFirstAidKit = currentFirstAidKit
+        view.dataSourceProvider = dataSourceProvider
         view.fetchedResultManager = fetchedResultManager
         presenter.view = view
         presenter.interactor = interactor

@@ -103,10 +103,10 @@ extension FirstAidKitsViewController {
         // Регистрируем ячейку для таблицы аптечек
         firstAidKitsTableView.register(
             UINib(
-                nibName: String(describing: FirstAidKitTableViewCell.self),
+                nibName: String(describing: FirstAidKitCell.self),
                 bundle: nil
             ),
-            forCellReuseIdentifier: String(describing: FirstAidKitTableViewCell.self)
+            forCellReuseIdentifier: String(describing: FirstAidKitCell.self)
         )
     }
 }

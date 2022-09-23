@@ -33,7 +33,6 @@ final class MedicinesFetchedResultsManager: NSObject,
 
 extension MedicinesFetchedResultsManager: NSFetchedResultsControllerDelegate {
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        
         tableView?.beginUpdates()
     }
     
@@ -65,13 +64,13 @@ extension MedicinesFetchedResultsManager: NSFetchedResultsControllerDelegate {
         case .update:
             if let indexPath = indexPath {
                 let medicine = fetchedResultsController.object(at: indexPath) as? DBMedicine
-                let cell = tableView?.cellForRow(at: indexPath) as? MedicineTableViewCell
+                let cell = tableView?.cellForRow(at: indexPath) as? MedicineCell
                 
                 cell?.configure(
                     name: medicine?.title ?? "",
-                    type: medicine?.type ?? "",
-                    expiryDate: medicine?.expiryDate?.toString() ?? "",
-                    amount: "\(medicine?.amount ?? 0)"
+                    type: medicine?.type,
+                    expiryDate: medicine?.expiryDate,
+                    amount: medicine?.amount
                 )
             }
         @unknown default:
@@ -80,7 +79,6 @@ extension MedicinesFetchedResultsManager: NSFetchedResultsControllerDelegate {
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        
         tableView?.endUpdates()
     }
 }

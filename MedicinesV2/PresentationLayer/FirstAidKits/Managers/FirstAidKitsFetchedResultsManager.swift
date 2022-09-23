@@ -33,7 +33,6 @@ final class FirstAidKitsFetchedResultsManager: NSObject,
 
 extension FirstAidKitsFetchedResultsManager: NSFetchedResultsControllerDelegate {
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        
         tableView?.beginUpdates()
     }
     
@@ -65,7 +64,7 @@ extension FirstAidKitsFetchedResultsManager: NSFetchedResultsControllerDelegate 
         case .update:
             if let indexPath = indexPath {
                 let firstAidKit = fetchedResultsController.object(at: indexPath) as? DBFirstAidKit
-                let cell = tableView?.cellForRow(at: indexPath) as? FirstAidKitTableViewCell
+                let cell = tableView?.cellForRow(at: indexPath) as? FirstAidKitCell
                 
                 cell?.configure(
                     titleFirstAidKit: firstAidKit?.title,
@@ -78,7 +77,6 @@ extension FirstAidKitsFetchedResultsManager: NSFetchedResultsControllerDelegate 
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        
         tableView?.endUpdates()
     }
 }

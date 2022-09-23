@@ -17,26 +17,38 @@ protocol MedicinesBusinessLogic {
     /// Запрос на обновление данных должен происходить
     /// в момент возврата на экран со списком лекарств.
     /// - Parameter medicine: принимает лекарство, которое необходимо удалить из БД
-    func deleteData(medicine: DBMedicine)
+    func delete(medicine: DBMedicine)
 }
 
 final class MedicinesInteractor {
+    
+    // MARK: - Public properties
+    
     /// Ссылка на презентер
     weak var presenter: MedicinesPresentationLogiс?
     var coreDataService: ICoreDataService?
     var notificationService: INotificationService?
+    
+    // MARK: - Private methods
+    
+    /// Метод для очистки очереди уведомлений
+    /// - Parameter medicine: принимает лекарство, уведомления для которого будут удалены.
+    private func deleteNotifications(for medicine: DBMedicine) {
+        if let medicineName = medicine.title {
+            notificationService?.notificationCenter.removePendingNotificationRequests(withIdentifiers: [medicineName])
+            
+            Logger.info("Уведомление для лекарства \(medicineName) удалено из очереди")
+        }
+    }
 }
 
 // MARK: - BusinessLogic
+
 extension MedicinesInteractor: MedicinesBusinessLogic {
-    func deleteData(medicine: DBMedicine) {
+    func delete(medicine: DBMedicine) {
         coreDataService?.performSave({ [weak self] context in
+            self?.deleteNotifications(for: medicine)
             self?.coreDataService?.delete(medicine, context: context)
-            
-            // Удаляем уведомление по идентификатору, чтобы оно не показывалось в будущем
-            if let medicineName = medicine.title {
-                self?.notificationService?.notificationCenter.removePendingNotificationRequests(withIdentifiers: [medicineName])
-            }
         })
     }
     
