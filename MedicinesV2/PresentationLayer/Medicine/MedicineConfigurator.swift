@@ -42,7 +42,7 @@ final class MedicineConfigurator {
         let interactor = MedicineInteractor()
         let router = MedicineRouter(withNavigationController: navigationController)
         
-        view.preseter = presenter
+        view.presenter = presenter
         view.currentFirstAidKit = firstAidKit
         view.medicine = medicine
         presenter.view = view

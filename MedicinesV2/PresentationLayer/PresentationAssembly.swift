@@ -17,6 +17,10 @@ final class PresentationAssembly {
         coreDataService = serviceAssembly.coreDataService
     }
     
+    lazy var notificationMedicineManager: INotificationMedicineManager = {
+        return NotificationMedicineManager(notificationService: notificationService)
+    }()
+    
     /// Инжектирование зависимостей в ``FirstAidKitsConfigurator``
     lazy var firstAidKits: FirstAidKitsConfigurator = {
         return FirstAidKitsConfigurator(coreDataService: coreDataService)
@@ -25,7 +29,7 @@ final class PresentationAssembly {
     /// Инжектирование зависимостей в ``MedicinesConfigurator``
     lazy var medicines: MedicinesConfigurator = {
         return MedicinesConfigurator(
-            notificationService: notificationService,
+            notificationManager: notificationMedicineManager,
             coreDataService: coreDataService
         )
     }()

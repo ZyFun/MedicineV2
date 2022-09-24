@@ -127,8 +127,8 @@ extension CoreDataService: ICoreDataService {
         dbMedicine.dateCreated = medicine.dateCreated
         dbMedicine.title = medicine.title
         dbMedicine.type = medicine.type
-        dbMedicine.amount = (medicine.amount) as NSNumber
-        dbMedicine.stepCountForStepper = (medicine.stepCountForStepper) as NSNumber
+        dbMedicine.amount = (medicine.amount) as? NSNumber
+        dbMedicine.stepCountForStepper = (medicine.stepCountForStepper) as? NSNumber
         dbMedicine.expiryDate = medicine.expiryDate
         
         if let currentFirstAidKit = currentFirstAidKit {
@@ -192,8 +192,8 @@ extension CoreDataService: ICoreDataService {
         }
         currentObject.title = newData.title
         currentObject.type = newData.type
-        currentObject.amount = (newData.amount) as NSNumber
-        currentObject.stepCountForStepper = (newData.stepCountForStepper) as NSNumber
+        currentObject.amount = (newData.amount) as? NSNumber
+        currentObject.stepCountForStepper = (newData.stepCountForStepper) as? NSNumber
         currentObject.expiryDate = newData.expiryDate
         
         Logger.info("Запуск изменения лекарства \(medicine.title ?? "no name")")

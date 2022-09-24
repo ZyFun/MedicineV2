@@ -9,9 +9,8 @@ import Foundation
 
 /// Протокол логики презентации данных
 protocol MedicinePresentationLogic: AnyObject {
-    /// Логика передачи подготовленных данных на экран
-    /// - Parameter data: принимает массив лекарств
-    func presentData(_ data: DBMedicine?)
+    /// Метод для возврата в список лекарств после сохранения лекарства
+    func returnToBack()
     ///  Логика отображения сообщения об ошибке
     func showError()
 }
@@ -67,8 +66,6 @@ extension MedicinePresenter: MedicineViewControllerOutput {
             currentFirstAidKit: currentFirstAidKit,
             dbMedicine: medicine
         )
-        
-        router?.routeToBack()
     }
 }
 
@@ -77,8 +74,7 @@ extension MedicinePresenter: MedicinePresentationLogic {
         view?.showErrorAlert(errorMessage: .noNameMedicine)
     }
     
-    
-    func presentData(_ data: DBMedicine?) {
-        // TODO: Доделать
+    func returnToBack() {
+        router?.routeToBack()
     }
 }

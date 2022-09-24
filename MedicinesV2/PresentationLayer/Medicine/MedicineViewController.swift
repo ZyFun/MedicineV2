@@ -9,8 +9,6 @@ import UIKit
 
 /// Протокол отображения ViewCintroller-a
 protocol MedicineDisplayLogic: AnyObject {
-    /// Метод для передачи данных в модель данных
-    func display(_ viewModels: [DBMedicine])
     /// Алерт для отображения сообщения об ошибке.
     /// - Parameter errorMessage: принимает кейс с ошибкой.
     func showErrorAlert(errorMessage: UIAlertController.ErrorMessage)
@@ -18,9 +16,10 @@ protocol MedicineDisplayLogic: AnyObject {
 
 final class MedicineViewController: UITableViewController {
     
-    // MARK: Public properties
+    // MARK: - Public properties
+    
     /// Ссылка на presenter
-    var preseter: MedicineViewControllerOutput?
+    var presenter: MedicineViewControllerOutput?
     /// Свойство содержащее в себе текущее лекарство
     /// - Если лекарство было передано в свойство, оно будет редактироваться
     /// - Если лекарства не было и это новое, будет создано новое
@@ -28,10 +27,12 @@ final class MedicineViewController: UITableViewController {
     /// Содержит в себе выбранную аптечку, для её связи с лекарствами
     var currentFirstAidKit: DBFirstAidKit?
     
-    // MARK: Private Properties
+    // MARK: - Private Properties
+    
     private var datePicker: UIDatePicker!
     
-    // MARK: IB Outlets
+    // MARK: - IB Outlets
+    
     @IBOutlet weak var medicineNameTextField: UITextField!
     @IBOutlet weak var medicineTypeTextField: UITextField!
     @IBOutlet weak var medicineAmountTextField: UITextField!
@@ -40,16 +41,37 @@ final class MedicineViewController: UITableViewController {
     
     @IBOutlet weak var medicineAmountStepper: UIStepper!
     
-    // MARK: Life Cycle
+    // MARK: - Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setup()
     }
+    
+    // MARK: - Override methods
+    
+    override func tableView(
+        _ tableView: UITableView,
+        heightForHeaderInSection section: Int
+    ) -> CGFloat {
+        // TODO: Непонятный баг, без этого отображаются заголовки которых нет
+        CGFloat.leastNonzeroMagnitude
+    }
+    
+    override func tableView(
+        _ tableView: UITableView,
+        heightForFooterInSection section: Int
+    ) -> CGFloat {
+        // TODO: Непонятный баг, без этого отображаются заголовки которых нет
+        CGFloat.leastNonzeroMagnitude
+    }
 }
 
 // MARK: - Настройки для ViewController
+
 private extension MedicineViewController {
+    
     /// Метод инициализации VC
     func setup() {
         setupNavigationBar()
@@ -57,11 +79,12 @@ private extension MedicineViewController {
         setupTableView()
         setupDataPicker()
         setupTextFields()
-        loadMedicine()
+        setDataMedicine()
         setupStepperMedicine()
     }
     
-    // MARK: Setup navigation bar
+    // MARK: - Setup navigation bar
+    
     /// Настройка navigation bar
     func setupNavigationBar() {
         title = medicine?.title ?? "Новое лекарство"
@@ -80,7 +103,21 @@ private extension MedicineViewController {
         navigationItem.rightBarButtonItems = [saveButton]
     }
     
-    // MARK: Setup gesture recognizer
+    /// Действие сохранения для кнопки навигационной панели
+    @objc func saveButtonPressed() {
+        presenter?.createMedicine(
+            name: medicineNameTextField.text,
+            type: medicineTypeTextField.text,
+            amount: medicineAmountTextField.text,
+            countSteps: medicineCountStepsTextField.text,
+            expiryDate: medicinesExpiryDateTextField.text,
+            currentFirstAidKit: currentFirstAidKit,
+            medicine: medicine
+        )
+    }
+    
+    // MARK: - Setup gesture recognizer
+    
     /// Настройка распознавания жестов.
     /// На данный момент используется для скрытия клавиатуры при тапе не по ячейке ввода.
     /// По каким то причинам более простой способ метода touchesBegan не работает
@@ -99,7 +136,8 @@ private extension MedicineViewController {
         view.endEditing(true)
     }
     
-    // MARK: Setup table view
+    // MARK: - Setup table view
+    
     /// Настройка внешнего вида таблицы
     func setupTableView() {
         tableView.allowsSelection = false
@@ -108,7 +146,8 @@ private extension MedicineViewController {
         tableView.tableFooterView = UIView()
     }
     
-    // MARK: Setup text fields
+    // MARK: - Setup text fields
+    
     /// Конфигурирование полей ввода текста
     func setupTextFields() {
         setupDelegateForTextFields()
@@ -136,17 +175,27 @@ private extension MedicineViewController {
         medicinesExpiryDateTextField.delegate = self
     }
     
-    // MARK: Setup stepper
+    // MARK: - Setup stepper
+    
     /// Конфигурирование степпера
     func setupStepperMedicine() {
-        // Извлекаем принудительно, так как расширение в любом случае вернет 0
-        medicineAmountStepper.value = medicineAmountTextField.text!.doubleValue
-        medicineAmountStepper.stepValue = medicineCountStepsTextField.text!.doubleValue
+        guard let value = medicineAmountTextField.text?.doubleValue else {
+            Logger.error("Нет значения для степпера")
+            return
+        }
+        guard let stepValue = medicineCountStepsTextField.text?.doubleValue else {
+            Logger.error("Нет значения для шага степпера")
+            return
+        }
+        
+        medicineAmountStepper.value = value
+        medicineAmountStepper.stepValue = stepValue
         medicineAmountStepper.minimumValue = 0
         medicineAmountStepper.maximumValue = 999
     }
     
-    // MARK: Setup data picker
+    // MARK: - Setup data picker
+    
     /// Настройка и конфигурации  кастомного datePicker для выбора даты с помощью барабана
     func setupDataPicker() {
         datePicker = UIDatePicker(
@@ -176,7 +225,8 @@ private extension MedicineViewController {
         medicinesExpiryDateTextField.text = datePicker.date.toString()
     }
     
-    // MARK: Keyboard tools
+    // MARK: - Keyboard tools
+    
     /// Метод добавляет тулбар на клавиатуру для определенного поля редактирования.
     /// - Parameter textField: принимает поле, для клавиатуры которого
     /// требуется добавить тулбар.
@@ -224,13 +274,15 @@ private extension MedicineViewController {
         }
     }
     
-    // MARK: IB Actions
+    // MARK: - IB Actions
+    
     // Действия для степпера
     @IBAction func stepMedicineCount(_ sender: UIStepper) {
         medicineAmountTextField.text = String(format: "%.2f", sender.value)
     }
     
-    // MARK: Actions
+    // MARK: - Actions
+    
     /// Назначает действий при окончании редактирования в поле ввода
     /// - Parameter textField: принимает поле ввода в котором необходимо применить
     ///  действие по окончанию редактирования
@@ -243,8 +295,10 @@ private extension MedicineViewController {
         }
         
         if textField == medicineCountStepsTextField {
-            // Извлекаем принудительно, так как расширение в любом случае вернет 0
-            var amountMedicine = textField.text!.doubleValue
+            guard var amountMedicine = textField.text?.doubleValue else {
+                Logger.error("Нет значения количества лекарств")
+                return
+            }
             
             // Защита от введения нуля пользователем и расширением NumberFormatter.
             // При значении 0 у степпера, приложение падает.
@@ -264,31 +318,19 @@ private extension MedicineViewController {
         }
         
         if textField == medicineAmountTextField {
-            // Извлекаем принудительно, так как расширение в любом случае вернет 0
-            let amountMedicine = textField.text!.doubleValue
+            guard let amountMedicine = textField.text?.doubleValue else {
+                Logger.error("Нет значения количества лекарств")
+                return
+            }
             textField.text = String(format: "%.2f", amountMedicine)
             medicineAmountStepper.value = amountMedicine
         }
         
         textField.resignFirstResponder()
     }
-    
-    /// Действие сохранения для кнопки навигационной панели
-    @objc func saveButtonPressed() {
-        preseter?.createMedicine(
-            name: medicineNameTextField.text,
-            type: medicineTypeTextField.text,
-            amount: medicineAmountTextField.text,
-            countSteps: medicineCountStepsTextField.text,
-            expiryDate: medicinesExpiryDateTextField.text,
-            currentFirstAidKit: currentFirstAidKit,
-            medicine: medicine
-        )
-    }
 
-    // TODO: Должно быть в Display Logic
     /// Заполнение свойств в поля лекарства из существующего выбранного лекарства
-    func loadMedicine() {
+    func setDataMedicine() {
         if let medicine = medicine {
             medicineNameTextField.text = medicine.title
             medicineTypeTextField.text = medicine.type
@@ -299,23 +341,9 @@ private extension MedicineViewController {
     }
 }
 
-//// MARK: - Table view data source
-//// MARK: - Table view delegate
-
 // MARK: - Text Field Delegate
+
 extension MedicineViewController: UITextFieldDelegate {
-    
-    // TODO: Размещен не там, это делегат таблицы
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        // TODO: Непонятный баг, без этого отображаются заголовки которых нет
-        CGFloat.leastNonzeroMagnitude
-    }
-    
-    // TODO: Размещен не там, это делегат таблицы
-    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        // TODO: Непонятный баг, без этого отображаются заголовки которых нет
-        CGFloat.leastNonzeroMagnitude
-    }
     
     // Используется для отображения тулбара
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -384,10 +412,8 @@ extension MedicineViewController: UITextFieldDelegate {
 }
 
 // MARK: - Medicine Display Logic
+
 extension MedicineViewController: MedicineDisplayLogic {
-    func display(_ viewModels: [DBMedicine]) {
-        // TODO: Доделать
-    }
     
     func showErrorAlert(errorMessage: UIAlertController.ErrorMessage) {
         let alert = UIAlertController

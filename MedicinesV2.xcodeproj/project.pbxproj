@@ -36,6 +36,7 @@
 		2CAE169A28DA07AF0071E783 /* MedicineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAE169928DA07AF0071E783 /* MedicineModel.swift */; };
 		2CB3FAD328C89E6800E4A378 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB3FAD228C89E6800E4A378 /* Logger.swift */; };
 		2CB3FAD528C8AA9900E4A378 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB3FAD428C8AA9900E4A378 /* NotificationService.swift */; };
+		2CB5E6F928DF1842003D06D0 /* NotificationMedicineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB5E6F828DF1842003D06D0 /* NotificationMedicineManager.swift */; };
 		2CBD2B1D277C7F9200F857C3 /* MedicinePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBD2B1C277C7F9200F857C3 /* MedicinePresenter.swift */; };
 		2CBD2B1F277C7FA300F857C3 /* MedicineInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBD2B1E277C7FA300F857C3 /* MedicineInteractor.swift */; };
 		2CBD2B21277C7FAF00F857C3 /* MedicineRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBD2B20277C7FAF00F857C3 /* MedicineRouter.swift */; };
@@ -86,6 +87,7 @@
 		2CAE169928DA07AF0071E783 /* MedicineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineModel.swift; sourceTree = "<group>"; };
 		2CB3FAD228C89E6800E4A378 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		2CB3FAD428C8AA9900E4A378 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		2CB5E6F828DF1842003D06D0 /* NotificationMedicineManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationMedicineManager.swift; sourceTree = "<group>"; };
 		2CBD2B1C277C7F9200F857C3 /* MedicinePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicinePresenter.swift; sourceTree = "<group>"; };
 		2CBD2B1E277C7FA300F857C3 /* MedicineInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineInteractor.swift; sourceTree = "<group>"; };
 		2CBD2B20277C7FAF00F857C3 /* MedicineRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineRouter.swift; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				2C38604028DC82DB003FED87 /* PresentationAssembly.swift */,
+				2CB5E6F728DF1831003D06D0 /* Managers */,
 				2CF1EE6F277346E70031D79D /* FirstAidKits */,
 				2C925709273D45CD00DA7284 /* Medicines */,
 				2CBD2B19277C7EFC00F857C3 /* Medicine */,
@@ -288,6 +291,14 @@
 			children = (
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		2CB5E6F728DF1831003D06D0 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				2CB5E6F828DF1842003D06D0 /* NotificationMedicineManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		2CBD2B19277C7EFC00F857C3 /* Medicine */ = {
@@ -450,6 +461,7 @@
 				2CF1EE75277347800031D79D /* FirstAidKitsInteractor.swift in Sources */,
 				2CF28C7C28DCA24C0017C0A4 /* FirstAidKitsDataSourceProvider.swift in Sources */,
 				2C92571D273D5CBF00DA7284 /* MedicinesRouter.swift in Sources */,
+				2CB5E6F928DF1842003D06D0 /* NotificationMedicineManager.swift in Sources */,
 				2CF1EE73277347700031D79D /* FirstAidKitsPresenter.swift in Sources */,
 				2C52BDBD273540F400356A63 /* SceneDelegate.swift in Sources */,
 				2CEAA1BB28DDC5C2000BA942 /* MedicinesDataSourceProvider.swift in Sources */,

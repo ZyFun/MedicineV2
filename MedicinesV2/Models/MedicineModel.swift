@@ -10,8 +10,8 @@ import Foundation
 struct MedicineModel {
     let dateCreated: Date
     let title: String
-    let type: String
-    let amount: Double
-    let stepCountForStepper: Double
+    let type: String?
+    let amount: Double?
+    let stepCountForStepper: Double?
     let expiryDate: Date?
 }

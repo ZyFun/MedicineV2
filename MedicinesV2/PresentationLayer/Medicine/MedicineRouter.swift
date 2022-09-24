@@ -23,6 +23,8 @@ final class MedicineRouter {
 
 extension MedicineRouter: MedicineRoutingLogic {
     func routeToBack() {
-        navigationController?.popViewController(animated: true)
+        DispatchQueue.main.async {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
 }

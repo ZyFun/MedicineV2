@@ -10,15 +10,15 @@ import UIKit
 /// Конфигурация VIPER модуля
 final class MedicinesConfigurator {
     
-    private let notificationService: INotificationService
+    private let notificationManager: INotificationMedicineManager
     private let coreDataService: ICoreDataService
     
     init(
-        notificationService: INotificationService,
+        notificationManager: INotificationMedicineManager,
         coreDataService: ICoreDataService
     ) {
         self.coreDataService = coreDataService
-        self.notificationService = notificationService
+        self.notificationManager = notificationManager
     }
     
     /// Конфигурирование модуля
@@ -60,7 +60,7 @@ final class MedicinesConfigurator {
         presenter.interactor = interactor
         presenter.router = router
         interactor.presenter = presenter
-        interactor.notificationService = notificationService
+        interactor.notificationManager = notificationManager
         interactor.coreDataService = coreDataService
     }
 }

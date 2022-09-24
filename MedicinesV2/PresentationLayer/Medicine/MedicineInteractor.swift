@@ -9,9 +9,6 @@ import Foundation
 
 /// Протокол для работы с бизнес логикой модуля
 protocol MedicineBusinessLogic {
-    /// Метод еще не доделан
-    func requestData(at indexPath: IndexPath)
-    
     /// Сохранение или создание нового лекарства
     /// - Если лекарство nil, создаётся новое лекарство. Если нет, идет редактирование текущего
     /// лекарства.
@@ -39,6 +36,7 @@ final class MedicineInteractor {
     /// Ссылка на презентер
     weak var presenter: MedicinePresentationLogic?
     var coreDataService: ICoreDataService?
+    var notificationService: INotificationService?
 }
 
 extension MedicineInteractor: MedicineBusinessLogic {
@@ -64,7 +62,6 @@ extension MedicineInteractor: MedicineBusinessLogic {
         }
         
         coreDataService?.performSave { [weak self] context in
-            // TODO: Сделать получение текущей аптечки в нужном контексте на примере кода ниже
             var currentFirstAidKit: DBFirstAidKit?
             
             self?.coreDataService?.fetchFirstAidKits(from: context, completion: { result in
@@ -86,7 +83,7 @@ extension MedicineInteractor: MedicineBusinessLogic {
             let medicine = MedicineModel(
                 dateCreated: Date(),
                 title: name ?? "",
-                type: type ?? "",
+                type: type,
                 amount: amount?.doubleValue ?? 0,
                 stepCountForStepper: countSteps?.doubleValue ?? 1,
                 expiryDate: expiryDate?.toDate()
@@ -106,10 +103,8 @@ extension MedicineInteractor: MedicineBusinessLogic {
                     context: context
                 )
             }
+            
+            self?.presenter?.returnToBack()
         }
-    }
-    
-    func requestData(at indexPath: IndexPath) {
-        // TODO: Доделать
     }
 }
