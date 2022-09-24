@@ -36,9 +36,6 @@ extension MedicinesRouter: MedicinesRoutingLogiс {
     func routeTo(target: MedicinesRouter.Target) {
         switch target {
         case .medicine(let currentFirstAidKit, let currentMedicine):
-            // TODO: Переход так и будет идти к сториборду, потому что в xib нельзя сделать статические ячейки
-            // Как вариант, в будущем использовать множество кастомных ячеек и каждую пихать по своему индексу.
-            // Создание ViewController
             let storyboard = UIStoryboard(name: "MedicineViewController", bundle: nil)
             guard let medicineVC = storyboard
                     .instantiateViewController(

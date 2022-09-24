@@ -45,6 +45,7 @@ final class MedicinesViewController: UIViewController {
 }
 
 // MARK: - Конфигурирование ViewController
+
 private extension MedicinesViewController {
     
     /// Метод инициализации VC
@@ -63,13 +64,13 @@ private extension MedicinesViewController {
         
         fetchedResultManager?.tableView = medicinesTableView
         
-        // TODO: Актуально для iOS ниже 15 версии. Можно удалить после прекращения поддержки этих версий
+        // TODO: (#Version) Актуально для iOS ниже 15 версии. Можно удалить после прекращения поддержки этих версий
         medicinesTableView?.tableFooterView = UIView()
         
         setupXibs()
     }
     
-    ///Инициализация Xibs
+    /// Инициализация Xibs
     func setupXibs() {
         medicinesTableView?.register(
             UINib(

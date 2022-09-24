@@ -80,4 +80,3 @@ extension FirstAidKitsFetchedResultsManager: NSFetchedResultsControllerDelegate 
         tableView?.endUpdates()
     }
 }
-

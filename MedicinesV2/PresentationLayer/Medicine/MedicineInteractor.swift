@@ -56,22 +56,13 @@ extension MedicineInteractor: MedicineBusinessLogic {
             return
         }
         
-        guard let currentFirstAidKitID = currentFirstAidKit?.objectID else {
-            Logger.error("Не удалось найти ID объекта")
-            return
-        }
-        
         coreDataService?.performSave { [weak self] context in
-            var currentFirstAidKit: DBFirstAidKit?
+            var firstAidKit: DBFirstAidKit?
             
             self?.coreDataService?.fetchFirstAidKits(from: context, completion: { result in
                 switch result {
                 case .success(let firstAidKits):
-                    if let firstAidKit = firstAidKits.filter({ $0.objectID == currentFirstAidKitID }).first {
-                        currentFirstAidKit = firstAidKit
-                    } else {
-                        Logger.warning("Объект не найден")
-                    }
+                    firstAidKit = self?.fetchFirstAidKit(from: firstAidKits, for: currentFirstAidKit)
                 case .failure(let error):
                     Logger.error(error.localizedDescription)
                 }
@@ -91,20 +82,37 @@ extension MedicineInteractor: MedicineBusinessLogic {
             
             // Проверяем на попытку создания нового лекарства
             if let dbMedicine = dbMedicine {
-                self?.coreDataService?.updateMedicine(
-                    dbMedicine,
-                    newData: medicine,
-                    context: context
-                )
+                self?.coreDataService?.updateMedicine(dbMedicine, newData: medicine, context: context)
             } else {
-                self?.coreDataService?.createMedicine(
-                    medicine,
-                    currentFirstAidKit: currentFirstAidKit,
-                    context: context
-                )
+                self?.coreDataService?.createMedicine(medicine, currentFirstAidKit: firstAidKit, context: context)
             }
             
             self?.presenter?.returnToBack()
+        }
+    }
+    
+    /// Метод для получения текущей аптечки из другого контекста
+    /// - Parameters:
+    ///   - firstAidKits: Принимает аптечки в текущий контекст для фильтрации
+    ///   - currentFirstAidKit: Принимает текущую аптечку из другого контекста  для поиска
+    ///     нужной в текущем контексте по ID
+    /// - Returns: Возвращает найденную аптечку
+    /// - Метод необходим для правильной работы с данными в разных контекстах
+    private func fetchFirstAidKit(
+        from firstAidKits: [DBFirstAidKit],
+        for currentFirstAidKit: DBFirstAidKit?
+    ) -> DBFirstAidKit? {
+        
+        guard let currentFirstAidKitID = currentFirstAidKit?.objectID else {
+            Logger.error("Не удалось найти ID объекта")
+            return nil
+        }
+        
+        if let firstAidKit = firstAidKits.filter({ $0.objectID == currentFirstAidKitID }).first {
+            return firstAidKit
+        } else {
+            Logger.warning("Объект не найден")
+            return nil
         }
     }
 }

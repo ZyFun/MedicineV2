@@ -11,7 +11,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
     func scene(
         _ scene: UIScene,
         willConnectTo session: UISceneSession,
@@ -52,10 +51,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        CoreDataService.shared.saveContext()
     }
 
-
 }
 
 // MARK: - Initial application settings
+
 private extension SceneDelegate {
     /// Создание и отображение стартового ViewController
     func createAndShowStartVC(for windowScene: UIWindowScene) {

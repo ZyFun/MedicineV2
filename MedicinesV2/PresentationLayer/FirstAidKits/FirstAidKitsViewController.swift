@@ -91,7 +91,7 @@ extension FirstAidKitsViewController {
         firstAidKitsTableView.dataSource = dataSourceProvider
         fetchedResultManager?.tableView = firstAidKitsTableView
         
-        // TODO: Удалить после прекращения поддержки iOS ниже 15
+        // TODO: (#Version) Удалить после прекращения поддержки iOS ниже 15
         // нужно для скрытия пустых разделителей для более ранних версий
         firstAidKitsTableView.tableFooterView = UIView()
         

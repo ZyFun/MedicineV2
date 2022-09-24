@@ -17,7 +17,7 @@ extension String {
     /// Возвращает 0, если формат данных не удается преобразовать в числовой
     var doubleValue: Double {
         String.numberFormatter.decimalSeparator = "."
-        if let result =  String.numberFormatter.number(from: self) {
+        if let result = String.numberFormatter.number(from: self) {
             return result.doubleValue
         } else {
             String.numberFormatter.decimalSeparator = ","

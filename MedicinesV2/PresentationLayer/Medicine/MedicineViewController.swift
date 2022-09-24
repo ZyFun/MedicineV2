@@ -55,7 +55,7 @@ final class MedicineViewController: UITableViewController {
         _ tableView: UITableView,
         heightForHeaderInSection section: Int
     ) -> CGFloat {
-        // TODO: Непонятный баг, без этого отображаются заголовки которых нет
+        // TODO: (#Explore) Непонятный баг, без этого отображаются заголовки которых нет
         CGFloat.leastNonzeroMagnitude
     }
     
@@ -63,7 +63,7 @@ final class MedicineViewController: UITableViewController {
         _ tableView: UITableView,
         heightForFooterInSection section: Int
     ) -> CGFloat {
-        // TODO: Непонятный баг, без этого отображаются заголовки которых нет
+        // TODO: (#Explore) Непонятный баг, без этого отображаются заголовки которых нет
         CGFloat.leastNonzeroMagnitude
     }
 }
@@ -142,7 +142,7 @@ private extension MedicineViewController {
     func setupTableView() {
         tableView.allowsSelection = false
         
-        // TODO: Удалить после прекращения поддержки iOS ниже 15
+        // TODO: (#Version) Удалить после прекращения поддержки iOS ниже 15
         tableView.tableFooterView = UIView()
     }
     
@@ -240,7 +240,7 @@ private extension MedicineViewController {
             )
         )
         
-        let leftSpeсing = UIBarButtonItem(
+        let leftSpacing = UIBarButtonItem(
             barButtonSystemItem: .flexibleSpace,
             target: nil,
             action: nil
@@ -252,7 +252,7 @@ private extension MedicineViewController {
             action: #selector(toolBarDoneButtonPressed)
         )
         
-        toolbar.setItems([leftSpeсing, doneButton], animated: false)
+        toolbar.setItems([leftSpacing, doneButton], animated: false)
         textField.inputAccessoryView = toolbar
     }
     
@@ -377,7 +377,7 @@ extension MedicineViewController: UITextFieldDelegate {
     
     // Функция для ограничения ввода символов и точек с запятыми
     // Выглядит как костыль но работает.
-    // TODO: Нужно подумать как это можно улучшить.
+    // FIXME: Нужно подумать как это можно улучшить.
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 
         if textField != medicineAmountTextField,
