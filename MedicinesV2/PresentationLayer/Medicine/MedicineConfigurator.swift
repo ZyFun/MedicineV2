@@ -9,6 +9,8 @@ import UIKit
 
 /// Конфигурация VIPER модуля
 final class MedicineConfigurator {
+    
+    private let notificationManager: INotificationMedicineManager
     private let coreDataService: ICoreDataService
     
     /// Передача текущей аптечки и лекарства на экран с лекарством
@@ -18,8 +20,10 @@ final class MedicineConfigurator {
     ///   - firstAidKit: принимает текущую аптечку в которой хранится выбранное лекарство
     ///   - medicine: принимает текущее лекарство
     init(
+        notificationManager: INotificationMedicineManager,
         coreDataService: ICoreDataService
     ) {
+        self.notificationManager = notificationManager
         self.coreDataService = coreDataService
     }
     
@@ -49,6 +53,7 @@ final class MedicineConfigurator {
         presenter.interactor = interactor
         presenter.router = router
         interactor.presenter = presenter
+        interactor.notificationManager = notificationManager
         interactor.coreDataService = coreDataService
     }
 }

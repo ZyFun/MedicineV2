@@ -36,7 +36,7 @@ final class MedicineInteractor {
     /// Ссылка на презентер
     weak var presenter: MedicinePresentationLogic?
     var coreDataService: ICoreDataService?
-    var notificationService: INotificationService?
+    var notificationManager: INotificationMedicineManager?
 }
 
 extension MedicineInteractor: MedicineBusinessLogic {
@@ -80,12 +80,14 @@ extension MedicineInteractor: MedicineBusinessLogic {
                 expiryDate: expiryDate?.toDate()
             )
             
-            // Проверяем на попытку создания нового лекарства
+            // Если лекарство не выбрано, создаём новое
             if let dbMedicine = dbMedicine {
-                self?.coreDataService?.updateMedicine(dbMedicine, newData: medicine, context: context)
+                self?.coreDataService?.update(dbMedicine, newData: medicine, context: context)
             } else {
-                self?.coreDataService?.createMedicine(medicine, currentFirstAidKit: firstAidKit, context: context)
+                self?.coreDataService?.create(medicine, in: firstAidKit, context: context)
             }
+            
+            self?.notificationManager?.addToQueueNotificationExpiredMedicine(data: medicine)
             
             self?.presenter?.returnToBack()
         }

@@ -14,8 +14,8 @@ protocol MedicinesPresentationLogiс: AnyObject {
 
 /// Протокол взаимодействия ViewController-a с презенетром
 protocol MedicinesViewControllerOutput {
-    /// Метод для получения лекарств при первой загрузке и обновлении/добавлении данных
-    func requestData()
+    /// Метод для обновления значка уведомлений на иконке приложения
+    func updateNotificationBadge()
     /// Метод для удаления данных из БД
     /// - Parameter medicine: принимает лекарство, которое необходимо удалить из БД
     func delete(_ medicine: DBMedicine)
@@ -36,8 +36,8 @@ final class MedicinesPresenter {
 }
 
 extension MedicinesPresenter: MedicinesViewControllerOutput {
-    func requestData() {
-        interactor?.requestData()
+    func updateNotificationBadge() {
+        interactor?.updateNotificationBadge()
     }
     
     func delete(_ medicine: DBMedicine) {

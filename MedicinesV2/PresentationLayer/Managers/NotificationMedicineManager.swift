@@ -8,11 +8,15 @@
 import Foundation
 
 protocol INotificationMedicineManager {
-    func updateNotificationQueueExpiredMedicine(data: [DBMedicine]?)
-    func setupBadgeForAppIcon(data: [DBMedicine]?)
-    /// Метод для очистки очереди уведомлений
-    /// - Parameter medicine: принимает лекарство, уведомления для которого будут удалены.
+    /// Метод для добавления уведомления о просроченном лекарстве в очередь центра уведомлений
+    /// - Parameter data: принимает лекарство, уведомления для которого будут добавлены.
+    func addToQueueNotificationExpiredMedicine(data: MedicineModel)
+    /// Метод для удаления уведомления из очереди центра уведомлений
+    /// - Parameter medicine: принимает лекарство, уведомление для которого будет удалено.
     func deleteNotification(for medicine: DBMedicine)
+    /// Метод установки бейджа с количеством просроченных лекарств на иконку приложения.
+    /// - Parameter data: Принимает лекарства для поиска в них просроченных лекарств
+    func setupBadgeForAppIcon(data: [DBMedicine]?)
 }
 
 final class NotificationMedicineManager {
@@ -35,31 +39,13 @@ extension NotificationMedicineManager: INotificationMedicineManager {
         }
     }
     
-    // TODO: (#Update) Код из старого приложения, нужно доработать
-    /// Метод для обновления очереди уведомлений.
-    /// - Добавление в очередь центра уведомлений: функция пробегается циклом по массиву
-    ///   лекарств и получает данные с именем лекарства и датой срока его годности. Далее эти
-    ///   данные принимаются функцией sendNotificationExpiredMedicine в классе Notifications
-    ///   и добавляются в очередь уведомлений.
-    func updateNotificationQueueExpiredMedicine(data: [DBMedicine]?) {
-        guard let data = data else {
-            Logger.warning("В базе еще нет лекарств")
-            return
-        }
-        
-        data.forEach({ [weak self] medicine in
-            if let medicineName = medicine.title {
-                self?.notificationService.sendNotificationExpiredMedicine(reminder: medicine.expiryDate, nameMedicine: medicineName)
-            }
-        })
+    func addToQueueNotificationExpiredMedicine(data: MedicineModel) {
+        notificationService.sendNotificationExpiredMedicine(
+            reminder: data.expiryDate,
+            nameMedicine: data.title
+        )
     }
     
-    // TODO: (#Update) Код из старого приложения, нужно доработать
-    /// Метод установки бейджа с количеством просроченных лекарств на иконку приложения.
-    /// - Установка бейджа на иконку: функция пробегается циклом по массиву лекарств.
-    ///   И если в базе есть лекарства с просроченным сроком годности, то добавляется +1 к
-    ///   значению на бейдже за каждое лекарство с просроченным сроком годности. Если таких
-    ///   лекарств нет, бейдж сбрасывается на 0.
     func setupBadgeForAppIcon(data: [DBMedicine]?) {
         guard let data = data else {
             Logger.warning("В базе еще нет лекарств")
@@ -68,13 +54,12 @@ extension NotificationMedicineManager: INotificationMedicineManager {
         
         var expiredMedicinesCount = 0
         
-        // TODO: (#Update) Сбросить счетчик на 0, если лекарств или аптечек нет совсем
+        // TODO: (MED-135) Сбросить счетчик на 0, если лекарств или аптечек нет совсем
         
         data.forEach { [weak self] medicine in
             if Date() >= medicine.expiryDate ?? Date() {
                 expiredMedicinesCount += 1
                 self?.notificationService.setupBadge(count: expiredMedicinesCount)
-                
             } else {
                 self?.notificationService.setupBadge(count: expiredMedicinesCount)
             }

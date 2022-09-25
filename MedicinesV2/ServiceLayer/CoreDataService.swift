@@ -18,10 +18,10 @@ protocol ICoreDataService {
     ) -> NSFetchedResultsController<NSFetchRequestResult>
     func fetchRequest(_ entityName: String) -> [NSFetchRequestResult]
     func fetchFirstAidKits(from context: NSManagedObjectContext, completion: (Result<[DBFirstAidKit], Error>) -> Void)
-    func createFirstAidKit(_ firstAidKitName: String, context: NSManagedObjectContext)
-    func createMedicine(_ medicine: MedicineModel, currentFirstAidKit: DBFirstAidKit?, context: NSManagedObjectContext)
-    func updateFirstAidKit(_ firstAidKit: DBFirstAidKit, newName: String, context: NSManagedObjectContext)
-    func updateMedicine(_ oldObject: DBMedicine, newData: MedicineModel, context: NSManagedObjectContext)
+    func create(_ firstAidKit: String, context: NSManagedObjectContext)
+    func create(_ medicine: MedicineModel, in currentFirstAidKit: DBFirstAidKit?, context: NSManagedObjectContext)
+    func update(_ currentFirstAidKit: DBFirstAidKit, newName: String, context: NSManagedObjectContext)
+    func update(_ currentMedicine: DBMedicine, newData: MedicineModel, context: NSManagedObjectContext)
     func delete(_ currentObject: NSManagedObject, context: NSManagedObjectContext)
 }
  
@@ -101,16 +101,16 @@ extension CoreDataService: ICoreDataService {
     /// - Parameters:
     ///   - firstAidKitName: принимает название аптечки, которое будет сохранено в базу
     ///   - context: принимает контекст, в котором производится работа с базой
-    func createFirstAidKit(_ firstAidKitName: String, context: NSManagedObjectContext) {
+    func create(_ firstAidKit: String, context: NSManagedObjectContext) {
         let dbFirstAidKit = DBFirstAidKit(context: context)
-        dbFirstAidKit.title = firstAidKitName
+        dbFirstAidKit.title = firstAidKit
 
         Logger.info("Запуск сохранения \(dbFirstAidKit.title ?? "no name")")
     }
     
-    func createMedicine(
+    func create(
         _ medicine: MedicineModel,
-        currentFirstAidKit: DBFirstAidKit?,
+        in currentFirstAidKit: DBFirstAidKit?,
         context: NSManagedObjectContext
     ) {
         let managedObject = NSEntityDescription.insertNewObject(
@@ -151,7 +151,7 @@ extension CoreDataService: ICoreDataService {
     }
     
     // TODO: (#Edit) Это лишний метод, сейчас используется для получения всех лекарств и добавлкния уведомлений.
-    // Нужно отрефакторить этот функционал. Задача MED-113
+    // Нужно отрефакторить этот функционал.
     /// Метод получения данных из базы
     /// - Parameter entityName: имя сущности в базе данных
     /// - Returns: Возвращает массив с результатом запроса данных
@@ -174,19 +174,19 @@ extension CoreDataService: ICoreDataService {
         return data
     }
     
-    func updateFirstAidKit(_ firstAidKit: DBFirstAidKit, newName: String, context: NSManagedObjectContext) {
-        let objectID = firstAidKit.objectID
+    func update(_ currentFirstAidKit: DBFirstAidKit, newName: String, context: NSManagedObjectContext) {
+        let objectID = currentFirstAidKit.objectID
         guard let currentObject = context.object(with: objectID) as? DBFirstAidKit else {
             Logger.error("Не удалось скастить объект до DBFirstAidKit")
             return
         }
         currentObject.title = newName
         
-        Logger.info("Запуск изменения аптечки \(firstAidKit.title ?? "no name")")
+        Logger.info("Запуск изменения аптечки \(currentFirstAidKit.title ?? "no name")")
     }
     
-    func updateMedicine(_ medicine: DBMedicine, newData: MedicineModel, context: NSManagedObjectContext) {
-        let objectID = medicine.objectID
+    func update(_ currentMedicine: DBMedicine, newData: MedicineModel, context: NSManagedObjectContext) {
+        let objectID = currentMedicine.objectID
         guard let currentObject = context.object(with: objectID) as? DBMedicine else {
             Logger.error("Не удалось скастить объект до DBMedicine")
             return
@@ -197,7 +197,7 @@ extension CoreDataService: ICoreDataService {
         currentObject.stepCountForStepper = (newData.stepCountForStepper) as? NSNumber
         currentObject.expiryDate = newData.expiryDate
         
-        Logger.info("Запуск изменения лекарства \(medicine.title ?? "no name")")
+        Logger.info("Запуск изменения лекарства \(currentMedicine.title ?? "no name")")
     }
     
     func delete(

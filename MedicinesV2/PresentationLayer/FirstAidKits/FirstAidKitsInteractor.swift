@@ -58,13 +58,13 @@ extension FirstAidKitInteractor: FirstAidKitsBusinessLogic {
     
     func createData(_ firstAidKitName: String) {
         coreDataService?.performSave({ [weak self] context in
-            self?.coreDataService?.createFirstAidKit(firstAidKitName, context: context)
+            self?.coreDataService?.create(firstAidKitName, context: context)
         })
     }
 
     func updateData(_ firstAidKit: DBFirstAidKit, newName: String) {
         coreDataService?.performSave({ context in
-            self.coreDataService?.updateFirstAidKit(firstAidKit, newName: newName, context: context)
+            self.coreDataService?.update(firstAidKit, newName: newName, context: context)
         })
     }
     

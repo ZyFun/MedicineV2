@@ -20,13 +20,13 @@ final class MedicinesViewController: UIViewController {
     var presenter: MedicinesViewControllerOutput?
     var dataSourceProvider: IMedicinesDataSourceProvider?
     var fetchedResultManager: IMedicinesFetchedResultsManager?
-    /// Содержит в себе выбранную аптечку, для её связи с лекарствами
+    /// Содержит в себе выбранную аптечку
     var currentFirstAidKit: DBFirstAidKit?
 
     // MARK: - IBOutlets
     
     /// Таблица с лекарствами
-    @IBOutlet weak var medicinesTableView: UITableView? // держим опционалом, чтобы не было крита в случае отсутствия данных
+    @IBOutlet weak var medicinesTableView: UITableView!
     
     // MARK: - Life Cycle
     
@@ -39,8 +39,7 @@ final class MedicinesViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        // FIXME: Сейчас служит только для обновления центра уведомлений, переделать
-        presenter?.requestData()
+        presenter?.updateNotificationBadge()
     }
 }
 

@@ -14,8 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        // Вызываем метод для запроса на отправку уведомлений
-        notificationService.requestAuthorisation()
+        notificationService.requestAuthorization()
         
         // Назначаем делегата, чтобы уведомление отображалось при активном приложении
         notificationService.notificationCenter.delegate = notificationService

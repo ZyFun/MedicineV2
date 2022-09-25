@@ -4,15 +4,22 @@
 //
 //  Created by Дмитрий Данилин on 07.09.2022.
 //
-// TODO: ([07.09.2022]) Это старый код из прошлой версии, нужно разобраться и доработать.
 
 import UIKit
 import UserNotifications
 
 protocol INotificationService {
     var notificationCenter: UNUserNotificationCenter { get }
-    func requestAuthorisation()
+    /// Метод получения запроса у пользователя для разрешения на отправку уведомлений
+    func requestAuthorization()
+    /// Метод для получения даты из базы данных и получения уведомления
+    /// - Parameters:
+    ///   - reminder: принимает дату, на которую будет установлено уведомление
+    ///   - nameMedicine: принимает название лекарства
     func sendNotificationExpiredMedicine(reminder: Date?, nameMedicine: String)
+    /// Метод для отображения бейджев на иконке приложения с количеством просроченных лекарств
+    /// - Parameter count: принимает количество просроченных лекарств для установки бейджа
+    ///   на иконку приложения с правильным номером
     func setupBadge(count: Int)
 }
 
@@ -21,10 +28,23 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate {
     // Создаём экземпляр класса, для управлением уведомлениями. current возвращет обект для центра уведомлений
     var notificationCenter = UNUserNotificationCenter.current()
     
-    // Метод получения запроса у пользователя для разрешения на отправку уведомлений
-    func requestAuthorisation() {
+    // Метод для показа уведомлений во время активного приложения
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
+    ) {
         
-        // Метод запроса авторизации. options это те уведомления которые мы хотим отправлять. Булево значение обозночает, прошла авторизация или нет
+        // Отображаем уведомление со звуком
+        completionHandler([.alert, .sound])
+    }
+}
+
+extension NotificationService: INotificationService {
+    
+    func requestAuthorization() {
+        // Метод запроса авторизации. options это те уведомления которые мы
+        // хотим отправлять. granted обозначает, прошла авторизация или нет
         notificationCenter.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, _) in
             Logger.info("Разрешение получено: \(granted)")
             
@@ -32,23 +52,18 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate {
             // Запрашиваем состояние разрешений
             self.getNotificationsSettings()
         }
-        
     }
     
-    // Метод для отслеживания настроек (включены или отключены уведомления)
+    /// Метод для отслеживания настроек (включены или отключены уведомления)
     private func getNotificationsSettings() {
-        
         // Проверяем состояние авторизаций или параметров уведомлений
         // TODO: (#Update) Посмотреть как можно запросить к примеру включить уведомления обратно, если пользователь их отключил
         notificationCenter.getNotificationSettings { (settings) in
             Logger.info("Настройки получены: \(settings)")
         }
-        
     }
     
-    // Создаём метод для получения даты из базы данных и получения уведомления
     func sendNotificationExpiredMedicine(reminder: Date?, nameMedicine: String) {
-        
         guard var date = reminder else { return }
         // Необходимо для того, чтобы получать уведомление о просроченном
         // лекарстве каждый день, раздражая пользователя, и заставляя выбросить
@@ -59,7 +74,7 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate {
         }
         
         // Создаём экземпляр класса календаря, для разбивки на компоненты полученной даты
-        let calendar = Calendar.current // TODO: (#Explore) Что делает current?
+        let calendar = Calendar.current
         // Выбираем компоненты, по которым будет срабатывать триггер из полученной даты
         var component = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
         // Указываем точное время срабатывания уведомлений
@@ -77,60 +92,42 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate {
         content.body = "Пора выбросить лекарство: \(nameMedicine)"
         
         if content.badge == 0 {
-            content.badge = 1 // TODO: (#Explore) Сделать в будущем так, чтобы +1 было уже к имеющимся бейджам. Уточнить, возможно ли это сделать
+            // TODO: (#Update) Сделать в будущем так, чтобы +1 было уже к имеющимся бейджам.
+            content.badge = 1
         }
         
         content.sound = UNNotificationSound.default
         
-        // Создаём идентификатор для запроса уведомления
         let identifier = "\(nameMedicine)"
-        // Создаём запроса уведомления
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
-        // Вызываем запрос уведомления через центр уведомлений и обрабатываем ошибку, если что то пойдет не так
         notificationCenter.add(request) { (error) in
             if let error = error {
                 Logger.error("Error: \(error.localizedDescription)")
                 // TODO: (#Explore) Принт из примера обработки ошибок, хочу посмотреть что он покажет если что то пойдет не так
                 Logger.error("\(error as Any)")
             }
+            
+            Logger.info("Добавлено уведомление для лекарства: \(identifier)")
         }
-        
     }
     
-    // Метод для показа уведомлений во время активного приложения
-    func userNotificationCenter(
-        _ center: UNUserNotificationCenter,
-        willPresent notification: UNNotification,
-        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
-    ) {
-        
-        // Отображаем уведомление со звуком
-        completionHandler([.alert, .sound])
-        
-    }
-    
-//    // TODO: (#Update) Добавить метод, чтобы при нажатии на уведомление что то происходило.
-//    // Метод для того, чтобы по нажатию на уведомление, что то происходило (пример с одного из уроков)
-//    func userNotificationCenter(
-//        _ center: UNUserNotificationCenter,
-//        didReceive response: UNNotificationResponse,
-//        withCompletionHandler completionHandler: @escaping () -> Void
-//    ) {
-//
-//        // Создаём действие которое происходит по нажатию на уведомление
-//        if response.notification.request.identifier == "Local Notification" {
-//            print("На уведомление нажали")
-//        }
-//        // Зачем то что то вызываем, он не объяснил зачем. Надо разобраться
-//        completionHandler()
-//    }
-    
-    // Метод для отображения бейджев на иконке приложения с количеством просроченных лекарств
     func setupBadge(count: Int) {
         UIApplication.shared.applicationIconBadgeNumber = count
     }
-}
-
-extension NotificationService: INotificationService {
     
+    //    // TODO: (#Update) Добавить метод, чтобы при нажатии на уведомление происходил вход в аптечку с лекарством
+    //    // Метод для того, чтобы по нажатию на уведомление, что то происходило (пример с одного из уроков)
+    //    func userNotificationCenter(
+    //        _ center: UNUserNotificationCenter,
+    //        didReceive response: UNNotificationResponse,
+    //        withCompletionHandler completionHandler: @escaping () -> Void
+    //    ) {
+    //
+    //        // Создаём действие которое происходит по нажатию на уведомление
+    //        if response.notification.request.identifier == "Local Notification" {
+    //            print("На уведомление нажали")
+    //        }
+    //
+    //        completionHandler()
+    //    }
 }

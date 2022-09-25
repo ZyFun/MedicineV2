@@ -36,6 +36,8 @@ final class PresentationAssembly {
     
     /// Инжектирование зависимостей в ``MedicineConfigurator``
     lazy var medicine: MedicineConfigurator = {
-        return MedicineConfigurator(coreDataService: coreDataService)
+        return MedicineConfigurator(
+            notificationManager: notificationMedicineManager,
+            coreDataService: coreDataService)
     }()
 }

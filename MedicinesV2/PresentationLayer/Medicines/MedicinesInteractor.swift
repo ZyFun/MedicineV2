@@ -9,10 +9,8 @@ import Foundation
 
 /// Протокол для работы с бизнес логикой модуля
 protocol MedicinesBusinessLogic {
-    /// Метод для получения объектов из БД в виде массива.
-    /// - Запрос должен происходить при первичной загрузке приложения,
-    /// и при создании или удалении данных (для корректной работы с массивом в таблице)
-    func requestData()
+    /// Метод для обновления значка уведомлений на иконке приложения
+    func updateNotificationBadge()
     /// Метод для удаления данных из БД
     /// Запрос на обновление данных должен происходить
     /// в момент возврата на экран со списком лекарств.
@@ -40,9 +38,8 @@ extension MedicinesInteractor: MedicinesBusinessLogic {
         })
     }
     
-    func requestData() {
+    func updateNotificationBadge() {
         let data = coreDataService?.fetchRequest(String(describing: DBMedicine.self)) as? [DBMedicine]
         notificationManager?.setupBadgeForAppIcon(data: data)
-        notificationManager?.updateNotificationQueueExpiredMedicine(data: data)
     }
 }
