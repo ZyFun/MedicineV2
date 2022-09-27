@@ -39,14 +39,14 @@ final class FirstAidKitInteractor {
     private func deleteNotifications(for firstAidKit: DBFirstAidKit) {
         firstAidKit.medicines?.forEach { medicine in
             guard let medicine = medicine as? DBMedicine else {
-                Logger.error("Ошибка каста до DBMedicine")
+                CustomLogger.error("Ошибка каста до DBMedicine")
                 return
             }
             
             if let medicineName = medicine.title {
                 notificationService?.notificationCenter.removePendingNotificationRequests(withIdentifiers: [medicineName])
                 
-                Logger.info("Уведомление для лекарства \(medicineName) удалено из очереди")
+                CustomLogger.info("Уведомление для лекарства \(medicineName) удалено из очереди")
             }
         }
     }

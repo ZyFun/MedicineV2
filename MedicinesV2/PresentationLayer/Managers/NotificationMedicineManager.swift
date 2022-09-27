@@ -35,7 +35,7 @@ extension NotificationMedicineManager: INotificationMedicineManager {
         if let medicineName = medicine.title {
             notificationService.notificationCenter.removePendingNotificationRequests(withIdentifiers: [medicineName])
             
-            Logger.info("Уведомление для лекарства \(medicineName) удалено из очереди")
+            CustomLogger.info("Уведомление для лекарства \(medicineName) удалено из очереди")
         }
     }
     
@@ -48,7 +48,7 @@ extension NotificationMedicineManager: INotificationMedicineManager {
     
     func setupBadgeForAppIcon(data: [DBMedicine]?) {
         guard let data = data else {
-            Logger.warning("В базе еще нет лекарств")
+            CustomLogger.warning("В базе еще нет лекарств")
             return
         }
         

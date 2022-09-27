@@ -64,7 +64,7 @@ extension MedicineInteractor: MedicineBusinessLogic {
                 case .success(let firstAidKits):
                     firstAidKit = self?.fetchFirstAidKit(from: firstAidKits, for: currentFirstAidKit)
                 case .failure(let error):
-                    Logger.error(error.localizedDescription)
+                    CustomLogger.error(error.localizedDescription)
                 }
             })
             
@@ -106,14 +106,14 @@ extension MedicineInteractor: MedicineBusinessLogic {
     ) -> DBFirstAidKit? {
         
         guard let currentFirstAidKitID = currentFirstAidKit?.objectID else {
-            Logger.error("Не удалось найти ID объекта")
+            CustomLogger.error("Не удалось найти ID объекта")
             return nil
         }
         
         if let firstAidKit = firstAidKits.filter({ $0.objectID == currentFirstAidKitID }).first {
             return firstAidKit
         } else {
-            Logger.warning("Объект не найден")
+            CustomLogger.warning("Объект не найден")
             return nil
         }
     }

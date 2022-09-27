@@ -1,13 +1,14 @@
 //
-//  Logger.swift
+//  CustomLogger.swift
 //  MedicinesV2
 //
 //  Created by Дмитрий Данилин on 07.09.2022.
 //
 
 import Foundation
+import os.log
 
-enum Logger {
+enum CustomLogger {
     enum LogLevel {
         case info
         case warning
@@ -35,7 +36,7 @@ enum Logger {
     }
     
     static func info(
-        _ str: String,
+        _ message: String,
         showInConsole: Bool? = true,
         shouldLogContext: Bool? = true,
         file: String = #file,
@@ -48,9 +49,9 @@ enum Logger {
             line: line
         )
         
-        Logger.handleLog(
+        CustomLogger.handleLog(
             level: .info,
-            str: str,
+            message: message,
             showInConsole: showInConsole ?? false,
             shouldLogContext: shouldLogContext ?? false,
             context: logContext
@@ -58,7 +59,7 @@ enum Logger {
     }
     
     static func warning(
-        _ str: String,
+        _ message: String,
         showInConsole: Bool? = true,
         shouldLogContext: Bool? = true,
         file: String = #file,
@@ -71,9 +72,9 @@ enum Logger {
             line: line
         )
         
-        Logger.handleLog(
+        CustomLogger.handleLog(
             level: .warning,
-            str: str,
+            message: message,
             showInConsole: showInConsole ?? false,
             shouldLogContext: shouldLogContext ?? false,
             context: logContext
@@ -81,7 +82,7 @@ enum Logger {
     }
     
     static func error(
-        _ str: String,
+        _ message: String,
         showInConsole: Bool? = true,
         shouldLogContext: Bool? = true,
         file: String = #file,
@@ -94,9 +95,9 @@ enum Logger {
             line: line
         )
         
-        Logger.handleLog(
+        CustomLogger.handleLog(
             level: .error,
-            str: str,
+            message: message,
             showInConsole: showInConsole ?? false,
             shouldLogContext: shouldLogContext ?? false,
             context: logContext
@@ -105,12 +106,12 @@ enum Logger {
     
     fileprivate static func handleLog(
         level: LogLevel,
-        str: String,
+        message: String,
         showInConsole: Bool,
         shouldLogContext: Bool,
         context: LogContext
     ) {
-        let logComponents = ["[\(level.prefix)]", str]
+        let logComponents = ["[\(level.prefix)]", message]
         
         var fullString = logComponents.joined(separator: " ")
         
@@ -119,7 +120,26 @@ enum Logger {
                 fullString += " -> \(context.description)"
             }
             
-            printDebug(fullString)
+//            printDebug(fullString)
+            
+            guard let module = URL(fileURLWithPath: context.file).deletingPathExtension().pathComponents.last else { return }
+            let formattedMessage = [message, context.description, "=========="].joined(separator: "\n\n")
+            let osLog = OSLog(subsystem: module, category: level.prefix)
+            
+            switch level {
+            case .info:
+                os_log(.info,
+                       log: osLog,
+                       "%{private}@", formattedMessage)
+            case .warning:
+                os_log(.error,
+                       log: osLog,
+                       "%{private}@", formattedMessage)
+            case .error:
+                os_log(.fault,
+                       log: osLog,
+                       "%{private}@", formattedMessage)
+            }
         }
     }
 }

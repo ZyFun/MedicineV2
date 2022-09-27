@@ -46,7 +46,7 @@ extension NotificationService: INotificationService {
         // Метод запроса авторизации. options это те уведомления которые мы
         // хотим отправлять. granted обозначает, прошла авторизация или нет
         notificationCenter.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, _) in
-            Logger.info("Разрешение получено: \(granted)")
+            CustomLogger.info("Разрешение получено: \(granted)")
             
             guard granted else { return }
             // Запрашиваем состояние разрешений
@@ -59,7 +59,7 @@ extension NotificationService: INotificationService {
         // Проверяем состояние авторизаций или параметров уведомлений
         // TODO: (#Update) Посмотреть как можно запросить к примеру включить уведомления обратно, если пользователь их отключил
         notificationCenter.getNotificationSettings { (settings) in
-            Logger.info("Настройки получены: \(settings)")
+            CustomLogger.info("Настройки получены: \(settings)")
         }
     }
     
@@ -102,12 +102,12 @@ extension NotificationService: INotificationService {
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
         notificationCenter.add(request) { (error) in
             if let error = error {
-                Logger.error("Error: \(error.localizedDescription)")
+                CustomLogger.error("Error: \(error.localizedDescription)")
                 // TODO: (#Explore) Принт из примера обработки ошибок, хочу посмотреть что он покажет если что то пойдет не так
-                Logger.error("\(error as Any)")
+                CustomLogger.error("\(error as Any)")
             }
             
-            Logger.info("Добавлено уведомление для лекарства: \(identifier)")
+            CustomLogger.info("Добавлено уведомление для лекарства: \(identifier)")
         }
     }
     

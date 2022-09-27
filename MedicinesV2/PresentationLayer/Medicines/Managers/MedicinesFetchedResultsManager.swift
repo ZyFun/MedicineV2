@@ -74,7 +74,7 @@ extension MedicinesFetchedResultsManager: NSFetchedResultsControllerDelegate {
                 )
             }
         @unknown default:
-            Logger.error("Что то пошло не так в NSFetchedResultsControllerDelegate")
+            CustomLogger.error("Что то пошло не так в NSFetchedResultsControllerDelegate")
         }
     }
     
