@@ -28,7 +28,8 @@ final class FirstAidKitInteractor {
     
     /// Ссылка на презентер
     weak var presenter: FirstAidKitsPresentationLogic?
-    var notificationService: INotificationService?
+    /// Сервис UserNotifications
+    var notificationService: INotificationService!
     var coreDataService: ICoreDataService?
     var fetchedResultManager: IFirstAidKitsFetchedResultsManager?
     
@@ -44,7 +45,7 @@ final class FirstAidKitInteractor {
             }
             
             if let medicineName = medicine.title {
-                notificationService?.notificationCenter.removePendingNotificationRequests(withIdentifiers: [medicineName])
+                notificationService.notificationCenter.removePendingNotificationRequests(withIdentifiers: [medicineName])
                 
                 CustomLogger.info("Уведомление для лекарства \(medicineName) удалено из очереди")
             }
