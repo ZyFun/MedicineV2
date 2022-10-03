@@ -9,7 +9,12 @@ import UIKit
 
 /// Протокол отображения ViewCintroller-a
 protocol MedicinesDisplayLogic: AnyObject {
-    
+    /// Метод для скрытия плейсхолдера
+    /// - Скрывает его, если список лекарств не пустой
+    func hidePlaceholder()
+    /// Метод для отображения плейсхолдера
+    /// - Показывает его, если список лекарств пустой
+    func showPlaceholder()
 }
 
 final class MedicinesViewController: UIViewController {
@@ -27,6 +32,9 @@ final class MedicinesViewController: UIViewController {
     
     /// Таблица с лекарствами
     @IBOutlet weak var medicinesTableView: UITableView!
+    /// Плейсхолдер
+    /// - Отображается, когда в списке еще нет аптечек
+    @IBOutlet weak var placeholderLabel: UILabel!
     
     // MARK: - Life Cycle
     
@@ -34,6 +42,7 @@ final class MedicinesViewController: UIViewController {
         super.viewDidLoad()
 
         setup()
+        presenter?.updatePlaceholder(for: currentFirstAidKit)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,6 +61,7 @@ private extension MedicinesViewController {
         setupNavigationBar()
         setupTableView()
         setupXibs()
+        setupPlaceholder()
     }
     
     // MARK: - Setup table view
@@ -96,6 +106,13 @@ private extension MedicinesViewController {
     /// Добавление нового лекарства
     @objc func addNewMedicine() {
         presenter?.routeToMedicine(with: currentFirstAidKit, by: nil)
+        presenter?.updatePlaceholder()
+    }
+    
+    // MARK: - Setup placeholders
+    
+    func setupPlaceholder() {
+        placeholderLabel.textColor = .systemGray
     }
 }
 
@@ -104,5 +121,13 @@ private extension MedicinesViewController {
 extension MedicinesViewController: MedicinesDisplayLogic {
     func display(_ viewModels: [DBMedicine]) {
         
+    }
+    
+    func hidePlaceholder() {
+        placeholderLabel.isHidden = true
+    }
+    
+    func showPlaceholder() {
+        placeholderLabel.isHidden = false
     }
 }

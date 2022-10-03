@@ -14,6 +14,15 @@ protocol MedicinesPresentationLogiс: AnyObject {
 
 /// Протокол взаимодействия ViewController-a с презенетром
 protocol MedicinesViewControllerOutput {
+    /// Метод для обновления состояния плейсхолдера
+    /// - Используется для скрытия или отображения плейсхолдера
+    /// - Если в базе аптечки есть лекарства, скрывается, иначе - отображается
+    /// - Parameter currentFirstAidKit: принимает текущую аптечку, в которой будет работа
+    ///                                 с плейсхолдером.
+    func updatePlaceholder(for currentFirstAidKit: DBFirstAidKit?)
+    /// Метод для обновления состояния плейсхолдера
+    /// - Используется для скрытия плейсхолдера при нажатии на добавить лекарство
+    func updatePlaceholder()
     /// Метод для обновления значка уведомлений на иконке приложения
     func updateNotificationBadge()
     /// Метод для удаления данных из БД
@@ -36,6 +45,22 @@ final class MedicinesPresenter {
 }
 
 extension MedicinesPresenter: MedicinesViewControllerOutput {
+    func updatePlaceholder(for currentFirstAidKit: DBFirstAidKit?) {
+        // TODO: (#MED-142) Придумать, как работать с многопоточкой и обновить плейсхолдер
+        // Сейчас не совсем оптимально. Нужно обновлять, сразу после того как произошло обновление и делать это плавно с анимацией.
+        if currentFirstAidKit?.medicines?.count != .zero {
+            self.view?.hidePlaceholder()
+        } else {
+            self.view?.showPlaceholder()
+        }
+    }
+    
+    func updatePlaceholder() {
+        // TODO: (#MED-142) Придумать, как работать с многопоточкой и обновить плейсхолдер
+        // Сейчас не совсем оптимально. Нужно обновлять, сразу после того как произошло обновление и делать это плавно с анимацией.
+        view?.hidePlaceholder()
+    }
+    
     func updateNotificationBadge() {
         interactor?.updateNotificationBadge()
     }
