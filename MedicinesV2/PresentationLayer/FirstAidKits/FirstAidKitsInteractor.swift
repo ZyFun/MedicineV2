@@ -9,6 +9,10 @@ import Foundation
 
 /// Протокол для работы с бизнес логикой модуля
 protocol FirstAidKitsBusinessLogic {
+    /// Метод для обновления состояния плейсхолдера
+    /// - Используется для скрытия или отображения плейсхолдера
+    /// - Если в базе есть аптечки, скрывается, иначе - отображается
+    func updatePlaceholder()
     /// Метод для создания новой аптечки.
     /// - Parameter firstAidKit: принимает имя аптечки.
     func createData(_ firstAidKitName: String)
@@ -31,7 +35,6 @@ final class FirstAidKitInteractor {
     /// Сервис UserNotifications
     var notificationService: INotificationService!
     var coreDataService: ICoreDataService?
-    var fetchedResultManager: IFirstAidKitsFetchedResultsManager?
     
     // MARK: - Private methods
     
@@ -57,9 +60,27 @@ final class FirstAidKitInteractor {
 
 extension FirstAidKitInteractor: FirstAidKitsBusinessLogic {
     
+    func updatePlaceholder() {
+        guard let data = coreDataService?.fetchRequest(
+            String(describing: DBFirstAidKit.self)
+        ) else {
+            CustomLogger.error("Не удалось получить аптечки из базы")
+            return
+        }
+        
+        if !data.isEmpty {
+            presenter?.hidePlaceholder()
+        } else {
+            presenter?.showPlaceholder()
+        }
+    }
+    
+    // MARK: - CRUD methods
+    
     func createData(_ firstAidKitName: String) {
         coreDataService?.performSave({ [weak self] context in
             self?.coreDataService?.create(firstAidKitName, context: context)
+            self?.presenter?.hidePlaceholder()
         })
     }
 
@@ -73,6 +94,12 @@ extension FirstAidKitInteractor: FirstAidKitsBusinessLogic {
         coreDataService?.performSave { [weak self] context in
             self?.deleteNotifications(for: firstAidKit)
             self?.coreDataService?.delete(firstAidKit, context: context)
+            
+            // TODO: (#MED-142) Придумать, как работать с многопоточкой и обновить плейсхолдер
+            // Сейчас не совсем оптимально. Нужно обновлять, сразу после того как произошло обновление и делать это плавно с анимацией.
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self?.updatePlaceholder()
+            }
         }
     }
 }

@@ -9,11 +9,20 @@ import Foundation
 
 /// Протокол логики презентации данных
 protocol FirstAidKitsPresentationLogic: AnyObject {
-    
+    /// Метод для скрытия плейсхолдера
+    /// - Скрывает его, если список аптечек не пустой
+    func hidePlaceholder()
+    /// Метод для отображения плейсхолдера
+    /// - Показывает его, если список аптечек пустой
+    func showPlaceholder()
 }
 
 /// Протокол взаимодействия ViewController-a с презенетром
 protocol FirstAidKitsViewControllerOutput {
+    /// Метод для обновления состояния плейсхолдера
+    /// - Используется для скрытия или отображения плейсхолдера
+    /// - Если в базе есть аптечки, скрывается, иначе - отображается
+    func updatePlaceholder()
     /// Метод для отображения кастомного алерт контроллера добавления или редактирования аптечки
     /// - Parameters:
     ///   - entity: Принимает аптечку
@@ -46,6 +55,10 @@ final class FirstAidKitsPresenter {
 
 extension FirstAidKitsPresenter: FirstAidKitsViewControllerOutput {
     
+    func updatePlaceholder() {
+        interactor?.updatePlaceholder()
+    }
+    
     // MARK: - Alerts
     
     func showAlert(for entity: DBFirstAidKit?, by indexPath: IndexPath?) {
@@ -75,4 +88,11 @@ extension FirstAidKitsPresenter: FirstAidKitsViewControllerOutput {
 
 extension FirstAidKitsPresenter: FirstAidKitsPresentationLogic {
     
+    func hidePlaceholder() {
+        view?.hidePlaceholder()
+    }
+    
+    func showPlaceholder() {
+        view?.showPlaceholder()
+    }
 }

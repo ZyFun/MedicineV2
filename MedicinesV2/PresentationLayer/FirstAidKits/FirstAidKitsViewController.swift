@@ -9,6 +9,12 @@ import UIKit
 
 /// Протокол отображения ViewCintroller-a
 protocol FirstAidKitsDisplayLogic: AnyObject {
+    /// Метод для скрытия плейсхолдера
+    /// - Скрывает его, если список аптечек не пустой
+    func hidePlaceholder()
+    /// Метод для отображения плейсхолдера
+    /// - Показывает его, если список аптечек пустой
+    func showPlaceholder()
     /// Метод для отображения кастомного алерт контроллера добавления или редактирования аптечки
     /// - Parameters:
     ///   - entity: Принимает аптечку
@@ -31,6 +37,9 @@ final class FirstAidKitsViewController: UIViewController {
     
     /// Таблица с аптечками
     @IBOutlet weak var firstAidKitsTableView: UITableView!
+    /// Плейсхолдер
+    /// - Отображается, когда в списке еще нет аптечек
+    @IBOutlet weak var placeholderLabel: UILabel!
     
     // MARK: - Life Cycle
     
@@ -38,6 +47,7 @@ final class FirstAidKitsViewController: UIViewController {
         super.viewDidLoad()
         
         setup()
+        presenter?.updatePlaceholder()
     }
 }
 
@@ -49,6 +59,7 @@ extension FirstAidKitsViewController {
     func setup() {
         setupNavigationBar()
         setupTableView()
+        setupPlaceholder()
     }
     
     // MARK: - Setup navigation bar
@@ -109,11 +120,29 @@ extension FirstAidKitsViewController {
             forCellReuseIdentifier: String(describing: FirstAidKitCell.self)
         )
     }
+    
+    // MARK: - Setup placeholders
+    
+    func setupPlaceholder() {
+        placeholderLabel.textColor = .systemGray
+    }
 }
 
 // MARK: - Логика обновления данных View
 
 extension FirstAidKitsViewController: FirstAidKitsDisplayLogic {
+    
+    func hidePlaceholder() {
+        DispatchQueue.main.async {
+            self.placeholderLabel.isHidden = true
+        }
+    }
+    
+    func showPlaceholder() {
+        DispatchQueue.main.async {
+            self.placeholderLabel.isHidden = false
+        }
+    }
     
     func showAlert(for entity: DBFirstAidKit? = nil, by indexPath: IndexPath? = nil) {
         let title = entity == nil ? "Добавить аптечку" : "Изменить название"
