@@ -81,6 +81,7 @@ extension FirstAidKitInteractor: FirstAidKitsBusinessLogic {
         coreDataService?.performSave({ [weak self] context in
             self?.coreDataService?.create(firstAidKitName, context: context)
             self?.presenter?.hidePlaceholder()
+            CustomLogger.info("Плейсхолдер скрыт после добавления аптечки")
         })
     }
 
@@ -95,11 +96,21 @@ extension FirstAidKitInteractor: FirstAidKitsBusinessLogic {
             self?.deleteNotifications(for: firstAidKit)
             self?.coreDataService?.delete(firstAidKit, context: context)
             
-            // TODO: (#MED-142) Придумать, как работать с многопоточкой и обновить плейсхолдер
-            // Сейчас не совсем оптимально. Нужно обновлять, сразу после того как произошло обновление и делать это плавно с анимацией.
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self?.updatePlaceholder()
+            self?.coreDataService?.fetchFirstAidKits(from: context) { result in
+                switch result {
+                case .success(let firstAidKits):
+                    self?.updatePlaceholder(for: firstAidKits)
+                case .failure(let error):
+                    CustomLogger.error(error.localizedDescription)
+                }
             }
+        }
+    }
+    
+    private func updatePlaceholder(for firstAidKits: [DBFirstAidKit]) {
+        if firstAidKits.isEmpty {
+            presenter?.showPlaceholder()
+            CustomLogger.info("Плейсхолдер отображен после удаления аптечки")
         }
     }
 }
