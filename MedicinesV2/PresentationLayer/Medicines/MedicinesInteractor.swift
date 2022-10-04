@@ -37,6 +37,7 @@ extension MedicinesInteractor: MedicinesBusinessLogic {
         coreDataService?.performSave { [weak self] context in
             self?.notificationManager?.deleteNotification(for: medicine)
             self?.coreDataService?.delete(medicine, context: context)
+            self?.updateNotificationBadge()
             // TODO: (#MED-142) Придумать, как работать с многопоточкой и обновить плейсхолдер после удаления данных
             // Сейчас не совсем оптимально. Нужно обновлять, сразу после того как произошло обновление и делать это плавно с анимацией.
         }

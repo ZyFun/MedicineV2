@@ -100,6 +100,7 @@ extension FirstAidKitInteractor: FirstAidKitsBusinessLogic {
                 switch result {
                 case .success(let firstAidKits):
                     self?.updatePlaceholder(for: firstAidKits)
+                    self?.updateNotificationBadge()
                 case .failure(let error):
                     CustomLogger.error(error.localizedDescription)
                 }
@@ -117,7 +118,9 @@ extension FirstAidKitInteractor: FirstAidKitsBusinessLogic {
     // MARK: - Notifications
     
     func updateNotificationBadge() {
-        let data = coreDataService?.fetchRequest(String(describing: DBMedicine.self)) as? [DBMedicine]
-        notificationManager?.setupBadgeForAppIcon(data: data)
+        DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 1) {
+            let data = self.coreDataService?.fetchRequest(String(describing: DBMedicine.self)) as? [DBMedicine]
+            self.notificationManager?.setupBadgeForAppIcon(data: data)
+        }
     }
 }

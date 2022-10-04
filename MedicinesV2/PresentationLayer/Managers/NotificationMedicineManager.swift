@@ -51,19 +51,15 @@ extension NotificationMedicineManager: INotificationMedicineManager {
             CustomLogger.warning("В базе еще нет лекарств")
             return
         }
-        
+        let currentDate = Date()
         var expiredMedicinesCount = 0
         
-        // TODO: (MED-135) Сбросить счетчик на 0, если лекарств или аптечек нет совсем
-        
-        data.forEach { [weak self] medicine in
-            if Date() >= medicine.expiryDate ?? Date() {
+        data.forEach { medicine in
+            if currentDate >= medicine.expiryDate ?? currentDate {
                 expiredMedicinesCount += 1
-                self?.notificationService.setupBadge(count: expiredMedicinesCount)
-            } else {
-                self?.notificationService.setupBadge(count: expiredMedicinesCount)
             }
         }
+        notificationService.setupBadge(count: expiredMedicinesCount)
         
         CustomLogger.info("Бейдж на иконке приложения обновлён")
     }
