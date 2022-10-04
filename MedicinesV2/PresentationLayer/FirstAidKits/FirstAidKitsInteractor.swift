@@ -24,6 +24,9 @@ protocol FirstAidKitsBusinessLogic {
     /// Метод для удаления данных из БД
     /// - Parameter firstAidKit: принимает аптечку, которую необходимо удалить из БД
     func delete(firstAidKit: DBFirstAidKit)
+    /// Метод для обновления бейджей на иконке приложения
+    /// - Используется для обновления бейджей при входе в приложение
+    func updateNotificationBadge()
 }
 
 final class FirstAidKitInteractor {
@@ -33,13 +36,14 @@ final class FirstAidKitInteractor {
     /// Ссылка на презентер
     weak var presenter: FirstAidKitsPresentationLogic?
     /// Сервис UserNotifications
-    var notificationService: INotificationService!
+    var notificationManager: INotificationMedicineManager!
     var coreDataService: ICoreDataService?
     
     // MARK: - Private methods
     
     /// Метод для очистки очереди уведомлений
-    /// - Parameter firstAidKit: принимает аптечку, уведомления для которой будут удалены.
+    /// - Parameter firstAidKit: принимает аптечку, в которой будут удалены лекарства и
+    ///                          уведомления для них.
     private func deleteNotifications(for firstAidKit: DBFirstAidKit) {
         firstAidKit.medicines?.forEach { medicine in
             guard let medicine = medicine as? DBMedicine else {
@@ -47,11 +51,7 @@ final class FirstAidKitInteractor {
                 return
             }
             
-            if let medicineName = medicine.title {
-                notificationService.notificationCenter.removePendingNotificationRequests(withIdentifiers: [medicineName])
-                
-                CustomLogger.info("Уведомление для лекарства \(medicineName) удалено из очереди")
-            }
+            notificationManager.deleteNotification(for: medicine)
         }
     }
 }
@@ -112,5 +112,12 @@ extension FirstAidKitInteractor: FirstAidKitsBusinessLogic {
             presenter?.showPlaceholder()
             CustomLogger.info("Плейсхолдер отображен после удаления аптечки")
         }
+    }
+    
+    // MARK: - Notifications
+    
+    func updateNotificationBadge() {
+        let data = coreDataService?.fetchRequest(String(describing: DBMedicine.self)) as? [DBMedicine]
+        notificationManager?.setupBadgeForAppIcon(data: data)
     }
 }

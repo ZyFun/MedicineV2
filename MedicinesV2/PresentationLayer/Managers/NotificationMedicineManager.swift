@@ -64,5 +64,7 @@ extension NotificationMedicineManager: INotificationMedicineManager {
                 self?.notificationService.setupBadge(count: expiredMedicinesCount)
             }
         }
+        
+        CustomLogger.info("Бейдж на иконке приложения обновлён")
     }
 }

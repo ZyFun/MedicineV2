@@ -133,9 +133,13 @@ extension CoreDataService: ICoreDataService {
         if let currentFirstAidKit = currentFirstAidKit {
             currentFirstAidKit.addToMedicines(dbMedicine)
             
-            CustomLogger.info("В базу добавлено новое лекарство.")
-            CustomLogger.info("Лекарств в базе: \(currentFirstAidKit.medicines?.count ?? 0)")
-            CustomLogger.info("для аптечки \(currentFirstAidKit.title ?? "no name")")
+            CustomLogger.info(
+                """
+                В базу добавлено новое лекарство.
+                Лекарств в базе: \(currentFirstAidKit.medicines?.count ?? 0)
+                для аптечки \(currentFirstAidKit.title ?? "no name")
+                """
+            )
         }
     }
     

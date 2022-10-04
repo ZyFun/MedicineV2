@@ -24,7 +24,7 @@ final class PresentationAssembly {
     /// Инжектирование зависимостей в ``FirstAidKitsConfigurator``
     lazy var firstAidKits: FirstAidKitsConfigurator = {
         return FirstAidKitsConfigurator(
-            notificationService: notificationService,
+            notificationManager: notificationMedicineManager,
             coreDataService: coreDataService
         )
     }()

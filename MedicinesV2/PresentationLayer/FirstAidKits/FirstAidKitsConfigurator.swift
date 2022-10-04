@@ -9,15 +9,15 @@ import UIKit
 
 final class FirstAidKitsConfigurator {
     
-    private let notificationService: INotificationService
+    private let notificationManager: INotificationMedicineManager
     private let coreDataService: ICoreDataService
     private let fetchedResultManager: IFirstAidKitsFetchedResultsManager
     
     init(
-        notificationService: INotificationService,
+        notificationManager: INotificationMedicineManager,
         coreDataService: ICoreDataService
     ) {
-        self.notificationService = notificationService
+        self.notificationManager = notificationManager
         self.coreDataService = coreDataService
         fetchedResultManager = FirstAidKitsFetchedResultsManager(
             fetchedResultsController: coreDataService.fetchResultController(
@@ -50,7 +50,7 @@ final class FirstAidKitsConfigurator {
         presenter.interactor = interactor
         presenter.router = router
         interactor.presenter = presenter
-        interactor.notificationService = notificationService
+        interactor.notificationManager = notificationManager
         interactor.coreDataService = coreDataService
     }
 }

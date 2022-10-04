@@ -41,6 +41,9 @@ protocol FirstAidKitsViewControllerOutput {
     /// Метод для удаления данных из БД
     /// - Parameter firstAidKit: принимает аптечку, которую необходимо удалить из БД
     func delete(_ firstAidKit: DBFirstAidKit)
+    /// Метод для обновления бейджей на иконке приложения
+    /// - Используется для обновления бейджей при входе в приложение
+    func updateNotificationBadge()
     /// Метод для перехода к лекартсвам в выбранной аптечке.
     /// - Parameter currentFirstAidKit: принимает текущую аптечку
     func routeToMedicines(with currentFirstAidKit: DBFirstAidKit)
@@ -77,6 +80,12 @@ extension FirstAidKitsPresenter: FirstAidKitsViewControllerOutput {
     
     func delete(_ firstAidKit: DBFirstAidKit) {
         interactor?.delete(firstAidKit: firstAidKit)
+    }
+    
+    // MARK: - Notifications
+    
+    func updateNotificationBadge() {
+        interactor?.updateNotificationBadge()
     }
     
     // MARK: - Routing

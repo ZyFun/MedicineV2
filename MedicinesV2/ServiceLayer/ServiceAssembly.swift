@@ -9,7 +9,7 @@
 final class ServiceAssembly {
     
     lazy var notificationService: INotificationService = {
-        return NotificationService()
+        return NotificationService.shared
     }()
     
     lazy var coreDataService: ICoreDataService = {

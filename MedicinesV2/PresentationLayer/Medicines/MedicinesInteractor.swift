@@ -10,6 +10,8 @@ import Foundation
 /// Протокол для работы с бизнес логикой модуля
 protocol MedicinesBusinessLogic {
     /// Метод для обновления значка уведомлений на иконке приложения
+    /// - Обновление происходит в глобальном потоке через 1 секунды после срабатывания метода.
+    ///   Это необходимо для того, чтобы данные в базе успели обновится и я получил новые данные.
     func updateNotificationBadge()
     /// Метод для удаления данных из БД
     /// Запрос на обновление данных должен происходить
@@ -32,16 +34,20 @@ final class MedicinesInteractor {
 
 extension MedicinesInteractor: MedicinesBusinessLogic {
     func delete(medicine: DBMedicine) {
-        coreDataService?.performSave({ [weak self] context in
+        coreDataService?.performSave { [weak self] context in
             self?.notificationManager?.deleteNotification(for: medicine)
             self?.coreDataService?.delete(medicine, context: context)
             // TODO: (#MED-142) Придумать, как работать с многопоточкой и обновить плейсхолдер после удаления данных
             // Сейчас не совсем оптимально. Нужно обновлять, сразу после того как произошло обновление и делать это плавно с анимацией.
-        })
+        }
     }
     
     func updateNotificationBadge() {
-        let data = coreDataService?.fetchRequest(String(describing: DBMedicine.self)) as? [DBMedicine]
-        notificationManager?.setupBadgeForAppIcon(data: data)
+        DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 1) {
+            let data = self.coreDataService?.fetchRequest(
+                String(describing: DBMedicine.self)
+            ) as? [DBMedicine]
+            self.notificationManager?.setupBadgeForAppIcon(data: data)
+        }
     }
 }

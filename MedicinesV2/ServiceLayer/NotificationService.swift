@@ -24,9 +24,18 @@ protocol INotificationService {
 }
 
 final class NotificationService: NSObject, UNUserNotificationCenterDelegate {
+    static let shared = NotificationService()
     
     // Создаём экземпляр класса, для управлением уведомлениями. current возвращет обект для центра уведомлений
     var notificationCenter = UNUserNotificationCenter.current()
+    
+    private override init() {
+        super.init()
+        
+        // Нужен, чтобы уведомление отображалось при активном приложении
+        // Инитим тут, так как класс синглтон и висит в памяти всегда.
+        notificationCenter.delegate = self
+    }
     
     // Метод для показа уведомлений во время активного приложения
     func userNotificationCenter(
@@ -112,7 +121,9 @@ extension NotificationService: INotificationService {
     }
     
     func setupBadge(count: Int) {
-        UIApplication.shared.applicationIconBadgeNumber = count
+        DispatchQueue.main.async {
+            UIApplication.shared.applicationIconBadgeNumber = count
+        }
     }
     
     //    // TODO: (#Update) Добавить метод, чтобы при нажатии на уведомление происходил вход в аптечку с лекарством
