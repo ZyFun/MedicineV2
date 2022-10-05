@@ -16,7 +16,13 @@ protocol INotificationService {
     /// - Parameters:
     ///   - reminder: принимает дату, на которую будет установлено уведомление
     ///   - nameMedicine: принимает название лекарства
-    func sendNotificationExpiredMedicine(reminder: Date?, nameMedicine: String)
+    ///   - createdDate: дата создания лекарства, для дополнения ключа идентификации
+    ///                  уведомления.
+    func sendNotificationExpiredMedicine(
+        reminder: Date?,
+        nameMedicine: String,
+        dateCreated: Date
+    )
     /// Метод для отображения бейджев на иконке приложения с количеством просроченных лекарств
     /// - Parameter count: принимает количество просроченных лекарств для установки бейджа
     ///   на иконку приложения с правильным номером
@@ -72,7 +78,11 @@ extension NotificationService: INotificationService {
         }
     }
     
-    func sendNotificationExpiredMedicine(reminder: Date?, nameMedicine: String) {
+    func sendNotificationExpiredMedicine(
+        reminder: Date?,
+        nameMedicine: String,
+        dateCreated: Date
+    ) {
         guard var date = reminder else { return }
         // Необходимо для того, чтобы получать уведомление о просроченном
         // лекарстве каждый день, раздражая пользователя, и заставляя выбросить
@@ -107,7 +117,10 @@ extension NotificationService: INotificationService {
         
         content.sound = UNNotificationSound.default
         
-        let identifier = "\(nameMedicine)"
+        let dateCreated = dateCreated.toString(format: "_MM-dd-yyyy_HH:mm:ss")
+        // Имя+дата создания нужны для уникальной идентификации лекарства,
+        // если имя будет одинаковое.
+        let identifier = nameMedicine + dateCreated
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
         notificationCenter.add(request) { (error) in
             if let error = error {

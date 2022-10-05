@@ -32,17 +32,26 @@ final class NotificationMedicineManager {
 
 extension NotificationMedicineManager: INotificationMedicineManager {
     func deleteNotification(for medicine: DBMedicine) {
+        guard let dateCreated = medicine.dateCreated else {
+            fatalError("Дата создания лекарства должна быть обязательно")
+        }
+        
         if let medicineName = medicine.title {
-            notificationService.notificationCenter.removePendingNotificationRequests(withIdentifiers: [medicineName])
+            let dateCreated = dateCreated.toString(format: "_MM-dd-yyyy_HH:mm:ss")
+            let identifier = medicineName + dateCreated
+            notificationService.notificationCenter.removePendingNotificationRequests(
+                withIdentifiers: [identifier]
+            )
             
-            CustomLogger.info("Уведомление для лекарства \(medicineName) удалено из очереди")
+            CustomLogger.info("Уведомление для лекарства \(identifier) удалено из очереди")
         }
     }
     
     func addToQueueNotificationExpiredMedicine(data: MedicineModel) {
         notificationService.sendNotificationExpiredMedicine(
             reminder: data.expiryDate,
-            nameMedicine: data.title
+            nameMedicine: data.title,
+            dateCreated: data.dateCreated
         )
     }
     
