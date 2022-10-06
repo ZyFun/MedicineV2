@@ -44,6 +44,13 @@ protocol FirstAidKitsViewControllerOutput {
     /// Метод для обновления бейджей на иконке приложения
     /// - Используется для обновления бейджей при входе в приложение
     func updateNotificationBadge()
+    /// Метод для обновления всех уведомлений
+    /// - Используется для того, чтобы все уведомления приходили повторно
+    /// - Лучше вызывать этот метод только после синхронизации с облаком при
+    ///   первом запуске, или при обновлении системы. Не знаю как обновляется
+    ///   очередь уведомлений если система была обновлена. Нужно это протестировать
+    ///   а до этого момента оставить и не использовать
+    func updateAllNotifications()
     /// Метод для перехода к лекартсвам в выбранной аптечке.
     /// - Parameter currentFirstAidKit: принимает текущую аптечку
     func routeToMedicines(with currentFirstAidKit: DBFirstAidKit)
@@ -86,6 +93,10 @@ extension FirstAidKitsPresenter: FirstAidKitsViewControllerOutput {
     
     func updateNotificationBadge() {
         interactor?.updateNotificationBadge()
+    }
+    
+    func updateAllNotifications() {
+        interactor?.updateAllNotifications()
     }
     
     // MARK: - Routing

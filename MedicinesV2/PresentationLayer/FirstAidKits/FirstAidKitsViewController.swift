@@ -49,6 +49,7 @@ final class FirstAidKitsViewController: UIViewController {
         setup()
         presenter?.updatePlaceholder()
         presenter?.updateNotificationBadge()
+        presenter?.updateAllNotifications()
     }
 }
 

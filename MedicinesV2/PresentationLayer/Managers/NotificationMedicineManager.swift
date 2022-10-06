@@ -10,7 +10,12 @@ import Foundation
 protocol INotificationMedicineManager {
     /// Метод для добавления уведомления о просроченном лекарстве в очередь центра уведомлений
     /// - Parameter data: принимает лекарство, уведомления для которого будут добавлены.
+    /// - Метод используется при работе с моделью данных
     func addToQueueNotificationExpiredMedicine(data: MedicineModel)
+    /// Метод для добавления уведомления о просроченном лекарстве в очередь центра уведомлений
+    /// - Parameter data: принимает лекарство, уведомления для которого будут добавлены.
+    /// - Метод используется при работе с базой данных
+    func addToQueueNotificationExpiredMedicine(data: DBMedicine)
     /// Метод для удаления уведомления из очереди центра уведомлений
     /// - Parameter medicine: принимает лекарство, уведомление для которого будет удалено.
     func deleteNotification(for medicine: DBMedicine)
@@ -52,6 +57,21 @@ extension NotificationMedicineManager: INotificationMedicineManager {
             reminder: data.expiryDate,
             nameMedicine: data.title,
             dateCreated: data.dateCreated
+        )
+    }
+    
+    func addToQueueNotificationExpiredMedicine(data: DBMedicine) {
+        guard let title = data.title else {
+            fatalError("Название лекарства должно быть обязательным")
+        }
+        guard let dateCreated = data.dateCreated else {
+            fatalError("Дата создания лекарства должна быть обязательной")
+        }
+        
+        notificationService.sendNotificationExpiredMedicine(
+            reminder: data.expiryDate,
+            nameMedicine: title,
+            dateCreated: dateCreated
         )
     }
     

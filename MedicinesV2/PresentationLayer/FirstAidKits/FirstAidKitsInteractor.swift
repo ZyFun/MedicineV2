@@ -27,6 +27,13 @@ protocol FirstAidKitsBusinessLogic {
     /// Метод для обновления бейджей на иконке приложения
     /// - Используется для обновления бейджей при входе в приложение
     func updateNotificationBadge()
+    /// Метод для обновления всех уведомлений
+    /// - Используется для того, чтобы все уведомления приходили повторно
+    /// - Лучше вызывать этот метод только после синхронизации с облаком при
+    ///   первом запуске, или при обновлении системы. Не знаю как обновляется
+    ///   очередь уведомлений если система была обновлена. Нужно это протестировать
+    ///   а до этого момента оставить и не использовать
+    func updateAllNotifications()
 }
 
 final class FirstAidKitInteractor {
@@ -59,6 +66,8 @@ final class FirstAidKitInteractor {
 // MARK: - Бизнес логика модуля
 
 extension FirstAidKitInteractor: FirstAidKitsBusinessLogic {
+    
+    // MARK: - Interface update
     
     func updatePlaceholder() {
         guard let data = coreDataService?.fetchRequest(
@@ -121,6 +130,31 @@ extension FirstAidKitInteractor: FirstAidKitsBusinessLogic {
         DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 1) {
             let data = self.coreDataService?.fetchRequest(String(describing: DBMedicine.self)) as? [DBMedicine]
             self.notificationManager?.setupBadgeForAppIcon(data: data)
+        }
+    }
+    
+    // TODO: (#Update) Не самый оптимальный способ в плане алгоритмов. Нужно пересмотреть, возможно есть способ лучше.
+    func updateAllNotifications() {
+        coreDataService?.performSave { [weak self] context in
+            self?.coreDataService?.fetchFirstAidKits(from: context) { result in
+                switch result {
+                case .success(let dbFirstAidKits):
+                    dbFirstAidKits.forEach { dbFirstAidKit in
+                        dbFirstAidKit.medicines?.forEach { medicine in
+                            guard let medicine = medicine as? DBMedicine else {
+                                CustomLogger.error("Ошибка каста до DBMedicine")
+                                return
+                            }
+                            self?.notificationManager.addToQueueNotificationExpiredMedicine(
+                                data: medicine
+                            )
+                            CustomLogger.info("Уведомление в очереди обновлено")
+                        }
+                    }
+                case .failure(let error):
+                    CustomLogger.error(error.localizedDescription)
+                }
+            }
         }
     }
 }
