@@ -90,6 +90,7 @@ extension MedicineInteractor: MedicineBusinessLogic {
             // Если лекарство не выбрано, создаём новое
             if let dbMedicine = dbMedicine {
                 self.coreDataService?.update(dbMedicine, newData: medicine, context: context)
+                self.notificationManager?.deleteNotification(for: dbMedicine)
             } else {
                 self.coreDataService?.create(medicine, in: firstAidKit, context: context)
             }
