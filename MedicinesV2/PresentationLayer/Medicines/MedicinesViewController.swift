@@ -124,10 +124,18 @@ extension MedicinesViewController: MedicinesDisplayLogic {
     }
     
     func hidePlaceholder() {
-        placeholderLabel.isHidden = true
+        DispatchQueue.main.async {
+            if !self.placeholderLabel.isHidden {
+                self.placeholderLabel.isHidden = true
+            }
+        }
     }
     
     func showPlaceholder() {
-        placeholderLabel.isHidden = false
+        DispatchQueue.main.async {
+            if self.placeholderLabel.isHidden {
+                self.placeholderLabel.isHidden = false
+            }
+        }
     }
 }

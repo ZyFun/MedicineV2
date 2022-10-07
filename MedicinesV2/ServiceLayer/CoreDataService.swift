@@ -18,6 +18,7 @@ protocol ICoreDataService {
     ) -> NSFetchedResultsController<NSFetchRequestResult>
     func fetchRequest(_ entityName: String) -> [NSFetchRequestResult]
     func fetchFirstAidKits(from context: NSManagedObjectContext, completion: (Result<[DBFirstAidKit], Error>) -> Void)
+    func fetchMedicines(from context: NSManagedObjectContext, completion: (Result<[DBMedicine], Error>) -> Void)
     func create(_ firstAidKit: String, context: NSManagedObjectContext)
     func create(_ medicine: MedicineModel, in currentFirstAidKit: DBFirstAidKit?, context: NSManagedObjectContext)
     func update(_ currentFirstAidKit: DBFirstAidKit, newName: String, context: NSManagedObjectContext)
@@ -149,6 +150,17 @@ extension CoreDataService: ICoreDataService {
         do {
             let firstAidKits = try context.fetch(fetchRequest)
             completion(.success(firstAidKits))
+        } catch {
+            completion(.failure(error))
+        }
+    }
+    
+    func fetchMedicines(from context: NSManagedObjectContext, completion: (Result<[DBMedicine], Error>) -> Void) {
+        let fetchRequest = DBMedicine.fetchRequest()
+
+        do {
+            let medicines = try context.fetch(fetchRequest)
+            completion(.success(medicines))
         } catch {
             completion(.failure(error))
         }

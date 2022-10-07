@@ -134,6 +134,7 @@ extension FirstAidKitInteractor: FirstAidKitsBusinessLogic {
     }
     
     // TODO: (#Update) Не самый оптимальный способ в плане алгоритмов. Нужно пересмотреть, возможно есть способ лучше.
+    // FIXME: Получить просто список лекарств без привязки к текущей аптечке.
     func updateAllNotifications() {
         coreDataService?.performSave { [weak self] context in
             self?.coreDataService?.fetchFirstAidKits(from: context) { result in

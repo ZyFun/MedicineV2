@@ -9,7 +9,12 @@ import Foundation
 
 /// Протокол логики презентации данных
 protocol MedicinesPresentationLogiс: AnyObject {
-    
+    /// Метод для отображения плейсхолдера
+    /// - Показывает его, если список лекарств пустой
+    func showPlaceholder()
+    /// Метод для скрытия плейсхолдера
+    /// - Скрывает его, если список лекарств не пустой
+    func hidePlaceholder()
 }
 
 /// Протокол взаимодействия ViewController-a с презенетром
@@ -47,19 +52,13 @@ final class MedicinesPresenter {
 }
 
 extension MedicinesPresenter: MedicinesViewControllerOutput {
+    
     func updatePlaceholder(for currentFirstAidKit: DBFirstAidKit?) {
-        // TODO: (#MED-142) Придумать, как работать с многопоточкой и обновить плейсхолдер
-        // Сейчас не совсем оптимально. Нужно обновлять, сразу после того как произошло обновление и делать это плавно с анимацией.
-        if currentFirstAidKit?.medicines?.count != .zero {
-            self.view?.hidePlaceholder()
-        } else {
-            self.view?.showPlaceholder()
-        }
+        interactor?.updatePlaceholder(for: currentFirstAidKit)
     }
     
     func updatePlaceholder() {
-        // TODO: (#MED-142) Придумать, как работать с многопоточкой и обновить плейсхолдер
-        // Сейчас не совсем оптимально. Нужно обновлять, сразу после того как произошло обновление и делать это плавно с анимацией.
+        // TODO: (#Update) Сделать скрытие плейсхолдера после добавления лекарства, а не после нажатия на +
         view?.hidePlaceholder()
     }
     
@@ -78,4 +77,11 @@ extension MedicinesPresenter: MedicinesViewControllerOutput {
 
 extension MedicinesPresenter: MedicinesPresentationLogiс {
     
+    func hidePlaceholder() {
+        view?.hidePlaceholder()
+    }
+    
+    func showPlaceholder() {
+        view?.showPlaceholder()
+    }
 }
