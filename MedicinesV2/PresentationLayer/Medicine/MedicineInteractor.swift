@@ -75,7 +75,7 @@ extension MedicineInteractor: MedicineBusinessLogic {
             
             var firstAidKit: DBFirstAidKit?
             
-            self.coreDataService?.fetchFirstAidKits(from: context) { result in
+            self.coreDataService?.fetch(DBFirstAidKit.self, from: context) { result in
                 switch result {
                 case .success(let dbFirstAidKits):
                     firstAidKit = self.fetchFirstAidKit(

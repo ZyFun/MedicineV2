@@ -17,8 +17,16 @@ protocol ICoreDataService {
         currentFirstAidKit: DBFirstAidKit?
     ) -> NSFetchedResultsController<NSFetchRequestResult>
     func fetchRequest(_ entityName: String) -> [NSFetchRequestResult]
-    func fetchFirstAidKits(from context: NSManagedObjectContext, completion: (Result<[DBFirstAidKit], Error>) -> Void)
-    func fetchMedicines(from context: NSManagedObjectContext, completion: (Result<[DBMedicine], Error>) -> Void)
+    /// Метод для получения данных из CoreData
+    /// - Parameters:
+    ///   - managedObject: принимает модель CoreData с которой предстоит работать.
+    ///   - context: принимает контекст, в котором производится работа с данными.
+    ///   - completion: возвращает Result или ошибку по завершению чтения данных из базы.
+    func fetch<T: NSManagedObject>(
+        _ managedObject: T.Type,
+        from context: NSManagedObjectContext,
+        completion: (Result<[T], Error>) -> Void
+    )
     func create(_ firstAidKit: String, context: NSManagedObjectContext)
     func create(_ medicine: MedicineModel, in currentFirstAidKit: DBFirstAidKit?, context: NSManagedObjectContext)
     func update(_ currentFirstAidKit: DBFirstAidKit, newName: String, context: NSManagedObjectContext)
@@ -144,23 +152,16 @@ extension CoreDataService: ICoreDataService {
         }
     }
     
-    func fetchFirstAidKits(from context: NSManagedObjectContext, completion: (Result<[DBFirstAidKit], Error>) -> Void) {
-        let fetchRequest = DBFirstAidKit.fetchRequest()
+    func fetch<T: NSManagedObject>(
+        _ managedObject: T.Type,
+        from context: NSManagedObjectContext,
+        completion: (Result<[T], Error>) -> Void
+    ) {
+        let fetchRequest = managedObject.fetchRequest()
 
         do {
-            let firstAidKits = try context.fetch(fetchRequest)
-            completion(.success(firstAidKits))
-        } catch {
-            completion(.failure(error))
-        }
-    }
-    
-    func fetchMedicines(from context: NSManagedObjectContext, completion: (Result<[DBMedicine], Error>) -> Void) {
-        let fetchRequest = DBMedicine.fetchRequest()
-
-        do {
-            let medicines = try context.fetch(fetchRequest)
-            completion(.success(medicines))
+            guard let dbObject = try context.fetch(fetchRequest) as? [T] else { return }
+            completion(.success(dbObject))
         } catch {
             completion(.failure(error))
         }

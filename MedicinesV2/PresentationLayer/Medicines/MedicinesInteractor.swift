@@ -54,7 +54,7 @@ extension MedicinesInteractor: MedicinesBusinessLogic {
             self.coreDataService?.delete(medicine, context: context)
             self.updateNotificationBadge()
             
-            self.coreDataService?.fetchFirstAidKits(from: context) { result in
+            self.coreDataService?.fetch(DBFirstAidKit.self, from: context) { result in
                 switch result {
                 case .success(let dbFirstAidKits):
                     firstAidKit = self.fetchFirstAidKit(

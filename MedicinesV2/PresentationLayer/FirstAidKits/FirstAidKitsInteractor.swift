@@ -105,7 +105,7 @@ extension FirstAidKitInteractor: FirstAidKitsBusinessLogic {
             self?.deleteNotifications(for: firstAidKit)
             self?.coreDataService?.delete(firstAidKit, context: context)
             
-            self?.coreDataService?.fetchFirstAidKits(from: context) { result in
+            self?.coreDataService?.fetch(DBFirstAidKit.self, from: context) { result in
                 switch result {
                 case .success(let firstAidKits):
                     self?.updatePlaceholder(for: firstAidKits)
@@ -137,7 +137,7 @@ extension FirstAidKitInteractor: FirstAidKitsBusinessLogic {
     // FIXME: Получить просто список лекарств без привязки к текущей аптечке.
     func updateAllNotifications() {
         coreDataService?.performSave { [weak self] context in
-            self?.coreDataService?.fetchFirstAidKits(from: context) { result in
+            self?.coreDataService?.fetch(DBFirstAidKit.self, from: context) { result in
                 switch result {
                 case .success(let dbFirstAidKits):
                     dbFirstAidKits.forEach { dbFirstAidKit in
