@@ -56,40 +56,48 @@ extension MedicineInteractor: MedicineBusinessLogic {
             return
         }
         
+        let dateCreated = self.constructDateCreation(dbMedicine)
+        
+        // Расширение doubleValue возвращает 0, но с 0 будет краш приложения
+        // при открытии такого лекарства. По этому, значение по умолчанию
+        // для stepCountForStepper равняется 1.
+        let medicine = MedicineModel(
+            dateCreated: dateCreated,
+            title: name ?? "",
+            type: type,
+            amount: amount?.doubleValue ?? 0,
+            stepCountForStepper: countSteps?.doubleValue ?? 1,
+            expiryDate: expiryDate?.toDate()
+        )
+        
         coreDataService?.performSave { [weak self] context in
+            guard let self = self else { return }
+            
             var firstAidKit: DBFirstAidKit?
             
-            self?.coreDataService?.fetchFirstAidKits(from: context, completion: { result in
+            self.coreDataService?.fetch(DBFirstAidKit.self, from: context) { result in
                 switch result {
-                case .success(let firstAidKits):
-                    firstAidKit = self?.fetchFirstAidKit(from: firstAidKits, for: currentFirstAidKit)
+                case .success(let dbFirstAidKits):
+                    firstAidKit = self.fetchFirstAidKit(
+                        from: dbFirstAidKits,
+                        for: currentFirstAidKit
+                    )
                 case .failure(let error):
-                    Logger.error(error.localizedDescription)
+                    CustomLogger.error(error.localizedDescription)
                 }
-            })
-            
-            // Расширение doubleValue возвращает 0, но с 0 будет краш приложения
-            // при открытии такого лекарства. По этому, значение по умолчанию
-            // для stepCountForStepper равняется 1.
-            let medicine = MedicineModel(
-                dateCreated: Date(),
-                title: name ?? "",
-                type: type,
-                amount: amount?.doubleValue ?? 0,
-                stepCountForStepper: countSteps?.doubleValue ?? 1,
-                expiryDate: expiryDate?.toDate()
-            )
+            }
             
             // Если лекарство не выбрано, создаём новое
             if let dbMedicine = dbMedicine {
-                self?.coreDataService?.update(dbMedicine, newData: medicine, context: context)
+                self.coreDataService?.update(dbMedicine, newData: medicine, context: context)
+                self.notificationManager?.deleteNotification(for: dbMedicine)
             } else {
-                self?.coreDataService?.create(medicine, in: firstAidKit, context: context)
+                self.coreDataService?.create(medicine, in: firstAidKit, context: context)
             }
             
-            self?.notificationManager?.addToQueueNotificationExpiredMedicine(data: medicine)
+            self.notificationManager?.addToQueueNotificationExpiredMedicine(data: medicine)
             
-            self?.presenter?.returnToBack()
+            self.presenter?.returnToBack()
         }
     }
     
@@ -106,15 +114,27 @@ extension MedicineInteractor: MedicineBusinessLogic {
     ) -> DBFirstAidKit? {
         
         guard let currentFirstAidKitID = currentFirstAidKit?.objectID else {
-            Logger.error("Не удалось найти ID объекта")
+            CustomLogger.error("Не удалось найти ID объекта")
             return nil
         }
         
         if let firstAidKit = firstAidKits.filter({ $0.objectID == currentFirstAidKitID }).first {
             return firstAidKit
         } else {
-            Logger.warning("Объект не найден")
+            CustomLogger.warning("Объект не найден")
             return nil
+        }
+    }
+    
+    /// Метод для построения даты создания
+    /// - Parameter dbMedicine: принимает текущую аптечку
+    /// - Returns: возвращает дату из базы или новую текущую
+    ///
+    private func constructDateCreation(_ dbMedicine: DBMedicine?) -> Date {
+        if let dateCreated = dbMedicine?.dateCreated {
+            return dateCreated
+        } else {
+            return Date()
         }
     }
 }

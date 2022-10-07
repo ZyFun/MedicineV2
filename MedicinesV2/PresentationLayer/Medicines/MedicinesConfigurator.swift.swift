@@ -62,5 +62,6 @@ final class MedicinesConfigurator {
         interactor.presenter = presenter
         interactor.notificationManager = notificationManager
         interactor.coreDataService = coreDataService
+        interactor.currentFirstAidKit = currentFirstAidKit
     }
 }

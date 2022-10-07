@@ -9,10 +9,15 @@ import UIKit
 
 final class FirstAidKitsConfigurator {
     
+    private let notificationManager: INotificationMedicineManager
     private let coreDataService: ICoreDataService
     private let fetchedResultManager: IFirstAidKitsFetchedResultsManager
     
-    init(coreDataService: ICoreDataService) {
+    init(
+        notificationManager: INotificationMedicineManager,
+        coreDataService: ICoreDataService
+    ) {
+        self.notificationManager = notificationManager
         self.coreDataService = coreDataService
         fetchedResultManager = FirstAidKitsFetchedResultsManager(
             fetchedResultsController: coreDataService.fetchResultController(
@@ -25,7 +30,10 @@ final class FirstAidKitsConfigurator {
     }
     
     func config(view: UIViewController, navigationController: UINavigationController) {
-        guard let view = view as? FirstAidKitsViewController else { return }
+        guard let view = view as? FirstAidKitsViewController else {
+            CustomLogger.error("ViewController аптечки не инициализирован")
+            return
+        }
         
         let presenter = FirstAidKitsPresenter()
         let interactor = FirstAidKitInteractor()
@@ -42,6 +50,7 @@ final class FirstAidKitsConfigurator {
         presenter.interactor = interactor
         presenter.router = router
         interactor.presenter = presenter
+        interactor.notificationManager = notificationManager
         interactor.coreDataService = coreDataService
     }
 }

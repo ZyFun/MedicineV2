@@ -180,11 +180,11 @@ private extension MedicineViewController {
     /// Конфигурирование степпера
     func setupStepperMedicine() {
         guard let value = medicineAmountTextField.text?.doubleValue else {
-            Logger.error("Нет значения для степпера")
+            CustomLogger.error("Нет значения для степпера")
             return
         }
         guard let stepValue = medicineCountStepsTextField.text?.doubleValue else {
-            Logger.error("Нет значения для шага степпера")
+            CustomLogger.error("Нет значения для шага степпера")
             return
         }
         
@@ -296,7 +296,7 @@ private extension MedicineViewController {
         
         if textField == medicineCountStepsTextField {
             guard var amountMedicine = textField.text?.doubleValue else {
-                Logger.error("Нет значения количества лекарств")
+                CustomLogger.error("Нет значения количества лекарств")
                 return
             }
             
@@ -319,7 +319,7 @@ private extension MedicineViewController {
         
         if textField == medicineAmountTextField {
             guard let amountMedicine = textField.text?.doubleValue else {
-                Logger.error("Нет значения количества лекарств")
+                CustomLogger.error("Нет значения количества лекарств")
                 return
             }
             textField.text = String(format: "%.2f", amountMedicine)

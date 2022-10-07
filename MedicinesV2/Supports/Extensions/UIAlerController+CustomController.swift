@@ -62,12 +62,14 @@ extension UIAlertController {
         
         addAction(saveAction)
         addAction(cancelAction)
-        addTextField { textFields in
+        addTextField { textField in
+            textField.autocapitalizationType = .sentences
+            
             if firstAidKit != nil {
-                textFields.text = firstAidKit?.title
-                textFields.placeholder = "Введите новое название аптечки"
+                textField.text = firstAidKit?.title
+                textField.placeholder = "Введите новое название аптечки"
             } else {
-                textFields.placeholder = "Введите название новой аптечки"
+                textField.placeholder = "Введите название новой аптечки"
             }
         }
     }

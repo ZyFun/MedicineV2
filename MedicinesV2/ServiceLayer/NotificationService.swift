@@ -16,7 +16,13 @@ protocol INotificationService {
     /// - Parameters:
     ///   - reminder: принимает дату, на которую будет установлено уведомление
     ///   - nameMedicine: принимает название лекарства
-    func sendNotificationExpiredMedicine(reminder: Date?, nameMedicine: String)
+    ///   - createdDate: дата создания лекарства, для дополнения ключа идентификации
+    ///                  уведомления.
+    func sendNotificationExpiredMedicine(
+        reminder: Date?,
+        nameMedicine: String,
+        dateCreated: Date
+    )
     /// Метод для отображения бейджев на иконке приложения с количеством просроченных лекарств
     /// - Parameter count: принимает количество просроченных лекарств для установки бейджа
     ///   на иконку приложения с правильным номером
@@ -24,9 +30,18 @@ protocol INotificationService {
 }
 
 final class NotificationService: NSObject, UNUserNotificationCenterDelegate {
+    static let shared = NotificationService()
     
     // Создаём экземпляр класса, для управлением уведомлениями. current возвращет обект для центра уведомлений
     var notificationCenter = UNUserNotificationCenter.current()
+    
+    private override init() {
+        super.init()
+        
+        // Нужен, чтобы уведомление отображалось при активном приложении
+        // Инитим тут, так как класс синглтон и висит в памяти всегда.
+        notificationCenter.delegate = self
+    }
     
     // Метод для показа уведомлений во время активного приложения
     func userNotificationCenter(
@@ -46,7 +61,7 @@ extension NotificationService: INotificationService {
         // Метод запроса авторизации. options это те уведомления которые мы
         // хотим отправлять. granted обозначает, прошла авторизация или нет
         notificationCenter.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, _) in
-            Logger.info("Разрешение получено: \(granted)")
+            CustomLogger.info("Разрешение получено: \(granted)")
             
             guard granted else { return }
             // Запрашиваем состояние разрешений
@@ -59,11 +74,15 @@ extension NotificationService: INotificationService {
         // Проверяем состояние авторизаций или параметров уведомлений
         // TODO: (#Update) Посмотреть как можно запросить к примеру включить уведомления обратно, если пользователь их отключил
         notificationCenter.getNotificationSettings { (settings) in
-            Logger.info("Настройки получены: \(settings)")
+            CustomLogger.info("Настройки получены: \(settings)")
         }
     }
     
-    func sendNotificationExpiredMedicine(reminder: Date?, nameMedicine: String) {
+    func sendNotificationExpiredMedicine(
+        reminder: Date?,
+        nameMedicine: String,
+        dateCreated: Date
+    ) {
         guard var date = reminder else { return }
         // Необходимо для того, чтобы получать уведомление о просроченном
         // лекарстве каждый день, раздражая пользователя, и заставляя выбросить
@@ -98,21 +117,26 @@ extension NotificationService: INotificationService {
         
         content.sound = UNNotificationSound.default
         
-        let identifier = "\(nameMedicine)"
+        let dateCreated = dateCreated.toString(format: "_MM-dd-yyyy_HH:mm:ss")
+        // Имя+дата создания нужны для уникальной идентификации лекарства,
+        // если имя будет одинаковое.
+        let identifier = nameMedicine + dateCreated
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
         notificationCenter.add(request) { (error) in
             if let error = error {
-                Logger.error("Error: \(error.localizedDescription)")
+                CustomLogger.error("Error: \(error.localizedDescription)")
                 // TODO: (#Explore) Принт из примера обработки ошибок, хочу посмотреть что он покажет если что то пойдет не так
-                Logger.error("\(error as Any)")
+                CustomLogger.error("\(error as Any)")
             }
             
-            Logger.info("Добавлено уведомление для лекарства: \(identifier)")
+            CustomLogger.info("Добавлено уведомление для лекарства: \(identifier)")
         }
     }
     
     func setupBadge(count: Int) {
-        UIApplication.shared.applicationIconBadgeNumber = count
+        DispatchQueue.main.async {
+            UIApplication.shared.applicationIconBadgeNumber = count
+        }
     }
     
     //    // TODO: (#Update) Добавить метод, чтобы при нажатии на уведомление происходил вход в аптечку с лекарством

@@ -9,11 +9,20 @@ import Foundation
 
 /// Протокол логики презентации данных
 protocol FirstAidKitsPresentationLogic: AnyObject {
-    
+    /// Метод для скрытия плейсхолдера
+    /// - Скрывает его, если список аптечек не пустой
+    func hidePlaceholder()
+    /// Метод для отображения плейсхолдера
+    /// - Показывает его, если список аптечек пустой
+    func showPlaceholder()
 }
 
 /// Протокол взаимодействия ViewController-a с презенетром
 protocol FirstAidKitsViewControllerOutput {
+    /// Метод для обновления состояния плейсхолдера
+    /// - Используется для скрытия или отображения плейсхолдера
+    /// - Если в базе есть аптечки, скрывается, иначе - отображается
+    func updatePlaceholder()
     /// Метод для отображения кастомного алерт контроллера добавления или редактирования аптечки
     /// - Parameters:
     ///   - entity: Принимает аптечку
@@ -32,6 +41,16 @@ protocol FirstAidKitsViewControllerOutput {
     /// Метод для удаления данных из БД
     /// - Parameter firstAidKit: принимает аптечку, которую необходимо удалить из БД
     func delete(_ firstAidKit: DBFirstAidKit)
+    /// Метод для обновления бейджей на иконке приложения
+    /// - Используется для обновления бейджей при входе в приложение
+    func updateNotificationBadge()
+    /// Метод для обновления всех уведомлений
+    /// - Используется для того, чтобы все уведомления приходили повторно
+    /// - Лучше вызывать этот метод только после синхронизации с облаком при
+    ///   первом запуске, или при обновлении системы. Не знаю как обновляется
+    ///   очередь уведомлений если система была обновлена. Нужно это протестировать
+    ///   а до этого момента оставить и не использовать
+    func updateAllNotifications()
     /// Метод для перехода к лекартсвам в выбранной аптечке.
     /// - Parameter currentFirstAidKit: принимает текущую аптечку
     func routeToMedicines(with currentFirstAidKit: DBFirstAidKit)
@@ -45,6 +64,10 @@ final class FirstAidKitsPresenter {
 }
 
 extension FirstAidKitsPresenter: FirstAidKitsViewControllerOutput {
+    
+    func updatePlaceholder() {
+        interactor?.updatePlaceholder()
+    }
     
     // MARK: - Alerts
     
@@ -66,6 +89,16 @@ extension FirstAidKitsPresenter: FirstAidKitsViewControllerOutput {
         interactor?.delete(firstAidKit: firstAidKit)
     }
     
+    // MARK: - Notifications
+    
+    func updateNotificationBadge() {
+        interactor?.updateNotificationBadge()
+    }
+    
+    func updateAllNotifications() {
+        interactor?.updateAllNotifications()
+    }
+    
     // MARK: - Routing
     
     func routeToMedicines(with currentFirstAidKit: DBFirstAidKit) {
@@ -75,4 +108,11 @@ extension FirstAidKitsPresenter: FirstAidKitsViewControllerOutput {
 
 extension FirstAidKitsPresenter: FirstAidKitsPresentationLogic {
     
+    func hidePlaceholder() {
+        view?.hidePlaceholder()
+    }
+    
+    func showPlaceholder() {
+        view?.showPlaceholder()
+    }
 }
