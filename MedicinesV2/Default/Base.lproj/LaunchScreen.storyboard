@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mBG-8b-aEu">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mBG-8b-aEu">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Аптечка" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C5z-XV-37S">
-                                <rect key="frame" x="115" y="611" width="185" height="36"/>
+                                <rect key="frame" x="148" y="611" width="118" height="36"/>
                                 <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="30"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -34,8 +34,7 @@
                         <color key="backgroundColor" name="background"/>
                         <constraints>
                             <constraint firstItem="UIi-3O-13Z" firstAttribute="centerY" secondItem="siz-IO-BOh" secondAttribute="centerY" id="OWw-kk-Fkq"/>
-                            <constraint firstItem="C5z-XV-37S" firstAttribute="leading" secondItem="uqt-Vv-WHf" secondAttribute="leading" constant="115" id="e6c-Au-0Dv"/>
-                            <constraint firstItem="uqt-Vv-WHf" firstAttribute="trailing" secondItem="C5z-XV-37S" secondAttribute="trailing" constant="114" id="rSs-nE-SOu"/>
+                            <constraint firstItem="C5z-XV-37S" firstAttribute="centerX" secondItem="siz-IO-BOh" secondAttribute="centerX" id="ffZ-5A-oNZ"/>
                             <constraint firstItem="C5z-XV-37S" firstAttribute="top" secondItem="UIi-3O-13Z" secondAttribute="bottom" constant="35" id="zM6-6i-cx4"/>
                             <constraint firstItem="UIi-3O-13Z" firstAttribute="centerX" secondItem="siz-IO-BOh" secondAttribute="centerX" id="zTl-Hl-AOX"/>
                         </constraints>
