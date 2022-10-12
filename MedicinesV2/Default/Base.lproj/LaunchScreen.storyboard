@@ -18,22 +18,23 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Аптечка" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C5z-XV-37S">
-                                <rect key="frame" x="148" y="611" width="118" height="36"/>
+                                <rect key="frame" x="148" y="513" width="118" height="36"/>
                                 <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="30"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appLoadImg" translatesAutoresizingMaskIntoConstraints="NO" id="UIi-3O-13Z">
-                                <rect key="frame" x="57" y="320" width="300" height="256"/>
+                                <rect key="frame" x="132" y="328" width="150" height="150"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="PH5-kJ-rI9"/>
+                                    <constraint firstAttribute="height" constant="150" id="AOs-59-5g9"/>
+                                    <constraint firstAttribute="width" constant="150" id="xe8-yJ-Tfg"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="uqt-Vv-WHf"/>
                         <color key="backgroundColor" name="background"/>
                         <constraints>
-                            <constraint firstItem="UIi-3O-13Z" firstAttribute="centerY" secondItem="siz-IO-BOh" secondAttribute="centerY" id="OWw-kk-Fkq"/>
+                            <constraint firstItem="UIi-3O-13Z" firstAttribute="centerY" secondItem="siz-IO-BOh" secondAttribute="centerY" constant="-45" id="OWw-kk-Fkq"/>
                             <constraint firstItem="C5z-XV-37S" firstAttribute="centerX" secondItem="siz-IO-BOh" secondAttribute="centerX" id="ffZ-5A-oNZ"/>
                             <constraint firstItem="C5z-XV-37S" firstAttribute="top" secondItem="UIi-3O-13Z" secondAttribute="bottom" constant="35" id="zM6-6i-cx4"/>
                             <constraint firstItem="UIi-3O-13Z" firstAttribute="centerX" secondItem="siz-IO-BOh" secondAttribute="centerX" id="zTl-Hl-AOX"/>

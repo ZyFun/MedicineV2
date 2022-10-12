@@ -9,6 +9,10 @@ import Foundation
 
 /// Протокол логики презентации данных
 protocol FirstAidKitsPresentationLogic: AnyObject {
+    /// Метод для скрытия сплешскрина
+    /// - Скрывает сплешскрин по окончанию загрузки всех данных и настройки приложения
+    /// - на данный момент вызывается методом `updateAllNotifications` в интеракторе.
+    func dismissSplashScreen()
     /// Метод для скрытия плейсхолдера
     /// - Скрывает его, если список аптечек не пустой
     func hidePlaceholder()
@@ -58,10 +62,14 @@ protocol FirstAidKitsViewControllerOutput {
 
 final class FirstAidKitsPresenter {
     
+    // MARK: - Public properties
+    
     weak var view: FirstAidKitsDisplayLogic?
     var interactor: FirstAidKitsBusinessLogic?
     var router: FirstAidKitRoutingLogic?
 }
+
+// MARK: - View Controller Output
 
 extension FirstAidKitsPresenter: FirstAidKitsViewControllerOutput {
     
@@ -106,7 +114,13 @@ extension FirstAidKitsPresenter: FirstAidKitsViewControllerOutput {
     }
 }
 
+// MARK: - Presentation Logic
+
 extension FirstAidKitsPresenter: FirstAidKitsPresentationLogic {
+    
+    func dismissSplashScreen() {
+        view?.dismissSplashScreen()
+    }
     
     func hidePlaceholder() {
         view?.hidePlaceholder()

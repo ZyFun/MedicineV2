@@ -15,7 +15,6 @@
 		2C496896277495E800436C5F /* FirstAidKitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C496894277495E800436C5F /* FirstAidKitCell.swift */; };
 		2C496897277495E800436C5F /* FirstAidKitCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C496895277495E800436C5F /* FirstAidKitCell.xib */; };
 		2C52BDBB273540F400356A63 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C52BDBA273540F400356A63 /* AppDelegate.swift */; };
-		2C52BDBD273540F400356A63 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C52BDBC273540F400356A63 /* SceneDelegate.swift */; };
 		2C52BDC2273540F400356A63 /* MedicineViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C52BDC0273540F400356A63 /* MedicineViewController.storyboard */; };
 		2C52BDC7273540F600356A63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C52BDC6273540F600356A63 /* Assets.xcassets */; };
 		2C52BDCA273540F600356A63 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C52BDC8273540F600356A63 /* LaunchScreen.storyboard */; };
@@ -45,6 +44,10 @@
 		2CDB5E2027A538EF002361F2 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 2CDB5E1F27A538EF002361F2 /* README.md */; };
 		2CE3D70728D8BDE7001DA9AF /* FirstAidKitsFetchedResultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE3D70628D8BDE7001DA9AF /* FirstAidKitsFetchedResultsManager.swift */; };
 		2CEAA1BB28DDC5C2000BA942 /* MedicinesDataSourceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEAA1BA28DDC5C2000BA942 /* MedicinesDataSourceProvider.swift */; };
+		2CED30E428F6E47200A6CEE5 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CED30E228F6E47200A6CEE5 /* SplashViewController.swift */; };
+		2CED30E528F6E47200A6CEE5 /* SplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CED30E328F6E47200A6CEE5 /* SplashViewController.xib */; };
+		2CED30E728F6E6A500A6CEE5 /* SplashPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CED30E628F6E6A500A6CEE5 /* SplashPresenter.swift */; };
+		2CED30E928F6E6C900A6CEE5 /* SplashAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CED30E828F6E6C900A6CEE5 /* SplashAnimator.swift */; };
 		2CF1EE71277347580031D79D /* FirstAidKitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF1EE70277347580031D79D /* FirstAidKitsViewController.swift */; };
 		2CF1EE73277347700031D79D /* FirstAidKitsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF1EE72277347700031D79D /* FirstAidKitsPresenter.swift */; };
 		2CF1EE75277347800031D79D /* FirstAidKitsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF1EE74277347800031D79D /* FirstAidKitsInteractor.swift */; };
@@ -67,7 +70,6 @@
 		2C496895277495E800436C5F /* FirstAidKitCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FirstAidKitCell.xib; sourceTree = "<group>"; };
 		2C52BDB7273540F400356A63 /* MedicinesV2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MedicinesV2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C52BDBA273540F400356A63 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2C52BDBC273540F400356A63 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		2C52BDC1273540F400356A63 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MedicineViewController.storyboard; sourceTree = "<group>"; };
 		2C52BDC6273540F600356A63 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2C52BDC9273540F600356A63 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -100,6 +102,10 @@
 		2CE3D70628D8BDE7001DA9AF /* FirstAidKitsFetchedResultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAidKitsFetchedResultsManager.swift; sourceTree = "<group>"; };
 		2CE3D70A28D90A00001DA9AF /* Medicines v3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Medicines v3.xcdatamodel"; sourceTree = "<group>"; };
 		2CEAA1BA28DDC5C2000BA942 /* MedicinesDataSourceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicinesDataSourceProvider.swift; sourceTree = "<group>"; };
+		2CED30E228F6E47200A6CEE5 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		2CED30E328F6E47200A6CEE5 /* SplashViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SplashViewController.xib; sourceTree = "<group>"; };
+		2CED30E628F6E6A500A6CEE5 /* SplashPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashPresenter.swift; sourceTree = "<group>"; };
+		2CED30E828F6E6C900A6CEE5 /* SplashAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashAnimator.swift; sourceTree = "<group>"; };
 		2CF1EE70277347580031D79D /* FirstAidKitsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAidKitsViewController.swift; sourceTree = "<group>"; };
 		2CF1EE72277347700031D79D /* FirstAidKitsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAidKitsPresenter.swift; sourceTree = "<group>"; };
 		2CF1EE74277347800031D79D /* FirstAidKitsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAidKitsInteractor.swift; sourceTree = "<group>"; };
@@ -223,6 +229,7 @@
 			children = (
 				2C38604028DC82DB003FED87 /* PresentationAssembly.swift */,
 				2CB5E6F728DF1831003D06D0 /* Managers */,
+				2CED30E128F6E2F500A6CEE5 /* SplashScreen */,
 				2CF1EE6F277346E70031D79D /* FirstAidKits */,
 				2C925709273D45CD00DA7284 /* Medicines */,
 				2CBD2B19277C7EFC00F857C3 /* Medicine */,
@@ -295,7 +302,6 @@
 			children = (
 				2C52BDDC27355E3600356A63 /* Recources */,
 				2C52BDBA273540F400356A63 /* AppDelegate.swift */,
-				2C52BDBC273540F400356A63 /* SceneDelegate.swift */,
 				2C52BDC8273540F600356A63 /* LaunchScreen.storyboard */,
 			);
 			path = Default;
@@ -351,6 +357,17 @@
 				2CEAA1BA28DDC5C2000BA942 /* MedicinesDataSourceProvider.swift */,
 			);
 			path = Providers;
+			sourceTree = "<group>";
+		};
+		2CED30E128F6E2F500A6CEE5 /* SplashScreen */ = {
+			isa = PBXGroup;
+			children = (
+				2CED30E328F6E47200A6CEE5 /* SplashViewController.xib */,
+				2CED30E228F6E47200A6CEE5 /* SplashViewController.swift */,
+				2CED30E628F6E6A500A6CEE5 /* SplashPresenter.swift */,
+				2CED30E828F6E6C900A6CEE5 /* SplashAnimator.swift */,
+			);
+			path = SplashScreen;
 			sourceTree = "<group>";
 		};
 		2CF1EE6F277346E70031D79D /* FirstAidKits */ = {
@@ -441,6 +458,7 @@
 				2C52BDCA273540F600356A63 /* LaunchScreen.storyboard in Resources */,
 				2C496897277495E800436C5F /* FirstAidKitCell.xib in Resources */,
 				2C925724273D80DD00DA7284 /* MedicineCell.xib in Resources */,
+				2CED30E528F6E47200A6CEE5 /* SplashViewController.xib in Resources */,
 				2CF28A1E277CAF5E002536F7 /* MedicinesViewController.xib in Resources */,
 				2C52BDC7273540F600356A63 /* Assets.xcassets in Resources */,
 				2C52BDC2273540F400356A63 /* MedicineViewController.storyboard in Resources */,
@@ -504,6 +522,7 @@
 				2C38603F28DC81FE003FED87 /* ServiceAssembly.swift in Sources */,
 				2C480C84275FB1FA000CD5CC /* Date+DateFormatter.swift in Sources */,
 				2C38604128DC82DB003FED87 /* PresentationAssembly.swift in Sources */,
+				2CED30E428F6E47200A6CEE5 /* SplashViewController.swift in Sources */,
 				2C776FDF27BF98E8004B67B4 /* Debug.swift in Sources */,
 				2CE3D70728D8BDE7001DA9AF /* FirstAidKitsFetchedResultsManager.swift in Sources */,
 				2C925717273D4DE800DA7284 /* MedicinesViewController.swift in Sources */,
@@ -520,10 +539,12 @@
 				2C6762892757A32300B46E21 /* MedicineViewController.swift in Sources */,
 				2CBD2B1F277C7FA300F857C3 /* MedicineInteractor.swift in Sources */,
 				2CBD2B23277C7FC200F857C3 /* MedicineConfigurator.swift in Sources */,
+				2CED30E728F6E6A500A6CEE5 /* SplashPresenter.swift in Sources */,
 				2CA75457273BED4100B147B7 /* UIAlerController+CustomController.swift in Sources */,
 				2C496896277495E800436C5F /* FirstAidKitCell.swift in Sources */,
 				2CBD2B1D277C7F9200F857C3 /* MedicinePresenter.swift in Sources */,
 				2CAE169828D9F7E30071E783 /* MedicinesFetchedResultsManager.swift in Sources */,
+				2CED30E928F6E6C900A6CEE5 /* SplashAnimator.swift in Sources */,
 				2CF1EE77277347980031D79D /* FirstAidKitsRouter.swift in Sources */,
 				2C925723273D80DD00DA7284 /* MedicineCell.swift in Sources */,
 				2C925719273D5C4400DA7284 /* MedicinesPresenter.swift in Sources */,
@@ -532,7 +553,6 @@
 				2C92571D273D5CBF00DA7284 /* MedicinesRouter.swift in Sources */,
 				2CB5E6F928DF1842003D06D0 /* NotificationMedicineManager.swift in Sources */,
 				2CF1EE73277347700031D79D /* FirstAidKitsPresenter.swift in Sources */,
-				2C52BDBD273540F400356A63 /* SceneDelegate.swift in Sources */,
 				2CEAA1BB28DDC5C2000BA942 /* MedicinesDataSourceProvider.swift in Sources */,
 				2C92571F273D611800DA7284 /* MedicinesConfigurator.swift.swift in Sources */,
 				2C1D3E6A2760FFD800D01C51 /* String+NumberFormatter.swift in Sources */,

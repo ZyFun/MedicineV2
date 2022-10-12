@@ -152,6 +152,8 @@ extension FirstAidKitInteractor: FirstAidKitsBusinessLogic {
                             CustomLogger.info("Уведомление в очереди обновлено")
                         }
                     }
+                    
+                    self?.presenter?.dismissSplashScreen()
                 case .failure(let error):
                     CustomLogger.error(error.localizedDescription)
                 }

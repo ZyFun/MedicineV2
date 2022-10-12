@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SplashViewController" customModule="MedicinesV2" customModuleProvider="target">
+            <connections>
+                <outlet property="loadInformLabel" destination="phq-nF-nl4" id="40C-85-Ux6"/>
+                <outlet property="logoImageView" destination="9af-J7-xwx" id="smr-n8-hD3"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Аптечка" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jFs-rB-EXD">
+                    <rect key="frame" x="148" y="513" width="118" height="36"/>
+                    <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="30"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appLoadImg" translatesAutoresizingMaskIntoConstraints="NO" id="9af-J7-xwx">
+                    <rect key="frame" x="132" y="328" width="150" height="150"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="150" id="DfB-6k-qjG"/>
+                        <constraint firstAttribute="height" constant="150" id="v9M-PK-afl"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Идёт загрузка данных" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="phq-nF-nl4">
+                    <rect key="frame" x="117.5" y="816.5" width="179.5" height="20.5"/>
+                    <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" name="background"/>
+            <constraints>
+                <constraint firstItem="jFs-rB-EXD" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="0UY-5b-TNV"/>
+                <constraint firstItem="jFs-rB-EXD" firstAttribute="top" secondItem="9af-J7-xwx" secondAttribute="bottom" constant="35" id="Vgh-kd-bE6"/>
+                <constraint firstItem="9af-J7-xwx" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="-45" id="Ywb-i6-k0u"/>
+                <constraint firstItem="phq-nF-nl4" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="aWW-qv-6Fp"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="phq-nF-nl4" secondAttribute="bottom" constant="25" id="gvw-U5-Ia7"/>
+                <constraint firstItem="9af-J7-xwx" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="vK9-UU-Y9Z"/>
+            </constraints>
+            <point key="canvasLocation" x="139" y="119"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="appLoadImg" width="256" height="256"/>
+        <namedColor name="background">
+            <color red="0.40799999237060547" green="0.81599998474121094" blue="0.68199998140335083" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
