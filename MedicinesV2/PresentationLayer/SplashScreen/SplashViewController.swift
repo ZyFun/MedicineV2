@@ -13,4 +13,14 @@ class SplashViewController: UIViewController {
     
     @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var loadInformLabel: UILabel!
+    
+    var logoIsHidden: Bool = false
+    
+    static let logoImage = UIImage(named: "AppLogo")
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        logoImageView.isHidden = logoIsHidden
+    }
 }

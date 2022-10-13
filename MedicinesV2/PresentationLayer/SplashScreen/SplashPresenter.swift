@@ -17,21 +17,48 @@ final class SplashPresenter {
     // MARK: - Private properties
     
     private lazy var animator: ISplashAnimator = SplashAnimator(
-        foregroundSplashWindow: foregroundSplashWindow
-    )
-    
-    private let splashVC = SplashViewController(
-        nibName: String(describing: SplashViewController.self),
-        bundle: nil
+        foregroundSplashWindow: foregroundSplashWindow,
+        backgroundSplashWindow: backgroundSplashWindow
     )
     
     private lazy var foregroundSplashWindow: UIWindow = {
+        var splashVC = createSplashVC(logoIsHidden: false)
+        
+        return splashWindow(
+            level: .normal + 1,
+            rootViewController: splashVC
+        )
+    }()
+    
+    private lazy var backgroundSplashWindow: UIWindow = {
+        var splashVC = createSplashVC(logoIsHidden: true)
+        
+        return splashWindow(
+            level: .normal - 1,
+            rootViewController: splashVC
+        )
+    }()
+    
+    private func createSplashVC(logoIsHidden: Bool) -> SplashViewController {
+        let splashVC = SplashViewController(
+            nibName: String(describing: SplashViewController.self),
+            bundle: nil
+        )
+        splashVC.logoIsHidden = logoIsHidden
+        
+        return splashVC
+    }
+    
+    private func splashWindow(
+        level: UIWindow.Level,
+        rootViewController: SplashViewController
+    ) -> UIWindow {
         let splashWindow = UIWindow()
-        splashWindow.windowLevel = .normal + 1
-        splashWindow.rootViewController = splashVC
+        splashWindow.windowLevel = level
+        splashWindow.rootViewController = rootViewController
         
         return splashWindow
-    }()
+    }
 }
 
 // MARK: - ISplashPresenter
