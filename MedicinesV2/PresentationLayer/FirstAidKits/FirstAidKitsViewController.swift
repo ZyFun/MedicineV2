@@ -9,6 +9,10 @@ import UIKit
 
 /// Протокол отображения ViewCintroller-a
 protocol FirstAidKitsDisplayLogic: AnyObject {
+    /// Метод для скрытия сплешскрина
+    /// - Скрывает сплешскрин по окончанию загрузки всех данных и настройки приложения
+    /// - на данный момент вызывается методом `updateAllNotifications` в интеракторе.
+    func dismissSplashScreen()
     /// Метод для скрытия плейсхолдера
     /// - Скрывает его, если список аптечек не пустой
     func hidePlaceholder()
@@ -30,6 +34,7 @@ final class FirstAidKitsViewController: UIViewController {
     
     /// Ссылка на presenter
     var presenter: FirstAidKitsViewControllerOutput?
+    var splashPresenter: ISplashPresenter?
     var dataSourceProvider: IFirstAidKitsDataSourceProvider?
     var fetchedResultManager: IFirstAidKitsFetchedResultsManager?
     
@@ -45,6 +50,8 @@ final class FirstAidKitsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        splashPresenter?.present()
         
         setup()
         presenter?.updatePlaceholder()
@@ -133,6 +140,14 @@ extension FirstAidKitsViewController {
 // MARK: - Логика обновления данных View
 
 extension FirstAidKitsViewController: FirstAidKitsDisplayLogic {
+    
+    func dismissSplashScreen() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.splashPresenter?.dismiss { [weak self] in
+                self?.splashPresenter = nil
+            }
+        }
+    }
     
     func hidePlaceholder() {
         DispatchQueue.main.async {
