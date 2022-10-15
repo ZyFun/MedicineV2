@@ -17,37 +17,42 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Qkq-SA-u3H">
-                        <rect key="frame" x="16" y="11" width="288" height="38"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Название аптечки" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="huY-1t-D57">
-                                <rect key="frame" x="0.0" y="0.0" width="145.5" height="38"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lfr-hg-6nN">
-                                <rect key="frame" x="277.5" y="0.0" width="10.5" height="38"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                    </stackView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lfr-hg-6nN">
+                        <rect key="frame" x="293.5" y="19.5" width="10.5" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Просроченных лекарств: 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gKa-L2-1Tw">
+                        <rect key="frame" x="16" y="35.5" width="158" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Название аптечки" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="huY-1t-D57">
+                        <rect key="frame" x="16" y="10" width="145.5" height="19.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailingMargin" secondItem="Qkq-SA-u3H" secondAttribute="trailing" id="3EB-xc-INp"/>
-                    <constraint firstItem="Qkq-SA-u3H" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="Ng0-7H-yH2"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="Qkq-SA-u3H" secondAttribute="bottom" id="ZI2-vB-9wj"/>
-                    <constraint firstItem="Qkq-SA-u3H" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="ghx-0f-zAL"/>
+                    <constraint firstItem="huY-1t-D57" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="2Nb-ia-AMX"/>
+                    <constraint firstItem="huY-1t-D57" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="3Jk-Zf-bCL"/>
+                    <constraint firstAttribute="trailing" secondItem="lfr-hg-6nN" secondAttribute="trailing" constant="16" id="E8M-yl-Iip"/>
+                    <constraint firstItem="gKa-L2-1Tw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="Nxn-Ja-iRx"/>
+                    <constraint firstItem="lfr-hg-6nN" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Tny-qk-xS8"/>
+                    <constraint firstItem="gKa-L2-1Tw" firstAttribute="top" secondItem="huY-1t-D57" secondAttribute="bottom" constant="6" id="zBp-es-J9e"/>
+                    <constraint firstAttribute="bottom" secondItem="gKa-L2-1Tw" secondAttribute="bottom" constant="10" id="zkG-Av-UMg"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="amountMedicines" destination="lfr-hg-6nN" id="DRf-Rp-F7B"/>
-                <outlet property="titleFirstAidKit" destination="huY-1t-D57" id="wqD-VC-Pfv"/>
+                <outlet property="amountMedicinesLabel" destination="lfr-hg-6nN" id="DRf-Rp-F7B"/>
+                <outlet property="expiredMedicinesCountLabel" destination="gKa-L2-1Tw" id="tXB-3h-yZS"/>
+                <outlet property="titleFirstAidKitLabel" destination="huY-1t-D57" id="wqD-VC-Pfv"/>
             </connections>
-            <point key="canvasLocation" x="137.68115942028987" y="123.21428571428571"/>
+            <point key="canvasLocation" x="137.68115942028987" y="122.54464285714285"/>
         </tableViewCell>
     </objects>
 </document>

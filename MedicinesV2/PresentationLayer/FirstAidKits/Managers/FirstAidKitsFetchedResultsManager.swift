@@ -29,6 +29,23 @@ final class FirstAidKitsFetchedResultsManager: NSObject,
         super.init()
         self.fetchedResultsController.delegate = self
     }
+    
+    /// Метод для поиска просроченных лекарств в аптечке
+    /// - Parameter currentFirstAidKid: аптечка в которой производится поиск
+    /// - Returns: возвращает число просроченных лекарств
+    private func searchExpiredMedicines(for currentFirstAidKid: DBFirstAidKit?) -> Int {
+        var expiredMedicinesCount = 0
+        
+        currentFirstAidKid?.medicines?.forEach { medicine in
+            guard let medicine = medicine as? DBMedicine else { return }
+            
+            if medicine.expiryDate ?? Date() <= Date() {
+                expiredMedicinesCount += 1
+            }
+        }
+        
+        return expiredMedicinesCount
+    }
 }
 
 extension FirstAidKitsFetchedResultsManager: NSFetchedResultsControllerDelegate {
@@ -66,9 +83,12 @@ extension FirstAidKitsFetchedResultsManager: NSFetchedResultsControllerDelegate 
                 let firstAidKit = fetchedResultsController.object(at: indexPath) as? DBFirstAidKit
                 let cell = tableView?.cellForRow(at: indexPath) as? FirstAidKitCell
                 
+                let expiredCount = searchExpiredMedicines(for: firstAidKit)
+                
                 cell?.configure(
                     titleFirstAidKit: firstAidKit?.title,
-                    amountMedicines: String(firstAidKit?.medicines?.count ?? 0)
+                    amountMedicines: String(firstAidKit?.medicines?.count ?? 0),
+                    expiredCount: expiredCount
                 )
             }
         @unknown default:
