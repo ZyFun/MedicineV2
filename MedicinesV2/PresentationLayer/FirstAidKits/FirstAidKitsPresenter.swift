@@ -19,6 +19,8 @@ protocol FirstAidKitsPresentationLogic: AnyObject {
     /// Метод для отображения плейсхолдера
     /// - Показывает его, если список аптечек пустой
     func showPlaceholder()
+    /// Метод для обновления лейбла о просроченных лекарствах в аптечке
+    func updateExpiredMedicinesLabel()
 }
 
 /// Протокол взаимодействия ViewController-a с презенетром
@@ -27,6 +29,9 @@ protocol FirstAidKitsViewControllerOutput {
     /// - Используется для скрытия или отображения плейсхолдера
     /// - Если в базе есть аптечки, скрывается, иначе - отображается
     func updatePlaceholder()
+    /// Метод для поиска просроченных лекарств в аптечке
+    /// - Используется для обновления лейбла в списке аптечек
+    func searchExpiredMedicines()
     /// Метод для отображения кастомного алерт контроллера добавления или редактирования аптечки
     /// - Parameters:
     ///   - entity: Принимает аптечку
@@ -72,6 +77,10 @@ final class FirstAidKitsPresenter {
 // MARK: - View Controller Output
 
 extension FirstAidKitsPresenter: FirstAidKitsViewControllerOutput {
+    
+    func searchExpiredMedicines() {
+        interactor?.searchExpiredMedicines()
+    }
     
     func updatePlaceholder() {
         interactor?.updatePlaceholder()
@@ -128,5 +137,9 @@ extension FirstAidKitsPresenter: FirstAidKitsPresentationLogic {
     
     func showPlaceholder() {
         view?.showPlaceholder()
+    }
+    
+    func updateExpiredMedicinesLabel() {
+        view?.updateExpiredMedicinesLabel()
     }
 }

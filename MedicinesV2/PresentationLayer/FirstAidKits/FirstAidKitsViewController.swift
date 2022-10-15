@@ -19,6 +19,8 @@ protocol FirstAidKitsDisplayLogic: AnyObject {
     /// Метод для отображения плейсхолдера
     /// - Показывает его, если список аптечек пустой
     func showPlaceholder()
+    /// Метод для обновления лейбла о просроченных лекарствах в аптечке
+    func updateExpiredMedicinesLabel()
     /// Метод для отображения кастомного алерт контроллера добавления или редактирования аптечки
     /// - Parameters:
     ///   - entity: Принимает аптечку
@@ -57,6 +59,15 @@ final class FirstAidKitsViewController: UIViewController {
         presenter?.updatePlaceholder()
         presenter?.updateNotificationBadge()
         presenter?.updateAllNotifications()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // FIXME: При первом входе дергает базу данных для поиска просрочки лишний раз
+        // Это не нужно делать, так как изначально сразу загружаются правильные данные
+        // и нужно только при обновлении лекарства
+        presenter?.searchExpiredMedicines()
     }
 }
 
@@ -140,6 +151,10 @@ extension FirstAidKitsViewController {
 // MARK: - Логика обновления данных View
 
 extension FirstAidKitsViewController: FirstAidKitsDisplayLogic {
+    
+    func updateExpiredMedicinesLabel() {
+        firstAidKitsTableView.reloadData()
+    }
     
     func dismissSplashScreen() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {

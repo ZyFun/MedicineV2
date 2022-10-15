@@ -12,8 +12,9 @@ final class FirstAidKitCell: UITableViewCell {
 
     // MARK: - Outlets
     
-    @IBOutlet weak var titleFirstAidKit: UILabel!
-    @IBOutlet weak var amountMedicines: UILabel!
+    @IBOutlet weak var titleFirstAidKitLabel: UILabel!
+    @IBOutlet weak var amountMedicinesLabel: UILabel!
+    @IBOutlet weak var expiredMedicinesCountLabel: UILabel!
     
     // MARK: - Life Cycle
     
@@ -31,9 +32,18 @@ extension FirstAidKitCell {
     /// - Parameters:
     ///   - titleFirstAidKit: принимает название аптечки.
     ///   - amountMedicines: принимает количество лекарств, хранящихся  в аптечке.
-    func configure(titleFirstAidKit: String?, amountMedicines: String) {
-        self.titleFirstAidKit.text = titleFirstAidKit
-        self.amountMedicines.text = amountMedicines
+    func configure(titleFirstAidKit: String?, amountMedicines: String, expiredCount: Int) {
+        self.titleFirstAidKitLabel.text = titleFirstAidKit
+        self.amountMedicinesLabel.text = amountMedicines
+        
+        if expiredCount != 0 {
+            expiredMedicinesCountLabel.text = "Просроченных лекарств: \(expiredCount)"
+            expiredMedicinesCountLabel.textColor = #colorLiteral(red: 0.8729341626, green: 0.4694843888, blue: 0.5979845524, alpha: 1)
+        } else {
+            expiredMedicinesCountLabel.text = "Все лекарства в порядке"
+            expiredMedicinesCountLabel.textColor = #colorLiteral(red: 0.4078431373, green: 0.8156862745, blue: 0.6823529412, alpha: 1)
+        }
+        
     }
 }
 
@@ -47,7 +57,7 @@ private extension FirstAidKitCell {
     
     /// Метод для настройки отображения элементов
     func setupUI() {
-        amountMedicines.textColor = .lightGray
+        amountMedicinesLabel.textColor = .lightGray
         accessoryType = .disclosureIndicator
     }
 }

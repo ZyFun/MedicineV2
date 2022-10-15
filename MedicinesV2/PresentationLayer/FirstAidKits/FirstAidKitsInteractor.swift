@@ -13,6 +13,9 @@ protocol FirstAidKitsBusinessLogic {
     /// - Используется для скрытия или отображения плейсхолдера
     /// - Если в базе есть аптечки, скрывается, иначе - отображается
     func updatePlaceholder()
+    /// Метод для поиска просроченных лекарств в аптечке
+    /// - Используется для обновления лейбла в списке аптечек
+    func searchExpiredMedicines()
     /// Метод для создания новой аптечки.
     /// - Parameter firstAidKit: принимает имя аптечки.
     func createData(_ firstAidKitName: String)
@@ -82,6 +85,19 @@ extension FirstAidKitInteractor: FirstAidKitsBusinessLogic {
         } else {
             presenter?.showPlaceholder()
         }
+    }
+    
+    func searchExpiredMedicines() {
+        var expiredMedicinesCount = 0
+        let medicines = self.coreDataService?.fetchRequest(String(describing: DBMedicine.self)) as? [DBMedicine]
+        
+        medicines?.forEach { medicine in
+            if medicine.expiryDate ?? Date() <= Date() {
+                expiredMedicinesCount += 1
+            }
+        }
+        
+        presenter?.updateExpiredMedicinesLabel()
     }
     
     // MARK: - CRUD methods
