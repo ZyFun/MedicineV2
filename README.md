@@ -44,6 +44,4 @@
 - Весь дизайн приложения был взять из головы.
 
 ## Installations
-Clone and run project in Xcode 13 or newer
-
-
+Clone and run project in Xcode 14 or newer
