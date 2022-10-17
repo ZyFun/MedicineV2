@@ -96,6 +96,7 @@ private extension MedicinesViewController {
     func setupNavigationBar() {
         title = currentFirstAidKit?.title
         addButtons()
+        addSearchController()
     }
     
     /// Добавление кнопок в navigation bar
@@ -107,6 +108,15 @@ private extension MedicinesViewController {
     @objc func addNewMedicine() {
         presenter?.routeToMedicine(with: currentFirstAidKit, by: nil)
         presenter?.updatePlaceholder()
+    }
+    
+    func addSearchController() {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchBar.placeholder = "Введите название лекарства"
+        searchController.obscuresBackgroundDuringPresentation = false
+        navigationItem.searchController = searchController
+        
+        searchController.searchBar.delegate = self
     }
     
     // MARK: - Setup placeholders
@@ -137,5 +147,55 @@ extension MedicinesViewController: MedicinesDisplayLogic {
                 self.placeholderLabel.isHidden = false
             }
         }
+    }
+}
+
+// MARK: - UISearchBarDelegate
+
+// TODO: (#Архитектура) пересмотреть код, не нарушает ли это архитектуру
+extension MedicinesViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        guard let currentFirstAidKit else { return }
+        let firstAidKitFilter = NSPredicate(
+            format: "%K == %@", "firstAidKit", currentFirstAidKit
+        )
+        let medicineFilter = NSPredicate(
+            format: "title CONTAINS[c] %@ OR type CONTAINS[c] %@", searchText, searchText
+        )
+        
+        fetchedResultManager?.fetchedResultsController
+            .fetchRequest.predicate = NSCompoundPredicate(
+                andPredicateWithSubpredicates: [
+                    firstAidKitFilter,
+                    medicineFilter
+                ]
+            )
+        
+        do {
+            try fetchedResultManager?.fetchedResultsController.performFetch()
+        } catch let error {
+            CustomLogger.error(error.localizedDescription)
+        }
+        
+        medicinesTableView.reloadData()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        guard let currentFirstAidKit else { return }
+        let firstAidKitFilter = NSPredicate(
+            format: "%K == %@", "firstAidKit", currentFirstAidKit
+        )
+        
+        fetchedResultManager?.fetchedResultsController
+            .fetchRequest.predicate = firstAidKitFilter
+        
+        do {
+            try fetchedResultManager?.fetchedResultsController.performFetch()
+        } catch let error {
+            CustomLogger.error(error.localizedDescription)
+        }
+        
+        medicinesTableView.reloadData()
     }
 }
