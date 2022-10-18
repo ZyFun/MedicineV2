@@ -88,6 +88,7 @@ extension FirstAidKitsViewController {
     func setupNavigationBar() {
         titleSetup()
         addBarButtons()
+        addSearchController()
     }
     
     /// Метод для настройки заголовка navigation bar
@@ -112,6 +113,15 @@ extension FirstAidKitsViewController {
     /// - Вызывает алерт контроллер, с помощью которого будет производится добавление аптечки
     @objc func addNewFirstAidKit() {
         presenter?.showAlert(for: nil, by: nil)
+    }
+    
+    func addSearchController() {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchBar.placeholder = "Введите название аптечки"
+        searchController.obscuresBackgroundDuringPresentation = false
+        navigationItem.searchController = searchController
+        
+        searchController.searchBar.delegate = self
     }
     
     // MARK: - Setup table view
@@ -197,5 +207,41 @@ extension FirstAidKitsViewController: FirstAidKitsDisplayLogic {
             }
         }
         present(alert, animated: true)
+    }
+}
+
+// MARK: - UISearchBarDelegate
+
+// TODO: (#Архитектура) пересмотреть код, не нарушает ли это архитектуру
+extension FirstAidKitsViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        let firstAidKitFilter = NSPredicate(
+            format: "title CONTAINS[c] %@", searchText
+        )
+        
+        fetchedResultManager?.fetchedResultsController
+            .fetchRequest.predicate = firstAidKitFilter
+        
+        do {
+            try fetchedResultManager?.fetchedResultsController.performFetch()
+        } catch let error {
+            CustomLogger.error(error.localizedDescription)
+        }
+        
+        firstAidKitsTableView.reloadData()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        fetchedResultManager?.fetchedResultsController
+            .fetchRequest.predicate = nil
+        
+        do {
+            try fetchedResultManager?.fetchedResultsController.performFetch()
+        } catch let error {
+            CustomLogger.error(error.localizedDescription)
+        }
+        
+        firstAidKitsTableView.reloadData()
     }
 }

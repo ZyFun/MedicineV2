@@ -112,7 +112,7 @@ private extension MedicinesViewController {
     
     func addSearchController() {
         let searchController = UISearchController(searchResultsController: nil)
-        searchController.searchBar.placeholder = "Введите название лекарства"
+        searchController.searchBar.placeholder = "Введите название или тип лекарства"
         searchController.obscuresBackgroundDuringPresentation = false
         navigationItem.searchController = searchController
         
