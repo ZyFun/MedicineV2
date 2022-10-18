@@ -12,6 +12,7 @@ class SplashViewController: UIViewController {
     // MARK: - Outlets
     
     @IBOutlet weak var logoImageView: UIImageView!
+    @IBOutlet weak var appTitle: UILabel!
     @IBOutlet weak var loadInformLabel: UILabel!
     
     var logoIsHidden: Bool = false
