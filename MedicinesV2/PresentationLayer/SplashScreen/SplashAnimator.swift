@@ -111,6 +111,7 @@ extension SplashAnimator: ISplashAnimator {
         
         UIView.animate(withDuration: 0.3) {
             self.backgroundSplashVC.loadInformLabel.alpha = 0
+            self.backgroundSplashVC.appTitle.alpha = 0
         }
         
         CATransaction.commit()
