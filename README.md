@@ -12,7 +12,7 @@
 ![CoreData](https://img.shields.io/badge/-CoreData-blue)
 ![CocoaPods](https://img.shields.io/badge/-CocoaPods-blue)
 ![SwiftLint](https://img.shields.io/badge/-SwiftLint-blue)
-<!-- ![AutoLayout](https://img.shields.io/badge/-AutoLayout-blue) -->
+![AutoLayout](https://img.shields.io/badge/-AutoLayout-blue)
 <!-- ![UserDefaults](https://img.shields.io/badge/-UserDefaults-blue) -->
 <!-- ![UnitTests](https://img.shields.io/badge/-UnitTests-blue) -->
 
@@ -37,7 +37,7 @@
 - Для более удобногй работы с таблицами с **CoreData** применяется **NSFetchedResultsControll**
 <!-- - Используется UserDefaults для хранения избранной валюты. -->
 <!-- - Код частично покрыт Unit тестами. -->
-<!-- - Частично, интерфейс написан кодом с помощью AutoLayout. -->
+- Частично, интерфейс написан кодом с помощью AutoLayout.
 - Вместо **Storyboard** использую **XIB** файлы. 1 экран – 1 **XIB**. В дальнейшем всё будет переделываться под верстку кодом.
 - Для подключения фреймворков используется **CocoaPods**
 - Используется фреймворк **Swiftlint** с кастомными настройками, рекомендованными Тинькофф Образованием + дополнительно своя конфигурация с более жесткими требованиями к стилю кода.

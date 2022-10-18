@@ -104,6 +104,7 @@ extension FirstAidKitsViewController {
             target: self,
             action: #selector(addNewFirstAidKit)
         )
+        add.tintColor = #colorLiteral(red: 0.196842283, green: 0.4615264535, blue: 0.4103206396, alpha: 1)
         
         // Тут будет несколько кнопок до появления отдельного меню настроек
         navigationItem.rightBarButtonItems = [add]
@@ -130,6 +131,10 @@ extension FirstAidKitsViewController {
     func setupTableView() {
         firstAidKitsTableView.delegate = dataSourceProvider
         firstAidKitsTableView.dataSource = dataSourceProvider
+        
+        firstAidKitsTableView.separatorStyle = .none
+        firstAidKitsTableView.backgroundColor = .systemGray6
+        
         fetchedResultManager?.tableView = firstAidKitsTableView
         
         // TODO: (#Version) Удалить после прекращения поддержки iOS ниже 15
@@ -143,11 +148,8 @@ extension FirstAidKitsViewController {
     func setupXibs() {
         // Регистрируем ячейку для таблицы аптечек
         firstAidKitsTableView.register(
-            UINib(
-                nibName: String(describing: FirstAidKitCell.self),
-                bundle: nil
-            ),
-            forCellReuseIdentifier: String(describing: FirstAidKitCell.self)
+            FirstAidKitCell.self,
+            forCellReuseIdentifier: FirstAidKitCell.identifier
         )
     }
     

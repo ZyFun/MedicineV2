@@ -123,6 +123,7 @@ extension FirstAidKitsDataSourceProvider: UITableViewDataSource {
 // MARK: - Table view delegate
 
 extension FirstAidKitsDataSourceProvider: UITableViewDelegate {
+    
     func tableView(
         _ tableView: UITableView,
         didSelectRowAt indexPath: IndexPath
