@@ -58,36 +58,10 @@ private extension MedicinesViewController {
     
     /// Метод инициализации VC
     func setup() {
+        view.backgroundColor = .systemGray6
         setupNavigationBar()
         setupTableView()
-        setupXibs()
         setupPlaceholder()
-    }
-    
-    // MARK: - Setup table view
-    
-    /// Метод настройки таблицы
-    func setupTableView() {
-        medicinesTableView?.delegate = dataSourceProvider
-        medicinesTableView?.dataSource = dataSourceProvider
-        
-        fetchedResultManager?.tableView = medicinesTableView
-        
-        // TODO: (#Version) Актуально для iOS ниже 15 версии. Можно удалить после прекращения поддержки этих версий
-        medicinesTableView?.tableFooterView = UIView()
-        
-        setupXibs()
-    }
-    
-    /// Инициализация Xibs
-    func setupXibs() {
-        medicinesTableView?.register(
-            UINib(
-                nibName: String(describing: MedicineCell.self),
-                bundle: nil
-            ),
-            forCellReuseIdentifier: String(describing: MedicineCell.self)
-        )
     }
     
     // MARK: - Setup navigation bar
@@ -95,6 +69,7 @@ private extension MedicinesViewController {
     /// Метод настройки Navigation Bar
     func setupNavigationBar() {
         title = currentFirstAidKit?.title
+        navigationController?.navigationBar.tintColor = #colorLiteral(red: 0.196842283, green: 0.4615264535, blue: 0.4103206396, alpha: 1)
         addButtons()
         addSearchController()
     }
@@ -117,6 +92,29 @@ private extension MedicinesViewController {
         navigationItem.searchController = searchController
         
         searchController.searchBar.delegate = self
+    }
+    
+    // MARK: - Setup table view
+    
+    /// Метод настройки таблицы
+    func setupTableView() {
+        medicinesTableView?.delegate = dataSourceProvider
+        medicinesTableView?.dataSource = dataSourceProvider
+        
+        medicinesTableView.separatorStyle = .none
+        medicinesTableView.backgroundColor = .systemGray6
+        
+        fetchedResultManager?.tableView = medicinesTableView
+        
+        registerCell()
+    }
+    
+    /// Регистрация ячейки
+    func registerCell() {
+        medicinesTableView?.register(
+            MedicineCell.self,
+            forCellReuseIdentifier: String(describing: MedicineCell.identifier)
+        )
     }
     
     // MARK: - Setup placeholders

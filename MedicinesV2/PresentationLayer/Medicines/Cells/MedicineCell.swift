@@ -2,32 +2,124 @@
 //  MedicineCell.swift
 //  MedicinesV2
 //
-//  Created by Дмитрий Данилин on 11.11.2021.
+//  Created by Дмитрий Данилин on 19.10.2022.
 //
 
 import UIKit
 
-class MedicineCell: UITableViewCell {
-
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var typeLabel: UILabel!
-    @IBOutlet weak var expiryDateLabel: UILabel!
-    @IBOutlet weak var trashLabel: UILabel!
-    @IBOutlet weak var amountLabel: UILabel!
+/// Ячейка для лекарства
+final class MedicineCell: UITableViewCell {
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    // MARK: - Public properties
+    
+    static let identifier = String(describing: MedicineCell.self)
+    
+    // MARK: - Private properties
+    
+    /// Кастомный контейнер
+    /// - В нем содержаться все элементы лекарства
+    /// - нужен для того, чтобы сделать его в виде карточки
+    private let viewContainer: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .systemBackground
+        view.layer.cornerRadius = 16
+        return view
+    }()
+    
+    /// Стек лейблов
+    /// - Предназначен для: названия лекарства, типа лекарства, назначения, срока годности
+    private var stackMedicineLabels: UIStackView = {
+        let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.axis = .vertical
+        stack.spacing = 4
+        return stack
+    }()
+    
+    private let nameLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "HelveticaNeue", size: 20)
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    private let typeLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "HelveticaNeue", size: 15)
+        label.textColor = .systemGray3
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    private let expiryDateLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "HelveticaNeue", size: 15)
+        return label
+    }()
+    
+    private let trashLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "HelveticaNeue", size: 15)
+        label.textAlignment = .center
+        label.backgroundColor = #colorLiteral(red: 0.8729341626, green: 0.4694843888, blue: 0.5979845524, alpha: 1)
+        label.layer.cornerRadius = 5
+        label.clipsToBounds = true
+        return label
+    }()
+    
+    private let amountLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "HelveticaNeue", size: 15)
+        return label
+    }()
+    
+    // MARK: - Initializer
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setup()
+        
+        contentView.addSubview(viewContainer)
+        viewContainer.addSubview(stackMedicineLabels)
+        stackMedicineLabels.addArrangedSubview(nameLabel)
+        stackMedicineLabels.addArrangedSubview(typeLabel)
+        stackMedicineLabels.addArrangedSubview(expiryDateLabel)
+        viewContainer.addSubview(trashLabel)
+        viewContainer.addSubview(amountLabel)
+        
+        NSLayoutConstraint.activate([
+            viewContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
+            viewContainer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            viewContainer.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            viewContainer.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
+            
+            stackMedicineLabels.topAnchor.constraint(equalTo: viewContainer.topAnchor, constant: 8),
+            stackMedicineLabels.leadingAnchor.constraint(equalTo: viewContainer.leadingAnchor, constant: 16),
+            stackMedicineLabels.bottomAnchor.constraint(equalTo: viewContainer.bottomAnchor, constant: -8),
+            
+            trashLabel.widthAnchor.constraint(equalToConstant: 75),
+            trashLabel.topAnchor.constraint(equalTo: viewContainer.topAnchor, constant: 15),
+            trashLabel.leadingAnchor.constraint(equalTo: stackMedicineLabels.trailingAnchor, constant: 8),
+            trashLabel.trailingAnchor.constraint(equalTo: viewContainer.trailingAnchor, constant: -16),
+            trashLabel.bottomAnchor.constraint(lessThanOrEqualTo: amountLabel.topAnchor, constant: -25),
+            
+            amountLabel.trailingAnchor.constraint(equalTo: viewContainer.trailingAnchor, constant: -16),
+            amountLabel.bottomAnchor.constraint(equalTo: viewContainer.bottomAnchor, constant: -8)
+            
+        ])
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-        // FIXME: После тестирования удалить, если всё будет работать правильно
-        // Изменил настройки ячейки, нужно тестирование
-//        trashLabel.isHidden = true
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
+    
 }
 
 // MARK: - Public method
@@ -78,14 +170,16 @@ extension MedicineCell {
 // MARK: - Конфигурирование ячейки
 
 private extension MedicineCell {
-    ///  Метод инициализации настроек
+
+    /// Метод инициализации настроек ячейки
     func setup() {
-        setupLabels()
+        setupUI()
     }
     
-    /// Метод для настройки лейблов
-    func setupLabels() {
-        trashLabel.layer.cornerRadius = 5
-        trashLabel.clipsToBounds = true
+    /// Метод для настройки отображения элементов
+    func setupUI() {
+        selectionStyle = .none
+        contentView.backgroundColor = .clear
+        backgroundColor = .clear
     }
 }

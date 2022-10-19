@@ -77,6 +77,7 @@ extension FirstAidKitsViewController {
     
     /// Метод инициализации VC
     func setup() {
+        view.backgroundColor = .systemGray6
         setupNavigationBar()
         setupTableView()
         setupPlaceholder()
@@ -137,15 +138,11 @@ extension FirstAidKitsViewController {
         
         fetchedResultManager?.tableView = firstAidKitsTableView
         
-        // TODO: (#Version) Удалить после прекращения поддержки iOS ниже 15
-        // нужно для скрытия пустых разделителей для более ранних версий
-        firstAidKitsTableView.tableFooterView = UIView()
-        
-        setupXibs()
+        registerCell()
     }
     
-    /// Инициализация Xibs
-    func setupXibs() {
+    /// Регистрация ячейки
+    func registerCell() {
         // Регистрируем ячейку для таблицы аптечек
         firstAidKitsTableView.register(
             FirstAidKitCell.self,
