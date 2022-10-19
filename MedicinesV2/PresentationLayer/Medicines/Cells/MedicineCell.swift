@@ -33,6 +33,7 @@ final class MedicineCell: UITableViewCell {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .vertical
+        stack.distribution = .equalSpacing
         stack.spacing = 4
         return stack
     }()
@@ -41,7 +42,7 @@ final class MedicineCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont(name: "HelveticaNeue", size: 20)
-        label.numberOfLines = 0
+        label.numberOfLines = 2
         return label
     }()
     
@@ -50,7 +51,7 @@ final class MedicineCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont(name: "HelveticaNeue", size: 15)
         label.textColor = .systemGray3
-        label.numberOfLines = 0
+        label.numberOfLines = 2
         return label
     }()
     
@@ -61,15 +62,15 @@ final class MedicineCell: UITableViewCell {
         return label
     }()
     
-    private let trashLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "HelveticaNeue", size: 15)
-        label.textAlignment = .center
-        label.backgroundColor = #colorLiteral(red: 0.8729341626, green: 0.4694843888, blue: 0.5979845524, alpha: 1)
-        label.layer.cornerRadius = 5
-        label.clipsToBounds = true
-        return label
+    /// Иконка действия
+    /// - показывает иконку, что необходимо сделать с лекарством:
+    ///     - Выбросить
+    ///     - Купить
+    private let actionIcon: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+        return imageView
     }()
     
     private let amountLabel: UILabel = {
@@ -91,7 +92,7 @@ final class MedicineCell: UITableViewCell {
         stackMedicineLabels.addArrangedSubview(nameLabel)
         stackMedicineLabels.addArrangedSubview(typeLabel)
         stackMedicineLabels.addArrangedSubview(expiryDateLabel)
-        viewContainer.addSubview(trashLabel)
+        viewContainer.addSubview(actionIcon)
         viewContainer.addSubview(amountLabel)
         
         NSLayoutConstraint.activate([
@@ -104,15 +105,15 @@ final class MedicineCell: UITableViewCell {
             stackMedicineLabels.leadingAnchor.constraint(equalTo: viewContainer.leadingAnchor, constant: 16),
             stackMedicineLabels.bottomAnchor.constraint(equalTo: viewContainer.bottomAnchor, constant: -8),
             
-            trashLabel.widthAnchor.constraint(equalToConstant: 75),
-            trashLabel.topAnchor.constraint(equalTo: viewContainer.topAnchor, constant: 15),
-            trashLabel.leadingAnchor.constraint(equalTo: stackMedicineLabels.trailingAnchor, constant: 8),
-            trashLabel.trailingAnchor.constraint(equalTo: viewContainer.trailingAnchor, constant: -16),
-            trashLabel.bottomAnchor.constraint(lessThanOrEqualTo: amountLabel.topAnchor, constant: -25),
+            actionIcon.widthAnchor.constraint(equalToConstant: 25),
+            actionIcon.heightAnchor.constraint(equalToConstant: 25),
+            actionIcon.topAnchor.constraint(equalTo: viewContainer.topAnchor, constant: 8),
+            actionIcon.leadingAnchor.constraint(equalTo: stackMedicineLabels.trailingAnchor, constant: 8),
+            actionIcon.trailingAnchor.constraint(equalTo: viewContainer.trailingAnchor, constant: -16),
+            actionIcon.bottomAnchor.constraint(lessThanOrEqualTo: amountLabel.topAnchor, constant: -25),
             
             amountLabel.trailingAnchor.constraint(equalTo: viewContainer.trailingAnchor, constant: -16),
             amountLabel.bottomAnchor.constraint(equalTo: viewContainer.bottomAnchor, constant: -8)
-            
         ])
     }
     
@@ -138,32 +139,34 @@ extension MedicineCell {
         expiryDate: Date?,
         amount: NSNumber?
     ) {
-        setAlertLabel(isAlertLabelPresent: false)
-        
         nameLabel.text = name
         typeLabel.text = type
         expiryDateLabel.text = expiryDate?.toString()
         amountLabel.text = "\(amount ?? 0) шт"
         
         if Date() >= expiryDate ?? Date() {
-            setAlertLabel(title: "В мусор", isAlertLabelPresent: true)
+            setImageActionIcon(need: .thrownOut)
         }
         
         if amount?.doubleValue ?? 0 <= 0 {
-            setAlertLabel(title: "Купить", isAlertLabelPresent: true)
+            setImageActionIcon(need: .buy)
         }
     }
     
-    /// Настройка лейбла предупреждения
-    /// - Parameters:
-    ///   - title: принимает заголовок, который будет отображаться в лейбле предупреждения
-    ///   - alertLabelPresent: при значении true выводит лейбл предупреждения из скрытия
-    func setAlertLabel(
-        title: String? = nil,
-        isAlertLabelPresent: Bool
-    ) {
-        trashLabel.text = title
-        trashLabel.isHidden = !isAlertLabelPresent
+    /// Настройка иконки предупреждения
+    /// - Parameter need: принимает действие, которое нужно произвести с лекарством
+    /// пользователю
+    private func setImageActionIcon(need: ActionWithMedicine) {
+        switch need {
+        case .buy:
+            actionIcon.image = UIImage(systemName: "cart")
+            actionIcon.tintColor = #colorLiteral(red: 0.4078431373, green: 0.8156862745, blue: 0.6823529412, alpha: 1)
+            amountLabel.textColor = #colorLiteral(red: 0.8729341626, green: 0.4694843888, blue: 0.5979845524, alpha: 1)
+        case .thrownOut:
+            actionIcon.image = UIImage(systemName: "trash")
+            actionIcon.tintColor = #colorLiteral(red: 0.8729341626, green: 0.4694843888, blue: 0.5979845524, alpha: 1)
+            expiryDateLabel.textColor = #colorLiteral(red: 0.8729341626, green: 0.4694843888, blue: 0.5979845524, alpha: 1)
+        }
     }
 }
 

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2C1D3E6A2760FFD800D01C51 /* String+NumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1D3E692760FFD800D01C51 /* String+NumberFormatter.swift */; };
+		2C24C0A32900689E0047CA3D /* ActionWithMedicine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C24C0A22900689E0047CA3D /* ActionWithMedicine.swift */; };
 		2C38603F28DC81FE003FED87 /* ServiceAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C38603E28DC81FE003FED87 /* ServiceAssembly.swift */; };
 		2C38604128DC82DB003FED87 /* PresentationAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C38604028DC82DB003FED87 /* PresentationAssembly.swift */; };
 		2C480C84275FB1FA000CD5CC /* Date+DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C480C83275FB1FA000CD5CC /* Date+DateFormatter.swift */; };
@@ -60,6 +61,7 @@
 		0AD6D90920B4CEB0A6846175 /* Pods_MedicinesV2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MedicinesV2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		10E65D531DCFBDBEECD0A75E /* Pods-MedicinesV2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MedicinesV2.debug.xcconfig"; path = "Target Support Files/Pods-MedicinesV2/Pods-MedicinesV2.debug.xcconfig"; sourceTree = "<group>"; };
 		2C1D3E692760FFD800D01C51 /* String+NumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+NumberFormatter.swift"; sourceTree = "<group>"; };
+		2C24C0A22900689E0047CA3D /* ActionWithMedicine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionWithMedicine.swift; sourceTree = "<group>"; };
 		2C38603E28DC81FE003FED87 /* ServiceAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAssembly.swift; sourceTree = "<group>"; };
 		2C38604028DC82DB003FED87 /* PresentationAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationAssembly.swift; sourceTree = "<group>"; };
 		2C480C83275FB1FA000CD5CC /* Date+DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+DateFormatter.swift"; sourceTree = "<group>"; };
@@ -130,6 +132,14 @@
 				0AD6D90920B4CEB0A6846175 /* Pods_MedicinesV2.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2C24C0A4290076AF0047CA3D /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				2C24C0A22900689E0047CA3D /* ActionWithMedicine.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		2C49688F2774956400436C5F /* Cells */ = {
@@ -235,6 +245,7 @@
 		2C925709273D45CD00DA7284 /* Medicines */ = {
 			isa = PBXGroup;
 			children = (
+				2C24C0A4290076AF0047CA3D /* Helpers */,
 				2CEAA1B928DDC59D000BA942 /* Providers */,
 				2CAE169628D9F7BC0071E783 /* Managers */,
 				2C925720273D808600DA7284 /* Cells */,
@@ -530,6 +541,7 @@
 				2CB3FAD528C8AA9900E4A378 /* NotificationService.swift in Sources */,
 				2C5F113627707CF60040536D /* Medicines.xcdatamodeld in Sources */,
 				2C5BBB7529000A6300D821EC /* MedicineCell.swift in Sources */,
+				2C24C0A32900689E0047CA3D /* ActionWithMedicine.swift in Sources */,
 				2C6762892757A32300B46E21 /* MedicineViewController.swift in Sources */,
 				2CBD2B1F277C7FA300F857C3 /* MedicineInteractor.swift in Sources */,
 				2CBD2B23277C7FC200F857C3 /* MedicineConfigurator.swift in Sources */,
