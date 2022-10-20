@@ -192,6 +192,20 @@ private extension MedicineViewController {
         medicineAmountStepper.stepValue = stepValue
         medicineAmountStepper.minimumValue = 0
         medicineAmountStepper.maximumValue = 999
+        
+        // TODO: (#Костыль) проверять работу с каждым обновлением Swift
+        // решает проблему невозможности изменить tint color у степпера
+        // начиная с iOS 13
+        medicineAmountStepper.setDecrementImage(
+            medicineAmountStepper.decrementImage(for: .normal),
+            for: .normal
+        )
+        medicineAmountStepper.setIncrementImage(
+            medicineAmountStepper.incrementImage(for: .normal),
+            for: .normal
+        )
+        
+        medicineAmountStepper.tintColor = #colorLiteral(red: 0.196842283, green: 0.4615264535, blue: 0.4103206396, alpha: 1)
     }
     
     // MARK: - Setup data picker

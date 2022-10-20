@@ -1,5 +1,5 @@
 //
-//  MedicineProblem.swift
+//  ActionWithMedicine.swift
 //  MedicinesV2
 //
 //  Created by Дмитрий Данилин on 19.10.2022.
