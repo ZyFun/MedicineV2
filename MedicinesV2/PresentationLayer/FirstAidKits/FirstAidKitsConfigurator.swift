@@ -12,13 +12,16 @@ final class FirstAidKitsConfigurator {
     private let notificationManager: INotificationMedicineManager
     private let coreDataService: ICoreDataService
     private let fetchedResultManager: IFirstAidKitsFetchedResultsManager
+    private let splashPresenter: ISplashPresenter
     
     init(
         notificationManager: INotificationMedicineManager,
-        coreDataService: ICoreDataService
+        coreDataService: ICoreDataService,
+        splashPresenter: ISplashPresenter
     ) {
         self.notificationManager = notificationManager
         self.coreDataService = coreDataService
+        self.splashPresenter = splashPresenter
         fetchedResultManager = FirstAidKitsFetchedResultsManager(
             fetchedResultsController: coreDataService.fetchResultController(
                 entityName: String(describing: DBFirstAidKit.self),
@@ -43,6 +46,7 @@ final class FirstAidKitsConfigurator {
             resultManager: fetchedResultManager
         )
         
+        view.splashPresenter = splashPresenter
         view.presenter = presenter
         view.dataSourceProvider = dataSourceProvider
         view.fetchedResultManager = fetchedResultManager

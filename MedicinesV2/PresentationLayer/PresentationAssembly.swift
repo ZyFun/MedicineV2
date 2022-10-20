@@ -25,7 +25,8 @@ final class PresentationAssembly {
     lazy var firstAidKits: FirstAidKitsConfigurator = {
         return FirstAidKitsConfigurator(
             notificationManager: notificationMedicineManager,
-            coreDataService: coreDataService
+            coreDataService: coreDataService,
+            splashPresenter: SplashPresenter()
         )
     }()
     

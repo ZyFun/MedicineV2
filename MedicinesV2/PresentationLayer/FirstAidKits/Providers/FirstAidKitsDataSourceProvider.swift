@@ -48,6 +48,23 @@ final class FirstAidKitsDataSourceProvider: NSObject, IFirstAidKitsDataSourcePro
         
         return firstAidKit
     }
+    
+    /// Метод для поиска просроченных лекарств в аптечке
+    /// - Parameter currentFirstAidKid: аптечка в которой производится поиск
+    /// - Returns: возвращает число просроченных лекарств
+    private func searchExpiredMedicines(for currentFirstAidKid: DBFirstAidKit?) -> Int {
+        var expiredMedicinesCount = 0
+        
+        currentFirstAidKid?.medicines?.forEach { medicine in
+            guard let medicine = medicine as? DBMedicine else { return }
+            
+            if medicine.expiryDate ?? Date() <= Date() {
+                expiredMedicinesCount += 1
+            }
+        }
+        
+        return expiredMedicinesCount
+    }
 }
 
 // MARK: - Table view data source
@@ -79,9 +96,12 @@ extension FirstAidKitsDataSourceProvider: UITableViewDataSource {
         
         let currentAmountMedicines = firstAidKit.medicines?.count
         
+        let expiredCount = searchExpiredMedicines(for: firstAidKit)
+        
         cell.configure(
             titleFirstAidKit: firstAidKit.title,
-            amountMedicines: String(currentAmountMedicines ?? 0)
+            amountMedicines: String(currentAmountMedicines ?? 0),
+            expiredCount: expiredCount
         )
         
         return cell
@@ -103,6 +123,7 @@ extension FirstAidKitsDataSourceProvider: UITableViewDataSource {
 // MARK: - Table view delegate
 
 extension FirstAidKitsDataSourceProvider: UITableViewDelegate {
+    
     func tableView(
         _ tableView: UITableView,
         didSelectRowAt indexPath: IndexPath

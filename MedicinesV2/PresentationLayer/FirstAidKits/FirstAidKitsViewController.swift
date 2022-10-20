@@ -9,12 +9,18 @@ import UIKit
 
 /// Протокол отображения ViewCintroller-a
 protocol FirstAidKitsDisplayLogic: AnyObject {
+    /// Метод для скрытия сплешскрина
+    /// - Скрывает сплешскрин по окончанию загрузки всех данных и настройки приложения
+    /// - на данный момент вызывается методом `updateAllNotifications` в интеракторе.
+    func dismissSplashScreen()
     /// Метод для скрытия плейсхолдера
     /// - Скрывает его, если список аптечек не пустой
     func hidePlaceholder()
     /// Метод для отображения плейсхолдера
     /// - Показывает его, если список аптечек пустой
     func showPlaceholder()
+    /// Метод для обновления лейбла о просроченных лекарствах в аптечке
+    func updateExpiredMedicinesLabel()
     /// Метод для отображения кастомного алерт контроллера добавления или редактирования аптечки
     /// - Parameters:
     ///   - entity: Принимает аптечку
@@ -30,6 +36,7 @@ final class FirstAidKitsViewController: UIViewController {
     
     /// Ссылка на presenter
     var presenter: FirstAidKitsViewControllerOutput?
+    var splashPresenter: ISplashPresenter?
     var dataSourceProvider: IFirstAidKitsDataSourceProvider?
     var fetchedResultManager: IFirstAidKitsFetchedResultsManager?
     
@@ -46,10 +53,21 @@ final class FirstAidKitsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        splashPresenter?.present()
+        
         setup()
         presenter?.updatePlaceholder()
         presenter?.updateNotificationBadge()
         presenter?.updateAllNotifications()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // FIXME: При первом входе дергает базу данных для поиска просрочки лишний раз
+        // Это не нужно делать, так как изначально сразу загружаются правильные данные
+        // и нужно только при обновлении лекарства
+        presenter?.searchExpiredMedicines()
     }
 }
 
@@ -59,6 +77,7 @@ extension FirstAidKitsViewController {
     
     /// Метод инициализации VC
     func setup() {
+        view.backgroundColor = .systemGray6
         setupNavigationBar()
         setupTableView()
         setupPlaceholder()
@@ -70,6 +89,7 @@ extension FirstAidKitsViewController {
     func setupNavigationBar() {
         titleSetup()
         addBarButtons()
+        addSearchController()
     }
     
     /// Метод для настройки заголовка navigation bar
@@ -85,6 +105,7 @@ extension FirstAidKitsViewController {
             target: self,
             action: #selector(addNewFirstAidKit)
         )
+        add.tintColor = #colorLiteral(red: 0.196842283, green: 0.4615264535, blue: 0.4103206396, alpha: 1)
         
         // Тут будет несколько кнопок до появления отдельного меню настроек
         navigationItem.rightBarButtonItems = [add]
@@ -96,30 +117,36 @@ extension FirstAidKitsViewController {
         presenter?.showAlert(for: nil, by: nil)
     }
     
+    func addSearchController() {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchBar.placeholder = "Введите название аптечки"
+        searchController.obscuresBackgroundDuringPresentation = false
+        navigationItem.searchController = searchController
+        
+        searchController.searchBar.delegate = self
+    }
+    
     // MARK: - Setup table view
     
     /// Метод настройки таблицы
     func setupTableView() {
         firstAidKitsTableView.delegate = dataSourceProvider
         firstAidKitsTableView.dataSource = dataSourceProvider
+        
+        firstAidKitsTableView.separatorStyle = .none
+        firstAidKitsTableView.backgroundColor = .systemGray6
+        
         fetchedResultManager?.tableView = firstAidKitsTableView
         
-        // TODO: (#Version) Удалить после прекращения поддержки iOS ниже 15
-        // нужно для скрытия пустых разделителей для более ранних версий
-        firstAidKitsTableView.tableFooterView = UIView()
-        
-        setupXibs()
+        registerCell()
     }
     
-    /// Инициализация Xibs
-    func setupXibs() {
+    /// Регистрация ячейки
+    func registerCell() {
         // Регистрируем ячейку для таблицы аптечек
         firstAidKitsTableView.register(
-            UINib(
-                nibName: String(describing: FirstAidKitCell.self),
-                bundle: nil
-            ),
-            forCellReuseIdentifier: String(describing: FirstAidKitCell.self)
+            FirstAidKitCell.self,
+            forCellReuseIdentifier: FirstAidKitCell.identifier
         )
     }
     
@@ -133,6 +160,18 @@ extension FirstAidKitsViewController {
 // MARK: - Логика обновления данных View
 
 extension FirstAidKitsViewController: FirstAidKitsDisplayLogic {
+    
+    func updateExpiredMedicinesLabel() {
+        firstAidKitsTableView.reloadData()
+    }
+    
+    func dismissSplashScreen() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.splashPresenter?.dismiss { [weak self] in
+                self?.splashPresenter = nil
+            }
+        }
+    }
     
     func hidePlaceholder() {
         DispatchQueue.main.async {
@@ -167,5 +206,41 @@ extension FirstAidKitsViewController: FirstAidKitsDisplayLogic {
             }
         }
         present(alert, animated: true)
+    }
+}
+
+// MARK: - UISearchBarDelegate
+
+// TODO: (#Архитектура) пересмотреть код, не нарушает ли это архитектуру
+extension FirstAidKitsViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        let firstAidKitFilter = NSPredicate(
+            format: "title CONTAINS[c] %@", searchText
+        )
+        
+        fetchedResultManager?.fetchedResultsController
+            .fetchRequest.predicate = firstAidKitFilter
+        
+        do {
+            try fetchedResultManager?.fetchedResultsController.performFetch()
+        } catch let error {
+            CustomLogger.error(error.localizedDescription)
+        }
+        
+        firstAidKitsTableView.reloadData()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        fetchedResultManager?.fetchedResultsController
+            .fetchRequest.predicate = nil
+        
+        do {
+            try fetchedResultManager?.fetchedResultsController.performFetch()
+        } catch let error {
+            CustomLogger.error(error.localizedDescription)
+        }
+        
+        firstAidKitsTableView.reloadData()
     }
 }
