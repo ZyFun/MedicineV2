@@ -3,7 +3,7 @@
 ![IOS](https://img.shields.io/badge/iOS-000000?style=for-the-badge&logo=ios&logoColor=white)
 <br/>
 ![Target](https://img.shields.io/badge/iOS-13.0-blue)
-![Version](https://img.shields.io/badge/version-0.4.2-blue)
+![Version](https://img.shields.io/badge/version-0.5.0-blue)
 <br/>
 ![UIKit](https://img.shields.io/badge/-UIKit-blue)
 ![XIB](https://img.shields.io/badge/-XIB-blue)
@@ -20,7 +20,7 @@
 Второе учебное приложение.
 
 ### News
-**dd.mm.2022**
+**20.10.2022**
 - Обновлен дизайн приложения
 - Добавлена возможность поиска лекарств и аптечек
 - Добавлена анимация при запуске приложения
