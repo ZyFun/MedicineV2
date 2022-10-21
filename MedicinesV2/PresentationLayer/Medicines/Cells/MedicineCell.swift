@@ -144,12 +144,12 @@ extension MedicineCell {
         expiryDateLabel.text = expiryDate?.toString()
         amountLabel.text = "\(amount ?? 0) шт"
         
-        if Date() >= expiryDate ?? Date() {
+        if let expiryDate, Date() >= expiryDate {
             setImageActionIcon(need: .thrownOut)
-        }
-        
-        if amount?.doubleValue ?? 0 <= 0 {
+        } else if amount?.doubleValue ?? 0 <= 0 {
             setImageActionIcon(need: .buy)
+        } else {
+            setImageActionIcon(need: .nothing)
         }
     }
     
@@ -166,6 +166,10 @@ extension MedicineCell {
             actionIcon.image = UIImage(systemName: "trash")
             actionIcon.tintColor = #colorLiteral(red: 0.8729341626, green: 0.4694843888, blue: 0.5979845524, alpha: 1)
             expiryDateLabel.textColor = #colorLiteral(red: 0.8729341626, green: 0.4694843888, blue: 0.5979845524, alpha: 1)
+        case .nothing:
+            actionIcon.image = nil
+            expiryDateLabel.textColor = .label
+            amountLabel.textColor = .label
         }
     }
 }

@@ -80,11 +80,13 @@ extension NotificationMedicineManager: INotificationMedicineManager {
             CustomLogger.warning("В базе еще нет лекарств")
             return
         }
-        let currentDate = Date()
+        
+        // TODO: (MED-170) Логику ниже делать методом сервиса кордаты
+        // к примеру назвать fetchCountExpiredMedicines
         var expiredMedicinesCount = 0
         
         data.forEach { medicine in
-            if currentDate >= medicine.expiryDate ?? currentDate {
+            if let expiryDate = medicine.expiryDate, Date() >= expiryDate {
                 expiredMedicinesCount += 1
             }
         }

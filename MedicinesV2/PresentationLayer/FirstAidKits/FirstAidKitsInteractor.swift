@@ -14,7 +14,8 @@ protocol FirstAidKitsBusinessLogic {
     /// - Если в базе есть аптечки, скрывается, иначе - отображается
     func updatePlaceholder()
     /// Метод для поиска просроченных лекарств в аптечке
-    /// - Используется для обновления лейбла в списке аптечек
+    /// - Используется только для запуска  обновления лейбла в списке аптечек, перезапуская
+    /// таблицу, если есть просроченные лекарства в базе.
     func searchExpiredMedicines()
     /// Метод для создания новой аптечки.
     /// - Parameter firstAidKit: принимает имя аптечки.
@@ -88,32 +89,34 @@ extension FirstAidKitInteractor: FirstAidKitsBusinessLogic {
     }
     
     func searchExpiredMedicines() {
+        // TODO: (MED-170) Логику ниже делать методом сервиса кордаты
+        // к примеру назвать fetchCountExpiredMedicines
         var expiredMedicinesCount = 0
         let medicines = self.coreDataService?.fetchRequest(String(describing: DBMedicine.self)) as? [DBMedicine]
-        
+
         medicines?.forEach { medicine in
-            if medicine.expiryDate ?? Date() <= Date() {
+            if let expiryDate = medicine.expiryDate, Date() >= expiryDate {
                 expiredMedicinesCount += 1
             }
         }
-        
+
         presenter?.updateExpiredMedicinesLabel()
     }
     
     // MARK: - CRUD methods
     
     func createData(_ firstAidKitName: String) {
-        coreDataService?.performSave({ [weak self] context in
+        coreDataService?.performSave { [weak self] context in
             self?.coreDataService?.create(firstAidKitName, context: context)
             self?.presenter?.hidePlaceholder()
             CustomLogger.info("Плейсхолдер скрыт после добавления аптечки")
-        })
+        }
     }
 
     func updateData(_ firstAidKit: DBFirstAidKit, newName: String) {
-        coreDataService?.performSave({ context in
+        coreDataService?.performSave { context in
             self.coreDataService?.update(firstAidKit, newName: newName, context: context)
-        })
+        }
     }
     
     func delete(firstAidKit: DBFirstAidKit) {
