@@ -121,6 +121,16 @@ final class MedicineCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - LifeCycle
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        actionIcon.image = nil
+        expiryDateLabel.textColor = .label
+        amountLabel.textColor = .label
+    }
+    
 }
 
 // MARK: - Public method
@@ -146,10 +156,10 @@ extension MedicineCell {
         
         if let expiryDate, Date() >= expiryDate {
             setImageActionIcon(need: .thrownOut)
-        } else if amount?.doubleValue ?? 0 <= 0 {
+        }
+        
+        if amount?.doubleValue ?? 0 <= 0 {
             setImageActionIcon(need: .buy)
-        } else {
-            setImageActionIcon(need: .nothing)
         }
     }
     
@@ -166,10 +176,6 @@ extension MedicineCell {
             actionIcon.image = UIImage(systemName: "trash")
             actionIcon.tintColor = #colorLiteral(red: 0.8729341626, green: 0.4694843888, blue: 0.5979845524, alpha: 1)
             expiryDateLabel.textColor = #colorLiteral(red: 0.8729341626, green: 0.4694843888, blue: 0.5979845524, alpha: 1)
-        case .nothing:
-            actionIcon.image = nil
-            expiryDateLabel.textColor = .label
-            amountLabel.textColor = .label
         }
     }
 }
