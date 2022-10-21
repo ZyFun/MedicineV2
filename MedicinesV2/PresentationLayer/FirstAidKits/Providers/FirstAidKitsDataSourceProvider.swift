@@ -52,13 +52,16 @@ final class FirstAidKitsDataSourceProvider: NSObject, IFirstAidKitsDataSourcePro
     /// Метод для поиска просроченных лекарств в аптечке
     /// - Parameter currentFirstAidKid: аптечка в которой производится поиск
     /// - Returns: возвращает число просроченных лекарств
+    /// - Такой же метод есть в `FirstAidKitsFetchedResultsManager`
     private func searchExpiredMedicines(for currentFirstAidKid: DBFirstAidKit?) -> Int {
+        // TODO: (MED-170) Логику ниже делать методом сервиса кордаты
+        // к примеру назвать fetchCountExpiredMedicines
         var expiredMedicinesCount = 0
         
         currentFirstAidKid?.medicines?.forEach { medicine in
             guard let medicine = medicine as? DBMedicine else { return }
             
-            if medicine.expiryDate ?? Date() <= Date() {
+            if let expiryDate = medicine.expiryDate, Date() >= expiryDate {
                 expiredMedicinesCount += 1
             }
         }

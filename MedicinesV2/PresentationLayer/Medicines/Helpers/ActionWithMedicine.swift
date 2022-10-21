@@ -12,4 +12,5 @@
 enum ActionWithMedicine {
     case buy
     case thrownOut
+    case nothing
 }
