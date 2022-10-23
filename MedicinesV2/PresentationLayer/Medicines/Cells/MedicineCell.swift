@@ -46,7 +46,7 @@ final class MedicineCell: UITableViewCell {
         return label
     }()
     
-    private let typeLabel: UILabel = {
+    private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont(name: "HelveticaNeue", size: 15)
@@ -90,7 +90,7 @@ final class MedicineCell: UITableViewCell {
         contentView.addSubview(viewContainer)
         viewContainer.addSubview(stackMedicineLabels)
         stackMedicineLabels.addArrangedSubview(nameLabel)
-        stackMedicineLabels.addArrangedSubview(typeLabel)
+        stackMedicineLabels.addArrangedSubview(descriptionLabel)
         stackMedicineLabels.addArrangedSubview(expiryDateLabel)
         viewContainer.addSubview(actionIcon)
         viewContainer.addSubview(amountLabel)
@@ -121,11 +121,17 @@ final class MedicineCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-}
-
-// MARK: - Public method
-
-extension MedicineCell {
+    // MARK: - LifeCycle
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        actionIcon.image = nil
+        expiryDateLabel.textColor = .label
+        amountLabel.textColor = .label
+    }
+    
+    // MARK: - Public method
     
     /// Настройка информации, которая будет отображаться в ячейке лекарства
     /// - Parameters:
@@ -136,20 +142,43 @@ extension MedicineCell {
     func configure (
         name: String,
         type: String?,
+        purpose: String?,
         expiryDate: Date?,
         amount: NSNumber?
     ) {
+        let description = generateDescriptionFrom(type, purpose)
+        
         nameLabel.text = name
-        typeLabel.text = type
+        descriptionLabel.text = description
         expiryDateLabel.text = expiryDate?.toString()
         amountLabel.text = "\(amount ?? 0) шт"
         
         if let expiryDate, Date() >= expiryDate {
             setImageActionIcon(need: .thrownOut)
-        } else if amount?.doubleValue ?? 0 <= 0 {
+        }
+        
+        if amount?.doubleValue ?? 0 <= 0 {
             setImageActionIcon(need: .buy)
+        }
+    }
+    
+    // MARK: - Private method
+    
+    /// Метод генерации описания лекарсва из типа и назначения
+    /// - Parameters:
+    ///   - type: принимает тип лекарства.
+    ///   - purpose: принимает назначение (область применения) лекарства.
+    /// - Returns: возвращает сгенерированное описание.
+    /// - Используется для правильной генерации строки описания, с запятыми и пробелами
+    private func generateDescriptionFrom(_ type: String?, _ purpose: String?) -> String? {
+        if let type, type != "", let purpose, purpose != "" {
+            return "\(type), \(purpose)"
+        } else if let type, type != "" {
+            return type
+        } else if let purpose {
+            return purpose
         } else {
-            setImageActionIcon(need: .nothing)
+            return nil
         }
     }
     
@@ -166,10 +195,6 @@ extension MedicineCell {
             actionIcon.image = UIImage(systemName: "trash")
             actionIcon.tintColor = #colorLiteral(red: 0.8729341626, green: 0.4694843888, blue: 0.5979845524, alpha: 1)
             expiryDateLabel.textColor = #colorLiteral(red: 0.8729341626, green: 0.4694843888, blue: 0.5979845524, alpha: 1)
-        case .nothing:
-            actionIcon.image = nil
-            expiryDateLabel.textColor = .label
-            amountLabel.textColor = .label
         }
     }
 }

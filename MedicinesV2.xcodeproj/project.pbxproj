@@ -17,6 +17,7 @@
 		2C52BDC2273540F400356A63 /* MedicineViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C52BDC0273540F400356A63 /* MedicineViewController.storyboard */; };
 		2C52BDC7273540F600356A63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C52BDC6273540F600356A63 /* Assets.xcassets */; };
 		2C52BDCA273540F600356A63 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C52BDC8273540F600356A63 /* LaunchScreen.storyboard */; };
+		2C56E08D29057A02009AAB46 /* UIImage+GraphicsImageRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C56E08C29057A02009AAB46 /* UIImage+GraphicsImageRenderer.swift */; };
 		2C5BBB7529000A6300D821EC /* MedicineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5BBB7429000A6300D821EC /* MedicineCell.swift */; };
 		2C5F113627707CF60040536D /* Medicines.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F113327707CF60040536D /* Medicines.xcdatamodeld */; };
 		2C60890927356B6400E66081 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60890827356B6400E66081 /* CoreDataService.swift */; };
@@ -72,6 +73,8 @@
 		2C52BDC6273540F600356A63 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2C52BDC9273540F600356A63 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2C52BDCB273540F600356A63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2C56E08B290551E2009AAB46 /* Medicines v4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Medicines v4.xcdatamodel"; sourceTree = "<group>"; };
+		2C56E08C29057A02009AAB46 /* UIImage+GraphicsImageRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+GraphicsImageRenderer.swift"; sourceTree = "<group>"; };
 		2C5BBB7429000A6300D821EC /* MedicineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineCell.swift; sourceTree = "<group>"; };
 		2C5F113427707CF60040536D /* MedicineV2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MedicineV2.xcdatamodel; sourceTree = "<group>"; };
 		2C5F113527707CF60040536D /* Medicines v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Medicines v2.xcdatamodel"; sourceTree = "<group>"; };
@@ -99,6 +102,8 @@
 		2CE3D70628D8BDE7001DA9AF /* FirstAidKitsFetchedResultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAidKitsFetchedResultsManager.swift; sourceTree = "<group>"; };
 		2CE3D70A28D90A00001DA9AF /* Medicines v3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Medicines v3.xcdatamodel"; sourceTree = "<group>"; };
 		2CEAA1BA28DDC5C2000BA942 /* MedicinesDataSourceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicinesDataSourceProvider.swift; sourceTree = "<group>"; };
+		2CED0DED290450E100A5751C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		2CED0DEE290450E100A5751C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/MedicineViewController.strings; sourceTree = "<group>"; };
 		2CED30E228F6E47200A6CEE5 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		2CED30E328F6E47200A6CEE5 /* SplashViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SplashViewController.xib; sourceTree = "<group>"; };
 		2CED30E628F6E6A500A6CEE5 /* SplashPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashPresenter.swift; sourceTree = "<group>"; };
@@ -282,6 +287,7 @@
 				2C480C83275FB1FA000CD5CC /* Date+DateFormatter.swift */,
 				2C480C85275FB340000CD5CC /* String+DateFormatter.swift.swift */,
 				2C1D3E692760FFD800D01C51 /* String+NumberFormatter.swift */,
+				2C56E08C29057A02009AAB46 /* UIImage+GraphicsImageRenderer.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -444,6 +450,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = 2C52BDAE273540F400356A63;
 			productRefGroup = 2C52BDB8273540F400356A63 /* Products */;
@@ -552,6 +559,7 @@
 				2CED30E928F6E6C900A6CEE5 /* SplashAnimator.swift in Sources */,
 				2CF1EE77277347980031D79D /* FirstAidKitsRouter.swift in Sources */,
 				2CF7909B28FED8A9009F53AD /* FirstAidKitCell.swift in Sources */,
+				2C56E08D29057A02009AAB46 /* UIImage+GraphicsImageRenderer.swift in Sources */,
 				2C925719273D5C4400DA7284 /* MedicinesPresenter.swift in Sources */,
 				2CF1EE75277347800031D79D /* FirstAidKitsInteractor.swift in Sources */,
 				2CF28C7C28DCA24C0017C0A4 /* FirstAidKitsDataSourceProvider.swift in Sources */,
@@ -571,6 +579,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				2C52BDC1273540F400356A63 /* Base */,
+				2CED0DEE290450E100A5751C /* ru */,
 			);
 			name = MedicineViewController.storyboard;
 			sourceTree = "<group>";
@@ -579,6 +588,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				2C52BDC9273540F600356A63 /* Base */,
+				2CED0DED290450E100A5751C /* ru */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -590,6 +600,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -651,6 +662,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -710,7 +722,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = B66N983M7Q;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MedicinesV2/Info.plist;
@@ -724,7 +736,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.5.1;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ru.zyfunphoto.MedicinesV2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -741,7 +753,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = B66N983M7Q;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MedicinesV2/Info.plist;
@@ -755,7 +767,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.5.1;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ru.zyfunphoto.MedicinesV2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -791,11 +803,12 @@
 		2C5F113327707CF60040536D /* Medicines.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2C56E08B290551E2009AAB46 /* Medicines v4.xcdatamodel */,
 				2CE3D70A28D90A00001DA9AF /* Medicines v3.xcdatamodel */,
 				2C5F113427707CF60040536D /* MedicineV2.xcdatamodel */,
 				2C5F113527707CF60040536D /* Medicines v2.xcdatamodel */,
 			);
-			currentVersion = 2CE3D70A28D90A00001DA9AF /* Medicines v3.xcdatamodel */;
+			currentVersion = 2C56E08B290551E2009AAB46 /* Medicines v4.xcdatamodel */;
 			path = Medicines.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

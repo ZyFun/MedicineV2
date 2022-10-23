@@ -78,6 +78,7 @@ extension MedicinesDataSourceProvider: UITableViewDataSource {
         cell.configure(
             name: medicine.title ?? "",
             type: medicine.type,
+            purpose: medicine.purpose,
             expiryDate: medicine.expiryDate,
             amount: medicine.amount
         )
@@ -85,17 +86,6 @@ extension MedicinesDataSourceProvider: UITableViewDataSource {
         return cell
     }
     
-    func tableView(
-        _ tableView: UITableView,
-        commit editingStyle: UITableViewCell.EditingStyle,
-        forRowAt indexPath: IndexPath
-    ) {
-        
-        if editingStyle == .delete {
-            guard let medicine = fetchMedicine(at: indexPath) else { return }
-            presenter?.delete(medicine)
-        }
-    }
 }
 
 // MARK: - Table view delegate
@@ -107,5 +97,41 @@ extension MedicinesDataSourceProvider: UITableViewDelegate {
         
         guard let currentMedicine = fetchMedicine(at: indexPath) else { return }
         presenter?.routeToMedicine(with: currentFirstAidKit, by: currentMedicine)
+    }
+    
+    func tableView(
+        _ tableView: UITableView,
+        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+    ) -> UISwipeActionsConfiguration? {
+        
+        let deleteAction = UIContextualAction(
+            style: .normal,
+            title: ""
+        ) { [weak self] _, _, isDone in
+            
+            guard let medicine = self?.fetchMedicine(at: indexPath) else { return }
+            self?.presenter?.delete(medicine)
+            
+            // Возвращаем значение в убегающее замыкание,
+            // чтобы отпустить интерфейс при пользовательских действиях с ячейкой
+            isDone(true)
+        }
+        
+        let largeConfig = UIImage.SymbolConfiguration(pointSize: 15.0, weight: .medium, scale: .large)
+        let deleteColor = #colorLiteral(red: 0.8729341626, green: 0.4694843888, blue: 0.5979845524, alpha: 1)
+        deleteAction.image = UIImage(
+            systemName: "trash",
+            withConfiguration: largeConfig
+        )?.withTintColor(
+            .white,
+            renderingMode: .alwaysTemplate
+        ).addBackgroundCircle(color: deleteColor, diameter: 35)
+        
+        deleteAction.backgroundColor = .systemGray6
+        
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+        configuration.performsFirstActionWithFullSwipe = false
+        
+        return configuration
     }
 }

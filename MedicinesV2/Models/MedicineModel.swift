@@ -11,6 +11,7 @@ struct MedicineModel {
     let dateCreated: Date
     let title: String
     let type: String?
+    let purpose: String?
     let amount: Double?
     let stepCountForStepper: Double?
     let expiryDate: Date?

@@ -159,7 +159,10 @@ extension MedicinesViewController: UISearchBarDelegate {
             format: "%K == %@", "firstAidKit", currentFirstAidKit
         )
         let medicineFilter = NSPredicate(
-            format: "title CONTAINS[c] %@ OR type CONTAINS[c] %@", searchText, searchText
+            format: "title CONTAINS[c] %@ OR type CONTAINS[c] %@ OR purpose CONTAINS[c] %@",
+            searchText,
+            searchText,
+            searchText
         )
         
         fetchedResultManager?.fetchedResultsController

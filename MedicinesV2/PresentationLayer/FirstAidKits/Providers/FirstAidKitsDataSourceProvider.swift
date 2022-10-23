@@ -110,17 +110,6 @@ extension FirstAidKitsDataSourceProvider: UITableViewDataSource {
         return cell
     }
     
-    func tableView(
-        _ tableView: UITableView,
-        commit editingStyle: UITableViewCell.EditingStyle,
-        forRowAt indexPath: IndexPath
-    ) {
-        
-        if editingStyle == .delete {
-            guard let firstAidKit = fetchFirstAidKit(at: indexPath) else { return }
-            presenter?.delete(firstAidKit)
-        }
-    }
 }
 
 // MARK: - Table view delegate
@@ -139,14 +128,14 @@ extension FirstAidKitsDataSourceProvider: UITableViewDelegate {
     
     func tableView(
         _ tableView: UITableView,
-        leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
     ) -> UISwipeActionsConfiguration? {
         
         guard let firstAidKit = fetchFirstAidKit(at: indexPath) else { return nil }
         
         let editAction = UIContextualAction(
             style: .normal,
-            title: "Изменить"
+            title: ""
         ) { [weak self] _, _, isDone in
             
             self?.presenter?.showAlert(for: firstAidKit, by: indexPath)
@@ -156,9 +145,43 @@ extension FirstAidKitsDataSourceProvider: UITableViewDelegate {
             isDone(true)
         }
         
-        // Настройка конпок действий
-        editAction.backgroundColor = .systemOrange
+        let deleteAction = UIContextualAction(
+            style: .normal,
+            title: ""
+        ) { [weak self] _, _, isDone in
+            self?.presenter?.delete(firstAidKit)
+            
+            // Возвращаем значение в убегающее замыкание,
+            // чтобы отпустить интерфейс при пользовательских действиях с ячейкой
+            isDone(true)
+        }
         
-        return UISwipeActionsConfiguration(actions: [editAction])
+        let largeConfig = UIImage.SymbolConfiguration(pointSize: 15.0, weight: .medium, scale: .large)
+        let editColor = #colorLiteral(red: 0.8705882353, green: 0.7843137255, blue: 0.5568627451, alpha: 1)
+        editAction.backgroundColor = .systemGray6
+        editAction.image = UIImage(
+            systemName: "pencil",
+            withConfiguration: largeConfig
+        )?.withTintColor(
+            .white,
+            renderingMode: .alwaysTemplate
+        ).addBackgroundCircle(color: editColor, diameter: 35)
+        
+        let deleteColor = #colorLiteral(red: 0.8729341626, green: 0.4694843888, blue: 0.5979845524, alpha: 1)
+        deleteAction.backgroundColor = .systemGray6
+        deleteAction.image = UIImage(
+            systemName: "trash",
+            withConfiguration: largeConfig
+        )?.withTintColor(
+            .white,
+            renderingMode: .alwaysTemplate
+        ).addBackgroundCircle(color: deleteColor, diameter: 35)
+        
+        let configuration = UISwipeActionsConfiguration(
+            actions: [deleteAction, editAction]
+        )
+        configuration.performsFirstActionWithFullSwipe = false
+        
+        return configuration
     }
 }

@@ -35,6 +35,7 @@ final class MedicineViewController: UITableViewController {
     
     @IBOutlet weak var medicineNameTextField: UITextField!
     @IBOutlet weak var medicineTypeTextField: UITextField!
+    @IBOutlet weak var medicinePurposeTextField: UITextField!
     @IBOutlet weak var medicineAmountTextField: UITextField!
     @IBOutlet weak var medicineCountStepsTextField: UITextField!
     @IBOutlet weak var medicinesExpiryDateTextField: UITextField!
@@ -108,6 +109,7 @@ private extension MedicineViewController {
         presenter?.createMedicine(
             name: medicineNameTextField.text,
             type: medicineTypeTextField.text,
+            purpose: medicinePurposeTextField.text,
             amount: medicineAmountTextField.text,
             countSteps: medicineCountStepsTextField.text,
             expiryDate: medicinesExpiryDateTextField.text,
@@ -170,6 +172,7 @@ private extension MedicineViewController {
     func setupDelegateForTextFields() {
         medicineNameTextField.delegate = self
         medicineTypeTextField.delegate = self
+        medicinePurposeTextField.delegate = self
         medicineCountStepsTextField.delegate = self
         medicineAmountTextField.delegate = self
         medicinesExpiryDateTextField.delegate = self
@@ -348,6 +351,7 @@ private extension MedicineViewController {
         if let medicine = medicine {
             medicineNameTextField.text = medicine.title
             medicineTypeTextField.text = medicine.type
+            medicinePurposeTextField.text = medicine.purpose
             medicineAmountTextField.text = "\(medicine.amount ?? 0)"
             medicineCountStepsTextField.text = "\(medicine.stepCountForStepper ?? 1)"
             medicinesExpiryDateTextField.text = "\(medicine.expiryDate?.toString() ?? "")"
