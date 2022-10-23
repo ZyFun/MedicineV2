@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,7 +20,7 @@
                             <tableViewSection id="zV4-O5-cGt">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="75" id="qOZ-Ku-69P">
-                                        <rect key="frame" x="0.0" y="44.5" width="414" height="75"/>
+                                        <rect key="frame" x="0.0" y="50" width="414" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qOZ-Ku-69P" id="Sht-9p-uMR">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
@@ -52,7 +52,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="75" id="jSs-OP-kQU">
-                                        <rect key="frame" x="0.0" y="119.5" width="414" height="75"/>
+                                        <rect key="frame" x="0.0" y="125" width="414" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jSs-OP-kQU" id="9ZZ-GK-tiu">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
@@ -83,8 +83,40 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="75" id="Kys-LU-Nax">
+                                        <rect key="frame" x="0.0" y="200" width="414" height="75"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Kys-LU-Nax" id="IqY-27-qec">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="qIv-da-ncQ" userLabel="Medicine name stack">
+                                                    <rect key="frame" x="20" y="4" width="374" height="67"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Назначение" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j9q-eO-5cx">
+                                                            <rect key="frame" x="0.0" y="0.0" width="374" height="31.5"/>
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" placeholder="Введите назначение (температура, кашель)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jJo-8k-SSe">
+                                                            <rect key="frame" x="0.0" y="37.5" width="374" height="29.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                            <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                                        </textField>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="qIv-da-ncQ" secondAttribute="trailing" id="KLG-k9-Y4i"/>
+                                                <constraint firstItem="qIv-da-ncQ" firstAttribute="leading" secondItem="IqY-27-qec" secondAttribute="leadingMargin" id="W17-UN-Z1Q"/>
+                                                <constraint firstAttribute="bottom" secondItem="qIv-da-ncQ" secondAttribute="bottom" constant="4" id="dA7-XT-H6S"/>
+                                                <constraint firstItem="qIv-da-ncQ" firstAttribute="top" secondItem="IqY-27-qec" secondAttribute="top" constant="4" id="rJh-WQ-TeF"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="75" id="xa9-wG-K4v">
-                                        <rect key="frame" x="0.0" y="194.5" width="414" height="75"/>
+                                        <rect key="frame" x="0.0" y="275" width="414" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xa9-wG-K4v" id="ah1-nL-0hv">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
@@ -140,7 +172,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="75" id="E8a-Rm-Lgo">
-                                        <rect key="frame" x="0.0" y="269.5" width="414" height="75"/>
+                                        <rect key="frame" x="0.0" y="350" width="414" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="E8a-Rm-Lgo" id="HBJ-H7-Bd8">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
@@ -184,6 +216,7 @@
                         <outlet property="medicineAmountTextField" destination="vmw-rD-va7" id="Ufb-2b-MGy"/>
                         <outlet property="medicineCountStepsTextField" destination="Qeq-Z1-OW3" id="mMB-pw-s3k"/>
                         <outlet property="medicineNameTextField" destination="qKB-rG-1cI" id="8Bs-60-e7f"/>
+                        <outlet property="medicinePurposeTextField" destination="jJo-8k-SSe" id="LoJ-Jc-qF9"/>
                         <outlet property="medicineTypeTextField" destination="6W6-xx-IPv" id="sRI-DY-9nm"/>
                         <outlet property="medicinesExpiryDateTextField" destination="Tbc-Bj-hxQ" id="G0r-Nn-o8A"/>
                     </connections>

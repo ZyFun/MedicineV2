@@ -17,6 +17,7 @@
 		2C52BDC2273540F400356A63 /* MedicineViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C52BDC0273540F400356A63 /* MedicineViewController.storyboard */; };
 		2C52BDC7273540F600356A63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C52BDC6273540F600356A63 /* Assets.xcassets */; };
 		2C52BDCA273540F600356A63 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C52BDC8273540F600356A63 /* LaunchScreen.storyboard */; };
+		2C56E08D29057A02009AAB46 /* UIImage+GraphicsImageRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C56E08C29057A02009AAB46 /* UIImage+GraphicsImageRenderer.swift */; };
 		2C5BBB7529000A6300D821EC /* MedicineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5BBB7429000A6300D821EC /* MedicineCell.swift */; };
 		2C5F113627707CF60040536D /* Medicines.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F113327707CF60040536D /* Medicines.xcdatamodeld */; };
 		2C60890927356B6400E66081 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60890827356B6400E66081 /* CoreDataService.swift */; };
@@ -72,6 +73,8 @@
 		2C52BDC6273540F600356A63 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2C52BDC9273540F600356A63 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2C52BDCB273540F600356A63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2C56E08B290551E2009AAB46 /* Medicines v4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Medicines v4.xcdatamodel"; sourceTree = "<group>"; };
+		2C56E08C29057A02009AAB46 /* UIImage+GraphicsImageRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+GraphicsImageRenderer.swift"; sourceTree = "<group>"; };
 		2C5BBB7429000A6300D821EC /* MedicineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineCell.swift; sourceTree = "<group>"; };
 		2C5F113427707CF60040536D /* MedicineV2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MedicineV2.xcdatamodel; sourceTree = "<group>"; };
 		2C5F113527707CF60040536D /* Medicines v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Medicines v2.xcdatamodel"; sourceTree = "<group>"; };
@@ -284,6 +287,7 @@
 				2C480C83275FB1FA000CD5CC /* Date+DateFormatter.swift */,
 				2C480C85275FB340000CD5CC /* String+DateFormatter.swift.swift */,
 				2C1D3E692760FFD800D01C51 /* String+NumberFormatter.swift */,
+				2C56E08C29057A02009AAB46 /* UIImage+GraphicsImageRenderer.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -555,6 +559,7 @@
 				2CED30E928F6E6C900A6CEE5 /* SplashAnimator.swift in Sources */,
 				2CF1EE77277347980031D79D /* FirstAidKitsRouter.swift in Sources */,
 				2CF7909B28FED8A9009F53AD /* FirstAidKitCell.swift in Sources */,
+				2C56E08D29057A02009AAB46 /* UIImage+GraphicsImageRenderer.swift in Sources */,
 				2C925719273D5C4400DA7284 /* MedicinesPresenter.swift in Sources */,
 				2CF1EE75277347800031D79D /* FirstAidKitsInteractor.swift in Sources */,
 				2CF28C7C28DCA24C0017C0A4 /* FirstAidKitsDataSourceProvider.swift in Sources */,
@@ -798,11 +803,12 @@
 		2C5F113327707CF60040536D /* Medicines.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2C56E08B290551E2009AAB46 /* Medicines v4.xcdatamodel */,
 				2CE3D70A28D90A00001DA9AF /* Medicines v3.xcdatamodel */,
 				2C5F113427707CF60040536D /* MedicineV2.xcdatamodel */,
 				2C5F113527707CF60040536D /* Medicines v2.xcdatamodel */,
 			);
-			currentVersion = 2CE3D70A28D90A00001DA9AF /* Medicines v3.xcdatamodel */;
+			currentVersion = 2C56E08B290551E2009AAB46 /* Medicines v4.xcdatamodel */;
 			path = Medicines.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

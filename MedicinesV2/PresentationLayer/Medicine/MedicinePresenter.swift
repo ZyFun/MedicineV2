@@ -24,6 +24,7 @@ protocol MedicineViewControllerOutput {
     /// - Parameters:
     ///   - name: принимает название лекарства
     ///   - type: принимает тип лекарства
+    ///   - purpose: принимает назначение лекарства
     ///   - amount: принимает количество лекарств
     ///   - countSteps: принимает количество шагов степпера
     ///   - expiryDate: принимает дату срока годности
@@ -33,6 +34,7 @@ protocol MedicineViewControllerOutput {
     func createMedicine(
         name: String?,
         type: String?,
+        purpose: String?,
         amount: String?,
         countSteps: String?,
         expiryDate: String?,
@@ -51,6 +53,7 @@ extension MedicinePresenter: MedicineViewControllerOutput {
     func createMedicine(
         name: String?,
         type: String?,
+        purpose: String?,
         amount: String?,
         countSteps: String?,
         expiryDate: String?,
@@ -60,6 +63,7 @@ extension MedicinePresenter: MedicineViewControllerOutput {
         interactor?.createMedicine(
             name: name,
             type: type,
+            purpose: purpose,
             amount: amount,
             countSteps: countSteps,
             expiryDate: expiryDate,

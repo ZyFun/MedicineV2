@@ -15,15 +15,18 @@ protocol MedicineBusinessLogic {
     /// - Parameters:
     ///   - name: принимает название лекарства
     ///   - type: принимает тип лекарства
+    ///   - purpose: принимает назначение лекарства
     ///   - amount: принимает количество лекарств
     ///   - countSteps: принимает количество шагов степпера
     ///   - expiryDate: принимает дату срока годности
     ///   - currentFirstAidKit: принимает текущую аптечку (используется для связи лекарства
     ///   с аптечкой)
     ///   - medicine: принимает текущее лекарство
+    ///   - dbMedicine: <#dbMedicine description#>
     func createMedicine(
         name: String?,
         type: String?,
+        purpose: String?,
         amount: String?,
         countSteps: String?,
         expiryDate: String?,
@@ -43,6 +46,7 @@ extension MedicineInteractor: MedicineBusinessLogic {
     func createMedicine(
         name: String?,
         type: String?,
+        purpose: String?,
         amount: String?,
         countSteps: String?,
         expiryDate: String?,
@@ -65,6 +69,7 @@ extension MedicineInteractor: MedicineBusinessLogic {
             dateCreated: dateCreated,
             title: name ?? "",
             type: type,
+            purpose: purpose,
             amount: amount?.doubleValue ?? 0,
             stepCountForStepper: countSteps?.doubleValue ?? 1,
             expiryDate: expiryDate?.toDate()
