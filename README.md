@@ -3,7 +3,7 @@
 ![IOS](https://img.shields.io/badge/iOS-000000?style=for-the-badge&logo=ios&logoColor=white)
 <br/>
 ![Target](https://img.shields.io/badge/iOS-13.0-blue)
-![Version](https://img.shields.io/badge/version-0.5.1-blue)
+![Version](https://img.shields.io/badge/version-1.0.0-blue)
 <br/>
 ![UIKit](https://img.shields.io/badge/-UIKit-blue)
 ![XIB](https://img.shields.io/badge/-XIB-blue)
