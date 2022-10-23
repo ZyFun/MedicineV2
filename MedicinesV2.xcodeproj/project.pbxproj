@@ -72,6 +72,7 @@
 		2C52BDC6273540F600356A63 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2C52BDC9273540F600356A63 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2C52BDCB273540F600356A63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2C56E08B290551E2009AAB46 /* Medicines v4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Medicines v4.xcdatamodel"; sourceTree = "<group>"; };
 		2C5BBB7429000A6300D821EC /* MedicineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineCell.swift; sourceTree = "<group>"; };
 		2C5F113427707CF60040536D /* MedicineV2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MedicineV2.xcdatamodel; sourceTree = "<group>"; };
 		2C5F113527707CF60040536D /* Medicines v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Medicines v2.xcdatamodel"; sourceTree = "<group>"; };
@@ -798,11 +799,12 @@
 		2C5F113327707CF60040536D /* Medicines.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2C56E08B290551E2009AAB46 /* Medicines v4.xcdatamodel */,
 				2CE3D70A28D90A00001DA9AF /* Medicines v3.xcdatamodel */,
 				2C5F113427707CF60040536D /* MedicineV2.xcdatamodel */,
 				2C5F113527707CF60040536D /* Medicines v2.xcdatamodel */,
 			);
-			currentVersion = 2CE3D70A28D90A00001DA9AF /* Medicines v3.xcdatamodel */;
+			currentVersion = 2C56E08B290551E2009AAB46 /* Medicines v4.xcdatamodel */;
 			path = Medicines.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

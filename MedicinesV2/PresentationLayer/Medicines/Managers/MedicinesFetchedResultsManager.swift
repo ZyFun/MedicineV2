@@ -69,6 +69,7 @@ extension MedicinesFetchedResultsManager: NSFetchedResultsControllerDelegate {
                 cell?.configure(
                     name: medicine?.title ?? "",
                     type: medicine?.type,
+                    purpose: medicine?.purpose,
                     expiryDate: medicine?.expiryDate,
                     amount: medicine?.amount
                 )

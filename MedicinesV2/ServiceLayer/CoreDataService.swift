@@ -135,6 +135,7 @@ extension CoreDataService: ICoreDataService {
         dbMedicine.dateCreated = medicine.dateCreated
         dbMedicine.title = medicine.title
         dbMedicine.type = medicine.type
+        dbMedicine.purpose = medicine.purpose
         dbMedicine.amount = (medicine.amount) as? NSNumber
         dbMedicine.stepCountForStepper = (medicine.stepCountForStepper) as? NSNumber
         dbMedicine.expiryDate = medicine.expiryDate
@@ -210,6 +211,7 @@ extension CoreDataService: ICoreDataService {
         }
         currentObject.title = newData.title
         currentObject.type = newData.type
+        currentObject.purpose = newData.purpose
         currentObject.amount = (newData.amount) as? NSNumber
         currentObject.stepCountForStepper = (newData.stepCountForStepper) as? NSNumber
         currentObject.expiryDate = newData.expiryDate

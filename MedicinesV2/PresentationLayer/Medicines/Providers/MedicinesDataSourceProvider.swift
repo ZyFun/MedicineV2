@@ -78,6 +78,7 @@ extension MedicinesDataSourceProvider: UITableViewDataSource {
         cell.configure(
             name: medicine.title ?? "",
             type: medicine.type,
+            purpose: medicine.purpose,
             expiryDate: medicine.expiryDate,
             amount: medicine.amount
         )
