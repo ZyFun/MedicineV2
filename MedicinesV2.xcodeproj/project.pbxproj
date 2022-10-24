@@ -29,6 +29,7 @@
 		2C92571B273D5C9A00DA7284 /* MedicinesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C92571A273D5C9A00DA7284 /* MedicinesInteractor.swift */; };
 		2C92571D273D5CBF00DA7284 /* MedicinesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C92571C273D5CBF00DA7284 /* MedicinesRouter.swift */; };
 		2C92571F273D611800DA7284 /* MedicinesConfigurator.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C92571E273D611800DA7284 /* MedicinesConfigurator.swift.swift */; };
+		2CA3AB1A2906445000763BC5 /* PrivacyPolicy.md in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3AB192906445000763BC5 /* PrivacyPolicy.md */; };
 		2CA75457273BED4100B147B7 /* UIAlerController+CustomController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA75456273BED4100B147B7 /* UIAlerController+CustomController.swift */; };
 		2CAE169828D9F7E30071E783 /* MedicinesFetchedResultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAE169728D9F7E30071E783 /* MedicinesFetchedResultsManager.swift */; };
 		2CAE169A28DA07AF0071E783 /* MedicineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAE169928DA07AF0071E783 /* MedicineModel.swift */; };
@@ -87,6 +88,7 @@
 		2C92571A273D5C9A00DA7284 /* MedicinesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicinesInteractor.swift; sourceTree = "<group>"; };
 		2C92571C273D5CBF00DA7284 /* MedicinesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicinesRouter.swift; sourceTree = "<group>"; };
 		2C92571E273D611800DA7284 /* MedicinesConfigurator.swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicinesConfigurator.swift.swift; sourceTree = "<group>"; };
+		2CA3AB192906445000763BC5 /* PrivacyPolicy.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = PrivacyPolicy.md; sourceTree = "<group>"; };
 		2CA75456273BED4100B147B7 /* UIAlerController+CustomController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlerController+CustomController.swift"; sourceTree = "<group>"; };
 		2CAE169728D9F7E30071E783 /* MedicinesFetchedResultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicinesFetchedResultsManager.swift; sourceTree = "<group>"; };
 		2CAE169928DA07AF0071E783 /* MedicineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineModel.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				2CDB5E1F27A538EF002361F2 /* README.md */,
+				2CA3AB192906445000763BC5 /* PrivacyPolicy.md */,
 				2CCA5A0127C0DDA1005C7753 /* .gitignore */,
 				2C52BDB9273540F400356A63 /* MedicinesV2 */,
 				2C52BDDB27355E1700356A63 /* Screenshots */,
@@ -473,6 +476,7 @@
 				2C52BDC7273540F600356A63 /* Assets.xcassets in Resources */,
 				2C52BDC2273540F400356A63 /* MedicineViewController.storyboard in Resources */,
 				2CDB5E2027A538EF002361F2 /* README.md in Resources */,
+				2CA3AB1A2906445000763BC5 /* PrivacyPolicy.md in Resources */,
 				2CCA5A0227C0DDA1005C7753 /* .gitignore in Resources */,
 				2C7A5FB82774EFA9002C4702 /* FirstAidKitsViewController.xib in Resources */,
 			);
