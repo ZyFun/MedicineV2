@@ -121,16 +121,6 @@ final class MedicineCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - LifeCycle
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-        actionIcon.image = nil
-        expiryDateLabel.textColor = .label
-        amountLabel.textColor = .label
-    }
-    
     // MARK: - Public method
     
     /// Настройка информации, которая будет отображаться в ячейке лекарства
@@ -153,11 +143,11 @@ final class MedicineCell: UITableViewCell {
         expiryDateLabel.text = expiryDate?.toString()
         amountLabel.text = "\(amount ?? 0) шт"
         
+        setImageActionIconDefault()
+        
         if let expiryDate, Date() >= expiryDate {
             setImageActionIcon(need: .thrownOut)
-        }
-        
-        if amount?.doubleValue ?? 0 <= 0 {
+        } else if amount?.doubleValue ?? 0 <= 0 {
             setImageActionIcon(need: .buy)
         }
     }
@@ -196,6 +186,15 @@ final class MedicineCell: UITableViewCell {
             actionIcon.tintColor = #colorLiteral(red: 0.8729341626, green: 0.4694843888, blue: 0.5979845524, alpha: 1)
             expiryDateLabel.textColor = #colorLiteral(red: 0.8729341626, green: 0.4694843888, blue: 0.5979845524, alpha: 1)
         }
+    }
+    
+    /// Метод для сброса иконки предупреждения
+    /// - используется для сброса расцветки лейблов и иконки в случае их изменения, а так же при
+    /// переиспользовании ячеек, к примеру в процессе поиска.
+    private func setImageActionIconDefault() {
+        actionIcon.image = nil
+        expiryDateLabel.textColor = .label
+        amountLabel.textColor = .label
     }
 }
 
