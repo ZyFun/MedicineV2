@@ -50,3 +50,9 @@
 
 ## Installations
 Clone and run project in Xcode 14 or newer
+
+## Screenshots
+<img src="https://github.com/ZyFun/MedicineV2/blob/main/Screenshots/Screenshot000.png" width="252" height="503" /> <img src="https://github.com/ZyFun/MedicineV2/blob/main/Screenshots/Screenshot001.png" width="252" height="503" /> <img src="https://github.com/ZyFun/MedicineV2/blob/main/Screenshots/Screenshot002.png" width="252" height="503" />
+
+## Demo
+<img src="https://github.com/ZyFun/MedicineV2/blob/main/Demo/Demo001.gif" width="252" height="447" />
