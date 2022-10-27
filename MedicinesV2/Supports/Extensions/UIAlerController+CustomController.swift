@@ -58,10 +58,10 @@ extension UIAlertController {
             completion(newValue)
         }
         
-        let cancelAction = UIAlertAction(title: "Отмена", style: .destructive)
+        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel)
         
-        addAction(saveAction)
         addAction(cancelAction)
+        addAction(saveAction)
         addTextField { textField in
             textField.autocapitalizationType = .sentences
             
