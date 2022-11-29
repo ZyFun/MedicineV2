@@ -11,6 +11,7 @@
 		2C24C0A32900689E0047CA3D /* ActionWithMedicine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C24C0A22900689E0047CA3D /* ActionWithMedicine.swift */; };
 		2C38603F28DC81FE003FED87 /* ServiceAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C38603E28DC81FE003FED87 /* ServiceAssembly.swift */; };
 		2C38604128DC82DB003FED87 /* PresentationAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C38604028DC82DB003FED87 /* PresentationAssembly.swift */; };
+		2C47A4EF293682BF000DFB49 /* FirstAidKitsInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C47A4EE293682BF000DFB49 /* FirstAidKitsInteractorTests.swift */; };
 		2C480C84275FB1FA000CD5CC /* Date+DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C480C83275FB1FA000CD5CC /* Date+DateFormatter.swift */; };
 		2C480C86275FB340000CD5CC /* String+DateFormatter.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C480C85275FB340000CD5CC /* String+DateFormatter.swift.swift */; };
 		2C52BDBB273540F400356A63 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C52BDBA273540F400356A63 /* AppDelegate.swift */; };
@@ -63,6 +64,16 @@
 		D69BD2AEA467A95327B2355E /* Pods_MedicinesV2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AD6D90920B4CEB0A6846175 /* Pods_MedicinesV2.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		2C47A4F0293682BF000DFB49 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2C52BDAF273540F400356A63 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2C52BDB6273540F400356A63;
+			remoteInfo = MedicinesV2;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		0AD6D90920B4CEB0A6846175 /* Pods_MedicinesV2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MedicinesV2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		10E65D531DCFBDBEECD0A75E /* Pods-MedicinesV2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MedicinesV2.debug.xcconfig"; path = "Target Support Files/Pods-MedicinesV2/Pods-MedicinesV2.debug.xcconfig"; sourceTree = "<group>"; };
@@ -70,6 +81,8 @@
 		2C24C0A22900689E0047CA3D /* ActionWithMedicine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionWithMedicine.swift; sourceTree = "<group>"; };
 		2C38603E28DC81FE003FED87 /* ServiceAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAssembly.swift; sourceTree = "<group>"; };
 		2C38604028DC82DB003FED87 /* PresentationAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationAssembly.swift; sourceTree = "<group>"; };
+		2C47A4EC293682BF000DFB49 /* MedicinesV2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MedicinesV2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C47A4EE293682BF000DFB49 /* FirstAidKitsInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAidKitsInteractorTests.swift; sourceTree = "<group>"; };
 		2C480C83275FB1FA000CD5CC /* Date+DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+DateFormatter.swift"; sourceTree = "<group>"; };
 		2C480C85275FB340000CD5CC /* String+DateFormatter.swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+DateFormatter.swift.swift"; sourceTree = "<group>"; };
 		2C52BDB7273540F400356A63 /* MedicinesV2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MedicinesV2.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,6 +143,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		2C47A4E9293682BF000DFB49 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2C52BDB4273540F400356A63 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -157,6 +177,30 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		2C47A4ED293682BF000DFB49 /* MedicinesV2Tests */ = {
+			isa = PBXGroup;
+			children = (
+				2C47A4F5293697C7000DFB49 /* PresentationLayer */,
+			);
+			path = MedicinesV2Tests;
+			sourceTree = "<group>";
+		};
+		2C47A4F5293697C7000DFB49 /* PresentationLayer */ = {
+			isa = PBXGroup;
+			children = (
+				2C47A4F7293697F5000DFB49 /* FirstAidKits */,
+			);
+			path = PresentationLayer;
+			sourceTree = "<group>";
+		};
+		2C47A4F7293697F5000DFB49 /* FirstAidKits */ = {
+			isa = PBXGroup;
+			children = (
+				2C47A4EE293682BF000DFB49 /* FirstAidKitsInteractorTests.swift */,
+			);
+			path = FirstAidKits;
+			sourceTree = "<group>";
+		};
 		2C49688F2774956400436C5F /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -173,6 +217,7 @@
 				2CCA5A0127C0DDA1005C7753 /* .gitignore */,
 				2C52BDB9273540F400356A63 /* MedicinesV2 */,
 				2C52BDDB27355E1700356A63 /* Screenshots */,
+				2C47A4ED293682BF000DFB49 /* MedicinesV2Tests */,
 				2C52BDB8273540F400356A63 /* Products */,
 				A3299CF99D993E68C45E1AE2 /* Pods */,
 				114F3F6D7E45DF26D7B019F2 /* Frameworks */,
@@ -183,6 +228,7 @@
 			isa = PBXGroup;
 			children = (
 				2C52BDB7273540F400356A63 /* MedicinesV2.app */,
+				2C47A4EC293682BF000DFB49 /* MedicinesV2Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -424,6 +470,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		2C47A4EB293682BF000DFB49 /* MedicinesV2Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2C47A4F4293682BF000DFB49 /* Build configuration list for PBXNativeTarget "MedicinesV2Tests" */;
+			buildPhases = (
+				2C47A4E8293682BF000DFB49 /* Sources */,
+				2C47A4E9293682BF000DFB49 /* Frameworks */,
+				2C47A4EA293682BF000DFB49 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2C47A4F1293682BF000DFB49 /* PBXTargetDependency */,
+			);
+			name = MedicinesV2Tests;
+			productName = MedicinesV2Tests;
+			productReference = 2C47A4EC293682BF000DFB49 /* MedicinesV2Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		2C52BDB6273540F400356A63 /* MedicinesV2 */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2C52BDCE273540F600356A63 /* Build configuration list for PBXNativeTarget "MedicinesV2" */;
@@ -450,9 +514,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1310;
+				LastSwiftUpdateCheck = 1410;
 				LastUpgradeCheck = 1310;
 				TargetAttributes = {
+					2C47A4EB293682BF000DFB49 = {
+						CreatedOnToolsVersion = 14.1;
+						TestTargetID = 2C52BDB6273540F400356A63;
+					};
 					2C52BDB6273540F400356A63 = {
 						CreatedOnToolsVersion = 13.1;
 					};
@@ -473,11 +541,19 @@
 			projectRoot = "";
 			targets = (
 				2C52BDB6273540F400356A63 /* MedicinesV2 */,
+				2C47A4EB293682BF000DFB49 /* MedicinesV2Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		2C47A4EA293682BF000DFB49 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2C52BDB5273540F400356A63 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -545,6 +621,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		2C47A4E8293682BF000DFB49 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C47A4EF293682BF000DFB49 /* FirstAidKitsInteractorTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2C52BDB3273540F400356A63 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -594,6 +678,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		2C47A4F1293682BF000DFB49 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2C52BDB6273540F400356A63 /* MedicinesV2 */;
+			targetProxy = 2C47A4F0293682BF000DFB49 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		2C52BDC0273540F400356A63 /* MedicineViewController.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -616,6 +708,46 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		2C47A4F2293682BF000DFB49 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B66N983M7Q;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ru.zyfunphoto.MedicinesV2Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MedicinesV2.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MedicinesV2";
+			};
+			name = Debug;
+		};
+		2C47A4F3293682BF000DFB49 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B66N983M7Q;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ru.zyfunphoto.MedicinesV2Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MedicinesV2.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MedicinesV2";
+			};
+			name = Release;
+		};
 		2C52BDCC273540F600356A63 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -799,6 +931,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		2C47A4F4293682BF000DFB49 /* Build configuration list for PBXNativeTarget "MedicinesV2Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2C47A4F2293682BF000DFB49 /* Debug */,
+				2C47A4F3293682BF000DFB49 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		2C52BDB2273540F400356A63 /* Build configuration list for PBXProject "MedicinesV2" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
