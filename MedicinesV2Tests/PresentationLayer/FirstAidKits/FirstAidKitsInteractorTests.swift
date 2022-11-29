@@ -65,7 +65,7 @@ final class FirstAidKitsInteractorTests: XCTestCase {
                     switch result {
                     case .success(let data):
                         data.forEach { firstAidKit in
-                            self.interactor.delete(firstAidKit: firstAidKit)
+                            self.interactor.coreDataService?.delete(firstAidKit, context: context)
                         }
                     case .failure(let error):
                         print(error)

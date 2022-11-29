@@ -12,6 +12,7 @@
 		2C38603F28DC81FE003FED87 /* ServiceAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C38603E28DC81FE003FED87 /* ServiceAssembly.swift */; };
 		2C38604128DC82DB003FED87 /* PresentationAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C38604028DC82DB003FED87 /* PresentationAssembly.swift */; };
 		2C47A4EF293682BF000DFB49 /* FirstAidKitsInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C47A4EE293682BF000DFB49 /* FirstAidKitsInteractorTests.swift */; };
+		2C47A4FA2936B371000DFB49 /* CoreDataServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C47A4F92936B371000DFB49 /* CoreDataServiceTests.swift */; };
 		2C480C84275FB1FA000CD5CC /* Date+DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C480C83275FB1FA000CD5CC /* Date+DateFormatter.swift */; };
 		2C480C86275FB340000CD5CC /* String+DateFormatter.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C480C85275FB340000CD5CC /* String+DateFormatter.swift.swift */; };
 		2C52BDBB273540F400356A63 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C52BDBA273540F400356A63 /* AppDelegate.swift */; };
@@ -83,6 +84,7 @@
 		2C38604028DC82DB003FED87 /* PresentationAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationAssembly.swift; sourceTree = "<group>"; };
 		2C47A4EC293682BF000DFB49 /* MedicinesV2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MedicinesV2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C47A4EE293682BF000DFB49 /* FirstAidKitsInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAidKitsInteractorTests.swift; sourceTree = "<group>"; };
+		2C47A4F92936B371000DFB49 /* CoreDataServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataServiceTests.swift; sourceTree = "<group>"; };
 		2C480C83275FB1FA000CD5CC /* Date+DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+DateFormatter.swift"; sourceTree = "<group>"; };
 		2C480C85275FB340000CD5CC /* String+DateFormatter.swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+DateFormatter.swift.swift"; sourceTree = "<group>"; };
 		2C52BDB7273540F400356A63 /* MedicinesV2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MedicinesV2.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -180,6 +182,7 @@
 		2C47A4ED293682BF000DFB49 /* MedicinesV2Tests */ = {
 			isa = PBXGroup;
 			children = (
+				2C47A4F82936B320000DFB49 /* ServiceLayer */,
 				2C47A4F5293697C7000DFB49 /* PresentationLayer */,
 			);
 			path = MedicinesV2Tests;
@@ -199,6 +202,14 @@
 				2C47A4EE293682BF000DFB49 /* FirstAidKitsInteractorTests.swift */,
 			);
 			path = FirstAidKits;
+			sourceTree = "<group>";
+		};
+		2C47A4F82936B320000DFB49 /* ServiceLayer */ = {
+			isa = PBXGroup;
+			children = (
+				2C47A4F92936B371000DFB49 /* CoreDataServiceTests.swift */,
+			);
+			path = ServiceLayer;
 			sourceTree = "<group>";
 		};
 		2C49688F2774956400436C5F /* Cells */ = {
@@ -625,6 +636,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C47A4FA2936B371000DFB49 /* CoreDataServiceTests.swift in Sources */,
 				2C47A4EF293682BF000DFB49 /* FirstAidKitsInteractorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
