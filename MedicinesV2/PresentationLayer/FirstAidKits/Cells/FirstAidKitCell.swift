@@ -65,10 +65,10 @@ final class FirstAidKitCell: UITableViewCell {
         viewContainer.addSubview(amountMedicinesLabel)
         
         NSLayoutConstraint.activate([
-            viewContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
+            viewContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
             viewContainer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             viewContainer.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            viewContainer.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
+            viewContainer.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
             
             titleFirstAidKitLabel.topAnchor.constraint(equalTo: viewContainer.topAnchor, constant: 10),
             titleFirstAidKitLabel.leadingAnchor.constraint(equalTo: viewContainer.leadingAnchor, constant: 16),
@@ -85,6 +85,16 @@ final class FirstAidKitCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Override Methods
+    
+    override func traitCollectionDidChange(
+        _ previousTraitCollection: UITraitCollection?
+    ) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        setupCardShadowColor()
     }
     
 }
@@ -124,5 +134,26 @@ private extension FirstAidKitCell {
         selectionStyle = .none
         contentView.backgroundColor = .clear
         backgroundColor = .clear
+        
+        setupCardShadow()
+    }
+    
+    /// Метод настройки параметров тени карточки
+    func setupCardShadow() {
+        setupCardShadowColor()
+        viewContainer.layer.shadowOffset = CGSize(width: 0, height: 3)
+        viewContainer.layer.shadowRadius = 3
+        viewContainer.layer.shadowOpacity = 0.5
+    }
+    
+    /// Используется для изменения цвета тени карточки лекарства
+    /// - Вынес в отдельный метод, потому что при смене темного и светлого режима
+    /// нужно вызывать только изменение цвета. В дальнейшем настройка цвета
+    /// будет вынесена в отдельный менеджер тем.
+    func setupCardShadowColor() {
+        #warning("добавить настройку тем в отдельном классе вместо хардкода текстом")
+        // Используется кастомная настройка цвета, для более гармоничного цвета
+        // в темном режиме. Цвет взят из Assets.
+        viewContainer.layer.shadowColor = UIColor(named: "cardShadowColor")?.cgColor
     }
 }
