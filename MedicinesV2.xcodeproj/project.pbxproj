@@ -627,7 +627,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# https://habr.com/ru/company/tinkoff/blog/317892/\n# ${PODS_ROOT}/SwiftLint/swiftlint\n";
+			shellScript = "# https://habr.com/ru/company/tinkoff/blog/317892/\n${PODS_ROOT}/SwiftLint/swiftlint\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
