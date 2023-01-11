@@ -613,7 +613,7 @@
 		2C80E5CB28DF301D00ECED21 /* Run Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
-			buildActionMask = 8;
+			buildActionMask = 12;
 			files = (
 			);
 			inputFileListPaths = (
@@ -625,9 +625,9 @@
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# https://habr.com/ru/company/tinkoff/blog/317892/\n${PODS_ROOT}/SwiftLint/swiftlint\n";
+			shellScript = "# https://habr.com/ru/company/tinkoff/blog/317892/\n# ${PODS_ROOT}/SwiftLint/swiftlint\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
