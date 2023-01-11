@@ -13,8 +13,8 @@
 ![CocoaPods](https://img.shields.io/badge/-CocoaPods-blue)
 ![SwiftLint](https://img.shields.io/badge/-SwiftLint-blue)
 ![AutoLayout](https://img.shields.io/badge/-AutoLayout-blue)
-<!-- ![UserDefaults](https://img.shields.io/badge/-UserDefaults-blue) -->
-<!-- ![UnitTests](https://img.shields.io/badge/-UnitTests-blue) -->
+![UnitTests](https://img.shields.io/badge/-UnitTests-blue)
+![XcodeCloudCI](https://img.shields.io/badge/-XcodeCloudCI-blue)
 
 # Аптечка v2
 Второе учебное приложение.
@@ -48,8 +48,8 @@
 - Приложение написано на архитектуре **VIPER**. Пока кривенько, но постепенно переписывается. Это первый проект на этой архитектуре. В этой архитектуре у данного приложения нет необходимости, я использую её только для практики и закрепления навыков. Понимаю, что для данного приложения вполне было бы достаточно MVC или MVP, к примеру с координатором.
 - Для хранения данных используется **CoreData**.
 - Для более удобной работы с таблицами с **CoreData** применяется **NSFetchedResultsControll**
-<!-- - Используется UserDefaults для хранения избранной валюты. -->
-<!-- - Код частично покрыт Unit тестами. -->
+- Код частично покрыт Unit тестами.
+- Настроен **CI Xcode Cloud** для автоматического запуска тестов.
 - Частично, интерфейс написан кодом с помощью **AutoLayout**.
 - Вместо **Storyboard** использую **XIB** файлы. 1 экран – 1 **XIB**. В дальнейшем всё будет переделываться под верстку кодом.
 - Для подключения фреймворков используется **CocoaPods**
