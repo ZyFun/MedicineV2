@@ -7,8 +7,12 @@
 
 import UIKit
 
-#warning("Вынести data source и delegate в отдельный класс")
 final class MenuViewController: UIViewController {
+    
+    // MARK: - Public properties
+    
+    // TODO: (#Refactor) инициализация должна быть в конфигураторе
+    var dataSourceProvider: IMenuDataSourceProvider = MenuDataSourceProvider()
     
     // MARK: - Private Properties
     
@@ -47,8 +51,8 @@ private extension MenuViewController {
     
     /// Метод настройки таблицы
     func setupTableView() {
-        menuTableView.delegate = self
-        menuTableView.dataSource = self
+        menuTableView.delegate = dataSourceProvider
+        menuTableView.dataSource = dataSourceProvider
         
         menuTableView.frame = view.bounds
         
@@ -62,49 +66,6 @@ private extension MenuViewController {
             MenuCell.self,
             forCellReuseIdentifier: MenuCell.identifier
         )
-    }
-    
-}
-
-// MARK: - Table view data source
-
-extension MenuViewController: UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // TODO: (#Fix) брать количество ячеек из модели
-        2
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: String(describing: MenuCell.self),
-            for: indexPath
-        ) as? MenuCell else {
-            CustomLogger.error("Ячейка меню не создана")
-            return UITableViewCell()
-        }
-        
-        guard let menuModel = MenuModel(rawValue: indexPath.row) else {
-            CustomLogger.error("Нет данных в ячейке по указанному индексу")
-            return UITableViewCell()
-        }
-        
-        cell.configure(
-            iconImage: menuModel.image,
-            title: menuModel.description
-        )
-        
-        return cell
-    }
-    
-}
-
-// MARK: - Table view delegate
-
-extension MenuViewController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        CustomLogger.warning("Выбрана ячейка \(indexPath.row.description)" )
     }
     
 }
