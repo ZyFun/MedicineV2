@@ -7,7 +7,6 @@
 
 import UIKit
 
-#warning("отрефакторить весь класс")
 final class MenuCell: UITableViewCell {
     
     // MARK: - Class properties
@@ -16,7 +15,7 @@ final class MenuCell: UITableViewCell {
     
     // MARK: - properties
     
-    let iconImageView: UIImageView = {
+    private let iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
@@ -25,7 +24,7 @@ final class MenuCell: UITableViewCell {
         return imageView
     }()
     
-    let titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 20)
@@ -41,8 +40,7 @@ final class MenuCell: UITableViewCell {
         addSubview(iconImageView)
         addSubview(titleLabel)
         
-        backgroundColor = .clear
-        selectionStyle = .none
+        setup()
         
         NSLayoutConstraint.activate([
             iconImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
@@ -58,4 +56,36 @@ final class MenuCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+// MARK: - Publik Methods
+
+extension MenuCell {
+    
+    /// Метод для конфигурирования отображаемой информации в ячейке.
+    /// - Parameters:
+    ///   - iconImage: принимает изображение для иконки меню
+    ///   - title: принимает название пункта меню
+    func configure(iconImage: UIImage, title: String) {
+        iconImageView.image = iconImage
+        titleLabel.text = title
+    }
+    
+}
+
+// MARK: - Конфигурирование ячейки
+
+private extension MenuCell {
+    
+    /// Метод инициализации настроек ячейки
+    func setup() {
+        setupUI()
+    }
+    
+    /// Метод для настройки отображения элементов
+    func setupUI() {
+        backgroundColor = .clear
+        selectionStyle = .none
+    }
+    
 }

@@ -28,7 +28,6 @@ final class MenuViewController: UIViewController {
             forCellReuseIdentifier: MenuCell.identifier
         )
         
-        // TODO: (#Fix) сделать размещение через констреинты (для смещения таблици ниже)
         view.addSubview(tableView)
         tableView.frame = view.bounds
         
@@ -57,11 +56,15 @@ extension MenuViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        let menuModel = MenuModel(rawValue: indexPath.row)
+        guard let menuModel = MenuModel(rawValue: indexPath.row) else {
+            CustomLogger.error("Нет данных в ячейке по указанному индексу")
+            return UITableViewCell()
+        }
         
-        // TODO: (Fix) вынести настройку в конфигурирование ячейки по аналогии с другими ячейками
-        cell.iconImageView.image = menuModel?.image
-        cell.titleLabel.text = menuModel?.description
+        cell.configure(
+            iconImage: menuModel.image,
+            title: menuModel.description
+        )
         
         return cell
     }
