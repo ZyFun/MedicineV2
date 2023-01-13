@@ -30,6 +30,10 @@ protocol FirstAidKitsDisplayLogic: AnyObject {
     func showAlert(for entity: DBFirstAidKit?, by indexPath: IndexPath?)
 }
 
+protocol FirstAidKitsControllerDelegate: AnyObject {
+    func toggleDisplayMenu()
+}
+
 final class FirstAidKitsViewController: UIViewController {
     
     // MARK: - Public properties
@@ -39,6 +43,9 @@ final class FirstAidKitsViewController: UIViewController {
     var splashPresenter: ISplashPresenter?
     var dataSourceProvider: IFirstAidKitsDataSourceProvider?
     var fetchedResultManager: IFirstAidKitsFetchedResultsManager?
+    
+    // TODO: (#Refactor) сделать презентер, для контейнера с меню, и управление через него
+    weak var delegate: FirstAidKitsControllerDelegate?
     
     // MARK: - Outlets
     
@@ -100,15 +107,28 @@ extension FirstAidKitsViewController {
     
     /// Метод для добавления кнопок в navigation bar
     func addBarButtons() {
-        let add = UIBarButtonItem(
+        let addBarButton = UIBarButtonItem(
             barButtonSystemItem: .add,
             target: self,
             action: #selector(addNewFirstAidKit)
         )
-        add.tintColor = #colorLiteral(red: 0.196842283, green: 0.4615264535, blue: 0.4103206396, alpha: 1)
+        addBarButton.tintColor = #colorLiteral(red: 0.196842283, green: 0.4615264535, blue: 0.4103206396, alpha: 1)
         
-        // Тут будет несколько кнопок до появления отдельного меню настроек
-        navigationItem.rightBarButtonItems = [add]
+        let menuBarButton = UIBarButtonItem(
+            image: UIImage(systemName: "line.horizontal.3"),
+            style: .plain,
+            target: self,
+            action: #selector(openMenu)
+        )
+        menuBarButton.tintColor = #colorLiteral(red: 0.196842283, green: 0.4615264535, blue: 0.4103206396, alpha: 1)
+        
+        navigationItem.rightBarButtonItem = addBarButton
+        navigationItem.leftBarButtonItem = menuBarButton
+    }
+    
+    /// Метод для открытия или закрытия меню
+    @objc func openMenu() {
+        delegate?.toggleDisplayMenu()
     }
     
     /// Метод для добавления новой аптечки.
