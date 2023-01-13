@@ -13,6 +13,8 @@ protocol IMenuDataSourceProvider: UITableViewDelegate, UITableViewDataSource {
 
 final class MenuDataSourceProvider: NSObject, IMenuDataSourceProvider {
     
+    let menuModel = MenuModel.getMenu()
+    
 }
 
 // MARK: - Table view data source
@@ -20,8 +22,7 @@ final class MenuDataSourceProvider: NSObject, IMenuDataSourceProvider {
 extension MenuDataSourceProvider: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // TODO: (#Fix) брать количество ячеек из модели
-        2
+        menuModel.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -33,14 +34,11 @@ extension MenuDataSourceProvider: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        guard let menuModel = MenuModel(rawValue: indexPath.row) else {
-            CustomLogger.error("Нет данных в ячейке по указанному индексу")
-            return UITableViewCell()
-        }
+        let menuModel = menuModel[indexPath.row]
         
         cell.configure(
-            iconImage: menuModel.image,
-            title: menuModel.description
+            iconImage: menuModel.iconImage,
+            title: menuModel.title
         )
         
         return cell

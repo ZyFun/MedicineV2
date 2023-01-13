@@ -1,5 +1,5 @@
 //
-//  MenuModel.swift
+//  OldMenuModel.swift
 //  MedicinesV2
 //
 //  Created by Дмитрий Данилин on 12.01.2023.
@@ -7,8 +7,9 @@
 
 import UIKit
 
-#warning("отрефакторить, возможно стоит сделать структурой и передавать из неё массив")
-enum MenuModel: Int, CustomStringConvertible {
+// TODO: (#Delete) удалить когда пойму что точно не буду использовать этот тип модели
+@available(*, unavailable, renamed: "MenuModel")
+enum OldMenuModel: Int, CustomStringConvertible {
     
     case settings
     case contacts

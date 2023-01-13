@@ -30,7 +30,6 @@ protocol FirstAidKitsDisplayLogic: AnyObject {
     func showAlert(for entity: DBFirstAidKit?, by indexPath: IndexPath?)
 }
 
-#warning("проверить на нарушение архитектуры")
 protocol FirstAidKitsControllerDelegate: AnyObject {
     func toggleDisplayMenu()
 }
@@ -45,7 +44,7 @@ final class FirstAidKitsViewController: UIViewController {
     var dataSourceProvider: IFirstAidKitsDataSourceProvider?
     var fetchedResultManager: IFirstAidKitsFetchedResultsManager?
     
-    #warning("проверить на нарушение архитектуры")
+    // TODO: (#Refactor) сделать презентер, для контейнера с меню, и управление через него
     weak var delegate: FirstAidKitsControllerDelegate?
     
     // MARK: - Outlets

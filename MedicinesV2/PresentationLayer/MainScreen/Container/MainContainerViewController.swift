@@ -7,7 +7,7 @@
 
 import UIKit
 
-// TODO: (#Refactor) Нужно отрефакторить класс добавив презентер
+// TODO: (#Refactor) Нужно отрефакторить модуль и привести к архитектуре MVP или VIPER
 final class MainContainerViewController: UIViewController {
     
     // MARK: - Private properties
