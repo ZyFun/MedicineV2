@@ -322,7 +322,7 @@
 				2C38604028DC82DB003FED87 /* PresentationAssembly.swift */,
 				2CB5E6F728DF1831003D06D0 /* Managers */,
 				2CED30E128F6E2F500A6CEE5 /* SplashScreen */,
-				2CF1EE6F277346E70031D79D /* FirstAidKits */,
+				2CF1B8E82971ADC100BCF726 /* MainScreen */,
 				2C925709273D45CD00DA7284 /* Medicines */,
 				2CBD2B19277C7EFC00F857C3 /* Medicine */,
 			);
@@ -481,15 +481,31 @@
 			path = SplashScreen;
 			sourceTree = "<group>";
 		};
+		2CF1B8E82971ADC100BCF726 /* MainScreen */ = {
+			isa = PBXGroup;
+			children = (
+				2CF1B8E92971ADE600BCF726 /* Container */,
+			);
+			path = MainScreen;
+			sourceTree = "<group>";
+		};
+		2CF1B8E92971ADE600BCF726 /* Container */ = {
+			isa = PBXGroup;
+			children = (
+				2CB115D42970351E00A2846A /* Menu */,
+				2CF1EE6F277346E70031D79D /* FirstAidKits */,
+				2CB115D52970354000A2846A /* MainContainerViewController.swift */,
+				2CF1B8E42971901800BCF726 /* MainContainerAnimator.swift */,
+			);
+			path = Container;
+			sourceTree = "<group>";
+		};
 		2CF1EE6F277346E70031D79D /* FirstAidKits */ = {
 			isa = PBXGroup;
 			children = (
-				2CB115D52970354000A2846A /* MainContainerViewController.swift */,
-				2CF1B8E42971901800BCF726 /* MainContainerAnimator.swift */,
 				2CE3D70928D8F2C6001DA9AF /* Providers */,
 				2CE3D70828D8F2A0001DA9AF /* Managers */,
 				2C49688F2774956400436C5F /* Cells */,
-				2CB115D42970351E00A2846A /* Menu */,
 				2CF1EE70277347580031D79D /* FirstAidKitsViewController.swift */,
 				2CF1EE72277347700031D79D /* FirstAidKitsPresenter.swift */,
 				2CF1EE74277347800031D79D /* FirstAidKitsInteractor.swift */,
