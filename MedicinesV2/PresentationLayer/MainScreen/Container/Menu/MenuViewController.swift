@@ -7,41 +7,69 @@
 
 import UIKit
 
-#warning("отрефакторить весь класс")
+#warning("Вынести data source и delegate в отдельный класс")
 final class MenuViewController: UIViewController {
     
-    var tableView: UITableView!
+    // MARK: - Private Properties
+    
+    private var menuTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.backgroundColor = #colorLiteral(red: 0.196842283, green: 0.4615264535, blue: 0.4103206396, alpha: 1)
+        tableView.separatorStyle = .none
+        tableView.rowHeight = 90
+        tableView.contentInset.top = 100
+        tableView.isScrollEnabled = false
+        return tableView
+    }()
 
+    // MARK: - Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = #colorLiteral(red: 0.196842283, green: 0.4615264535, blue: 0.4103206396, alpha: 1)
-        configureTableView()
+        
+        setup()
     }
     
-    func configureTableView() {
-        tableView = UITableView()
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(
+}
+
+// MARK: - Конфигурирование ViewController
+
+private extension MenuViewController {
+    
+    /// Метод инициализации VC
+    func setup() {
+        view.addSubview(menuTableView)
+        view.backgroundColor = #colorLiteral(red: 0.196842283, green: 0.4615264535, blue: 0.4103206396, alpha: 1)
+        setupTableView()
+    }
+    
+    // MARK: - Setup table view
+    
+    /// Метод настройки таблицы
+    func setupTableView() {
+        menuTableView.delegate = self
+        menuTableView.dataSource = self
+        
+        menuTableView.frame = view.bounds
+        
+        registerCell()
+    }
+    
+    /// Регистрация ячейки
+    func registerCell() {
+        // Регистрируем ячейку для таблицы меню
+        menuTableView.register(
             MenuCell.self,
             forCellReuseIdentifier: MenuCell.identifier
         )
-        
-        view.addSubview(tableView)
-        tableView.frame = view.bounds
-        
-        tableView.separatorStyle = .none
-        tableView.rowHeight = 90
-        
-        tableView.backgroundColor = #colorLiteral(red: 0.196842283, green: 0.4615264535, blue: 0.4103206396, alpha: 1)
-        
-        tableView.contentInset.top = 100
-        tableView.isScrollEnabled = false
     }
+    
 }
 
+// MARK: - Table view data source
+
 extension MenuViewController: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // TODO: (#Fix) брать количество ячеек из модели
         2
@@ -68,10 +96,15 @@ extension MenuViewController: UITableViewDataSource {
         
         return cell
     }
+    
 }
 
+// MARK: - Table view delegate
+
 extension MenuViewController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+        CustomLogger.warning("Выбрана ячейка \(indexPath.row.description)" )
     }
+    
 }
