@@ -32,7 +32,7 @@ protocol FirstAidKitsDisplayLogic: AnyObject {
 
 #warning("проверить на нарушение архитектуры")
 protocol FirstAidKitsControllerDelegate: AnyObject {
-    func toggleMenu()
+    func toggleDisplayMenu()
 }
 
 final class FirstAidKitsViewController: UIViewController {
@@ -129,7 +129,7 @@ extension FirstAidKitsViewController {
     
     /// Метод для открытия или закрытия меню
     @objc func openMenu() {
-        delegate?.toggleMenu()
+        delegate?.toggleDisplayMenu()
     }
     
     /// Метод для добавления новой аптечки.

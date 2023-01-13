@@ -58,6 +58,7 @@
 		2CED30E528F6E47200A6CEE5 /* SplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CED30E328F6E47200A6CEE5 /* SplashViewController.xib */; };
 		2CED30E728F6E6A500A6CEE5 /* SplashPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CED30E628F6E6A500A6CEE5 /* SplashPresenter.swift */; };
 		2CED30E928F6E6C900A6CEE5 /* SplashAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CED30E828F6E6C900A6CEE5 /* SplashAnimator.swift */; };
+		2CF1B8E52971901800BCF726 /* MainContainerAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF1B8E42971901800BCF726 /* MainContainerAnimator.swift */; };
 		2CF1EE71277347580031D79D /* FirstAidKitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF1EE70277347580031D79D /* FirstAidKitsViewController.swift */; };
 		2CF1EE73277347700031D79D /* FirstAidKitsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF1EE72277347700031D79D /* FirstAidKitsPresenter.swift */; };
 		2CF1EE75277347800031D79D /* FirstAidKitsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF1EE74277347800031D79D /* FirstAidKitsInteractor.swift */; };
@@ -141,6 +142,7 @@
 		2CED30E328F6E47200A6CEE5 /* SplashViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SplashViewController.xib; sourceTree = "<group>"; };
 		2CED30E628F6E6A500A6CEE5 /* SplashPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashPresenter.swift; sourceTree = "<group>"; };
 		2CED30E828F6E6C900A6CEE5 /* SplashAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashAnimator.swift; sourceTree = "<group>"; };
+		2CF1B8E42971901800BCF726 /* MainContainerAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContainerAnimator.swift; sourceTree = "<group>"; };
 		2CF1EE70277347580031D79D /* FirstAidKitsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAidKitsViewController.swift; sourceTree = "<group>"; };
 		2CF1EE72277347700031D79D /* FirstAidKitsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAidKitsPresenter.swift; sourceTree = "<group>"; };
 		2CF1EE74277347800031D79D /* FirstAidKitsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAidKitsInteractor.swift; sourceTree = "<group>"; };
@@ -483,6 +485,7 @@
 			isa = PBXGroup;
 			children = (
 				2CB115D52970354000A2846A /* MainContainerViewController.swift */,
+				2CF1B8E42971901800BCF726 /* MainContainerAnimator.swift */,
 				2CE3D70928D8F2C6001DA9AF /* Providers */,
 				2CE3D70828D8F2A0001DA9AF /* Managers */,
 				2C49688F2774956400436C5F /* Cells */,
@@ -695,6 +698,7 @@
 				2C5F113627707CF60040536D /* Medicines.xcdatamodeld in Sources */,
 				2C5BBB7529000A6300D821EC /* MedicineCell.swift in Sources */,
 				2C24C0A32900689E0047CA3D /* ActionWithMedicine.swift in Sources */,
+				2CF1B8E52971901800BCF726 /* MainContainerAnimator.swift in Sources */,
 				2C6762892757A32300B46E21 /* MedicineViewController.swift in Sources */,
 				2CBD2B1F277C7FA300F857C3 /* MedicineInteractor.swift in Sources */,
 				2CBD2B23277C7FC200F857C3 /* MedicineConfigurator.swift in Sources */,

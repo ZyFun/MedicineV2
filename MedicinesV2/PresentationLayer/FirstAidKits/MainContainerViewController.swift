@@ -7,22 +7,40 @@
 
 import UIKit
 
-#warning("отрефакторить весь класс")
+// TODO: (#Refactor) Нужно отрефакторить класс добавив презентер
 final class MainContainerViewController: UIViewController {
     
-    // Пока не понятно зачем он нужен отдельно от функции и глобально для класса
-    var mainVC: UIViewController!
-    var menuVC: UIViewController!
-    var isMove = false
+    // MARK: - Private properties
+    
+    private var mainVC: UIViewController!
+    private var menuVC: UIViewController!
+    private var isDisplayed = false
+    
+    private var animator: IMainContainerAnimator?
+    
+    // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureFirstAidKitController()
+        setup()
     }
     
-    /// Конфигурирование VIPER модуля для инжектирования зависимостей
-    func configureFirstAidKitController() {
+}
+
+// MARK: - Конфигурирование ViewController
+
+private extension MainContainerViewController {
+    
+    /// Метод инициализации VC
+    func setup() {
+        createFirstAidKitController()
+        // TODO: (#Refactor) должно быть в презентере
+        animator = MainContainerAnimator(mainVC: mainVC)
+    }
+    
+    /// Конфигурирование VIPER модуля списка аптечек
+    func createFirstAidKitController() {
         let firstAidKitsVC = FirstAidKitsViewController(
             nibName: String(describing: FirstAidKitsViewController.self),
             bundle: nil
@@ -43,53 +61,34 @@ final class MainContainerViewController: UIViewController {
         )
     }
     
-    // TODO: (Fix) добавить weak self для замыкания
-    func showMenuVC(shouldMove: Bool) {
-        if shouldMove {
-            // показываем меню
-            UIView.animate(
-                withDuration: 0.5,
-                delay: 0,
-                usingSpringWithDamping: 0.8,
-                initialSpringVelocity: 0,
-                options: .curveEaseInOut
-            ) {
-                // TODO: (#Fix) Сделать сдвиг не фиксированно 140, а на треть экрана рассчитав размер
-                self.mainVC.view.frame.origin.x = self.mainVC.view.frame.width - 140
-            }
-        } else {
-            // убираем меню
-            UIView.animate(
-                withDuration: 0.5,
-                delay: 0,
-                usingSpringWithDamping: 0.8,
-                initialSpringVelocity: 0,
-                options: .curveEaseInOut
-            ) {
-                self.mainVC.view.frame.origin.x = 0
-            }
-        }
-    }
-    
     /// Конфигурирование экрана меню
-    func configureMenuController() {
+    func createMenuController() {
         if menuVC == nil {
             menuVC = MenuViewController()
             view.insertSubview(menuVC.view, at: 0) // Контроллер с меню добавляется под контроллер с аптечкой
             addChild(menuVC)
-            
-            CustomLogger.warning("Экран с меню добавлен в стек")
         }
     }
     
+    /// Метод для отображения или скрытия меню
+    /// - Parameter isDisplayed:
+    /// если значение true – отображает меню
+    /// если значение false – скрывает меню
+    func showMenuVC(_ isDisplayed: Bool) {
+        if isDisplayed {
+            animator?.animateAppearance()
+        } else {
+            animator?.animateDisappearance()
+        }
+    }
 }
 
 // MARK: - FirstAidKitsControllerDelegate
 
 extension MainContainerViewController: FirstAidKitsControllerDelegate {
-    func toggleMenu() {
-        configureMenuController()
-        isMove.toggle()
-        showMenuVC(shouldMove: isMove)
+    func toggleDisplayMenu() {
+        createMenuController()
+        isDisplayed.toggle()
+        showMenuVC(isDisplayed)
     }
 }
