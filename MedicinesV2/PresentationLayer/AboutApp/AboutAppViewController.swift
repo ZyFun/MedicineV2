@@ -11,7 +11,7 @@ class AboutAppViewController: UIViewController {
     
     // MARK: - IBOutlets
     
-    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var versionLabel: UILabel!
     
     // MARK: - Public property
     
@@ -22,7 +22,7 @@ class AboutAppViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        presenter?.presentInfo()
+        presenter?.presentAppVersion()
     }
 
     // MARK: - IBActions
@@ -37,7 +37,7 @@ extension AboutAppViewController: AboutAppOutput {
         navigationController?.popViewController(animated: true)
     }
     
-    func setDescription(_ description: String) {
-        descriptionLabel.text = description
+    func setVersion(_ version: String) {
+        versionLabel.text = version
     }
 }

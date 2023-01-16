@@ -17,6 +17,8 @@
 		2C4044292975826600965DE4 /* AboutAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C4044272975826600965DE4 /* AboutAppViewController.xib */; };
 		2C40442B297588C500965DE4 /* AboutAppBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C40442A297588C500965DE4 /* AboutAppBuilder.swift */; };
 		2C40442D2975921F00965DE4 /* Bundle+AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C40442C2975921F00965DE4 /* Bundle+AppInfo.swift */; };
+		2C404433297599FE00965DE4 /* AboutAppUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C404432297599FE00965DE4 /* AboutAppUnitTests.swift */; };
+		2C4044362975A5A800965DE4 /* StubAboutAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4044352975A5A800965DE4 /* StubAboutAppView.swift */; };
 		2C47A4EF293682BF000DFB49 /* FirstAidKitsInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C47A4EE293682BF000DFB49 /* FirstAidKitsInteractorTests.swift */; };
 		2C47A4FA2936B371000DFB49 /* CoreDataServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C47A4F92936B371000DFB49 /* CoreDataServiceTests.swift */; };
 		2C480C84275FB1FA000CD5CC /* Date+DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C480C83275FB1FA000CD5CC /* Date+DateFormatter.swift */; };
@@ -101,6 +103,8 @@
 		2C4044272975826600965DE4 /* AboutAppViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutAppViewController.xib; sourceTree = "<group>"; };
 		2C40442A297588C500965DE4 /* AboutAppBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppBuilder.swift; sourceTree = "<group>"; };
 		2C40442C2975921F00965DE4 /* Bundle+AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+AppInfo.swift"; sourceTree = "<group>"; };
+		2C404432297599FE00965DE4 /* AboutAppUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppUnitTests.swift; sourceTree = "<group>"; };
+		2C4044352975A5A800965DE4 /* StubAboutAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubAboutAppView.swift; sourceTree = "<group>"; };
 		2C47A4EC293682BF000DFB49 /* MedicinesV2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MedicinesV2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C47A4EE293682BF000DFB49 /* FirstAidKitsInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAidKitsInteractorTests.swift; sourceTree = "<group>"; };
 		2C47A4F92936B371000DFB49 /* CoreDataServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataServiceTests.swift; sourceTree = "<group>"; };
@@ -217,6 +221,23 @@
 			path = AboutApp;
 			sourceTree = "<group>";
 		};
+		2C40442F297599BF00965DE4 /* AboutApp */ = {
+			isa = PBXGroup;
+			children = (
+				2C4044342975A58700965DE4 /* Mock */,
+				2C404432297599FE00965DE4 /* AboutAppUnitTests.swift */,
+			);
+			path = AboutApp;
+			sourceTree = "<group>";
+		};
+		2C4044342975A58700965DE4 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				2C4044352975A5A800965DE4 /* StubAboutAppView.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
 		2C47A4ED293682BF000DFB49 /* MedicinesV2Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -229,6 +250,7 @@
 		2C47A4F5293697C7000DFB49 /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				2C40442F297599BF00965DE4 /* AboutApp */,
 				2C47A4F7293697F5000DFB49 /* FirstAidKits */,
 			);
 			path = PresentationLayer;
@@ -733,6 +755,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C47A4FA2936B371000DFB49 /* CoreDataServiceTests.swift in Sources */,
+				2C404433297599FE00965DE4 /* AboutAppUnitTests.swift in Sources */,
+				2C4044362975A5A800965DE4 /* StubAboutAppView.swift in Sources */,
 				2C47A4EF293682BF000DFB49 /* FirstAidKitsInteractorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

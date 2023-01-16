@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AboutAppViewController" customModule="MedicinesV2" customModuleProvider="target">
             <connections>
-                <outlet property="descriptionLabel" destination="gt0-Au-09C" id="IO3-et-1gu"/>
+                <outlet property="versionLabel" destination="gt0-Au-09C" id="IO3-et-1gu"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -27,7 +27,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qzi-SX-OHN">
-                    <rect key="frame" x="159" y="763" width="75" height="35"/>
+                    <rect key="frame" x="159" y="797" width="75" height="35"/>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" title="Button"/>
                     <connections>
