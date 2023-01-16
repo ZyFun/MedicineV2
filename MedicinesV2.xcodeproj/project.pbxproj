@@ -11,6 +11,12 @@
 		2C24C0A32900689E0047CA3D /* ActionWithMedicine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C24C0A22900689E0047CA3D /* ActionWithMedicine.swift */; };
 		2C38603F28DC81FE003FED87 /* ServiceAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C38603E28DC81FE003FED87 /* ServiceAssembly.swift */; };
 		2C38604128DC82DB003FED87 /* PresentationAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C38604028DC82DB003FED87 /* PresentationAssembly.swift */; };
+		2C40442329757CD800965DE4 /* AboutAppPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C40442229757CD800965DE4 /* AboutAppPresenter.swift */; };
+		2C40442529757DFC00965DE4 /* AboutAppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C40442429757DFC00965DE4 /* AboutAppModel.swift */; };
+		2C4044282975826600965DE4 /* AboutAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4044262975826600965DE4 /* AboutAppViewController.swift */; };
+		2C4044292975826600965DE4 /* AboutAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C4044272975826600965DE4 /* AboutAppViewController.xib */; };
+		2C40442B297588C500965DE4 /* AboutAppBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C40442A297588C500965DE4 /* AboutAppBuilder.swift */; };
+		2C40442D2975921F00965DE4 /* Bundle+AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C40442C2975921F00965DE4 /* Bundle+AppInfo.swift */; };
 		2C47A4EF293682BF000DFB49 /* FirstAidKitsInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C47A4EE293682BF000DFB49 /* FirstAidKitsInteractorTests.swift */; };
 		2C47A4FA2936B371000DFB49 /* CoreDataServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C47A4F92936B371000DFB49 /* CoreDataServiceTests.swift */; };
 		2C480C84275FB1FA000CD5CC /* Date+DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C480C83275FB1FA000CD5CC /* Date+DateFormatter.swift */; };
@@ -89,6 +95,12 @@
 		2C24C0A22900689E0047CA3D /* ActionWithMedicine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionWithMedicine.swift; sourceTree = "<group>"; };
 		2C38603E28DC81FE003FED87 /* ServiceAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAssembly.swift; sourceTree = "<group>"; };
 		2C38604028DC82DB003FED87 /* PresentationAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationAssembly.swift; sourceTree = "<group>"; };
+		2C40442229757CD800965DE4 /* AboutAppPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppPresenter.swift; sourceTree = "<group>"; };
+		2C40442429757DFC00965DE4 /* AboutAppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppModel.swift; sourceTree = "<group>"; };
+		2C4044262975826600965DE4 /* AboutAppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppViewController.swift; sourceTree = "<group>"; };
+		2C4044272975826600965DE4 /* AboutAppViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutAppViewController.xib; sourceTree = "<group>"; };
+		2C40442A297588C500965DE4 /* AboutAppBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppBuilder.swift; sourceTree = "<group>"; };
+		2C40442C2975921F00965DE4 /* Bundle+AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+AppInfo.swift"; sourceTree = "<group>"; };
 		2C47A4EC293682BF000DFB49 /* MedicinesV2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MedicinesV2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C47A4EE293682BF000DFB49 /* FirstAidKitsInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAidKitsInteractorTests.swift; sourceTree = "<group>"; };
 		2C47A4F92936B371000DFB49 /* CoreDataServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataServiceTests.swift; sourceTree = "<group>"; };
@@ -191,6 +203,18 @@
 				2C24C0A22900689E0047CA3D /* ActionWithMedicine.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		2C40442129757AAD00965DE4 /* AboutApp */ = {
+			isa = PBXGroup;
+			children = (
+				2C40442A297588C500965DE4 /* AboutAppBuilder.swift */,
+				2C4044272975826600965DE4 /* AboutAppViewController.xib */,
+				2C4044262975826600965DE4 /* AboutAppViewController.swift */,
+				2C40442229757CD800965DE4 /* AboutAppPresenter.swift */,
+				2C40442429757DFC00965DE4 /* AboutAppModel.swift */,
+			);
+			path = AboutApp;
 			sourceTree = "<group>";
 		};
 		2C47A4ED293682BF000DFB49 /* MedicinesV2Tests */ = {
@@ -327,6 +351,7 @@
 				2CB5E6F728DF1831003D06D0 /* Managers */,
 				2CED30E128F6E2F500A6CEE5 /* SplashScreen */,
 				2CF1B8E82971ADC100BCF726 /* MainScreen */,
+				2C40442129757AAD00965DE4 /* AboutApp */,
 				2C925709273D45CD00DA7284 /* Medicines */,
 				2CBD2B19277C7EFC00F857C3 /* Medicine */,
 			);
@@ -374,6 +399,7 @@
 				2C480C85275FB340000CD5CC /* String+DateFormatter.swift.swift */,
 				2C1D3E692760FFD800D01C51 /* String+NumberFormatter.swift */,
 				2C56E08C29057A02009AAB46 /* UIImage+GraphicsImageRenderer.swift */,
+				2C40442C2975921F00965DE4 /* Bundle+AppInfo.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -642,6 +668,7 @@
 				2C52BDCA273540F600356A63 /* LaunchScreen.storyboard in Resources */,
 				2CBF4DE529080F5500ED297D /* Screenshot001.png in Resources */,
 				2CED30E528F6E47200A6CEE5 /* SplashViewController.xib in Resources */,
+				2C4044292975826600965DE4 /* AboutAppViewController.xib in Resources */,
 				2CBF4DEF2908169700ED297D /* Demo.gif in Resources */,
 				2CBF4DE629080F5500ED297D /* Screenshot000.png in Resources */,
 				2CF28A1E277CAF5E002536F7 /* MedicinesViewController.xib in Resources */,
@@ -717,11 +744,13 @@
 				2CF1B8EF2971C0D500BCF726 /* OldMenuModel.swift in Sources */,
 				2CB115DB297050D600A2846A /* MenuCell.swift in Sources */,
 				2CB3FAD328C89E6800E4A378 /* CustomLogger.swift in Sources */,
+				2C40442529757DFC00965DE4 /* AboutAppModel.swift in Sources */,
 				2C38603F28DC81FE003FED87 /* ServiceAssembly.swift in Sources */,
 				2C480C84275FB1FA000CD5CC /* Date+DateFormatter.swift in Sources */,
 				2C38604128DC82DB003FED87 /* PresentationAssembly.swift in Sources */,
 				2CED30E428F6E47200A6CEE5 /* SplashViewController.swift in Sources */,
 				2C776FDF27BF98E8004B67B4 /* Debug.swift in Sources */,
+				2C40442D2975921F00965DE4 /* Bundle+AppInfo.swift in Sources */,
 				2CE3D70728D8BDE7001DA9AF /* FirstAidKitsFetchedResultsManager.swift in Sources */,
 				2C925717273D4DE800DA7284 /* MedicinesViewController.swift in Sources */,
 				2CAE169A28DA07AF0071E783 /* MedicineModel.swift in Sources */,
@@ -731,11 +760,14 @@
 				2CBD2B21277C7FAF00F857C3 /* MedicineRouter.swift in Sources */,
 				2C92571B273D5C9A00DA7284 /* MedicinesInteractor.swift in Sources */,
 				2C480C86275FB340000CD5CC /* String+DateFormatter.swift.swift in Sources */,
+				2C4044282975826600965DE4 /* AboutAppViewController.swift in Sources */,
 				2C52BDBB273540F400356A63 /* AppDelegate.swift in Sources */,
 				2C60890927356B6400E66081 /* CoreDataService.swift in Sources */,
 				2CB3FAD528C8AA9900E4A378 /* NotificationService.swift in Sources */,
 				2CB115D62970354000A2846A /* MainContainerViewController.swift in Sources */,
 				2C5F113627707CF60040536D /* Medicines.xcdatamodeld in Sources */,
+				2C40442B297588C500965DE4 /* AboutAppBuilder.swift in Sources */,
+				2C40442329757CD800965DE4 /* AboutAppPresenter.swift in Sources */,
 				2C5BBB7529000A6300D821EC /* MedicineCell.swift in Sources */,
 				2C24C0A32900689E0047CA3D /* ActionWithMedicine.swift in Sources */,
 				2CF1B8E52971901800BCF726 /* MainContainerAnimator.swift in Sources */,
