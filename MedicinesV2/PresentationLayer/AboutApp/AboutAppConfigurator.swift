@@ -1,5 +1,5 @@
 //
-//  AboutAppBuilder.swift
+//  AboutAppConfigurator.swift
 //  MedicinesV2
 //
 //  Created by Дмитрий Данилин on 16.01.2023.
@@ -7,12 +7,11 @@
 
 import UIKit
 
-protocol Builder {
-    static func createAboutAppModule() -> UIViewController
-}
-
-final class ModuleBuilder: Builder {
-    static func createAboutAppModule() -> UIViewController {
+/// Конфигурация MVP модуля
+final class AboutAppConfigurator {
+    func config(
+        view: UIViewController
+    ) {
         let infoModel = AboutAppInfoModel(
             version: "Версия: \(Bundle.main.appVersionLong) (\(Bundle.main.appBuild))",
             developer: "Разработчик: Дмитрий Данилин",
@@ -22,10 +21,10 @@ final class ModuleBuilder: Builder {
             frameworks: nil
         )
         
-        let view = AboutAppViewController()
+        guard let view = view as? AboutAppViewController else { return }
         let presenter = AboutAppPresenter(view: view, infoModel: infoModel)
-        view.presenter = presenter
         
-        return view
+        view.presenter = presenter
+        presenter.view = view
     }
 }

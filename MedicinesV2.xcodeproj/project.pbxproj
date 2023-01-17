@@ -15,7 +15,7 @@
 		2C40442529757DFC00965DE4 /* AboutAppInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C40442429757DFC00965DE4 /* AboutAppInfoModel.swift */; };
 		2C4044282975826600965DE4 /* AboutAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4044262975826600965DE4 /* AboutAppViewController.swift */; };
 		2C4044292975826600965DE4 /* AboutAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C4044272975826600965DE4 /* AboutAppViewController.xib */; };
-		2C40442B297588C500965DE4 /* AboutAppBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C40442A297588C500965DE4 /* AboutAppBuilder.swift */; };
+		2C40442B297588C500965DE4 /* AboutAppConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C40442A297588C500965DE4 /* AboutAppConfigurator.swift */; };
 		2C40442D2975921F00965DE4 /* Bundle+AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C40442C2975921F00965DE4 /* Bundle+AppInfo.swift */; };
 		2C404433297599FE00965DE4 /* AboutAppUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C404432297599FE00965DE4 /* AboutAppUnitTests.swift */; };
 		2C4044362975A5A800965DE4 /* StubAboutAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4044352975A5A800965DE4 /* StubAboutAppView.swift */; };
@@ -101,7 +101,7 @@
 		2C40442429757DFC00965DE4 /* AboutAppInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppInfoModel.swift; sourceTree = "<group>"; };
 		2C4044262975826600965DE4 /* AboutAppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppViewController.swift; sourceTree = "<group>"; };
 		2C4044272975826600965DE4 /* AboutAppViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutAppViewController.xib; sourceTree = "<group>"; };
-		2C40442A297588C500965DE4 /* AboutAppBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppBuilder.swift; sourceTree = "<group>"; };
+		2C40442A297588C500965DE4 /* AboutAppConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppConfigurator.swift; sourceTree = "<group>"; };
 		2C40442C2975921F00965DE4 /* Bundle+AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+AppInfo.swift"; sourceTree = "<group>"; };
 		2C404432297599FE00965DE4 /* AboutAppUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppUnitTests.swift; sourceTree = "<group>"; };
 		2C4044352975A5A800965DE4 /* StubAboutAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubAboutAppView.swift; sourceTree = "<group>"; };
@@ -212,7 +212,7 @@
 		2C40442129757AAD00965DE4 /* AboutApp */ = {
 			isa = PBXGroup;
 			children = (
-				2C40442A297588C500965DE4 /* AboutAppBuilder.swift */,
+				2C40442A297588C500965DE4 /* AboutAppConfigurator.swift */,
 				2C4044272975826600965DE4 /* AboutAppViewController.xib */,
 				2C4044262975826600965DE4 /* AboutAppViewController.swift */,
 				2C40442229757CD800965DE4 /* AboutAppPresenter.swift */,
@@ -790,7 +790,7 @@
 				2CB3FAD528C8AA9900E4A378 /* NotificationService.swift in Sources */,
 				2CB115D62970354000A2846A /* MainContainerViewController.swift in Sources */,
 				2C5F113627707CF60040536D /* Medicines.xcdatamodeld in Sources */,
-				2C40442B297588C500965DE4 /* AboutAppBuilder.swift in Sources */,
+				2C40442B297588C500965DE4 /* AboutAppConfigurator.swift in Sources */,
 				2C40442329757CD800965DE4 /* AboutAppPresenter.swift in Sources */,
 				2C5BBB7529000A6300D821EC /* MedicineCell.swift in Sources */,
 				2C24C0A32900689E0047CA3D /* ActionWithMedicine.swift in Sources */,
