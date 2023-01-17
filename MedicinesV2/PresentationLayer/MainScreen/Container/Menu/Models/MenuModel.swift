@@ -7,22 +7,25 @@
 
 import UIKit
 
-struct MenuModel {
-    let iconImage: UIImage
-    let title: String
+enum MenuModel: Int, CaseIterable {
+    case settings
+    case aboutApp
     
-    static func getMenu() -> [MenuModel] {
-        [
-            MenuModel(
-                iconImage: UIImage(systemName: "gear") ?? UIImage(),
-                title: "Настройки"
-            ),
-            
-            MenuModel(
-                iconImage: UIImage(systemName: "book.fill") ?? UIImage(),
-                title: "Контакты"
-            )
-        ]
+    var title: String {
+        switch self {
+        case .settings:
+            return "Настройки"
+        case .aboutApp:
+            return "О приложении"
+        }
     }
     
+    var iconImage: UIImage {
+        switch self {
+        case .settings:
+            return UIImage(systemName: "gear") ?? UIImage()
+        case .aboutApp:
+            return UIImage(systemName: "book.fill") ?? UIImage()
+        }
+    }
 }

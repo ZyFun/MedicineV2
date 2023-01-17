@@ -8,12 +8,14 @@
 import UIKit
 
 protocol IMenuDataSourceProvider: UITableViewDelegate, UITableViewDataSource {
-    
+    #warning("Удалить каку после добавления роутера и презентера")
+    var view: UIViewController? { get set }
 }
 
 final class MenuDataSourceProvider: NSObject, IMenuDataSourceProvider {
     
-    let menuModel = MenuModel.getMenu()
+    #warning("Удалить каку после добавления роутера и презентера")
+    var view: UIViewController?
     
 }
 
@@ -22,7 +24,7 @@ final class MenuDataSourceProvider: NSObject, IMenuDataSourceProvider {
 extension MenuDataSourceProvider: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        menuModel.count
+        MenuModel.allCases.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -34,7 +36,10 @@ extension MenuDataSourceProvider: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        let menuModel = menuModel[indexPath.row]
+        guard let menuModel = MenuModel(rawValue: indexPath.row) else {
+            CustomLogger.error("Меню не собралось")
+            return UITableViewCell()
+        }
         
         cell.configure(
             iconImage: menuModel.iconImage,
@@ -51,7 +56,21 @@ extension MenuDataSourceProvider: UITableViewDataSource {
 extension MenuDataSourceProvider: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        CustomLogger.warning("Выбрана ячейка \(indexPath.row.description)" )
+        #warning("Удалить каку после добавления роутера и презентера")
+        // TODO: (#Add) Дописать логику перехода на определенный экран из меню
+        // сделать презентер и роутер для этого модуля, и октрывать экран через них.
+        guard let menu = MenuModel(rawValue: indexPath.row) else { return }
+        
+        switch menu {
+        case .settings:
+            CustomLogger.warning("Меню настроек в разработке")
+        case .aboutApp:
+            let view = AboutAppViewController()
+            PresentationAssembly().aboutApp.config(view: view)
+            self.view?.present(view, animated: true)
+            // Добавить сворачивание меню
+        }
+        
     }
     
 }

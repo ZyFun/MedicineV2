@@ -42,10 +42,10 @@ final class AboutAppUnitTests: XCTestCase {
     
     func test_createModule_aboutApp_moduleIsNotNil() {
         // Then
-        XCTAssertNotNil(view, "Вью не должно быть пустым")
-        XCTAssertNotNil(model, "Модель не должна быть пустой")
-        XCTAssertNotNil(presenter, "Презентер не должен быть пустым")
-        XCTAssertNotNil(presenter?.view, "Мдуль не собрался")
+        XCTAssertNotNil(view)
+        XCTAssertNotNil(model)
+        XCTAssertNotNil(presenter)
+        XCTAssertNotNil(presenter?.view)
     }
     
     // MARK: - Presenter tests
@@ -58,7 +58,7 @@ final class AboutAppUnitTests: XCTestCase {
         presenter.presentAppInfo()
         
         // Then
-        XCTAssertEqual(view.infoModel?.version, version, "Версия не установилась")
+        XCTAssertEqual(view.infoModel?.version, version)
     }
     
     // MARK: - Model tests
@@ -75,12 +75,12 @@ final class AboutAppUnitTests: XCTestCase {
         )
         
         // Then
-        XCTAssertEqual(model.version, data.version, "Номер версии не совпадает")
-        XCTAssertEqual(model.developer, data.developer, "Разработчик не совпадает")
-        XCTAssertEqual(model.discordUrl, data.discordUrl, "Ссылка на дискорд не совпадает")
-        XCTAssertEqual(model.vkUrl, data.vkUrl, "Ссылка на ВК не совпадает")
-        XCTAssertEqual(model.tgUrl, data.tgUrl, "Ссылка на ТГ не совпадает")
-        XCTAssertEqual(model.frameworks, data.frameworks, "Фреймворки не совпадают")
+        XCTAssertEqual(model.version, data.version)
+        XCTAssertEqual(model.developer, data.developer)
+        XCTAssertEqual(model.discordUrl, data.discordUrl)
+        XCTAssertEqual(model.vkUrl, data.vkUrl)
+        XCTAssertEqual(model.tgUrl, data.tgUrl)
+        XCTAssertEqual(model.frameworks, data.frameworks)
     }
     
 }

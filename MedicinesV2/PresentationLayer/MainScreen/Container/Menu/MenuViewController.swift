@@ -54,6 +54,9 @@ private extension MenuViewController {
         menuTableView.delegate = dataSourceProvider
         menuTableView.dataSource = dataSourceProvider
         
+        #warning("Удалить каку после добавления роутера и презентера")
+        dataSourceProvider.view = self
+        
         menuTableView.frame = view.bounds
         
         registerCell()

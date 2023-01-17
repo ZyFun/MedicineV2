@@ -59,6 +59,6 @@ extension AboutAppViewController: AboutAppView {
     }
     
     func dismiss() {
-        navigationController?.popViewController(animated: true)
+        dismiss(animated: true)
     }
 }
