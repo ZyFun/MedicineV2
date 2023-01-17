@@ -11,16 +11,19 @@ protocol Builder {
     static func createAboutAppModule() -> UIViewController
 }
 
-class ModuleBuilder: Builder {
+final class ModuleBuilder: Builder {
     static func createAboutAppModule() -> UIViewController {
-        let model = AboutAppModel(
-            description: "Приложение аптечка",
-            nameDeveloper: "Данилин Дмитрий",
-            version: "\(Bundle.main.appVersionLong) (\(Bundle.main.appBuild))"
+        let infoModel = AboutAppInfoModel(
+            version: "Версия: \(Bundle.main.appVersionLong) (\(Bundle.main.appBuild))",
+            developer: "Разработчик: Дмитрий Данилин",
+            discordUrl: nil,
+            vkUrl: nil,
+            tgUrl: nil,
+            frameworks: nil
         )
         
         let view = AboutAppViewController()
-        let presenter = AboutAppPresenter(view: view, info: model)
+        let presenter = AboutAppPresenter(view: view, infoModel: infoModel)
         view.presenter = presenter
         
         return view

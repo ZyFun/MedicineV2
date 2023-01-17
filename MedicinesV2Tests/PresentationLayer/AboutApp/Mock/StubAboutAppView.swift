@@ -8,11 +8,11 @@
 import Foundation
 @testable import MedicinesV2
 
-final class StubAboutAppView: AboutAppOutput {
-    var version: String?
-
-    func setVersion(_ version: String) {
-        self.version = version
+final class StubAboutAppView: AboutAppView {
+    var infoModel: AboutAppInfoModel?
+    
+    func setAppInfo(from infoModel: AboutAppInfoModel) {
+        self.infoModel = infoModel
     }
 
     func dismiss() {}

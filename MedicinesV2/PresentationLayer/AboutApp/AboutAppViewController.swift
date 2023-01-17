@@ -7,11 +7,25 @@
 
 import UIKit
 
-class AboutAppViewController: UIViewController {
+/// Протокол отображения данных ViewCintroller-a
+protocol AboutAppView: AnyObject {
+    /// Метод установки описания информации о приложении
+    /// - Parameter infoModel: принимает модель с собранной информацией о приложении
+    func setAppInfo(from infoModel: AboutAppInfoModel)
+    /// Метод выхода с экрана
+    func dismiss()
+}
+
+final class AboutAppViewController: UIViewController {
     
     // MARK: - IBOutlets
     
     @IBOutlet weak var versionLabel: UILabel!
+    @IBOutlet weak var developerLabel: UILabel!
+    @IBOutlet weak var vkUrlLabel: UILabel!
+    @IBOutlet weak var discordUrlLabel: UILabel!
+    @IBOutlet weak var tgUrlLabel: UILabel!
+    @IBOutlet weak var frameworksLabel: UILabel!
     
     // MARK: - Public property
     
@@ -22,22 +36,29 @@ class AboutAppViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        presenter?.presentAppVersion()
+        presenter?.presentAppInfo()
     }
 
     // MARK: - IBActions
     
     @IBAction func closeButtonPressed() {
-        presenter?.view.dismiss()
+        presenter?.view?.dismiss()
     }
 }
 
-extension AboutAppViewController: AboutAppOutput {
-    func dismiss() {
-        navigationController?.popViewController(animated: true)
+// MARK: - AboutAppView
+
+extension AboutAppViewController: AboutAppView {
+    func setAppInfo(from infoModel: AboutAppInfoModel) {
+        versionLabel.text = infoModel.version
+        developerLabel.text = infoModel.developer
+        vkUrlLabel.text = infoModel.vkUrl
+        discordUrlLabel.text = infoModel.vkUrl
+        tgUrlLabel.text = infoModel.tgUrl
+        frameworksLabel.text = infoModel.frameworks
     }
     
-    func setVersion(_ version: String) {
-        versionLabel.text = version
+    func dismiss() {
+        navigationController?.popViewController(animated: true)
     }
 }
