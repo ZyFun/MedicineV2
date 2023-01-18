@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AboutAppViewController" customModule="MedicinesV2" customModuleProvider="target">
             <connections>
+                <outlet property="closeButton" destination="qzi-SX-OHN" id="bsg-y5-7Yq"/>
                 <outlet property="developerLabel" destination="1Mn-GA-dEB" id="G1x-3k-4Iw"/>
                 <outlet property="discordUrlLabel" destination="f9f-Yl-YQj" id="LLI-hM-WRP"/>
                 <outlet property="frameworksLabel" destination="U1Y-gY-CmC" id="Umv-sg-fmf"/>

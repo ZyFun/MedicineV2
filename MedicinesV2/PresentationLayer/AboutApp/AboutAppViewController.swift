@@ -26,6 +26,7 @@ final class AboutAppViewController: UIViewController {
     @IBOutlet weak var discordUrlLabel: UILabel!
     @IBOutlet weak var tgUrlLabel: UILabel!
     @IBOutlet weak var frameworksLabel: UILabel!
+    @IBOutlet weak var closeButton: UIButton!
     
     // MARK: - Public property
     
@@ -36,6 +37,7 @@ final class AboutAppViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setup()
         presenter?.presentAppInfo()
     }
 
@@ -60,5 +62,18 @@ extension AboutAppViewController: AboutAppView {
     
     func dismiss() {
         dismiss(animated: true)
+    }
+}
+
+private extension AboutAppViewController {
+    func setup() {
+        setupButtons()
+    }
+    
+    func setupButtons() {
+        closeButton.layer.borderWidth = 1
+        closeButton.layer.cornerRadius = 16
+        closeButton.setTitle("Закрыть", for: .normal)
+        closeButton.layer.borderColor = UIColor.systemGray.cgColor
     }
 }
