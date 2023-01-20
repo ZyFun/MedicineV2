@@ -78,6 +78,14 @@ final class AboutAppUnitTests: XCTestCase {
         XCTAssertEqual(view.tgUrl, url)
     }
     
+    func test_dissmis_dismissInvoked() {
+        // When
+        presenter.dismiss()
+        
+        // Then
+        XCTAssertTrue(view.dismissInvoked)
+    }
+    
     // MARK: - Model tests
     
     func test_aboutAppModelBuilding_buildModel_modelBuilded() {

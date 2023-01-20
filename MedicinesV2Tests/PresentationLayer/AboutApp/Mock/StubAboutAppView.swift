@@ -11,6 +11,7 @@ import Foundation
 final class StubAboutAppView: AboutAppView {
     var infoModel: AboutAppInfoModel?
     var tgUrl: URL?
+    var dismissInvoked: Bool = false
     
     func setAppInfo(from infoModel: AboutAppInfoModel) {
         self.infoModel = infoModel
@@ -20,5 +21,7 @@ final class StubAboutAppView: AboutAppView {
         tgUrl = url
     }
 
-    func dismiss() {}
+    func dismiss() {
+        dismissInvoked = true
+    }
 }
