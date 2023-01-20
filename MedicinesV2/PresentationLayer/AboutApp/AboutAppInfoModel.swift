@@ -13,5 +13,4 @@ struct AboutAppInfoModel {
     let discordUrl: String?
     let vkUrl: String?
     let tgUrl: String?
-    let frameworks: String?
 }

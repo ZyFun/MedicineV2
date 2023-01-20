@@ -12,6 +12,9 @@ protocol AboutAppView: AnyObject {
     /// Метод установки описания информации о приложении
     /// - Parameter infoModel: принимает модель с собранной информацией о приложении
     func setAppInfo(from infoModel: AboutAppInfoModel)
+    /// Метод для открытия URL в сафари
+    /// - Parameter url: принимает необходимый URL адрес.
+    func open(url: URL)
     /// Метод выхода с экрана
     func dismiss()
 }
@@ -22,10 +25,8 @@ final class AboutAppViewController: UIViewController {
     
     @IBOutlet weak var versionLabel: UILabel!
     @IBOutlet weak var developerLabel: UILabel!
-    @IBOutlet weak var vkUrlLabel: UILabel!
     @IBOutlet weak var discordUrlLabel: UILabel!
-    @IBOutlet weak var tgUrlLabel: UILabel!
-    @IBOutlet weak var frameworksLabel: UILabel!
+    @IBOutlet weak var tgButton: UIButton!
     @IBOutlet weak var closeButton: UIButton!
     
     // MARK: - Public property
@@ -46,18 +47,23 @@ final class AboutAppViewController: UIViewController {
     @IBAction func closeButtonPressed() {
         presenter?.view?.dismiss()
     }
+    
+    @IBAction func tgButtonPressed() {
+        presenter?.openTGUrl()
+    }
 }
 
-// MARK: - AboutAppView
+// MARK: - Логика обновления данных View
 
 extension AboutAppViewController: AboutAppView {
     func setAppInfo(from infoModel: AboutAppInfoModel) {
         versionLabel.text = infoModel.version
         developerLabel.text = infoModel.developer
-        vkUrlLabel.text = infoModel.vkUrl
-        discordUrlLabel.text = infoModel.vkUrl
-        tgUrlLabel.text = infoModel.tgUrl
-        frameworksLabel.text = infoModel.frameworks
+        discordUrlLabel.text = infoModel.discordUrl
+    }
+    
+    func open(url: URL) {
+        UIApplication.shared.open(url)
     }
     
     func dismiss() {
@@ -65,12 +71,16 @@ extension AboutAppViewController: AboutAppView {
     }
 }
 
+// MARK: - Конфигурирование ViewController
+
 private extension AboutAppViewController {
     func setup() {
         setupButtons()
     }
     
     func setupButtons() {
+        tgButton.setTitle("Telegram", for: .normal)
+        
         closeButton.layer.borderWidth = 1
         closeButton.layer.cornerRadius = 16
         closeButton.setTitle("Закрыть", for: .normal)

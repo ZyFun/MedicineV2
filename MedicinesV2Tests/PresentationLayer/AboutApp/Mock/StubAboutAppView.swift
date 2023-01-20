@@ -10,9 +10,14 @@ import Foundation
 
 final class StubAboutAppView: AboutAppView {
     var infoModel: AboutAppInfoModel?
+    var tgUrl: URL?
     
     func setAppInfo(from infoModel: AboutAppInfoModel) {
         self.infoModel = infoModel
+    }
+    
+    func open(url: URL) {
+        tgUrl = url
     }
 
     func dismiss() {}

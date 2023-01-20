@@ -16,9 +16,8 @@ final class AboutAppConfigurator {
             version: "Версия: \(Bundle.main.appVersionLong) (\(Bundle.main.appBuild))",
             developer: "Разработчик: Дмитрий Данилин",
             discordUrl: nil,
-            vkUrl: nil,
-            tgUrl: nil,
-            frameworks: nil
+            vkUrl: "https://vk.com",
+            tgUrl: "https://t.me/+8zc4QsHHac03ZGYy"
         )
         
         guard let view = view as? AboutAppViewController else { return }

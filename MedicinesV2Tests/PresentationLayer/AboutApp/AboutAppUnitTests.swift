@@ -23,8 +23,7 @@ final class AboutAppUnitTests: XCTestCase {
             developer: "Я",
             discordUrl: "DC",
             vkUrl: "VK",
-            tgUrl: "TG",
-            frameworks: "Swiftlint"
+            tgUrl: "TG"
         )
         
         presenter = AboutAppPresenter(view: view, infoModel: model)
@@ -61,6 +60,24 @@ final class AboutAppUnitTests: XCTestCase {
         XCTAssertEqual(view.infoModel?.version, version)
     }
     
+    func test_openTGUrl_linkMatch() {
+        // Given
+        guard let tgUrlString = model.tgUrl else {
+            XCTFail("В моделе не указан url")
+            return
+        }
+        guard let url = URL(string: tgUrlString) else {
+            XCTFail("Не удалось преобразовать в ссылку")
+            return
+        }
+        
+        // When
+        presenter.openTGUrl()
+        
+        // Then
+        XCTAssertEqual(view.tgUrl, url)
+    }
+    
     // MARK: - Model tests
     
     func test_aboutAppModelBuilding_buildModel_modelBuilded() {
@@ -70,8 +87,7 @@ final class AboutAppUnitTests: XCTestCase {
             developer: "Я",
             discordUrl: "DC",
             vkUrl: "VK",
-            tgUrl: "TG",
-            frameworks: "Swiftlint"
+            tgUrl: "TG"
         )
         
         // Then
@@ -80,7 +96,6 @@ final class AboutAppUnitTests: XCTestCase {
         XCTAssertEqual(model.discordUrl, data.discordUrl)
         XCTAssertEqual(model.vkUrl, data.vkUrl)
         XCTAssertEqual(model.tgUrl, data.tgUrl)
-        XCTAssertEqual(model.frameworks, data.frameworks)
     }
     
 }

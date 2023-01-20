@@ -210,11 +210,11 @@
 		2C40442129757AAD00965DE4 /* AboutApp */ = {
 			isa = PBXGroup;
 			children = (
-				2C40442A297588C500965DE4 /* AboutAppConfigurator.swift */,
+				2C40442429757DFC00965DE4 /* AboutAppInfoModel.swift */,
 				2C4044272975826600965DE4 /* AboutAppViewController.xib */,
 				2C4044262975826600965DE4 /* AboutAppViewController.swift */,
 				2C40442229757CD800965DE4 /* AboutAppPresenter.swift */,
-				2C40442429757DFC00965DE4 /* AboutAppInfoModel.swift */,
+				2C40442A297588C500965DE4 /* AboutAppConfigurator.swift */,
 			);
 			path = AboutApp;
 			sourceTree = "<group>";
