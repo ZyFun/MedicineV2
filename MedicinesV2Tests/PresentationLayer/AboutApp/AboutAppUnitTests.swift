@@ -62,11 +62,11 @@ final class AboutAppUnitTests: XCTestCase {
     
     func test_openTGUrl_linkMatch() {
         // Given
-        guard let tgUrlString = model.tgUrl else {
+        guard let urlString = model.tgUrl else {
             XCTFail("В моделе не указан url")
             return
         }
-        guard let url = URL(string: tgUrlString) else {
+        guard let url = URL(string: urlString) else {
             XCTFail("Не удалось преобразовать в ссылку")
             return
         }
@@ -75,7 +75,25 @@ final class AboutAppUnitTests: XCTestCase {
         presenter.openTGUrl()
         
         // Then
-        XCTAssertEqual(view.tgUrl, url)
+        XCTAssertEqual(view.currentUrl, url)
+    }
+    
+    func test_openVKUrl_linkMatch() {
+        // Given
+        guard let urlString = model.vkUrl else {
+            XCTFail("В моделе не указан url")
+            return
+        }
+        guard let url = URL(string: urlString) else {
+            XCTFail("Не удалось преобразовать в ссылку")
+            return
+        }
+        
+        // When
+        presenter.openVKUrl()
+        
+        // Then
+        XCTAssertEqual(view.currentUrl, url)
     }
     
     func test_dissmis_dismissInvoked() {

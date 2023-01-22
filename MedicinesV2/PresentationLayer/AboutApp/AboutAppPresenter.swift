@@ -13,6 +13,8 @@ protocol AboutAppPresentationLogic: AnyObject {
     func presentAppInfo()
     /// Метод для открытия ссылки на группу в Telegram
     func openTGUrl()
+    /// Метод для открытия ссылки на группу в ВКонтакте
+    func openVKUrl()
     /// Метод выхода с экрана
     func dismiss()
 }
@@ -37,9 +39,13 @@ final class AboutAppPresenter {
 // MARK: - Presentation Logic
 
 extension AboutAppPresenter: AboutAppPresentationLogic {
+    // MARK: - Presentation
+    
     func presentAppInfo() {
         view?.setAppInfo(from: infoModel)
     }
+    
+    // MARK: - URL links
     
     func openTGUrl() {
         guard let urlString = infoModel.tgUrl else {
@@ -51,6 +57,19 @@ extension AboutAppPresenter: AboutAppPresentationLogic {
             view?.open(url: url)
         }
     }
+    
+    func openVKUrl() {
+        guard let urlString = infoModel.vkUrl else {
+            CustomLogger.error("URL в модели отсутствует")
+            return
+        }
+        
+        if let url = URL(string: urlString) {
+            view?.open(url: url)
+        }
+    }
+    
+    // MARK: - Navigation
     
     func dismiss() {
         view?.dismiss()

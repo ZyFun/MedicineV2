@@ -10,7 +10,7 @@ import Foundation
 
 final class StubAboutAppView: AboutAppView {
     var infoModel: AboutAppInfoModel?
-    var tgUrl: URL?
+    var currentUrl: URL?
     var dismissInvoked: Bool = false
     
     func setAppInfo(from infoModel: AboutAppInfoModel) {
@@ -18,7 +18,7 @@ final class StubAboutAppView: AboutAppView {
     }
     
     func open(url: URL) {
-        tgUrl = url
+        currentUrl = url
     }
 
     func dismiss() {

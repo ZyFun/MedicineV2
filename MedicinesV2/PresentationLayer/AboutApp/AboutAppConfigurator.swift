@@ -16,7 +16,7 @@ final class AboutAppConfigurator {
             version: "Версия: \(Bundle.main.appVersionLong) (\(Bundle.main.appBuild))",
             developer: "Разработчик: Дмитрий Данилин",
             discordUrl: nil,
-            vkUrl: "https://vk.com",
+            vkUrl: "https://vk.com/public218412067",
             tgUrl: "https://t.me/+8zc4QsHHac03ZGYy"
         )
         

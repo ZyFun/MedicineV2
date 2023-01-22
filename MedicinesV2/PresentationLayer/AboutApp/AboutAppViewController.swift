@@ -25,8 +25,8 @@ final class AboutAppViewController: UIViewController {
     
     @IBOutlet weak var versionLabel: UILabel!
     @IBOutlet weak var developerLabel: UILabel!
-    @IBOutlet weak var discordUrlLabel: UILabel!
     @IBOutlet weak var tgButton: UIButton!
+    @IBOutlet weak var vkButton: UIButton!
     @IBOutlet weak var closeButton: UIButton!
     
     // MARK: - Public property
@@ -48,6 +48,10 @@ final class AboutAppViewController: UIViewController {
         presenter?.view?.dismiss()
     }
     
+    @IBAction func vkButtonPressed() {
+        presenter?.openVKUrl()
+    }
+    
     @IBAction func tgButtonPressed() {
         presenter?.openTGUrl()
     }
@@ -59,7 +63,6 @@ extension AboutAppViewController: AboutAppView {
     func setAppInfo(from infoModel: AboutAppInfoModel) {
         versionLabel.text = infoModel.version
         developerLabel.text = infoModel.developer
-        discordUrlLabel.text = infoModel.discordUrl
     }
     
     func open(url: URL) {
@@ -80,6 +83,8 @@ private extension AboutAppViewController {
     
     func setupButtons() {
         tgButton.setTitle("Telegram", for: .normal)
+        
+        vkButton.setTitle("ВКонтакте", for: .normal)
         
         closeButton.layer.borderWidth = 1
         closeButton.layer.cornerRadius = 16
