@@ -58,6 +58,12 @@
 		2CBF4DE729080F5500ED297D /* Screenshot002.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CBF4DE429080F5500ED297D /* Screenshot002.png */; };
 		2CBF4DEF2908169700ED297D /* Demo.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2CBF4DEE2908169700ED297D /* Demo.gif */; };
 		2CCA5A0227C0DDA1005C7753 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 2CCA5A0127C0DDA1005C7753 /* .gitignore */; };
+		2CD39E2829814C79001BC7EA /* Di.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD39E2729814C79001BC7EA /* Di.swift */; };
+		2CD39E2B298154BE001BC7EA /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD39E2A298154BE001BC7EA /* ContainerViewController.swift */; };
+		2CD39E2D29815670001BC7EA /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD39E2C29815670001BC7EA /* BaseCoordinator.swift */; };
+		2CD39E302981597C001BC7EA /* ApplicationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD39E2F2981597C001BC7EA /* ApplicationCoordinator.swift */; };
+		2CD39E3229815A50001BC7EA /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD39E3129815A50001BC7EA /* Router.swift */; };
+		2CD39E3429816922001BC7EA /* CoordinatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD39E3329816922001BC7EA /* CoordinatorFactory.swift */; };
 		2CDB5E2027A538EF002361F2 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 2CDB5E1F27A538EF002361F2 /* README.md */; };
 		2CE3D70728D8BDE7001DA9AF /* FirstAidKitsFetchedResultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE3D70628D8BDE7001DA9AF /* FirstAidKitsFetchedResultsManager.swift */; };
 		2CEAA1BB28DDC5C2000BA942 /* MedicinesDataSourceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEAA1BA28DDC5C2000BA942 /* MedicinesDataSourceProvider.swift */; };
@@ -148,6 +154,12 @@
 		2CBF4DE429080F5500ED297D /* Screenshot002.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Screenshot002.png; sourceTree = "<group>"; };
 		2CBF4DEE2908169700ED297D /* Demo.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Demo.gif; sourceTree = "<group>"; };
 		2CCA5A0127C0DDA1005C7753 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		2CD39E2729814C79001BC7EA /* Di.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Di.swift; sourceTree = "<group>"; };
+		2CD39E2A298154BE001BC7EA /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
+		2CD39E2C29815670001BC7EA /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
+		2CD39E2F2981597C001BC7EA /* ApplicationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationCoordinator.swift; sourceTree = "<group>"; };
+		2CD39E3129815A50001BC7EA /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		2CD39E3329816922001BC7EA /* CoordinatorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorFactory.swift; sourceTree = "<group>"; };
 		2CDB5E1F27A538EF002361F2 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		2CE3D70628D8BDE7001DA9AF /* FirstAidKitsFetchedResultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAidKitsFetchedResultsManager.swift; sourceTree = "<group>"; };
 		2CE3D70A28D90A00001DA9AF /* Medicines v3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Medicines v3.xcdatamodel"; sourceTree = "<group>"; };
@@ -472,6 +484,9 @@
 		2CB3FAD128C89DD100E4A378 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				2CD39E2E29815957001BC7EA /* Coordinators */,
+				2CD39E2629814C69001BC7EA /* DI */,
+				2CD39E29298154A4001BC7EA /* Library */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -495,6 +510,33 @@
 				2C52BDC0273540F400356A63 /* MedicineViewController.storyboard */,
 			);
 			path = Medicine;
+			sourceTree = "<group>";
+		};
+		2CD39E2629814C69001BC7EA /* DI */ = {
+			isa = PBXGroup;
+			children = (
+				2CD39E2729814C79001BC7EA /* Di.swift */,
+			);
+			path = DI;
+			sourceTree = "<group>";
+		};
+		2CD39E29298154A4001BC7EA /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				2CD39E2A298154BE001BC7EA /* ContainerViewController.swift */,
+				2CD39E2C29815670001BC7EA /* BaseCoordinator.swift */,
+				2CD39E3129815A50001BC7EA /* Router.swift */,
+				2CD39E3329816922001BC7EA /* CoordinatorFactory.swift */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		2CD39E2E29815957001BC7EA /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				2CD39E2F2981597C001BC7EA /* ApplicationCoordinator.swift */,
+			);
+			path = Coordinators;
 			sourceTree = "<group>";
 		};
 		2CE3D70828D8F2A0001DA9AF /* Managers */ = {
@@ -768,9 +810,12 @@
 				2C40442529757DFC00965DE4 /* AboutAppInfoModel.swift in Sources */,
 				2C38603F28DC81FE003FED87 /* ServiceAssembly.swift in Sources */,
 				2C480C84275FB1FA000CD5CC /* Date+DateFormatter.swift in Sources */,
+				2CD39E3429816922001BC7EA /* CoordinatorFactory.swift in Sources */,
 				2C38604128DC82DB003FED87 /* PresentationAssembly.swift in Sources */,
 				2CED30E428F6E47200A6CEE5 /* SplashViewController.swift in Sources */,
+				2CD39E2D29815670001BC7EA /* BaseCoordinator.swift in Sources */,
 				2C776FDF27BF98E8004B67B4 /* Debug.swift in Sources */,
+				2CD39E302981597C001BC7EA /* ApplicationCoordinator.swift in Sources */,
 				2C40442D2975921F00965DE4 /* Bundle+AppInfo.swift in Sources */,
 				2CE3D70728D8BDE7001DA9AF /* FirstAidKitsFetchedResultsManager.swift in Sources */,
 				2C925717273D4DE800DA7284 /* MedicinesViewController.swift in Sources */,
@@ -778,11 +823,13 @@
 				2CF1B8EB2971BB1300BCF726 /* MenuDataSourceProvider.swift in Sources */,
 				2CF1EE7B277348330031D79D /* FirstAidKitsConfigurator.swift in Sources */,
 				2CF1EE71277347580031D79D /* FirstAidKitsViewController.swift in Sources */,
+				2CD39E2829814C79001BC7EA /* Di.swift in Sources */,
 				2CBD2B21277C7FAF00F857C3 /* MedicineRouter.swift in Sources */,
 				2C92571B273D5C9A00DA7284 /* MedicinesInteractor.swift in Sources */,
 				2C480C86275FB340000CD5CC /* String+DateFormatter.swift.swift in Sources */,
 				2C4044282975826600965DE4 /* AboutAppViewController.swift in Sources */,
 				2C52BDBB273540F400356A63 /* AppDelegate.swift in Sources */,
+				2CD39E3229815A50001BC7EA /* Router.swift in Sources */,
 				2C60890927356B6400E66081 /* CoreDataService.swift in Sources */,
 				2CB3FAD528C8AA9900E4A378 /* NotificationService.swift in Sources */,
 				2CB115D62970354000A2846A /* MainContainerViewController.swift in Sources */,
@@ -790,6 +837,7 @@
 				2C40442B297588C500965DE4 /* AboutAppConfigurator.swift in Sources */,
 				2C40442329757CD800965DE4 /* AboutAppPresenter.swift in Sources */,
 				2C5BBB7529000A6300D821EC /* MedicineCell.swift in Sources */,
+				2CD39E2B298154BE001BC7EA /* ContainerViewController.swift in Sources */,
 				2C24C0A32900689E0047CA3D /* ActionWithMedicine.swift in Sources */,
 				2CF1B8E52971901800BCF726 /* MainContainerAnimator.swift in Sources */,
 				2C6762892757A32300B46E21 /* MedicineViewController.swift in Sources */,
