@@ -71,6 +71,8 @@
 		2CED30E528F6E47200A6CEE5 /* SplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CED30E328F6E47200A6CEE5 /* SplashViewController.xib */; };
 		2CED30E728F6E6A500A6CEE5 /* SplashPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CED30E628F6E6A500A6CEE5 /* SplashPresenter.swift */; };
 		2CED30E928F6E6C900A6CEE5 /* SplashAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CED30E828F6E6C900A6CEE5 /* SplashAnimator.swift */; };
+		2CEDC3EF298296F0003D3107 /* StartCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEDC3EE298296F0003D3107 /* StartCoordinator.swift */; };
+		2CEDC3F22982975E003D3107 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEDC3F12982975E003D3107 /* Types.swift */; };
 		2CF1B8E52971901800BCF726 /* MainContainerAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF1B8E42971901800BCF726 /* MainContainerAnimator.swift */; };
 		2CF1B8EB2971BB1300BCF726 /* MenuDataSourceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF1B8EA2971BB1300BCF726 /* MenuDataSourceProvider.swift */; };
 		2CF1B8EF2971C0D500BCF726 /* MenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF1B8EE2971C0D500BCF726 /* MenuModel.swift */; };
@@ -170,6 +172,8 @@
 		2CED30E328F6E47200A6CEE5 /* SplashViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SplashViewController.xib; sourceTree = "<group>"; };
 		2CED30E628F6E6A500A6CEE5 /* SplashPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashPresenter.swift; sourceTree = "<group>"; };
 		2CED30E828F6E6C900A6CEE5 /* SplashAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashAnimator.swift; sourceTree = "<group>"; };
+		2CEDC3EE298296F0003D3107 /* StartCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartCoordinator.swift; sourceTree = "<group>"; };
+		2CEDC3F12982975E003D3107 /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		2CF1B8E42971901800BCF726 /* MainContainerAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContainerAnimator.swift; sourceTree = "<group>"; };
 		2CF1B8EA2971BB1300BCF726 /* MenuDataSourceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuDataSourceProvider.swift; sourceTree = "<group>"; };
 		2CF1B8EE2971C0D500BCF726 /* MenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuModel.swift; sourceTree = "<group>"; };
@@ -317,7 +321,8 @@
 		2C52BDB9273540F400356A63 /* MedicinesV2 */ = {
 			isa = PBXGroup;
 			children = (
-				2C52BDCB273540F600356A63 /* Info.plist */,
+				2C7572252982900500F1A506 /* Configuration */,
+				2C52BDDC27355E3600356A63 /* Recources */,
 				2CB3FAD128C89DD100E4A378 /* Common */,
 				2CB3FAD028C89D4700E4A378 /* Default */,
 				2C52BDD827355DA400356A63 /* Supports */,
@@ -371,9 +376,19 @@
 		2C52BDDC27355E3600356A63 /* Recources */ = {
 			isa = PBXGroup;
 			children = (
+				2CEDC3ED2982918A003D3107 /* Mocks */,
+				2C52BDC8273540F600356A63 /* LaunchScreen.storyboard */,
 				2C52BDC6273540F600356A63 /* Assets.xcassets */,
 			);
 			path = Recources;
+			sourceTree = "<group>";
+		};
+		2C7572252982900500F1A506 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				2C52BDCB273540F600356A63 /* Info.plist */,
+			);
+			path = Configuration;
 			sourceTree = "<group>";
 		};
 		2C925708273D45B500DA7284 /* PresentationLayer */ = {
@@ -474,9 +489,7 @@
 		2CB3FAD028C89D4700E4A378 /* Default */ = {
 			isa = PBXGroup;
 			children = (
-				2C52BDDC27355E3600356A63 /* Recources */,
 				2C52BDBA273540F400356A63 /* AppDelegate.swift */,
-				2C52BDC8273540F600356A63 /* LaunchScreen.storyboard */,
 			);
 			path = Default;
 			sourceTree = "<group>";
@@ -523,10 +536,10 @@
 		2CD39E29298154A4001BC7EA /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				2CEDC3F02982973E003D3107 /* Foundation */,
 				2CD39E2A298154BE001BC7EA /* ContainerViewController.swift */,
 				2CD39E2C29815670001BC7EA /* BaseCoordinator.swift */,
 				2CD39E3129815A50001BC7EA /* Router.swift */,
-				2CD39E3329816922001BC7EA /* CoordinatorFactory.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -534,7 +547,9 @@
 		2CD39E2E29815957001BC7EA /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
+				2CD39E3329816922001BC7EA /* CoordinatorFactory.swift */,
 				2CD39E2F2981597C001BC7EA /* ApplicationCoordinator.swift */,
+				2CEDC3EE298296F0003D3107 /* StartCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -572,6 +587,21 @@
 				2CED30E828F6E6C900A6CEE5 /* SplashAnimator.swift */,
 			);
 			path = SplashScreen;
+			sourceTree = "<group>";
+		};
+		2CEDC3ED2982918A003D3107 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		2CEDC3F02982973E003D3107 /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				2CEDC3F12982975E003D3107 /* Types.swift */,
+			);
+			path = Foundation;
 			sourceTree = "<group>";
 		};
 		2CF1B8E82971ADC100BCF726 /* MainScreen */ = {
@@ -811,6 +841,7 @@
 				2C38603F28DC81FE003FED87 /* ServiceAssembly.swift in Sources */,
 				2C480C84275FB1FA000CD5CC /* Date+DateFormatter.swift in Sources */,
 				2CD39E3429816922001BC7EA /* CoordinatorFactory.swift in Sources */,
+				2CEDC3F22982975E003D3107 /* Types.swift in Sources */,
 				2C38604128DC82DB003FED87 /* PresentationAssembly.swift in Sources */,
 				2CED30E428F6E47200A6CEE5 /* SplashViewController.swift in Sources */,
 				2CD39E2D29815670001BC7EA /* BaseCoordinator.swift in Sources */,
@@ -841,6 +872,7 @@
 				2C24C0A32900689E0047CA3D /* ActionWithMedicine.swift in Sources */,
 				2CF1B8E52971901800BCF726 /* MainContainerAnimator.swift in Sources */,
 				2C6762892757A32300B46E21 /* MedicineViewController.swift in Sources */,
+				2CEDC3EF298296F0003D3107 /* StartCoordinator.swift in Sources */,
 				2CBD2B1F277C7FA300F857C3 /* MedicineInteractor.swift in Sources */,
 				2CBD2B23277C7FC200F857C3 /* MedicineConfigurator.swift in Sources */,
 				2CED30E728F6E6A500A6CEE5 /* SplashPresenter.swift in Sources */,
@@ -1065,7 +1097,7 @@
 				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = B66N983M7Q;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MedicinesV2/Info.plist;
+				INFOPLIST_FILE = MedicinesV2/Configuration/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Аптечка";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -1096,7 +1128,7 @@
 				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = B66N983M7Q;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MedicinesV2/Info.plist;
+				INFOPLIST_FILE = MedicinesV2/Configuration/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Аптечка";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;

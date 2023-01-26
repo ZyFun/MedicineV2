@@ -7,9 +7,6 @@
 
 import Foundation
 
-#warning("продолжить отюда")
-// https://youtu.be/sM-AaI32hTc?t=1223
-
 final class ApplicationCoordinator: BaseCoordinator {
     private let router: IRouter
     private let coordinatorFactory: ICoordinatorFactory
@@ -22,17 +19,13 @@ final class ApplicationCoordinator: BaseCoordinator {
     
     override func start() {
         if isAuthorized {
-            runMoveFlow()
+            runMainFlow()
         } else {
-            runLoginFlow()
+            
         }
     }
     
-    private func runMoveFlow() {
-        
-    }
-    
-    private func runLoginFlow() {
+    private func runMainFlow() {
         
     }
 }
