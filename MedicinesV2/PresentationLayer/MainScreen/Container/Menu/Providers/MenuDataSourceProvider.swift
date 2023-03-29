@@ -8,15 +8,15 @@
 import UIKit
 
 protocol IMenuDataSourceProvider: UITableViewDelegate, UITableViewDataSource {
-    #warning("Удалить каку после добавления роутера и презентера")
-    var view: UIViewController? { get set }
+    
 }
 
 final class MenuDataSourceProvider: NSObject, IMenuDataSourceProvider {
+    private var presenter: MenuPresenter
     
-    #warning("Удалить каку после добавления роутера и презентера")
-    var view: UIViewController?
-    
+    init(presenter: MenuPresenter) {
+        self.presenter = presenter
+    }
 }
 
 // MARK: - Table view data source
@@ -56,19 +56,13 @@ extension MenuDataSourceProvider: UITableViewDataSource {
 extension MenuDataSourceProvider: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        #warning("Удалить каку после добавления роутера и презентера")
-        // TODO: (#Add) Дописать логику перехода на определенный экран из меню
-        // сделать презентер и роутер для этого модуля, и октрывать экран через них.
         guard let menu = MenuModel(rawValue: indexPath.row) else { return }
         
         switch menu {
         case .settings:
             CustomLogger.warning("Меню настроек в разработке")
         case .aboutApp:
-            let view = AboutAppViewController()
-            PresentationAssembly().aboutApp.config(view: view)
-            self.view?.present(view, animated: true)
-            // Добавить сворачивание меню
+            presenter.presentAboutAppScreen()
         }
         
     }
