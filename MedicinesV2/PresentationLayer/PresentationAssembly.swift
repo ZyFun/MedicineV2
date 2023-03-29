@@ -30,6 +30,16 @@ final class PresentationAssembly {
         )
     }()
     
+    /// Инжектирование зависимостей в ``MenuConfigurator``
+    lazy var menu: MenuConfigurator = {
+        return MenuConfigurator()
+    }()
+    
+    /// Инжектирование зависимостей в ``AboutAppConfigurator``
+    lazy var aboutApp: AboutAppConfigurator = {
+        return AboutAppConfigurator()
+    }()
+    
     /// Инжектирование зависимостей в ``MedicinesConfigurator``
     lazy var medicines: MedicinesConfigurator = {
         return MedicinesConfigurator(

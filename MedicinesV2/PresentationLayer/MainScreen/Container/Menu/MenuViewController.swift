@@ -7,12 +7,17 @@
 
 import UIKit
 
+/// Протокол отображения данных ViewCintroller-a
+protocol MenuView: AnyObject {
+    
+}
+
 final class MenuViewController: UIViewController {
     
     // MARK: - Public properties
     
-    // TODO: (#Refactor) инициализация должна быть в конфигураторе
-    var dataSourceProvider: IMenuDataSourceProvider = MenuDataSourceProvider()
+    var presenter: MenuPresenter?
+    var dataSourceProvider: IMenuDataSourceProvider?
     
     // MARK: - Private Properties
     
@@ -67,5 +72,11 @@ private extension MenuViewController {
             forCellReuseIdentifier: MenuCell.identifier
         )
     }
+    
+}
+
+// MARK: - Логика обновления данных View
+
+extension MenuViewController: MenuView {
     
 }

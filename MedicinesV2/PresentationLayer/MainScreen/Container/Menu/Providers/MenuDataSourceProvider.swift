@@ -12,9 +12,11 @@ protocol IMenuDataSourceProvider: UITableViewDelegate, UITableViewDataSource {
 }
 
 final class MenuDataSourceProvider: NSObject, IMenuDataSourceProvider {
+    private var presenter: MenuPresenter
     
-    let menuModel = MenuModel.getMenu()
-    
+    init(presenter: MenuPresenter) {
+        self.presenter = presenter
+    }
 }
 
 // MARK: - Table view data source
@@ -22,7 +24,7 @@ final class MenuDataSourceProvider: NSObject, IMenuDataSourceProvider {
 extension MenuDataSourceProvider: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        menuModel.count
+        MenuModel.allCases.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -34,7 +36,10 @@ extension MenuDataSourceProvider: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        let menuModel = menuModel[indexPath.row]
+        guard let menuModel = MenuModel(rawValue: indexPath.row) else {
+            CustomLogger.error("Меню не собралось")
+            return UITableViewCell()
+        }
         
         cell.configure(
             iconImage: menuModel.iconImage,
@@ -51,7 +56,15 @@ extension MenuDataSourceProvider: UITableViewDataSource {
 extension MenuDataSourceProvider: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        CustomLogger.warning("Выбрана ячейка \(indexPath.row.description)" )
+        guard let menu = MenuModel(rawValue: indexPath.row) else { return }
+        
+        switch menu {
+        case .settings:
+            CustomLogger.warning("Меню настроек в разработке")
+        case .aboutApp:
+            presenter.presentAboutAppScreen()
+        }
+        
     }
     
 }

@@ -14,6 +14,9 @@ final class MainContainerViewController: UIViewController {
     
     private var mainVC: UIViewController!
     private var menuVC: UIViewController!
+    // нужен для передачи контроллера навигации в другие модули после создания
+    // mainVC. Используется для вызова present из роутера модулей.
+    private var navController: UINavigationController!
     private var isDisplayed = false
     
     private var animator: IMainContainerAnimator?
@@ -51,6 +54,8 @@ private extension MainContainerViewController {
             rootViewController: firstAidKitsVC
         )
         
+        navController = navigationController
+        
         mainVC = navigationController
         view.addSubview(mainVC.view)
         addChild(mainVC)
@@ -63,10 +68,20 @@ private extension MainContainerViewController {
     
     /// Конфигурирование экрана меню
     func createMenuController() {
+        // Проверка на nil, это заготовка того, чтобы при необходимости убирать
+        // меню из памяти, и создавать новое меню если его еще не было создано.
+        // в данный момент он никогда не будет nil.
         if menuVC == nil {
             menuVC = MenuViewController()
+            
+            PresentationAssembly().menu.config(
+                view: menuVC,
+                navigationController: navController
+            )
+            
             view.insertSubview(menuVC.view, at: 0) // Контроллер с меню добавляется под контроллер с аптечкой
             addChild(menuVC)
+            menuVC.didMove(toParent: self)
         }
     }
     
