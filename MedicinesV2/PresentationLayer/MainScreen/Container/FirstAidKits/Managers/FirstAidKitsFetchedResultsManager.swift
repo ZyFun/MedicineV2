@@ -105,7 +105,7 @@ extension FirstAidKitsFetchedResultsManager: NSFetchedResultsControllerDelegate 
                 )
             }
         @unknown default:
-            CustomLogger.error("Что то пошло не так в NSFetchedResultsControllerDelegate")
+            SystemLogger.error("Что то пошло не так в NSFetchedResultsControllerDelegate")
         }
     }
     

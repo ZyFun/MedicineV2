@@ -44,7 +44,7 @@ final class MedicinesDataSourceProvider: NSObject, IMedicinesDataSourceProvider 
         guard let medicine = fetchedResultManager.fetchedResultsController.object(
             at: indexPath
         ) as? DBMedicine else {
-            CustomLogger.error("Ошибка каста object к DBMedicine")
+            SystemLogger.error("Ошибка каста object к DBMedicine")
             return nil
         }
         

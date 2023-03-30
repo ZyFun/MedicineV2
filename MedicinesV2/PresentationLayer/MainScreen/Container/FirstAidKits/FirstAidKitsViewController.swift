@@ -245,7 +245,7 @@ extension FirstAidKitsViewController: UISearchBarDelegate {
         do {
             try fetchedResultManager?.fetchedResultsController.performFetch()
         } catch let error {
-            CustomLogger.error(error.localizedDescription)
+            SystemLogger.error(error.localizedDescription)
         }
         
         firstAidKitsTableView.reloadData()
@@ -258,7 +258,7 @@ extension FirstAidKitsViewController: UISearchBarDelegate {
         do {
             try fetchedResultManager?.fetchedResultsController.performFetch()
         } catch let error {
-            CustomLogger.error(error.localizedDescription)
+            SystemLogger.error(error.localizedDescription)
         }
         
         firstAidKitsTableView.reloadData()

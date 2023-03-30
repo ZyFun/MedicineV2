@@ -64,7 +64,7 @@ extension MedicinesInteractor: MedicinesBusinessLogic {
                     
                     self.updatePlaceholder(for: firstAidKit)
                 case .failure(let error):
-                    CustomLogger.error(error.localizedDescription)
+                    SystemLogger.error(error.localizedDescription)
                 }
             }
         }
@@ -92,30 +92,30 @@ extension MedicinesInteractor: MedicinesBusinessLogic {
     ) -> DBFirstAidKit? {
         
         guard let currentFirstAidKitID = currentFirstAidKit?.objectID else {
-            CustomLogger.error("Не удалось найти ID объекта")
+            SystemLogger.error("Не удалось найти ID объекта")
             return nil
         }
         
         if let firstAidKit = firstAidKits.filter({ $0.objectID == currentFirstAidKitID }).first {
             return firstAidKit
         } else {
-            CustomLogger.warning("Объект не найден")
+            SystemLogger.warning("Объект не найден")
             return nil
         }
     }
     
     func updatePlaceholder(for currentFirstAidKit: DBFirstAidKit?) {
         guard let currentFirstAidKit = currentFirstAidKit else {
-            CustomLogger.error("Аптечка не была передана")
+            SystemLogger.error("Аптечка не была передана")
             return
         }
         
         if currentFirstAidKit.medicines == [] {
             presenter?.showPlaceholder()
-            CustomLogger.info("Лекарств в аптечке нет. Плейсхолдер отображен")
+            SystemLogger.info("Лекарств в аптечке нет. Плейсхолдер отображен")
         } else {
             presenter?.hidePlaceholder()
-            CustomLogger.info("Лекарства в аптечке есть. Плейсхолдер скрыт")
+            SystemLogger.info("Лекарства в аптечке есть. Плейсхолдер скрыт")
         }
     }
 }

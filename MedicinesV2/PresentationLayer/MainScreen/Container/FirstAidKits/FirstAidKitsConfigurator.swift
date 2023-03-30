@@ -34,7 +34,7 @@ final class FirstAidKitsConfigurator {
     
     func config(view: UIViewController, navigationController: UINavigationController) {
         guard let view = view as? FirstAidKitsViewController else {
-            CustomLogger.error("ViewController аптечки не инициализирован")
+            SystemLogger.error("ViewController аптечки не инициализирован")
             return
         }
         
