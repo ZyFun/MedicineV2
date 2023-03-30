@@ -48,7 +48,7 @@ extension NotificationMedicineManager: INotificationMedicineManager {
                 withIdentifiers: [identifier]
             )
             
-            CustomLogger.info("Уведомление для лекарства \(identifier) удалено из очереди")
+            SystemLogger.info("Уведомление для лекарства \(identifier) удалено из очереди")
         }
     }
     
@@ -77,7 +77,7 @@ extension NotificationMedicineManager: INotificationMedicineManager {
     
     func setupBadgeForAppIcon(data: [DBMedicine]?) {
         guard let data = data else {
-            CustomLogger.warning("В базе еще нет лекарств")
+            SystemLogger.warning("В базе еще нет лекарств")
             return
         }
         
@@ -92,6 +92,6 @@ extension NotificationMedicineManager: INotificationMedicineManager {
         }
         notificationService.setupBadge(count: expiredMedicinesCount)
         
-        CustomLogger.info("Бейдж на иконке приложения обновлён")
+        SystemLogger.info("Бейдж на иконке приложения обновлён")
     }
 }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C0BD41029D5D9BB004F4D77 /* SettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0BD40F29D5D9BB004F4D77 /* SettingsService.swift */; };
+		2C0BD41229D5E006004F4D77 /* SettingsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0BD41129D5E006004F4D77 /* SettingsServiceTests.swift */; };
 		2C1D3E6A2760FFD800D01C51 /* String+NumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1D3E692760FFD800D01C51 /* String+NumberFormatter.swift */; };
 		2C24C0A32900689E0047CA3D /* ActionWithMedicine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C24C0A22900689E0047CA3D /* ActionWithMedicine.swift */; };
 		2C38603F28DC81FE003FED87 /* ServiceAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C38603E28DC81FE003FED87 /* ServiceAssembly.swift */; };
@@ -49,7 +51,7 @@
 		2CB115D62970354000A2846A /* MainContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB115D52970354000A2846A /* MainContainerViewController.swift */; };
 		2CB115D82970355300A2846A /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB115D72970355300A2846A /* MenuViewController.swift */; };
 		2CB115DB297050D600A2846A /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB115DA297050D600A2846A /* MenuCell.swift */; };
-		2CB3FAD328C89E6800E4A378 /* CustomLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB3FAD228C89E6800E4A378 /* CustomLogger.swift */; };
+		2CB3FAD328C89E6800E4A378 /* SystemLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB3FAD228C89E6800E4A378 /* SystemLogger.swift */; };
 		2CB3FAD528C8AA9900E4A378 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB3FAD428C8AA9900E4A378 /* NotificationService.swift */; };
 		2CB5E6F928DF1842003D06D0 /* NotificationMedicineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB5E6F828DF1842003D06D0 /* NotificationMedicineManager.swift */; };
 		2CBD2B1D277C7F9200F857C3 /* MedicinePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBD2B1C277C7F9200F857C3 /* MedicinePresenter.swift */; };
@@ -98,6 +100,8 @@
 /* Begin PBXFileReference section */
 		0AD6D90920B4CEB0A6846175 /* Pods_MedicinesV2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MedicinesV2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		10E65D531DCFBDBEECD0A75E /* Pods-MedicinesV2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MedicinesV2.debug.xcconfig"; path = "Target Support Files/Pods-MedicinesV2/Pods-MedicinesV2.debug.xcconfig"; sourceTree = "<group>"; };
+		2C0BD40F29D5D9BB004F4D77 /* SettingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsService.swift; sourceTree = "<group>"; };
+		2C0BD41129D5E006004F4D77 /* SettingsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsServiceTests.swift; sourceTree = "<group>"; };
 		2C1D3E692760FFD800D01C51 /* String+NumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+NumberFormatter.swift"; sourceTree = "<group>"; };
 		2C24C0A22900689E0047CA3D /* ActionWithMedicine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionWithMedicine.swift; sourceTree = "<group>"; };
 		2C38603E28DC81FE003FED87 /* ServiceAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAssembly.swift; sourceTree = "<group>"; };
@@ -145,7 +149,7 @@
 		2CB115D52970354000A2846A /* MainContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContainerViewController.swift; sourceTree = "<group>"; };
 		2CB115D72970355300A2846A /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		2CB115DA297050D600A2846A /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
-		2CB3FAD228C89E6800E4A378 /* CustomLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLogger.swift; sourceTree = "<group>"; };
+		2CB3FAD228C89E6800E4A378 /* SystemLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemLogger.swift; sourceTree = "<group>"; };
 		2CB3FAD428C8AA9900E4A378 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		2CB5E6F828DF1842003D06D0 /* NotificationMedicineManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationMedicineManager.swift; sourceTree = "<group>"; };
 		2CBD2B1C277C7F9200F857C3 /* MedicinePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicinePresenter.swift; sourceTree = "<group>"; };
@@ -278,6 +282,7 @@
 			isa = PBXGroup;
 			children = (
 				2C47A4F92936B371000DFB49 /* CoreDataServiceTests.swift */,
+				2C0BD41129D5E006004F4D77 /* SettingsServiceTests.swift */,
 			);
 			path = ServiceLayer;
 			sourceTree = "<group>";
@@ -342,7 +347,7 @@
 			children = (
 				2CA75455273BECDA00B147B7 /* Extensions */,
 				2C776FDE27BF98E8004B67B4 /* Debug.swift */,
-				2CB3FAD228C89E6800E4A378 /* CustomLogger.swift */,
+				2CB3FAD228C89E6800E4A378 /* SystemLogger.swift */,
 			);
 			path = Supports;
 			sourceTree = "<group>";
@@ -353,6 +358,7 @@
 				2C38603E28DC81FE003FED87 /* ServiceAssembly.swift */,
 				2C60890827356B6400E66081 /* CoreDataService.swift */,
 				2CB3FAD428C8AA9900E4A378 /* NotificationService.swift */,
+				2C0BD40F29D5D9BB004F4D77 /* SettingsService.swift */,
 			);
 			path = ServiceLayer;
 			sourceTree = "<group>";
@@ -788,6 +794,7 @@
 				2C47A4FA2936B371000DFB49 /* CoreDataServiceTests.swift in Sources */,
 				2C404433297599FE00965DE4 /* AboutAppUnitTests.swift in Sources */,
 				2C4044362975A5A800965DE4 /* StubAboutAppView.swift in Sources */,
+				2C0BD41229D5E006004F4D77 /* SettingsServiceTests.swift in Sources */,
 				2C47A4EF293682BF000DFB49 /* FirstAidKitsInteractorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -799,7 +806,7 @@
 				2CF1B8EF2971C0D500BCF726 /* MenuModel.swift in Sources */,
 				2C62A6BF29D480F0008ED3BE /* MenuRouter.swift in Sources */,
 				2CB115DB297050D600A2846A /* MenuCell.swift in Sources */,
-				2CB3FAD328C89E6800E4A378 /* CustomLogger.swift in Sources */,
+				2CB3FAD328C89E6800E4A378 /* SystemLogger.swift in Sources */,
 				2C62A6BD29D480B4008ED3BE /* MenuPresenter.swift in Sources */,
 				2C40442529757DFC00965DE4 /* AboutAppInfoModel.swift in Sources */,
 				2C38603F28DC81FE003FED87 /* ServiceAssembly.swift in Sources */,
@@ -826,6 +833,7 @@
 				2C5F113627707CF60040536D /* Medicines.xcdatamodeld in Sources */,
 				2C40442B297588C500965DE4 /* AboutAppConfigurator.swift in Sources */,
 				2CC2B1ED29B8816500E00670 /* MenuIcons.swift in Sources */,
+				2C0BD41029D5D9BB004F4D77 /* SettingsService.swift in Sources */,
 				2C40442329757CD800965DE4 /* AboutAppPresenter.swift in Sources */,
 				2C5BBB7529000A6300D821EC /* MedicineCell.swift in Sources */,
 				2C24C0A32900689E0047CA3D /* ActionWithMedicine.swift in Sources */,

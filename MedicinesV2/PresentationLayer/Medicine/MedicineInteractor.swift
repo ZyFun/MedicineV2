@@ -88,7 +88,7 @@ extension MedicineInteractor: MedicineBusinessLogic {
                         for: currentFirstAidKit
                     )
                 case .failure(let error):
-                    CustomLogger.error(error.localizedDescription)
+                    SystemLogger.error(error.localizedDescription)
                 }
             }
             
@@ -119,14 +119,14 @@ extension MedicineInteractor: MedicineBusinessLogic {
     ) -> DBFirstAidKit? {
         
         guard let currentFirstAidKitID = currentFirstAidKit?.objectID else {
-            CustomLogger.error("Не удалось найти ID объекта")
+            SystemLogger.error("Не удалось найти ID объекта")
             return nil
         }
         
         if let firstAidKit = firstAidKits.filter({ $0.objectID == currentFirstAidKitID }).first {
             return firstAidKit
         } else {
-            CustomLogger.warning("Объект не найден")
+            SystemLogger.warning("Объект не найден")
             return nil
         }
     }

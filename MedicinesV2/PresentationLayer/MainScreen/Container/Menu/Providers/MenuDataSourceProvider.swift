@@ -32,12 +32,12 @@ extension MenuDataSourceProvider: UITableViewDataSource {
             withIdentifier: String(describing: MenuCell.self),
             for: indexPath
         ) as? MenuCell else {
-            CustomLogger.error("Ячейка меню не создана")
+            SystemLogger.error("Ячейка меню не создана")
             return UITableViewCell()
         }
         
         guard let menuModel = MenuModel(rawValue: indexPath.row) else {
-            CustomLogger.error("Меню не собралось")
+            SystemLogger.error("Меню не собралось")
             return UITableViewCell()
         }
         
@@ -60,7 +60,7 @@ extension MenuDataSourceProvider: UITableViewDelegate {
         
         switch menu {
         case .settings:
-            CustomLogger.warning("Меню настроек в разработке")
+            SystemLogger.warning("Меню настроек в разработке")
         case .aboutApp:
             presenter.presentAboutAppScreen()
         }

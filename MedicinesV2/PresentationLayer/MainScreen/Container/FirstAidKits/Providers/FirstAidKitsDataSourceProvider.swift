@@ -42,7 +42,7 @@ final class FirstAidKitsDataSourceProvider: NSObject, IFirstAidKitsDataSourcePro
         guard let firstAidKit = fetchedResultManager.fetchedResultsController.object(
             at: indexPath
         ) as? DBFirstAidKit else {
-            CustomLogger.error("Ошибка каста object к DBFirstAidKit")
+            SystemLogger.error("Ошибка каста object к DBFirstAidKit")
             return nil
         }
         

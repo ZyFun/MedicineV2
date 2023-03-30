@@ -1,5 +1,5 @@
 //
-//  CustomLogger.swift
+//  SystemLogger.swift
 //  MedicinesV2
 //
 //  Created by Дмитрий Данилин on 07.09.2022.
@@ -8,7 +8,7 @@
 import Foundation
 import os.log
 
-enum CustomLogger {
+enum SystemLogger {
     enum LogLevel {
         case info
         case warning
@@ -49,7 +49,7 @@ enum CustomLogger {
             line: line
         )
         
-        CustomLogger.handleLog(
+        SystemLogger.handleLog(
             level: .info,
             message: message,
             showInConsole: showInConsole ?? false,
@@ -72,7 +72,7 @@ enum CustomLogger {
             line: line
         )
         
-        CustomLogger.handleLog(
+        SystemLogger.handleLog(
             level: .warning,
             message: message,
             showInConsole: showInConsole ?? false,
@@ -95,7 +95,7 @@ enum CustomLogger {
             line: line
         )
         
-        CustomLogger.handleLog(
+        SystemLogger.handleLog(
             level: .error,
             message: message,
             showInConsole: showInConsole ?? false,

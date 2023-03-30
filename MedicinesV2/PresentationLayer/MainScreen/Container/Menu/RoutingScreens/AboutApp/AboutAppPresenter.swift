@@ -49,7 +49,7 @@ extension AboutAppPresenter: AboutAppPresentationLogic {
     
     func openTGUrl() {
         guard let urlString = infoModel.tgUrl else {
-            CustomLogger.error("URL в модели отсутствует")
+            SystemLogger.error("URL в модели отсутствует")
             return
         }
         
@@ -60,7 +60,7 @@ extension AboutAppPresenter: AboutAppPresentationLogic {
     
     func openVKUrl() {
         guard let urlString = infoModel.vkUrl else {
-            CustomLogger.error("URL в модели отсутствует")
+            SystemLogger.error("URL в модели отсутствует")
             return
         }
         

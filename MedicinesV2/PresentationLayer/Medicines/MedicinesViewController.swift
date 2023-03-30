@@ -176,7 +176,7 @@ extension MedicinesViewController: UISearchBarDelegate {
         do {
             try fetchedResultManager?.fetchedResultsController.performFetch()
         } catch let error {
-            CustomLogger.error(error.localizedDescription)
+            SystemLogger.error(error.localizedDescription)
         }
         
         medicinesTableView.reloadData()
@@ -194,7 +194,7 @@ extension MedicinesViewController: UISearchBarDelegate {
         do {
             try fetchedResultManager?.fetchedResultsController.performFetch()
         } catch let error {
-            CustomLogger.error(error.localizedDescription)
+            SystemLogger.error(error.localizedDescription)
         }
         
         medicinesTableView.reloadData()
