@@ -66,6 +66,7 @@
 		2CCA5A0227C0DDA1005C7753 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 2CCA5A0127C0DDA1005C7753 /* .gitignore */; };
 		2CDB5E2027A538EF002361F2 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 2CDB5E1F27A538EF002361F2 /* README.md */; };
 		2CE3D70728D8BDE7001DA9AF /* FirstAidKitsFetchedResultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE3D70628D8BDE7001DA9AF /* FirstAidKitsFetchedResultsManager.swift */; };
+		2CE9917629D8531000893D9D /* IdentifiableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE9917529D8531000893D9D /* IdentifiableCell.swift */; };
 		2CEAA1BB28DDC5C2000BA942 /* MedicinesDataSourceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEAA1BA28DDC5C2000BA942 /* MedicinesDataSourceProvider.swift */; };
 		2CED30E428F6E47200A6CEE5 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CED30E228F6E47200A6CEE5 /* SplashViewController.swift */; };
 		2CED30E528F6E47200A6CEE5 /* SplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CED30E328F6E47200A6CEE5 /* SplashViewController.xib */; };
@@ -165,6 +166,7 @@
 		2CDB5E1F27A538EF002361F2 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		2CE3D70628D8BDE7001DA9AF /* FirstAidKitsFetchedResultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAidKitsFetchedResultsManager.swift; sourceTree = "<group>"; };
 		2CE3D70A28D90A00001DA9AF /* Medicines v3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Medicines v3.xcdatamodel"; sourceTree = "<group>"; };
+		2CE9917529D8531000893D9D /* IdentifiableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableCell.swift; sourceTree = "<group>"; };
 		2CEAA1BA28DDC5C2000BA942 /* MedicinesDataSourceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicinesDataSourceProvider.swift; sourceTree = "<group>"; };
 		2CED0DED290450E100A5751C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		2CED0DEE290450E100A5751C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/MedicineViewController.strings; sourceTree = "<group>"; };
@@ -501,6 +503,7 @@
 		2CB3FAD128C89DD100E4A378 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				2CE9917429D852F200893D9D /* Protocols */,
 				2CFD714329B89E1500EF4353 /* URL */,
 				2CFD713E29B88C8D00EF4353 /* Icons */,
 			);
@@ -542,6 +545,14 @@
 				2CF28C7B28DCA24C0017C0A4 /* FirstAidKitsDataSourceProvider.swift */,
 			);
 			path = Providers;
+			sourceTree = "<group>";
+		};
+		2CE9917429D852F200893D9D /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				2CE9917529D8531000893D9D /* IdentifiableCell.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		2CEAA1B928DDC59D000BA942 /* Providers */ = {
@@ -856,6 +867,7 @@
 				2CF28C7C28DCA24C0017C0A4 /* FirstAidKitsDataSourceProvider.swift in Sources */,
 				2C92571D273D5CBF00DA7284 /* MedicinesRouter.swift in Sources */,
 				2CB5E6F928DF1842003D06D0 /* NotificationMedicineManager.swift in Sources */,
+				2CE9917629D8531000893D9D /* IdentifiableCell.swift in Sources */,
 				2CFD714229B89AE600EF4353 /* SocialMediaURL.swift in Sources */,
 				2CF1EE73277347700031D79D /* FirstAidKitsPresenter.swift in Sources */,
 				2CEAA1BB28DDC5C2000BA942 /* MedicinesDataSourceProvider.swift in Sources */,

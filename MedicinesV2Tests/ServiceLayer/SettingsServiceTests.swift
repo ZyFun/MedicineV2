@@ -27,20 +27,20 @@ final class SettingsServiceTests: XCTestCase {
     
     // MARK: - Ascending settings tests
     
-    func test_save_withSortAscendingTrue_shouldSaved() {
+    func test_saveSetting_withSortAscendingTrue_shouldSaved() {
         // Given
-        let ascending = true
+        var ascending = true
         
         // When
         sortSettingService.saveSetting(ascending: ascending, with: .sortAscending)
         waiting(time: 1, description: "Ожидание сохранения данных")
         
         // Then
-        let sut = makeSutAscending()
-        XCTAssertTrue(sut)
+        ascending = sortSettingService.getAscending(with: .sortAscending)
+        XCTAssertTrue(ascending)
     }
     
-    func test_get_withSortAscendingDefault_shouldAscendingFalse() {
+    func test_getAscending_withSortAscendingDefault_shouldAscendingFalse() {
         // Given
         var ascending = true
         
@@ -53,7 +53,7 @@ final class SettingsServiceTests: XCTestCase {
     
     func test_delete_shouldAscendingFalse() {
         // Given
-        let ascending = true
+        var ascending = true
         sortSettingService.saveSetting(ascending: ascending, with: .sortAscending)
         waiting(time: 1, description: "Ожидание сохранения данных")
         
@@ -62,12 +62,8 @@ final class SettingsServiceTests: XCTestCase {
         waiting(time: 1, description: "Ожидание удаления данных")
         
         // Then
-        let sut = makeSutAscending()
-        XCTAssertFalse(sut)
-    }
-    
-    private func makeSutAscending() -> Bool {
-        sortSettingService.getAscending(with: .sortAscending)
+        ascending = sortSettingService.getAscending(with: .sortAscending)
+        XCTAssertFalse(ascending)
     }
     
     /// Метод для установки паузы в тестах

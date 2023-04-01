@@ -8,11 +8,7 @@
 import UIKit
 
 /// Ячейка для аптечки
-final class FirstAidKitCell: UITableViewCell {
-    
-    // MARK: - Public properties
-    
-    static let identifier = String(describing: FirstAidKitCell.self)
+final class FirstAidKitCell: UITableViewCell, IdentifiableCell {
     
     // MARK: - Private properties
     

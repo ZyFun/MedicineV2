@@ -8,11 +8,7 @@
 import UIKit
 
 /// Ячейка для лекарства
-final class MedicineCell: UITableViewCell {
-    
-    // MARK: - Public properties
-    
-    static let identifier = String(describing: MedicineCell.self)
+final class MedicineCell: UITableViewCell, IdentifiableCell {
     
     // MARK: - Private properties
     
