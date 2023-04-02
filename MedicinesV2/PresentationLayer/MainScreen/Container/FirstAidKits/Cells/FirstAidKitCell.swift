@@ -54,29 +54,8 @@ final class FirstAidKitCell: UITableViewCell, IdentifiableCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setup()
-        
-        contentView.addSubview(viewContainer)
-        viewContainer.addSubview(titleFirstAidKitLabel)
-        viewContainer.addSubview(expiredMedicinesCountLabel)
-        viewContainer.addSubview(amountMedicinesLabel)
-        
-        NSLayoutConstraint.activate([
-            viewContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            viewContainer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            viewContainer.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            viewContainer.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
-            
-            titleFirstAidKitLabel.topAnchor.constraint(equalTo: viewContainer.topAnchor, constant: 10),
-            titleFirstAidKitLabel.leadingAnchor.constraint(equalTo: viewContainer.leadingAnchor, constant: 16),
-            titleFirstAidKitLabel.trailingAnchor.constraint(equalTo: amountMedicinesLabel.leadingAnchor, constant: -5),
-            
-            expiredMedicinesCountLabel.topAnchor.constraint(equalTo: titleFirstAidKitLabel.bottomAnchor, constant: 6),
-            expiredMedicinesCountLabel.leadingAnchor.constraint(equalTo: viewContainer.leadingAnchor, constant: 16),
-            expiredMedicinesCountLabel.bottomAnchor.constraint(equalTo: viewContainer.bottomAnchor, constant: -10),
-            
-            amountMedicinesLabel.centerYAnchor.constraint(equalTo: viewContainer.centerYAnchor),
-            amountMedicinesLabel.trailingAnchor.constraint(equalTo: viewContainer.trailingAnchor, constant: -16)
-        ])
+        addViews()
+        setupConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -148,5 +127,32 @@ private extension FirstAidKitCell {
     /// не изменяются сами.
     func setupCardShadowColor() {
         viewContainer.layer.shadowColor = Colors.cardShadow?.cgColor
+    }
+    
+    func addViews() {
+        contentView.addSubview(viewContainer)
+        viewContainer.addSubview(titleFirstAidKitLabel)
+        viewContainer.addSubview(expiredMedicinesCountLabel)
+        viewContainer.addSubview(amountMedicinesLabel)
+    }
+    
+    func setupConstraints() {
+        NSLayoutConstraint.activate([
+            viewContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            viewContainer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            viewContainer.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            viewContainer.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            
+            titleFirstAidKitLabel.topAnchor.constraint(equalTo: viewContainer.topAnchor, constant: 10),
+            titleFirstAidKitLabel.leadingAnchor.constraint(equalTo: viewContainer.leadingAnchor, constant: 16),
+            titleFirstAidKitLabel.trailingAnchor.constraint(equalTo: amountMedicinesLabel.leadingAnchor, constant: -5),
+            
+            expiredMedicinesCountLabel.topAnchor.constraint(equalTo: titleFirstAidKitLabel.bottomAnchor, constant: 6),
+            expiredMedicinesCountLabel.leadingAnchor.constraint(equalTo: viewContainer.leadingAnchor, constant: 16),
+            expiredMedicinesCountLabel.bottomAnchor.constraint(equalTo: viewContainer.bottomAnchor, constant: -10),
+            
+            amountMedicinesLabel.centerYAnchor.constraint(equalTo: viewContainer.centerYAnchor),
+            amountMedicinesLabel.trailingAnchor.constraint(equalTo: viewContainer.trailingAnchor, constant: -16)
+        ])
     }
 }

@@ -82,35 +82,8 @@ final class MedicineCell: UITableViewCell, IdentifiableCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setup()
-        
-        contentView.addSubview(viewContainer)
-        viewContainer.addSubview(stackMedicineLabels)
-        stackMedicineLabels.addArrangedSubview(nameLabel)
-        stackMedicineLabels.addArrangedSubview(descriptionLabel)
-        stackMedicineLabels.addArrangedSubview(expiryDateLabel)
-        viewContainer.addSubview(actionIcon)
-        viewContainer.addSubview(amountLabel)
-        
-        NSLayoutConstraint.activate([
-            viewContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            viewContainer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            viewContainer.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            viewContainer.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
-            
-            stackMedicineLabels.topAnchor.constraint(equalTo: viewContainer.topAnchor, constant: 8),
-            stackMedicineLabels.leadingAnchor.constraint(equalTo: viewContainer.leadingAnchor, constant: 16),
-            stackMedicineLabels.bottomAnchor.constraint(equalTo: viewContainer.bottomAnchor, constant: -8),
-            
-            actionIcon.widthAnchor.constraint(equalToConstant: 25),
-            actionIcon.heightAnchor.constraint(equalToConstant: 25),
-            actionIcon.topAnchor.constraint(equalTo: viewContainer.topAnchor, constant: 8),
-            actionIcon.leadingAnchor.constraint(equalTo: stackMedicineLabels.trailingAnchor, constant: 8),
-            actionIcon.trailingAnchor.constraint(equalTo: viewContainer.trailingAnchor, constant: -16),
-            actionIcon.bottomAnchor.constraint(lessThanOrEqualTo: amountLabel.topAnchor, constant: -25),
-            
-            amountLabel.trailingAnchor.constraint(equalTo: viewContainer.trailingAnchor, constant: -16),
-            amountLabel.bottomAnchor.constraint(equalTo: viewContainer.bottomAnchor, constant: -8)
-        ])
+        addViews()
+        setupConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -236,5 +209,38 @@ private extension MedicineCell {
     /// не изменяются сами.
     func setupCardShadowColor() {
         viewContainer.layer.shadowColor = Colors.cardShadow?.cgColor
+    }
+    
+    func addViews() {
+        contentView.addSubview(viewContainer)
+        viewContainer.addSubview(stackMedicineLabels)
+        stackMedicineLabels.addArrangedSubview(nameLabel)
+        stackMedicineLabels.addArrangedSubview(descriptionLabel)
+        stackMedicineLabels.addArrangedSubview(expiryDateLabel)
+        viewContainer.addSubview(actionIcon)
+        viewContainer.addSubview(amountLabel)
+    }
+    
+    func setupConstraints() {
+        NSLayoutConstraint.activate([
+            viewContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            viewContainer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            viewContainer.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            viewContainer.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            
+            stackMedicineLabels.topAnchor.constraint(equalTo: viewContainer.topAnchor, constant: 8),
+            stackMedicineLabels.leadingAnchor.constraint(equalTo: viewContainer.leadingAnchor, constant: 16),
+            stackMedicineLabels.bottomAnchor.constraint(equalTo: viewContainer.bottomAnchor, constant: -8),
+            
+            actionIcon.widthAnchor.constraint(equalToConstant: 25),
+            actionIcon.heightAnchor.constraint(equalToConstant: 25),
+            actionIcon.topAnchor.constraint(equalTo: viewContainer.topAnchor, constant: 8),
+            actionIcon.leadingAnchor.constraint(equalTo: stackMedicineLabels.trailingAnchor, constant: 8),
+            actionIcon.trailingAnchor.constraint(equalTo: viewContainer.trailingAnchor, constant: -16),
+            actionIcon.bottomAnchor.constraint(lessThanOrEqualTo: amountLabel.topAnchor, constant: -25),
+            
+            amountLabel.trailingAnchor.constraint(equalTo: viewContainer.trailingAnchor, constant: -16),
+            amountLabel.bottomAnchor.constraint(equalTo: viewContainer.bottomAnchor, constant: -8)
+        ])
     }
 }

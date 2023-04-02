@@ -208,7 +208,7 @@ private extension MedicineViewController {
             for: .normal
         )
         
-        medicineAmountStepper.tintColor = #colorLiteral(red: 0.196842283, green: 0.4615264535, blue: 0.4103206396, alpha: 1)
+        medicineAmountStepper.tintColor = Colors.darkCyan
     }
     
     // MARK: - Setup data picker
