@@ -156,26 +156,17 @@ extension FirstAidKitsDataSourceProvider: UITableViewDelegate {
             isDone(true)
         }
         
-        let largeConfig = UIImage.SymbolConfiguration(pointSize: 15.0, weight: .medium, scale: .large)
-        let editColor = #colorLiteral(red: 0.8705882353, green: 0.7843137255, blue: 0.5568627451, alpha: 1)
         editAction.backgroundColor = .systemGray6
-        editAction.image = UIImage(
-            systemName: "pencil",
-            withConfiguration: largeConfig
-        )?.withTintColor(
-            .white,
-            renderingMode: .alwaysTemplate
-        ).addBackgroundCircle(color: editColor, diameter: 35)
+        editAction.image = SystemIcons.editIcon.roundIconRendering(
+            color: Colors.ripeWheat,
+            diameter: Constants.diameterActionButton
+        )
         
-        let deleteColor = #colorLiteral(red: 0.8729341626, green: 0.4694843888, blue: 0.5979845524, alpha: 1)
         deleteAction.backgroundColor = .systemGray6
-        deleteAction.image = UIImage(
-            systemName: "trash",
-            withConfiguration: largeConfig
-        )?.withTintColor(
-            .white,
-            renderingMode: .alwaysTemplate
-        ).addBackgroundCircle(color: deleteColor, diameter: 35)
+        deleteAction.image = SystemIcons.deleteIcon.roundIconRendering(
+            color: Colors.pinkRed,
+            diameter: Constants.diameterActionButton
+        )
         
         let configuration = UISwipeActionsConfiguration(
             actions: [deleteAction, editAction]
@@ -183,5 +174,13 @@ extension FirstAidKitsDataSourceProvider: UITableViewDelegate {
         configuration.performsFirstActionWithFullSwipe = false
         
         return configuration
+    }
+}
+
+// MARK: - Constants
+
+private extension FirstAidKitsDataSourceProvider {
+    struct Constants {
+        static let diameterActionButton: Double = 35
     }
 }

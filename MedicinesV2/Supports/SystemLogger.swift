@@ -120,8 +120,6 @@ enum SystemLogger {
                 fullString += " -> \(context.description)"
             }
             
-//            printDebug(fullString)
-            
             guard let module = URL(fileURLWithPath: context.file).deletingPathExtension().pathComponents.last else { return }
             let formattedMessage = [message, context.description, "=========="].joined(separator: "\n\n")
             let osLog = OSLog(subsystem: module, category: level.prefix)

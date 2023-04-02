@@ -69,7 +69,7 @@ private extension MedicinesViewController {
     /// Метод настройки Navigation Bar
     func setupNavigationBar() {
         title = currentFirstAidKit?.title
-        navigationController?.navigationBar.tintColor = #colorLiteral(red: 0.196842283, green: 0.4615264535, blue: 0.4103206396, alpha: 1)
+        navigationController?.navigationBar.tintColor = Colors.darkCyan
         addButtons()
         addSearchController()
     }

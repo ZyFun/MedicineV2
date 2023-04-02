@@ -112,7 +112,7 @@ extension FirstAidKitsViewController {
             target: self,
             action: #selector(addNewFirstAidKit)
         )
-        addBarButton.tintColor = #colorLiteral(red: 0.196842283, green: 0.4615264535, blue: 0.4103206396, alpha: 1)
+        addBarButton.tintColor = Colors.darkCyan
         
         let menuBarButton = UIBarButtonItem(
             image: UIImage(systemName: "line.horizontal.3"),
@@ -120,7 +120,7 @@ extension FirstAidKitsViewController {
             target: self,
             action: #selector(openMenu)
         )
-        menuBarButton.tintColor = #colorLiteral(red: 0.196842283, green: 0.4615264535, blue: 0.4103206396, alpha: 1)
+        menuBarButton.tintColor = Colors.darkCyan
         
         navigationItem.rightBarButtonItem = addBarButton
         navigationItem.leftBarButtonItem = menuBarButton

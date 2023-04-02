@@ -184,13 +184,13 @@ final class MedicineCell: UITableViewCell, IdentifiableCell {
     private func setImageActionIcon(need: ActionWithMedicine) {
         switch need {
         case .buy:
-            actionIcon.image = UIImage(systemName: "cart")
-            actionIcon.tintColor = #colorLiteral(red: 0.4078431373, green: 0.8156862745, blue: 0.6823529412, alpha: 1)
-            amountLabel.textColor = #colorLiteral(red: 0.8729341626, green: 0.4694843888, blue: 0.5979845524, alpha: 1)
+            actionIcon.image = SystemIcons.cart.image
+            actionIcon.tintColor = Colors.lightGreen
+            amountLabel.textColor = Colors.pinkRed
         case .thrownOut:
-            actionIcon.image = UIImage(systemName: "trash")
-            actionIcon.tintColor = #colorLiteral(red: 0.8729341626, green: 0.4694843888, blue: 0.5979845524, alpha: 1)
-            expiryDateLabel.textColor = #colorLiteral(red: 0.8729341626, green: 0.4694843888, blue: 0.5979845524, alpha: 1)
+            actionIcon.image = SystemIcons.deleteIcon.image
+            actionIcon.tintColor = Colors.pinkRed
+            expiryDateLabel.textColor = Colors.pinkRed
         }
     }
     
@@ -232,12 +232,9 @@ private extension MedicineCell {
     
     /// Используется для изменения цвета тени карточки лекарства
     /// - Вынес в отдельный метод, потому что при смене темного и светлого режима
-    /// нужно вызывать только изменение цвета. В дальнейшем настройка цвета
-    /// будет вынесена в отдельный менеджер тем.
+    /// нужно вызывать в traitCollectionDidChange для изменение цвета. Так как cgColor
+    /// не изменяются сами.
     func setupCardShadowColor() {
-        #warning("добавить настройку тем в отдельном классе вместо хардкода текстом")
-        // Используется кастомная настройка цвета, для более гармоничного цвета
-        // в темном режиме. Цвет взят из Assets.
-        viewContainer.layer.shadowColor = UIColor(named: "cardShadowColor")?.cgColor
+        viewContainer.layer.shadowColor = Colors.cardShadow?.cgColor
     }
 }

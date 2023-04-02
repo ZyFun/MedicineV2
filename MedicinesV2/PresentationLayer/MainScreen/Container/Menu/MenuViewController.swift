@@ -23,7 +23,7 @@ final class MenuViewController: UIViewController {
     
     private var menuTableView: UITableView = {
         let tableView = UITableView()
-        tableView.backgroundColor = #colorLiteral(red: 0.196842283, green: 0.4615264535, blue: 0.4103206396, alpha: 1)
+        tableView.backgroundColor = Colors.darkCyan
         tableView.separatorStyle = .none
         tableView.rowHeight = 90
         tableView.contentInset.top = 100
@@ -48,7 +48,7 @@ private extension MenuViewController {
     /// Метод инициализации VC
     func setup() {
         view.addSubview(menuTableView)
-        view.backgroundColor = #colorLiteral(red: 0.196842283, green: 0.4615264535, blue: 0.4103206396, alpha: 1)
+        view.backgroundColor = Colors.darkCyan
         setupTableView()
     }
     

@@ -108,10 +108,10 @@ extension FirstAidKitCell {
         
         if expiredCount != 0 {
             expiredMedicinesCountLabel.text = "Просроченных лекарств: \(expiredCount)"
-            expiredMedicinesCountLabel.textColor = #colorLiteral(red: 0.8729341626, green: 0.4694843888, blue: 0.5979845524, alpha: 1)
+            expiredMedicinesCountLabel.textColor = Colors.pinkRed
         } else {
             expiredMedicinesCountLabel.text = "Все лекарства в порядке"
-            expiredMedicinesCountLabel.textColor = #colorLiteral(red: 0.4078431373, green: 0.8156862745, blue: 0.6823529412, alpha: 1)
+            expiredMedicinesCountLabel.textColor = Colors.lightGreen
         }
         
     }
@@ -144,12 +144,9 @@ private extension FirstAidKitCell {
     
     /// Используется для изменения цвета тени карточки лекарства
     /// - Вынес в отдельный метод, потому что при смене темного и светлого режима
-    /// нужно вызывать только изменение цвета. В дальнейшем настройка цвета
-    /// будет вынесена в отдельный менеджер тем.
+    /// нужно вызывать в traitCollectionDidChange для изменение цвета. Так как cgColor
+    /// не изменяются сами.
     func setupCardShadowColor() {
-        #warning("добавить настройку тем в отдельном классе вместо хардкода текстом")
-        // Используется кастомная настройка цвета, для более гармоничного цвета
-        // в темном режиме. Цвет взят из Assets.
-        viewContainer.layer.shadowColor = UIColor(named: "cardShadowColor")?.cgColor
+        viewContainer.layer.shadowColor = Colors.cardShadow?.cgColor
     }
 }
