@@ -14,57 +14,96 @@ final class SettingsServiceTests: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        sortSettingService.delete(with: .sortAscending)
+        sortSettingService.deleteSortSettings()
         waiting(time: 2, description: "Ожидание обнуления настроек")
     }
     
     override func tearDown() {
         super.tearDown()
         
-        sortSettingService.delete(with: .sortAscending)
+        sortSettingService.deleteSortSettings()
         waiting(time: 2, description: "Ожидание обнуления настроек")
+    }
+    
+    // MARK: - Common methods
+    
+    func test_deleteSortSettings_shouldDataDeleted() {
+        // Given
+        var ascending: Bool
+        let field = "title"
+        var sutField = ""
+        
+        sortSettingService.saveSortSetting(ascending: .up)
+        sortSettingService.saveSortSetting(field: .expiryDate)
+        waiting(time: 1, description: "Ожидание сохранения данных")
+        
+        // When
+        sortSettingService.deleteSortSettings()
+        waiting(time: 1, description: "Ожидание удаления данных")
+        
+        // Then
+        ascending = sortSettingService.getSortAscending()
+        sutField = sortSettingService.getSortField()
+        XCTAssertTrue(ascending)
+        XCTAssertEqual(field, sutField)
     }
     
     // MARK: - Ascending settings tests
     
-    func test_saveSetting_withSortAscendingTrue_shouldSaved() {
+    func test_saveSortSetting_ascendingUp_shouldSaved() {
         // Given
-        var ascending = true
+        var ascending: Bool
         
         // When
-        sortSettingService.saveSetting(ascending: ascending, with: .sortAscending)
+        sortSettingService.saveSortSetting(ascending: .up)
         waiting(time: 1, description: "Ожидание сохранения данных")
         
         // Then
-        ascending = sortSettingService.getAscending(with: .sortAscending)
+        ascending = sortSettingService.getSortAscending()
         XCTAssertTrue(ascending)
     }
     
-    func test_getAscending_withSortAscendingDefault_shouldAscendingFalse() {
+    func test_getSortAscending_withSortAscendingDefault_shouldAscendingFalse() {
         // Given
-        var ascending = true
+        var ascending: Bool
         
         // When
-        ascending = sortSettingService.getAscending(with: .sortAscending)
+        ascending = sortSettingService.getSortAscending()
         
         // Then
-        XCTAssertFalse(ascending)
+        XCTAssertTrue(ascending)
     }
     
-    func test_delete_shouldAscendingFalse() {
+    // MARK: - Field settings tests
+    
+    func test_saveSortSetting_withFieldDateCreated_shouldSaved() {
         // Given
-        var ascending = true
-        sortSettingService.saveSetting(ascending: ascending, with: .sortAscending)
-        waiting(time: 1, description: "Ожидание сохранения данных")
+        let field = #keyPath(DBMedicine.dateCreated)
+        var sutField = ""
         
         // When
-        sortSettingService.delete(with: .sortAscending)
-        waiting(time: 1, description: "Ожидание удаления данных")
+        sortSettingService.saveSortSetting(field: .dateCreated)
+        waiting(time: 1, description: "Ожидание сохранения данных")
         
         // Then
-        ascending = sortSettingService.getAscending(with: .sortAscending)
-        XCTAssertFalse(ascending)
+        sutField = sortSettingService.getSortField()
+        XCTAssertEqual(field, sutField)
     }
+    
+    func test_getSortField_withFieldDefault_shouldFieldTitle() {
+        // Given
+        let field = #keyPath(DBMedicine.title)
+        var sutField = ""
+        
+        // When
+        sutField = sortSettingService.getSortField()
+        waiting(time: 1, description: "Ожидание сохранения данных")
+        
+        // Then
+        XCTAssertEqual(field, sutField)
+    }
+    
+    // MARK: - Private methods
     
     /// Метод для установки паузы в тестах
     /// - нужен к примеру для задержки теста при сохранении, так как к примеру UserDefaults не

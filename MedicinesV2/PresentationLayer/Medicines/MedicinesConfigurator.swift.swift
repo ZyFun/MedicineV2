@@ -12,13 +12,16 @@ final class MedicinesConfigurator {
     
     private let notificationManager: INotificationMedicineManager
     private let coreDataService: ICoreDataService
+    private let sortingService: SortableSettings
     
     init(
         notificationManager: INotificationMedicineManager,
-        coreDataService: ICoreDataService
+        coreDataService: ICoreDataService,
+        sortingService: SortableSettings
     ) {
         self.coreDataService = coreDataService
         self.notificationManager = notificationManager
+        self.sortingService = sortingService
     }
     
     /// Конфигурирование модуля
@@ -41,8 +44,8 @@ final class MedicinesConfigurator {
         let fetchedResultManager = MedicinesFetchedResultsManager(
             fetchedResultsController: coreDataService.fetchResultController(
                 entityName: String(describing: DBMedicine.self),
-                keyForSort: #keyPath(DBMedicine.title),
-                sortAscending: true,
+                keyForSort: sortingService.getSortField(),
+                sortAscending: sortingService.getSortAscending(),
                 currentFirstAidKit: currentFirstAidKit
             )
         )
