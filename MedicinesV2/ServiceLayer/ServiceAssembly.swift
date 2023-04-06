@@ -15,4 +15,8 @@ final class ServiceAssembly {
     lazy var coreDataService: ICoreDataService = {
         return CoreDataService.shared
     }()
+    
+    lazy var sortingService: SortableSettings = {
+        return SettingsService()
+    }()
 }

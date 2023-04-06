@@ -11,10 +11,12 @@ final class PresentationAssembly {
     
     private let notificationService: INotificationService
     private let coreDataService: ICoreDataService
+    private let sortingService: SortableSettings
     
     init() {
         notificationService = serviceAssembly.notificationService
         coreDataService = serviceAssembly.coreDataService
+        sortingService = serviceAssembly.sortingService
     }
     
     lazy var notificationMedicineManager: INotificationMedicineManager = {
@@ -44,7 +46,8 @@ final class PresentationAssembly {
     lazy var medicines: MedicinesConfigurator = {
         return MedicinesConfigurator(
             notificationManager: notificationMedicineManager,
-            coreDataService: coreDataService
+            coreDataService: coreDataService,
+            sortingService: sortingService
         )
     }()
     
