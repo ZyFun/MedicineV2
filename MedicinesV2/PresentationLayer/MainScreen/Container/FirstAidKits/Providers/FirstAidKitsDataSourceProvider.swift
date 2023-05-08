@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import DTLogger
 
 protocol IFirstAidKitsDataSourceProvider: UITableViewDelegate, UITableViewDataSource {
     

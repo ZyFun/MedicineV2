@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import DTLogger
 
 protocol IMedicinesDataSourceProvider: UITableViewDelegate, UITableViewDataSource {
     var fetchedResultManager: IMedicinesFetchedResultsManager { get set }

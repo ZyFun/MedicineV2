@@ -48,12 +48,12 @@
 		2C92571F273D611800DA7284 /* MedicinesConfigurator.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C92571E273D611800DA7284 /* MedicinesConfigurator.swift.swift */; };
 		2CA3AB1A2906445000763BC5 /* PrivacyPolicy.md in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3AB192906445000763BC5 /* PrivacyPolicy.md */; };
 		2CA75457273BED4100B147B7 /* UIAlerController+CustomController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA75456273BED4100B147B7 /* UIAlerController+CustomController.swift */; };
+		2CAAA0CC2A099AD20073DF78 /* DTLogger in Frameworks */ = {isa = PBXBuildFile; productRef = 2CAAA0CB2A099AD20073DF78 /* DTLogger */; };
 		2CAE169828D9F7E30071E783 /* MedicinesFetchedResultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAE169728D9F7E30071E783 /* MedicinesFetchedResultsManager.swift */; };
 		2CAE169A28DA07AF0071E783 /* MedicineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAE169928DA07AF0071E783 /* MedicineModel.swift */; };
 		2CB115D62970354000A2846A /* MainContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB115D52970354000A2846A /* MainContainerViewController.swift */; };
 		2CB115D82970355300A2846A /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB115D72970355300A2846A /* MenuViewController.swift */; };
 		2CB115DB297050D600A2846A /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB115DA297050D600A2846A /* MenuCell.swift */; };
-		2CB3FAD328C89E6800E4A378 /* SystemLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB3FAD228C89E6800E4A378 /* SystemLogger.swift */; };
 		2CB3FAD528C8AA9900E4A378 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB3FAD428C8AA9900E4A378 /* NotificationService.swift */; };
 		2CB5E6F928DF1842003D06D0 /* NotificationMedicineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB5E6F828DF1842003D06D0 /* NotificationMedicineManager.swift */; };
 		2CBD2B1D277C7F9200F857C3 /* MedicinePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBD2B1C277C7F9200F857C3 /* MedicinePresenter.swift */; };
@@ -153,7 +153,6 @@
 		2CB115D52970354000A2846A /* MainContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContainerViewController.swift; sourceTree = "<group>"; };
 		2CB115D72970355300A2846A /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		2CB115DA297050D600A2846A /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
-		2CB3FAD228C89E6800E4A378 /* SystemLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemLogger.swift; sourceTree = "<group>"; };
 		2CB3FAD428C8AA9900E4A378 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		2CB5E6F828DF1842003D06D0 /* NotificationMedicineManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationMedicineManager.swift; sourceTree = "<group>"; };
 		2CBD2B1C277C7F9200F857C3 /* MedicinePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicinePresenter.swift; sourceTree = "<group>"; };
@@ -204,6 +203,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CAAA0CC2A099AD20073DF78 /* DTLogger in Frameworks */,
 				D69BD2AEA467A95327B2355E /* Pods_MedicinesV2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -350,7 +350,6 @@
 			isa = PBXGroup;
 			children = (
 				2CA75455273BECDA00B147B7 /* Extensions */,
-				2CB3FAD228C89E6800E4A378 /* SystemLogger.swift */,
 			);
 			path = Supports;
 			sourceTree = "<group>";
@@ -682,6 +681,9 @@
 			dependencies = (
 			);
 			name = MedicinesV2;
+			packageProductDependencies = (
+				2CAAA0CB2A099AD20073DF78 /* DTLogger */,
+			);
 			productName = MedicineV2;
 			productReference = 2C52BDB7273540F400356A63 /* MedicinesV2.app */;
 			productType = "com.apple.product-type.application";
@@ -715,6 +717,9 @@
 				ru,
 			);
 			mainGroup = 2C52BDAE273540F400356A63;
+			packageReferences = (
+				2CAAA0CA2A099AD20073DF78 /* XCRemoteSwiftPackageReference "DTLogger" */,
+			);
 			productRefGroup = 2C52BDB8273540F400356A63 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -822,7 +827,6 @@
 				2C67351429D9777C00876547 /* SystemIcons.swift in Sources */,
 				2C62A6BF29D480F0008ED3BE /* MenuRouter.swift in Sources */,
 				2CB115DB297050D600A2846A /* MenuCell.swift in Sources */,
-				2CB3FAD328C89E6800E4A378 /* SystemLogger.swift in Sources */,
 				2C62A6BD29D480B4008ED3BE /* MenuPresenter.swift in Sources */,
 				2C40442529757DFC00965DE4 /* AboutAppInfoModel.swift in Sources */,
 				2C38603F28DC81FE003FED87 /* ServiceAssembly.swift in Sources */,
@@ -1163,6 +1167,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2CAAA0CA2A099AD20073DF78 /* XCRemoteSwiftPackageReference "DTLogger" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ZyFun/DTLogger.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2CAAA0CB2A099AD20073DF78 /* DTLogger */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2CAAA0CA2A099AD20073DF78 /* XCRemoteSwiftPackageReference "DTLogger" */;
+			productName = DTLogger;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		2C5F113327707CF60040536D /* Medicines.xcdatamodeld */ = {

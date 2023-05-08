@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import DTLogger
 
 /// Протокол взаимодействия ViewController-a с презенетром
 protocol AboutAppPresentationLogic: AnyObject {

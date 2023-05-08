@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import DTLogger
 
 /// Протокол отображения ViewCintroller-a
 protocol MedicineDisplayLogic: AnyObject {

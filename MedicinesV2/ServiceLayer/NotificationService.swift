@@ -7,6 +7,7 @@
 
 import UIKit
 import UserNotifications
+import DTLogger
 
 protocol INotificationService {
     var notificationCenter: UNUserNotificationCenter { get }

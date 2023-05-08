@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import DTLogger
 
 protocol SortableSettings {
     typealias FieldSorting = SettingsService.Fields

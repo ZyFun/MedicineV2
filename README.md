@@ -12,6 +12,7 @@
 ![GCD](https://img.shields.io/badge/-GCD-blue)
 ![CoreData](https://img.shields.io/badge/-CoreData-blue)
 ![CocoaPods](https://img.shields.io/badge/-CocoaPods-blue)
+![SPM](https://img.shields.io/badge/-SPM-blue)
 ![SwiftLint](https://img.shields.io/badge/-SwiftLint-blue)
 ![AutoLayout](https://img.shields.io/badge/-AutoLayout-blue)
 ![UnitTests](https://img.shields.io/badge/-UnitTests-blue)
@@ -57,6 +58,7 @@
 - Частично, интерфейс написан кодом с помощью **AutoLayout**.
 - Вместо **Storyboard** использую **XIB** файлы. 1 экран – 1 **XIB**. В дальнейшем всё будет переделываться под верстку кодом.
 - Для подключения фреймворков используется **CocoaPods**
+- Часто используемый в разных проектах код, вынесен в **SPM**
 - Используется фреймворк **Swiftlint** с кастомными настройками, рекомендованными Тинькофф Образованием + дополнительно своя конфигурация с более жесткими требованиями к стилю кода.
 - Весь дизайн приложения был взять из головы.
 

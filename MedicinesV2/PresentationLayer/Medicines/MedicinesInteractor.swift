@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import DTLogger
 
 /// Протокол для работы с бизнес логикой модуля
 protocol MedicinesBusinessLogic {

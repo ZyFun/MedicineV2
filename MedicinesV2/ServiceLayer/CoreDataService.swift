@@ -6,6 +6,7 @@
 //
 
 import CoreData
+import DTLogger
 
 /// Протокол для работы с базой данных
 protocol ICoreDataService {

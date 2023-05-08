@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import DTLogger
 
 protocol IMedicinesFetchedResultsManager {
     /// Используется для передачи таблицы с вью в FetchedResultsManager

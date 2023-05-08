@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import DTLogger
 
 protocol INotificationMedicineManager {
     /// Метод для добавления уведомления о просроченном лекарстве в очередь центра уведомлений

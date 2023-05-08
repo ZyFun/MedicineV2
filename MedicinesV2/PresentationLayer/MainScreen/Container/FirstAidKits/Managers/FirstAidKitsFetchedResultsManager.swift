@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import DTLogger
 
 protocol IFirstAidKitsFetchedResultsManager {
     /// Используется для передачи таблицы с вью в FetchedResultsManager
