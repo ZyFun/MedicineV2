@@ -11,19 +11,26 @@ import DTLogger
 
 protocol INotificationService {
     var notificationCenter: UNUserNotificationCenter { get }
+    
     /// Метод получения запроса у пользователя для разрешения на отправку уведомлений
     func requestAuthorization()
-    /// Метод для получения даты из базы данных и получения уведомления
+    
+    /// Метод для установки получения уведомления
     /// - Parameters:
     ///   - reminder: принимает дату, на которую будет установлено уведомление
     ///   - nameMedicine: принимает название лекарства
-    ///   - createdDate: дата создания лекарства, для дополнения ключа идентификации
-    ///                  уведомления.
+    ///   - dateCreated: дата создания лекарства, для дополнения ключа идентификации
+    ///   уведомления.
+    ///   - isRepeat: принимает настройку, повторять уведомления или нет
+    ///   - hourNotifiable: принимает час, в который будет приходить уведомление
     func sendNotificationExpiredMedicine(
         reminder: Date?,
         nameMedicine: String,
-        dateCreated: Date
+        dateCreated: Date,
+        isRepeat: Bool,
+        hourNotifiable: Int
     )
+    
     /// Метод для отображения бейджев на иконке приложения с количеством просроченных лекарств
     /// - Parameter count: принимает количество просроченных лекарств для установки бейджа
     ///   на иконку приложения с правильным номером
@@ -39,8 +46,6 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate {
     private override init() {
         super.init()
         
-        // Нужен, чтобы уведомление отображалось при активном приложении
-        // Инитим тут, так как класс синглтон и висит в памяти всегда.
         notificationCenter.delegate = self
     }
     
@@ -82,40 +87,33 @@ extension NotificationService: INotificationService {
     func sendNotificationExpiredMedicine(
         reminder: Date?,
         nameMedicine: String,
-        dateCreated: Date
+        dateCreated: Date,
+        isRepeat: Bool,
+        hourNotifiable: Int
     ) {
-        guard var date = reminder else { return }
-        // Необходимо для того, чтобы получать уведомление о просроченном
-        // лекарстве каждый день, раздражая пользователя, и заставляя выбросить
-        // лекарство из аптечки.
-        // TODO: (#Update) Стоит реализовать настройку, чтобы пользователь выбирал, напоминать 1 раз или каждый день, пока лекарство не выброшено из аптечки
-        if date <= Date() {
-            date = Date()
-        }
+        guard let date = reminder else { return }
         
         // Создаём экземпляр класса календаря, для разбивки на компоненты полученной даты
         let calendar = Calendar.current
-        // Выбираем компоненты, по которым будет срабатывать триггер из полученной даты
-        var component = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
-        // Указываем точное время срабатывания уведомлений
-        // TODO: (#Update) Стоит реализовать настройку для пользователей, чтобы они сами выбирали удобное время уведомлений
-        component.hour = 20
+        var component: DateComponents
+        if date <= Date() {
+            component = calendar.dateComponents([.hour, .minute, .second], from: date)
+        } else {
+            component = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
+        }
+        
+        let hour = hourNotifiable > 23 && hourNotifiable < 0 ? 23 : hourNotifiable
+        component.hour = hour
         component.minute = 0
         component.second = 0
+        
         // Создаём триггер срабатывания уведомления по календарю
-        let trigger = UNCalendarNotificationTrigger(dateMatching: component, repeats: true)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: component, repeats: isRepeat)
         
         // Создаём экземпляр класса. Для настройки контента уведомлений
         let content = UNMutableNotificationContent()
-        // Настраиваем контент для показа
         content.title = "Лекарство просрочено"
         content.body = "Пора выбросить лекарство: \(nameMedicine)"
-        
-        if content.badge == 0 {
-            // TODO: (#Update) Сделать в будущем так, чтобы +1 было уже к имеющимся бейджам.
-            content.badge = 1
-        }
-        
         content.sound = UNNotificationSound.default
         
         let dateCreated = dateCreated.toString(format: "_MM-dd-yyyy_HH:mm:ss")
@@ -123,7 +121,7 @@ extension NotificationService: INotificationService {
         // если имя будет одинаковое.
         let identifier = nameMedicine + dateCreated
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
-        notificationCenter.add(request) { (error) in
+        notificationCenter.add(request) { error in
             if let error = error {
                 SystemLogger.error("Error: \(error.localizedDescription)")
                 // TODO: (#Explore) Принт из примера обработки ошибок, хочу посмотреть что он покажет если что то пойдет не так

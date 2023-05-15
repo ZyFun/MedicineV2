@@ -9,7 +9,7 @@ import XCTest
 @testable import MedicinesV2
 
 final class SettingsServiceTests: XCTestCase {
-    private let sortSettingService: SortableSettings = SettingsService()
+    private let sortSettingService: SortableSettings = SettingsService.shared
     
     override func setUp() {
         super.setUp()

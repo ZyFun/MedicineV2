@@ -12,15 +12,21 @@ final class PresentationAssembly {
     private let notificationService: INotificationService
     private let coreDataService: ICoreDataService
     private let sortingService: SortableSettings
+    private let notificationSettingService: NotificationSettings
     
     init() {
         notificationService = serviceAssembly.notificationService
         coreDataService = serviceAssembly.coreDataService
         sortingService = serviceAssembly.sortingService
+        notificationSettingService = serviceAssembly.notificationSettingService
     }
     
+    /// Инжектирование зависимостей в ``NotificationMedicineManager``
     lazy var notificationMedicineManager: INotificationMedicineManager = {
-        return NotificationMedicineManager(notificationService: notificationService)
+        return NotificationMedicineManager(
+            notificationService: notificationService,
+            notificationSettingService: notificationSettingService
+        )
     }()
     
     /// Инжектирование зависимостей в ``FirstAidKitsConfigurator``

@@ -8,6 +8,7 @@
 import Foundation
 import DTLogger
 
+/// Протокол с методами сохранения настроек сортировки
 protocol SortableSettings {
     typealias FieldSorting = SettingsService.Fields
     typealias SortDirection = SettingsService.SortDirection
@@ -33,18 +34,45 @@ protocol SortableSettings {
     func deleteSortSettings()
 }
 
+/// Протокол с методами сохранения настроек уведомлений
+protocol NotificationSettings {
+    /// Метод для сохранения настроек уведомления
+    /// - Parameters:
+    ///   - hourNotifiable: принимает час, в который будет приходить уведомление
+    ///   - isRepeat: принимает Bool для возможности настройки повтора уведомления.
+    ///   При значении true уведомления повторяются.
+    ///   - Может выбросить ошибку
+    func saveNotificationSettings(hourNotifiable: Int, isRepeat: Bool) throws
+    
+    /// Метод для чтения сохраненных параметров настройки уведомлений. Если настройки еще не
+    /// сохранялись, возвращает nil. В этом случае настройки нужно задать по умолчанию.
+    /// - Returns: Возвращает опциональный ``NotificationSettingModel``
+    ///   - Может выбросить ошибку
+    func getNotificationSettings() throws -> NotificationSettingModel?
+    
+    /// Удаляет все объекты с ключём notification
+    func deleteNotificationSettings()
+}
+
 final class SettingsService {
+    static let shared = SettingsService()
+    
     private let userDefaults = UserDefaults.standard
+    
+    /// Ключи для сохранения в ``UserDefaults``
+    private enum Key: String {
+        case sortField
+        case sortAscending
+        case notification
+    }
+    
+    private init() {}
 }
 
 // MARK: - SortableSettings
 
 extension SettingsService: SortableSettings {
-    private enum Key: String {
-        case sortField
-        case sortAscending
-    }
-    
+    /// Поля, по которым будет задана сортировка
     enum Fields {
         case title
         case dateCreated
@@ -61,7 +89,8 @@ extension SettingsService: SortableSettings {
             }
         }
     }
-
+    
+    /// Направление сортировки
     enum SortDirection {
         case up
         case down
@@ -81,7 +110,6 @@ extension SettingsService: SortableSettings {
             let key = Key.sortAscending.rawValue
             let value = ascending.isAscending
             self.userDefaults.set(value, forKey: key)
-            
             SystemLogger.info("Направление сортировки сохранено: \(ascending)")
         }
     }
@@ -98,7 +126,6 @@ extension SettingsService: SortableSettings {
     func saveSortSetting(field: FieldSorting) {
         DispatchQueue.global(qos: .utility).async {
             self.userDefaults.set(field.type, forKey: Key.sortField.rawValue)
-            
             SystemLogger.info("Поле сортировки сохранено: \(field)")
         }
     }
@@ -117,8 +144,49 @@ extension SettingsService: SortableSettings {
         DispatchQueue.global(qos: .utility).async {
             self.userDefaults.removeObject(forKey: Key.sortField.rawValue)
             self.userDefaults.removeObject(forKey: Key.sortAscending.rawValue)
-            
             SystemLogger.info("Направление сортировки сброшено")
+        }
+    }
+}
+
+// MARK: - NotificationSettings
+
+extension SettingsService: NotificationSettings {    
+    func saveNotificationSettings(hourNotifiable: Int, isRepeat: Bool) throws {
+        let notification = NotificationSettingModel(hourNotifiable: hourNotifiable, isRepeat: isRepeat)
+        
+        do {
+            let encoded = try notification.encode()
+            DispatchQueue.global(qos: .utility).async {
+                self.userDefaults.set(encoded, forKey: Key.notification.rawValue)
+                SystemLogger.info("Время уведомлений сохранено")
+            }
+        } catch {
+            throw error
+        }
+    }
+    
+    func getNotificationSettings() throws -> NotificationSettingModel? {
+        guard let data = userDefaults.data(forKey: Key.notification.rawValue) else {
+            SystemLogger.warning("Время и повтор уведомлений установлены по умолчанию")
+            return nil
+        }
+        
+        do {
+            let setting = try NotificationSettingModel.decode(from: data)
+            return NotificationSettingModel(
+                hourNotifiable: setting.hourNotifiable,
+                isRepeat: setting.isRepeat
+            )
+        } catch {
+            throw error
+        }
+    }
+    
+    func deleteNotificationSettings() {
+        DispatchQueue.global(qos: .utility).async {
+            self.userDefaults.removeObject(forKey: Key.notification.rawValue)
+            SystemLogger.info("Время уведомлений сброшено")
         }
     }
 }
