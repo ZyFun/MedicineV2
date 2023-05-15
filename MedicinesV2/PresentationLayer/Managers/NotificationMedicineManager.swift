@@ -13,24 +13,54 @@ protocol INotificationMedicineManager {
     /// - Parameter data: принимает лекарство, уведомления для которого будут добавлены.
     /// - Метод используется при работе с моделью данных
     func addToQueueNotificationExpiredMedicine(data: MedicineModel)
+    
     /// Метод для добавления уведомления о просроченном лекарстве в очередь центра уведомлений
     /// - Parameter data: принимает лекарство, уведомления для которого будут добавлены.
     /// - Метод используется при работе с базой данных
     func addToQueueNotificationExpiredMedicine(data: DBMedicine)
+    
     /// Метод для удаления уведомления из очереди центра уведомлений
     /// - Parameter medicine: принимает лекарство, уведомление для которого будет удалено.
     func deleteNotification(for medicine: DBMedicine)
+    
     /// Метод установки бейджа с количеством просроченных лекарств на иконку приложения.
     /// - Parameter data: Принимает лекарства для поиска в них просроченных лекарств
     func setupBadgeForAppIcon(data: [DBMedicine]?)
+    
+    /// Метод для установки и сохранения времени уведомления
+    /// - Parameters:
+    ///   - hourNotifiable: принимает час, в который будет приходить уведомление
+    ///   - isRepeat: принимает Bool для возможности настройки повтора уведомления.
+    func setTimeForNotification(hourNotifiable: Int, isRepeat: Bool) throws
+    
+    /// Метод для получения времени уведомления
+    /// - Нужно вызывать перед тем как будет происходить добавление уведомления в очередь уведомлений.
+    func getTimeForNotification() throws
 }
 
 final class NotificationMedicineManager {
     
     let notificationService: INotificationService
+    let notificationSettingService: NotificationSettings
     
-    init(notificationService: INotificationService) {
+    private var hourNotifiable: Int
+    private var isRepeat: Bool
+    
+    /// - Parameters:
+    ///   - notificationService: сервис уведомлений
+    ///   - notificationSettingService: сервис настроек
+    ///   - hourNotifiable: час отображения уведомлений. По умолчанию установлено на 20 часов
+    ///   - isRepeat: настройка повторения уведомления. По умолчанию true и уведомления повторяются
+    init(
+        notificationService: INotificationService,
+        notificationSettingService: NotificationSettings,
+        hourNotifiable: Int = 20,
+        isRepeat: Bool = true
+    ) {
         self.notificationService = notificationService
+        self.notificationSettingService = notificationSettingService
+        self.hourNotifiable = hourNotifiable
+        self.isRepeat = isRepeat
     }
 }
 
@@ -54,10 +84,13 @@ extension NotificationMedicineManager: INotificationMedicineManager {
     }
     
     func addToQueueNotificationExpiredMedicine(data: MedicineModel) {
+        try? getTimeForNotification()
         notificationService.sendNotificationExpiredMedicine(
             reminder: data.expiryDate,
             nameMedicine: data.title,
-            dateCreated: data.dateCreated
+            dateCreated: data.dateCreated,
+            isRepeat: isRepeat,
+            hourNotifiable: hourNotifiable
         )
     }
     
@@ -69,11 +102,36 @@ extension NotificationMedicineManager: INotificationMedicineManager {
             fatalError("Дата создания лекарства должна быть обязательной")
         }
         
+        try? getTimeForNotification()
         notificationService.sendNotificationExpiredMedicine(
             reminder: data.expiryDate,
             nameMedicine: title,
-            dateCreated: dateCreated
+            dateCreated: dateCreated,
+            isRepeat: isRepeat,
+            hourNotifiable: hourNotifiable
         )
+    }
+    
+    func getTimeForNotification() throws {
+        do {
+            guard let data = try notificationSettingService.getNotificationSettings() else { return }
+            hourNotifiable = data.hourNotifiable
+            isRepeat = data.isRepeat
+        } catch {
+            SystemLogger.error(error.localizedDescription)
+            // TODO: () Доделать обработку ошибок и уведомлять о ней пользователя
+        }
+    }
+    
+    func setTimeForNotification(hourNotifiable: Int, isRepeat: Bool) throws {
+        // TODO: () Дописать вызов для обновления времени обновления для всех лекарств
+        
+        do {
+            try notificationSettingService.saveNotificationSettings(hourNotifiable: hourNotifiable, isRepeat: isRepeat)
+        } catch {
+            SystemLogger.error(error.localizedDescription)
+            // TODO: () Доделать обработку ошибок и уведомлять о ней пользователя
+        }
     }
     
     func setupBadgeForAppIcon(data: [DBMedicine]?) {

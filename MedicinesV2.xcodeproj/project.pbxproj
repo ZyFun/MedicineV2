@@ -64,6 +64,8 @@
 		2CBF4DE629080F5500ED297D /* Screenshot000.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CBF4DE329080F5500ED297D /* Screenshot000.png */; };
 		2CBF4DE729080F5500ED297D /* Screenshot002.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CBF4DE429080F5500ED297D /* Screenshot002.png */; };
 		2CBF4DEF2908169700ED297D /* Demo.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2CBF4DEE2908169700ED297D /* Demo.gif */; };
+		2CC874D52A1255FB000D16B5 /* NotificationSettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC874D42A1255FB000D16B5 /* NotificationSettingModel.swift */; };
+		2CC874D72A129E65000D16B5 /* NotificationSettingServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC874D62A129E65000D16B5 /* NotificationSettingServiceTests.swift */; };
 		2CCA5A0227C0DDA1005C7753 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 2CCA5A0127C0DDA1005C7753 /* .gitignore */; };
 		2CDB5E2027A538EF002361F2 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 2CDB5E1F27A538EF002361F2 /* README.md */; };
 		2CE3D70728D8BDE7001DA9AF /* FirstAidKitsFetchedResultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE3D70628D8BDE7001DA9AF /* FirstAidKitsFetchedResultsManager.swift */; };
@@ -163,6 +165,8 @@
 		2CBF4DE329080F5500ED297D /* Screenshot000.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Screenshot000.png; sourceTree = "<group>"; };
 		2CBF4DE429080F5500ED297D /* Screenshot002.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Screenshot002.png; sourceTree = "<group>"; };
 		2CBF4DEE2908169700ED297D /* Demo.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Demo.gif; sourceTree = "<group>"; };
+		2CC874D42A1255FB000D16B5 /* NotificationSettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingModel.swift; sourceTree = "<group>"; };
+		2CC874D62A129E65000D16B5 /* NotificationSettingServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingServiceTests.swift; sourceTree = "<group>"; };
 		2CCA5A0127C0DDA1005C7753 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		2CDB5E1F27A538EF002361F2 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		2CE3D70628D8BDE7001DA9AF /* FirstAidKitsFetchedResultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAidKitsFetchedResultsManager.swift; sourceTree = "<group>"; };
@@ -287,6 +291,7 @@
 			children = (
 				2C47A4F92936B371000DFB49 /* CoreDataServiceTests.swift */,
 				2C0BD41129D5E006004F4D77 /* SettingsServiceTests.swift */,
+				2CC874D62A129E65000D16B5 /* NotificationSettingServiceTests.swift */,
 			);
 			path = ServiceLayer;
 			sourceTree = "<group>";
@@ -342,6 +347,7 @@
 			isa = PBXGroup;
 			children = (
 				2CAE169928DA07AF0071E783 /* MedicineModel.swift */,
+				2CC874D42A1255FB000D16B5 /* NotificationSettingModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -811,6 +817,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C47A4FA2936B371000DFB49 /* CoreDataServiceTests.swift in Sources */,
+				2CC874D72A129E65000D16B5 /* NotificationSettingServiceTests.swift in Sources */,
 				2C404433297599FE00965DE4 /* AboutAppUnitTests.swift in Sources */,
 				2C4044362975A5A800965DE4 /* StubAboutAppView.swift in Sources */,
 				2C0BD41229D5E006004F4D77 /* SettingsServiceTests.swift in Sources */,
@@ -840,6 +847,7 @@
 				2CAE169A28DA07AF0071E783 /* MedicineModel.swift in Sources */,
 				2CF1B8EB2971BB1300BCF726 /* MenuDataSourceProvider.swift in Sources */,
 				2CF1EE7B277348330031D79D /* FirstAidKitsConfigurator.swift in Sources */,
+				2CC874D52A1255FB000D16B5 /* NotificationSettingModel.swift in Sources */,
 				2CF1EE71277347580031D79D /* FirstAidKitsViewController.swift in Sources */,
 				2CBD2B21277C7FAF00F857C3 /* MedicineRouter.swift in Sources */,
 				2C92571B273D5C9A00DA7284 /* MedicinesInteractor.swift in Sources */,

@@ -17,6 +17,10 @@ final class ServiceAssembly {
     }()
     
     lazy var sortingService: SortableSettings = {
-        return SettingsService()
+        return SettingsService.shared
+    }()
+    
+    lazy var notificationSettingService: NotificationSettings = {
+        return SettingsService.shared
     }()
 }
