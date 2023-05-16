@@ -48,6 +48,13 @@ final class PresentationAssembly {
         return AboutAppConfigurator()
     }()
     
+    /// Инжектирование зависимостей в ``SettingsConfigurator``
+    lazy var settings: SettingsConfigurator = {
+        return SettingsConfigurator(
+            notificationSettingService: notificationSettingService
+        )
+    }()
+    
     /// Инжектирование зависимостей в ``MedicinesConfigurator``
     lazy var medicines: MedicinesConfigurator = {
         return MedicinesConfigurator(

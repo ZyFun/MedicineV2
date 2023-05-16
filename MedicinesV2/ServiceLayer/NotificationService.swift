@@ -57,7 +57,7 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate {
     ) {
         
         // Отображаем уведомление со звуком
-        completionHandler([.alert, .sound])
+        completionHandler([.list, .sound])
     }
 }
 

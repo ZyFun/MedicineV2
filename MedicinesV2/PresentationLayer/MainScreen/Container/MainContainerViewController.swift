@@ -21,6 +21,18 @@ final class MainContainerViewController: UIViewController {
     
     private var animator: IMainContainerAnimator?
     
+    private lazy var closeSwipeGesture: UISwipeGestureRecognizer = {
+        let gesture = UISwipeGestureRecognizer(target: self, action: #selector(handleLeftSwipeGesture))
+        gesture.direction = .left
+        return gesture
+    }()
+    
+    private lazy var openEdgePanGesture: UIScreenEdgePanGestureRecognizer = {
+        let gesture = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(handleLeftEdgePanGesture))
+        gesture.edges = .left
+        return gesture
+    }()
+    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -40,6 +52,7 @@ private extension MainContainerViewController {
         createFirstAidKitController()
         // TODO: (#Refactor) должно быть в презентере
         animator = MainContainerAnimator(mainVC: mainVC)
+        view.addGestureRecognizer(openEdgePanGesture)
     }
     
     /// Конфигурирование VIPER модуля списка аптечек
@@ -92,8 +105,22 @@ private extension MainContainerViewController {
     func showMenuVC(_ isDisplayed: Bool) {
         if isDisplayed {
             animator?.animateAppearance()
+            view.addGestureRecognizer(closeSwipeGesture)
+            view.removeGestureRecognizer(openEdgePanGesture)
         } else {
             animator?.animateDisappearance()
+            view.removeGestureRecognizer(closeSwipeGesture)
+            view.addGestureRecognizer(openEdgePanGesture)
+        }
+    }
+    
+    @objc func handleLeftSwipeGesture() {
+        toggleDisplayMenu()
+    }
+    
+    @objc func handleLeftEdgePanGesture(_ gesture: UIScreenEdgePanGestureRecognizer) {
+        if gesture.state == .began {
+            toggleDisplayMenu()
         }
     }
 }
@@ -105,5 +132,8 @@ extension MainContainerViewController: FirstAidKitsControllerDelegate {
         createMenuController()
         isDisplayed.toggle()
         showMenuVC(isDisplayed)
+        // Для предотвращения нажатий на экран, пока меню активно
+        mainVC.children.first?.view.isUserInteractionEnabled.toggle()
+        mainVC.children.first?.navigationItem.searchController?.searchBar.isUserInteractionEnabled.toggle()
     }
 }

@@ -14,7 +14,7 @@ protocol SortableSettings {
     typealias SortDirection = SettingsService.SortDirection
     
     /// Метод сохраняет направление сортировки
-    /// - Parameter ascending: выбор из enum типа направления, вверх или вниз
+    /// - Parameter ascending: выбор из enum типа направления, по возрастанию или по убыванию
     func saveSortSetting(ascending: SortDirection)
     /// Метод получает направление сортировки
     /// - Returns: если ключ сортировки не был найден в памяти, возвращается true как настройка

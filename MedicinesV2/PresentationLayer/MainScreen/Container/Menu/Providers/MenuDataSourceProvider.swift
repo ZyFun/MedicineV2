@@ -61,7 +61,7 @@ extension MenuDataSourceProvider: UITableViewDelegate {
         
         switch menu {
         case .settings:
-            SystemLogger.warning("Меню настроек в разработке")
+            presenter.presentSettingsScreen()
         case .aboutApp:
             presenter.presentAboutAppScreen()
         }
