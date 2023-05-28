@@ -66,7 +66,6 @@ final class FirstAidKitsViewController: UIViewController {
         setup()
         presenter?.updatePlaceholder()
         presenter?.updateNotificationBadge()
-        presenter?.updateAllNotifications()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,6 +75,11 @@ final class FirstAidKitsViewController: UIViewController {
         // Это не нужно делать, так как изначально сразу загружаются правильные данные
         // и нужно только при обновлении лекарства
         presenter?.searchExpiredMedicines()
+        
+        // FIXME: Должен срабатывать только при сохранении настроек.
+        // можно сделать делегат и вызывать этот метод из него, а лучше сделать
+        // отдельный менеджер
+        presenter?.updateAllNotifications()
     }
 }
 

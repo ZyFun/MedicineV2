@@ -12,6 +12,7 @@ protocol MenuPresentationLogic: AnyObject {
     init(view: MenuView)
     
     func presentAboutAppScreen()
+    func presentSettingsScreen()
 }
 
 final class MenuPresenter {
@@ -30,6 +31,10 @@ final class MenuPresenter {
 // MARK: - Presentation Logic
 
 extension MenuPresenter: MenuPresentationLogic {
+    func presentSettingsScreen() {
+        router?.routeTo(target: .settings)
+    }
+    
     func presentAboutAppScreen() {
         router?.routeTo(target: .aboutApp)
     }

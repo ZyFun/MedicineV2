@@ -23,9 +23,9 @@ enum MenuModel: Int, CaseIterable {
     var iconImage: UIImage {
         switch self {
         case .settings:
-            return SystemIcons.book.image ?? UIImage()
-        case .aboutApp:
             return SystemIcons.gear.image ?? UIImage()
+        case .aboutApp:
+            return SystemIcons.book.image ?? UIImage()
         }
     }
 }
