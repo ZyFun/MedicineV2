@@ -26,6 +26,8 @@ final class MenuRouter: MenuRoutingLogic {
     enum Targets {
         /// Экран с информацией о приложении
         case aboutApp
+        /// Экран настроек
+        case settings
     }
     
     func routeTo(target: MenuRouter.Targets) {
@@ -39,6 +41,21 @@ final class MenuRouter: MenuRoutingLogic {
             
             // Навигация
             view.modalPresentationStyle = .pageSheet
+            navigationController?.present(view, animated: true)
+        case .settings:
+            // Создание ViewController
+            let view = SettingsViewController()
+            
+            // Конфигурация модуля для инжектирования зависимостей
+            PresentationAssembly().settings.config(view: view)
+            
+            // Навигация
+            // Именно этот метод используется для того, чтобы сработал метод
+            // жизненного цикла и произошло обновление всех уведомлений с уже новыми настройками
+            // FIXME: По хорошему, нужен отдельный менеджер, который будет заниматься обновлением уведомлений
+            // и получать доступ к базе лекарств чтобы перезаписать прошлые уведомления
+            // Заменить на открытие экрана с .pageSheet
+            view.modalPresentationStyle = .fullScreen
             navigationController?.present(view, animated: true)
         }
     }

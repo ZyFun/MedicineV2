@@ -18,10 +18,20 @@ final class MainContainerAnimator {
     
     private let mainVC: UIViewController
     
+    private lazy var overlayView: UIView = {
+        let view = UIView(frame: mainVC.view.bounds)
+        view.isUserInteractionEnabled = false
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+        view.alpha = 0
+        return view
+    }()
+    
     // MARK: - Initializer
     
     init(mainVC: UIViewController) {
         self.mainVC = mainVC
+        
+        mainVC.view.addSubview(overlayView)
     }
 }
 
@@ -41,6 +51,7 @@ extension MainContainerAnimator: IMainContainerAnimator {
             guard let self else { return }
             let mainVCWidth = self.mainVC.view.frame.width * 2 / 3
             self.mainVC.view.frame.origin.x = mainVCWidth
+            overlayView.alpha = 1
         }
     }
     
@@ -55,6 +66,7 @@ extension MainContainerAnimator: IMainContainerAnimator {
         ) { [weak self] in
             guard let self else { return }
             self.mainVC.view.frame.origin.x = 0
+            overlayView.alpha = 0
         }
     }
 }
