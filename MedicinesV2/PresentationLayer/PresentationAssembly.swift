@@ -51,7 +51,8 @@ final class PresentationAssembly {
     /// Инжектирование зависимостей в ``SettingsConfigurator``
     lazy var settings: SettingsConfigurator = {
         return SettingsConfigurator(
-            notificationSettingService: notificationSettingService
+            notificationSettingService: notificationSettingService,
+            sortingSettingService: sortingService
         )
     }()
     

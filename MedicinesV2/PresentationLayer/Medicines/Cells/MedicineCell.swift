@@ -208,7 +208,7 @@ private extension MedicineCell {
     /// нужно вызывать в traitCollectionDidChange для изменение цвета. Так как cgColor
     /// не изменяются сами.
     func setupCardShadowColor() {
-        viewContainer.layer.shadowColor = Colors.cardShadow?.cgColor
+        viewContainer.layer.shadowColor = Colors.cardShadow.cgColor
     }
     
     func addViews() {

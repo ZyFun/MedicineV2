@@ -13,16 +13,19 @@ final class SettingsFactory {
     private let tableView: UITableView
     private var sections: [SettingSections]
     private var tableViewAdapter: TableViewAdapter?
-    private weak var delegate: NotificationCellDelegate?
+    private weak var notificationDelegate: NotificationCellDelegate?
+    private weak var sortingDelegate: SortingCellDelegate?
     
     init(
         tableView: UITableView,
         sections: [SettingSections],
-        delegate: NotificationCellDelegate?
+        notificationDelegate: NotificationCellDelegate?,
+        sortingDelegate: SortingCellDelegate?
     ) {
         self.tableView = tableView
         self.sections = sections
-        self.delegate = delegate
+        self.notificationDelegate = notificationDelegate
+        self.sortingDelegate = sortingDelegate
         
         setupTableView()
     }
@@ -54,7 +57,15 @@ final class SettingsFactory {
                 viewModels: viewModel.viewModels,
                 heightCell: 45,
                 typeHeader: .base(viewModel.titleSection),
-                delegate: delegate
+                delegate: notificationDelegate
+            )
+            return configurator.configure(for: tableView)
+        case .sorting(let viewModel):
+            let configurator = SortingSectionConfigurator(
+                viewModels: viewModel.viewModels,
+                heightCell: 45,
+                typeHeader: .base(viewModel.titleSection),
+                delegate: sortingDelegate
             )
             return configurator.configure(for: tableView)
         }

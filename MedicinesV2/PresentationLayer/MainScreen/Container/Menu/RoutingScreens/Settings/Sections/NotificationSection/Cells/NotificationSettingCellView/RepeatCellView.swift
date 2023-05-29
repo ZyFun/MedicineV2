@@ -72,22 +72,14 @@ final class RepeatCellView: BaseView {
         
         NSLayoutConstraint.activate([
             nameSettingLabel.leadingAnchor
-                .constraint(equalTo: leadingAnchor, constant: Padding.contentInCell),
+                .constraint(equalTo: leadingAnchor, constant: Constants.SettingCell.yPadding),
             nameSettingLabel.centerYAnchor
                 .constraint(equalTo: centerYAnchor),
             
             repeatSwitch.trailingAnchor
-                .constraint(equalTo: trailingAnchor, constant: -Padding.contentInCell),
+                .constraint(equalTo: trailingAnchor, constant: -Constants.SettingCell.yPadding),
             repeatSwitch.centerYAnchor
                 .constraint(equalTo: centerYAnchor)
         ])
-    }
-}
-
-// MARK: - Constants
-
-private extension RepeatCellView {
-    struct Padding {
-        static let contentInCell: CGFloat = 16
     }
 }

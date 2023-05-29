@@ -93,7 +93,8 @@ private extension SettingsViewController {
         factory = SettingsFactory(
             tableView: tableView,
             sections: [],
-            delegate: presenter
+            notificationDelegate: presenter,
+            sortingDelegate: presenter
         )
     }
     
