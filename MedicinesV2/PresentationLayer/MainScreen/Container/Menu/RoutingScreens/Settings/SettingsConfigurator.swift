@@ -9,9 +9,14 @@ import UIKit
 
 final class SettingsConfigurator {
     let notificationSettingService: NotificationSettings
+    let sortingSettingService: SortableSettings
     
-    init(notificationSettingService: NotificationSettings) {
+    init(
+        notificationSettingService: NotificationSettings,
+        sortingSettingService: SortableSettings
+    ) {
         self.notificationSettingService = notificationSettingService
+        self.sortingSettingService = sortingSettingService
     }
     
     func config(
@@ -23,5 +28,6 @@ final class SettingsConfigurator {
         view.presenter = presenter
         presenter.view = view
         presenter.notificationSettingService = notificationSettingService
+        presenter.sortingSettingService = sortingSettingService
     }
 }

@@ -97,22 +97,14 @@ final class TimeCellView: BaseView {
         
         NSLayoutConstraint.activate([
             nameSettingLabel.leadingAnchor
-                .constraint(equalTo: leadingAnchor, constant: Padding.contentInCell),
+                .constraint(equalTo: leadingAnchor, constant: Constants.SettingCell.yPadding),
             nameSettingLabel.centerYAnchor
                 .constraint(equalTo: centerYAnchor),
             
             timeButton.trailingAnchor
-                .constraint(equalTo: trailingAnchor, constant: -Padding.contentInCell),
+                .constraint(equalTo: trailingAnchor, constant: -Constants.SettingCell.yPadding),
             timeButton.centerYAnchor
                 .constraint(equalTo: centerYAnchor)
         ])
-    }
-}
-
-// MARK: - Constants
-
-private extension TimeCellView {
-    struct Padding {
-        static let contentInCell: CGFloat = 16
     }
 }

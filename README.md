@@ -2,8 +2,8 @@
 ![Swift](https://img.shields.io/badge/swift-F54A2A?style=for-the-badge&logo=swift&logoColor=white)
 ![IOS](https://img.shields.io/badge/iOS-000000?style=for-the-badge&logo=ios&logoColor=white)
 <br/>
-![Target](https://img.shields.io/badge/iOS-14.0-blue)
-![Version](https://img.shields.io/badge/version-1.0.0-blue)
+![Target](https://img.shields.io/badge/iOS-15.0-blue)
+![Version](https://img.shields.io/badge/version-1.1.0RC-blue)
 <br/>
 ![UIKit](https://img.shields.io/badge/-UIKit-blue)
 ![XIB](https://img.shields.io/badge/-XIB-blue)
@@ -22,7 +22,7 @@
 Второе учебное приложение.
 
 ### News
-**--.05.2023**
+**--.10.2023**
 <br/>
 Новые возможности:
 - Добавлено боковое меню
@@ -34,6 +34,9 @@
 
 Изменение UI:
 - Добавлена тень к карточкам лекарств и аптечек
+
+Другие изменения:
+- Увеличен таргет iOS до 15
 
 **20.10.2022**
 - Обновлен дизайн приложения
@@ -65,7 +68,7 @@
 - Весь дизайн приложения был взять из головы.
 
 ## Installations
-Clone and run project in Xcode 14 or newer
+Clone and run project in Xcode 15 or newer
 
 ## Screenshots
 <img src="https://github.com/ZyFun/MedicineV2/blob/main/Screenshots/Screenshot000.png" width="252" height="503" /> <img src="https://github.com/ZyFun/MedicineV2/blob/main/Screenshots/Screenshot001.png" width="252" height="503" /> <img src="https://github.com/ZyFun/MedicineV2/blob/main/Screenshots/Screenshot002.png" width="252" height="503" />

@@ -1,0 +1,16 @@
+{
+  "sourceLanguage" : "ru",
+  "strings" : {
+    "Время" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

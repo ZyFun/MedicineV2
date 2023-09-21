@@ -87,6 +87,13 @@
 		2CC874D72A129E65000D16B5 /* NotificationSettingServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC874D62A129E65000D16B5 /* NotificationSettingServiceTests.swift */; };
 		2CCA5A0227C0DDA1005C7753 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 2CCA5A0127C0DDA1005C7753 /* .gitignore */; };
 		2CDB5E2027A538EF002361F2 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 2CDB5E1F27A538EF002361F2 /* README.md */; };
+		2CDDB5F22A24CBBB00BBA817 /* SortingSectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDDB5F12A24CBBB00BBA817 /* SortingSectionViewModel.swift */; };
+		2CDDB5F72A24CC7E00BBA817 /* SortingSettingCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDDB5F62A24CC7E00BBA817 /* SortingSettingCellModel.swift */; };
+		2CDDB5F92A24CFF200BBA817 /* SortAscendingCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDDB5F82A24CFF200BBA817 /* SortAscendingCellView.swift */; };
+		2CDDB5FB2A24D13200BBA817 /* Paddings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDDB5FA2A24D13200BBA817 /* Paddings.swift */; };
+		2CDDB5FD2A24D79700BBA817 /* SortingSettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDDB5FC2A24D79700BBA817 /* SortingSettingCell.swift */; };
+		2CDDB5FF2A24DB8000BBA817 /* SortingSettingCellBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDDB5FE2A24DB8000BBA817 /* SortingSettingCellBuilder.swift */; };
+		2CDDB6012A24DC6A00BBA817 /* SortingSectionConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDDB6002A24DC6A00BBA817 /* SortingSectionConfigurator.swift */; };
 		2CE109F82A17D99100E2C83D /* SectionConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE109F72A17D99100E2C83D /* SectionConfigurator.swift */; };
 		2CE3D70728D8BDE7001DA9AF /* FirstAidKitsFetchedResultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE3D70628D8BDE7001DA9AF /* FirstAidKitsFetchedResultsManager.swift */; };
 		2CE7052A2A1F881B000A00B3 /* RepeatCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE705292A1F881B000A00B3 /* RepeatCellView.swift */; };
@@ -105,6 +112,8 @@
 		2CF1EE7B277348330031D79D /* FirstAidKitsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF1EE7A277348330031D79D /* FirstAidKitsConfigurator.swift */; };
 		2CF28A1E277CAF5E002536F7 /* MedicinesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CF28A1C277CAF5E002536F7 /* MedicinesViewController.xib */; };
 		2CF28C7C28DCA24C0017C0A4 /* FirstAidKitsDataSourceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF28C7B28DCA24C0017C0A4 /* FirstAidKitsDataSourceProvider.swift */; };
+		2CF684AB2ABC5DC500C079B0 /* SortFieldCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF684AA2ABC5DC500C079B0 /* SortFieldCellView.swift */; };
+		2CF684AD2ABCAAE600C079B0 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 2CF684AC2ABCAAE600C079B0 /* Localizable.xcstrings */; };
 		2CF7909B28FED8A9009F53AD /* FirstAidKitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF7909A28FED8A9009F53AD /* FirstAidKitCell.swift */; };
 		2CFD714029B899D300EF4353 /* URLProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFD713F29B899D300EF4353 /* URLProvider.swift */; };
 		2CFD714229B89AE600EF4353 /* SocialMediaURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFD714129B89AE600EF4353 /* SocialMediaURL.swift */; };
@@ -208,6 +217,13 @@
 		2CC874D62A129E65000D16B5 /* NotificationSettingServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingServiceTests.swift; sourceTree = "<group>"; };
 		2CCA5A0127C0DDA1005C7753 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		2CDB5E1F27A538EF002361F2 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		2CDDB5F12A24CBBB00BBA817 /* SortingSectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingSectionViewModel.swift; sourceTree = "<group>"; };
+		2CDDB5F62A24CC7E00BBA817 /* SortingSettingCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingSettingCellModel.swift; sourceTree = "<group>"; };
+		2CDDB5F82A24CFF200BBA817 /* SortAscendingCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortAscendingCellView.swift; sourceTree = "<group>"; };
+		2CDDB5FA2A24D13200BBA817 /* Paddings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paddings.swift; sourceTree = "<group>"; };
+		2CDDB5FC2A24D79700BBA817 /* SortingSettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingSettingCell.swift; sourceTree = "<group>"; };
+		2CDDB5FE2A24DB8000BBA817 /* SortingSettingCellBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingSettingCellBuilder.swift; sourceTree = "<group>"; };
+		2CDDB6002A24DC6A00BBA817 /* SortingSectionConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingSectionConfigurator.swift; sourceTree = "<group>"; };
 		2CE109F72A17D99100E2C83D /* SectionConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionConfigurator.swift; sourceTree = "<group>"; };
 		2CE3D70628D8BDE7001DA9AF /* FirstAidKitsFetchedResultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAidKitsFetchedResultsManager.swift; sourceTree = "<group>"; };
 		2CE3D70A28D90A00001DA9AF /* Medicines v3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Medicines v3.xcdatamodel"; sourceTree = "<group>"; };
@@ -229,6 +245,8 @@
 		2CF1EE7A277348330031D79D /* FirstAidKitsConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAidKitsConfigurator.swift; sourceTree = "<group>"; };
 		2CF28A1C277CAF5E002536F7 /* MedicinesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MedicinesViewController.xib; sourceTree = "<group>"; };
 		2CF28C7B28DCA24C0017C0A4 /* FirstAidKitsDataSourceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAidKitsDataSourceProvider.swift; sourceTree = "<group>"; };
+		2CF684AA2ABC5DC500C079B0 /* SortFieldCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortFieldCellView.swift; sourceTree = "<group>"; };
+		2CF684AC2ABCAAE600C079B0 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		2CF7909A28FED8A9009F53AD /* FirstAidKitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAidKitCell.swift; sourceTree = "<group>"; };
 		2CFD713F29B899D300EF4353 /* URLProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProvider.swift; sourceTree = "<group>"; };
 		2CFD714129B89AE600EF4353 /* SocialMediaURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialMediaURL.swift; sourceTree = "<group>"; };
@@ -480,6 +498,7 @@
 		2C52BDDC27355E3600356A63 /* Recources */ = {
 			isa = PBXGroup;
 			children = (
+				2CF684AC2ABCAAE600C079B0 /* Localizable.xcstrings */,
 				2C52BDC6273540F600356A63 /* Assets.xcassets */,
 			);
 			path = Recources;
@@ -500,6 +519,7 @@
 				2C67351629D97BB900876547 /* Colors.swift */,
 				2C67351329D9777C00876547 /* SystemIcons.swift */,
 				2C8A0E202A175AB1009081AE /* Fonts.swift */,
+				2CDDB5FA2A24D13200BBA817 /* Paddings.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -560,6 +580,7 @@
 				2C8A0E352A17BED8009081AE /* SettingSections.swift */,
 				2C8A0E382A17BF85009081AE /* SectionModels */,
 				2C8A0E1A2A175624009081AE /* NotificationSection */,
+				2CDDB5F32A24CC1A00BBA817 /* SortingSection */,
 			);
 			path = Sections;
 			sourceTree = "<group>";
@@ -568,6 +589,7 @@
 			isa = PBXGroup;
 			children = (
 				2C8A0E392A17BFC2009081AE /* NotificationSectionViewModel.swift */,
+				2CDDB5F12A24CBBB00BBA817 /* SortingSectionViewModel.swift */,
 			);
 			path = SectionModels;
 			sourceTree = "<group>";
@@ -710,6 +732,35 @@
 				2C52BDC0273540F400356A63 /* MedicineViewController.storyboard */,
 			);
 			path = Medicine;
+			sourceTree = "<group>";
+		};
+		2CDDB5F32A24CC1A00BBA817 /* SortingSection */ = {
+			isa = PBXGroup;
+			children = (
+				2CDDB5F42A24CC2D00BBA817 /* Cells */,
+				2CDDB6002A24DC6A00BBA817 /* SortingSectionConfigurator.swift */,
+			);
+			path = SortingSection;
+			sourceTree = "<group>";
+		};
+		2CDDB5F42A24CC2D00BBA817 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				2CDDB5F52A24CC4000BBA817 /* SortingSettingCellView */,
+				2CDDB5FC2A24D79700BBA817 /* SortingSettingCell.swift */,
+				2CDDB5FE2A24DB8000BBA817 /* SortingSettingCellBuilder.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		2CDDB5F52A24CC4000BBA817 /* SortingSettingCellView */ = {
+			isa = PBXGroup;
+			children = (
+				2CDDB5F62A24CC7E00BBA817 /* SortingSettingCellModel.swift */,
+				2CDDB5F82A24CFF200BBA817 /* SortAscendingCellView.swift */,
+				2CF684AA2ABC5DC500C079B0 /* SortFieldCellView.swift */,
+			);
+			path = SortingSettingCellView;
 			sourceTree = "<group>";
 		};
 		2CE3D70828D8F2A0001DA9AF /* Managers */ = {
@@ -872,7 +923,7 @@
 			};
 			buildConfigurationList = 2C52BDB2273540F400356A63 /* Build configuration list for PBXProject "MedicinesV2" */;
 			compatibilityVersion = "Xcode 13.0";
-			developmentRegion = en;
+			developmentRegion = ru;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -916,6 +967,7 @@
 				2C52BDC7273540F600356A63 /* Assets.xcassets in Resources */,
 				2C52BDC2273540F400356A63 /* MedicineViewController.storyboard in Resources */,
 				2CDB5E2027A538EF002361F2 /* README.md in Resources */,
+				2CF684AD2ABCAAE600C079B0 /* Localizable.xcstrings in Resources */,
 				2CA3AB1A2906445000763BC5 /* PrivacyPolicy.md in Resources */,
 				2CCA5A0227C0DDA1005C7753 /* .gitignore in Resources */,
 				2C7A5FB82774EFA9002C4702 /* FirstAidKitsViewController.xib in Resources */,
@@ -989,6 +1041,7 @@
 				2CF1B8EF2971C0D500BCF726 /* MenuModel.swift in Sources */,
 				2C67351729D97BB900876547 /* Colors.swift in Sources */,
 				2C67351429D9777C00876547 /* SystemIcons.swift in Sources */,
+				2CDDB5F92A24CFF200BBA817 /* SortAscendingCellView.swift in Sources */,
 				2C62A6BF29D480F0008ED3BE /* MenuRouter.swift in Sources */,
 				2CB115DB297050D600A2846A /* MenuCell.swift in Sources */,
 				2C26546A2A153DDB00CC5C6D /* TableViewSectionProtocols.swift in Sources */,
@@ -1000,11 +1053,13 @@
 				2C67351929D9B3E200876547 /* UIColor+Hex.swift in Sources */,
 				2C480C84275FB1FA000CD5CC /* Date+DateFormatter.swift in Sources */,
 				2C26546D2A153F0500CC5C6D /* TableViewAdapter.swift in Sources */,
+				2CDDB5FB2A24D13200BBA817 /* Paddings.swift in Sources */,
 				2C38604128DC82DB003FED87 /* PresentationAssembly.swift in Sources */,
 				2CED30E428F6E47200A6CEE5 /* SplashViewController.swift in Sources */,
 				2C40442D2975921F00965DE4 /* Bundle+AppInfo.swift in Sources */,
 				2CE3D70728D8BDE7001DA9AF /* FirstAidKitsFetchedResultsManager.swift in Sources */,
 				2C925717273D4DE800DA7284 /* MedicinesViewController.swift in Sources */,
+				2CDDB5F72A24CC7E00BBA817 /* SortingSettingCellModel.swift in Sources */,
 				2CAE169A28DA07AF0071E783 /* MedicineModel.swift in Sources */,
 				2CF1B8EB2971BB1300BCF726 /* MenuDataSourceProvider.swift in Sources */,
 				2CF1EE7B277348330031D79D /* FirstAidKitsConfigurator.swift in Sources */,
@@ -1042,21 +1097,26 @@
 				2CED30E728F6E6A500A6CEE5 /* SplashPresenter.swift in Sources */,
 				2C8A0E2E2A1783D4009081AE /* NotificationSectionConfigurator.swift in Sources */,
 				2CA75457273BED4100B147B7 /* UIAlerController+CustomController.swift in Sources */,
+				2CDDB5FF2A24DB8000BBA817 /* SortingSettingCellBuilder.swift in Sources */,
 				2C8A0E3A2A17BFC2009081AE /* NotificationSectionViewModel.swift in Sources */,
 				2C8A0E342A17B977009081AE /* TableViewSectionHeaderBuilder.swift in Sources */,
+				2CDDB5FD2A24D79700BBA817 /* SortingSettingCell.swift in Sources */,
 				2CBD2B1D277C7F9200F857C3 /* MedicinePresenter.swift in Sources */,
 				2CE7052A2A1F881B000A00B3 /* RepeatCellView.swift in Sources */,
 				2CFD714029B899D300EF4353 /* URLProvider.swift in Sources */,
 				2CAE169828D9F7E30071E783 /* MedicinesFetchedResultsManager.swift in Sources */,
 				2CED30E928F6E6C900A6CEE5 /* SplashAnimator.swift in Sources */,
+				2CDDB5F22A24CBBB00BBA817 /* SortingSectionViewModel.swift in Sources */,
 				2CF1EE77277347980031D79D /* FirstAidKitsRouter.swift in Sources */,
 				2CF7909B28FED8A9009F53AD /* FirstAidKitCell.swift in Sources */,
 				2CB115D82970355300A2846A /* MenuViewController.swift in Sources */,
 				2C56E08D29057A02009AAB46 /* UIImage+GraphicsImageRenderer.swift in Sources */,
+				2CF684AB2ABC5DC500C079B0 /* SortFieldCellView.swift in Sources */,
 				2C925719273D5C4400DA7284 /* MedicinesPresenter.swift in Sources */,
 				2CF1EE75277347800031D79D /* FirstAidKitsInteractor.swift in Sources */,
 				2CF28C7C28DCA24C0017C0A4 /* FirstAidKitsDataSourceProvider.swift in Sources */,
 				2C92571D273D5CBF00DA7284 /* MedicinesRouter.swift in Sources */,
+				2CDDB6012A24DC6A00BBA817 /* SortingSectionConfigurator.swift in Sources */,
 				2C03448C2A15006100EE4120 /* UsesAutoLayout.swift in Sources */,
 				2CB5E6F928DF1842003D06D0 /* NotificationMedicineManager.swift in Sources */,
 				2C7787702A1376C300115C5F /* SettingsPresenter.swift in Sources */,
@@ -1267,16 +1327,18 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = B66N983M7Q;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MedicinesV2/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Аптечка";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.medical";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1298,16 +1360,18 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = B66N983M7Q;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MedicinesV2/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Аптечка";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.medical";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

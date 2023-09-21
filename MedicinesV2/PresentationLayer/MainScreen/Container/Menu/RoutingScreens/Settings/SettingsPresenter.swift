@@ -21,6 +21,7 @@ final class SettingsPresenter {
     
     weak var view: SettingsView?
     var notificationSettingService: NotificationSettings?
+    var sortingSettingService: SortableSettings?
     
     // MARK: - Private properties
     
@@ -29,6 +30,9 @@ final class SettingsPresenter {
     // Заданы настройки по умолчанию, если пользователь еще не выбирал их
     private var timeName: TimeNotification = .evening
     private var isRepeatNotification: Bool = true
+    
+    private var ascendingName: SortAscending = .down
+    private var fieldName: SortField = .dateCreated
     
     // MARK: - Initializer
     
@@ -41,9 +45,16 @@ final class SettingsPresenter {
 
 extension SettingsPresenter: SettingsPresentationLogic {
     func getSettingsSections() {
+        createNotificationSection()
+        createSortingSection()
+        
+        view?.show(sections: sections)
+    }
+    
+    private func createNotificationSection() {
         var notificationSettingModel: NotificationSettingModel?
         
-        // Получаем модель данных из базы
+        // Получаем модель данных из UserDefaults
         do {
             notificationSettingModel = try notificationSettingService?.getNotificationSettings()
         } catch {
@@ -61,15 +72,15 @@ extension SettingsPresenter: SettingsPresentationLogic {
             }
         }
         
-        // Задаём условия повтора из моделм
+        // Задаём условия повтора из модели
         if let isRepeat = notificationSettingModel?.isRepeat {
             isRepeatNotification = isRepeat
         }
         
-        // Создаём и отображаем секции
+        // Создаём и отображаем ячейки секции
         let notificationSettingModels = [
             NotificationSettingCellModel(
-                settingName: "Время",
+                settingName: String(localized: "Время"),
                 buttonName: timeName
             ),
             NotificationSettingCellModel(
@@ -78,16 +89,55 @@ extension SettingsPresenter: SettingsPresentationLogic {
             )
         ]
         
-        let settingSection = NotificationSectionViewModel(titleSection: "Уведомления", viewModels: notificationSettingModels)
+        let settingSection = NotificationSectionViewModel(
+            titleSection: "Уведомления",
+            viewModels: notificationSettingModels
+        )
         
         sections.append(SettingSections.notification(settingSection))
-        
-        view?.show(sections: sections)
     }
     
+    private func createSortingSection() {
+        // Получаем данные из UserDefaults
+        if let ascending = sortingSettingService?.getSortAscending() {
+            ascendingName = ascending ? .up : .down
+        }
+        
+        if let field = sortingSettingService?.getSortField() {
+            fieldName = SortField(rawValue: field) ?? .dateCreated
+        }
+        
+        // Создаём и отображаем ячейки секции
+        let sortingSettingModels = [
+            SortingSettingCellModel(
+                settingName: "Направление",
+                ascending: ascendingName
+            ),
+            SortingSettingCellModel(
+                settingName: "Поле",
+                field: fieldName
+            )
+        ]
+        
+        let sortingSection = SortingSectionViewModel(
+            titleSection: "Сортировка",
+            viewModels: sortingSettingModels
+        )
+        
+        sections.append(SettingSections.sorting(sortingSection))
+    }
+    
+    // FIXME: Необходимо переписать так, чтобы после срабатывания вызывалось обновление уведомлений.
+    // Сейчас обновления происходят методом жизненного цикла ``FirstAidKitsViewController`` ,
+    // после того как настройки были закрыты.
     /// Метод для сохранения настроек
     /// - warning: Очередь уведомлений обновляется после выхода с экрана настроек
     func saveSettings() {
+        saveNotifications()
+        saveSortSettings()
+    }
+    
+    private func saveNotifications() {
         do {
             try notificationSettingService?.saveNotificationSettings(
                 hourNotifiable: timeName.value,
@@ -96,12 +146,28 @@ extension SettingsPresenter: SettingsPresentationLogic {
         } catch {
             SystemLogger.error(error.localizedDescription)
         }
+    }
+    
+    private func saveSortSettings() {
+        switch fieldName {
+        case .title:
+            sortingSettingService?.saveSortSetting(field: .title)
+        case .dateCreated:
+            sortingSettingService?.saveSortSetting(field: .dateCreated)
+        case .expiryDate:
+            sortingSettingService?.saveSortSetting(field: .expiryDate)
+        }
         
-        // FIXME: Необходимо переписать так, чтобы после срабатывания вызывалось обновление уведомлений.
-        // Сейчас обновления происходят методом жизненного цикла ``FirstAidKitsViewController`` ,
-        // после того как настройки были закрыты.
+        switch ascendingName {
+        case .up:
+            sortingSettingService?.saveSortSetting(ascending: .up)
+        case .down:
+            sortingSettingService?.saveSortSetting(ascending: .down)
+        }
     }
 }
+
+// MARK: - NotificationCellDelegate
 
 extension SettingsPresenter: NotificationCellDelegate {
     func didSelectTimeNotification(time: TimeNotification) {
@@ -112,5 +178,19 @@ extension SettingsPresenter: NotificationCellDelegate {
     func didToggleSwitched(isRepeat: Bool) {
         SystemLogger.info("Повторять уведомления после отображения: \(isRepeat)")
         isRepeatNotification = isRepeat
+    }
+}
+
+// MARK: - SortingCellDelegate
+
+extension SettingsPresenter: SortingCellDelegate {
+    func didSelectSort(ascending: SortAscending) {
+        SystemLogger.info("Направление сортировки: \(ascending.description)")
+        ascendingName = ascending
+    }
+    
+    func didSelectSort(field: SortField) {
+        SystemLogger.info("Поле сортировки: \(field.rawValue)")
+        fieldName = field
     }
 }
