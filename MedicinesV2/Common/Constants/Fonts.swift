@@ -24,8 +24,8 @@ enum SettingsFontSize {
     
     var size: CGFloat {
         switch self {
-        case .defaultSize: return 17.0
-        case .titleSize: return 19.0
+        case .defaultSize: 17.0
+        case .titleSize: 19.0
         }
     }
 }
