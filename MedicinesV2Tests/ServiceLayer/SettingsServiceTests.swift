@@ -6,10 +6,11 @@
 //
 
 import XCTest
+import DTLogger
 @testable import MedicinesV2
 
 final class SettingsServiceTests: XCTestCase {
-    private let sortSettingService: SortableSettings = SettingsService.shared
+    private let sortSettingService: SortableSettings = SettingsService(logger: DTLogger.shared)
     
     override func setUp() {
         super.setUp()

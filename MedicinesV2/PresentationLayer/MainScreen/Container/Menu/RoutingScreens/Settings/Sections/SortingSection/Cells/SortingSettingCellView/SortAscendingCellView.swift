@@ -11,6 +11,11 @@ import DTLogger
 final class SortAscendingCellView: BaseView {
     typealias SortAscending = SortingSettingCellModel.SortAscending
     
+    // MARK: - Dependencies
+    
+    // TODO: (MEDIC-48) Подумать как избавится от синглтона если это возможно и пробросить зависимость
+    private let logger: DTLogger = DTLogger.shared
+    
     // MARK: - Private properties
     
     private var selectSortingAction: ((SortAscending) -> Void)?
@@ -54,7 +59,7 @@ final class SortAscendingCellView: BaseView {
         let up = UIAction(title: SortAscending.up.description) { [weak self] _ in
             self?.sortingButton.setTitle(SortAscending.up.description, for: .normal)
             guard let selectTimeAction = self?.selectSortingAction else {
-                SystemLogger.error("Действие не было передано на вью ячейки")
+                self?.logger.log(.error, "Действие не было передано на вью ячейки")
                 return
             }
             
@@ -64,7 +69,7 @@ final class SortAscendingCellView: BaseView {
         let down = UIAction(title: SortAscending.down.description) { [weak self] _ in
             self?.sortingButton.setTitle(SortAscending.down.description, for: .normal)
             guard let selectTimeAction = self?.selectSortingAction else {
-                SystemLogger.error("Действие не было передано на вью ячейки")
+                self?.logger.log(.error, "Действие не было передано на вью ячейки")
                 return
             }
             

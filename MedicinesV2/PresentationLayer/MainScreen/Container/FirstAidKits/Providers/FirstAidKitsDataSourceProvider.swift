@@ -18,6 +18,7 @@ final class FirstAidKitsDataSourceProvider: NSObject, IFirstAidKitsDataSourcePro
     // MARK: - Public Properties
     
     var fetchedResultManager: IFirstAidKitsFetchedResultsManager
+    var logger: DTLogger
     
     // MARK: - Private properties
     
@@ -27,10 +28,12 @@ final class FirstAidKitsDataSourceProvider: NSObject, IFirstAidKitsDataSourcePro
     
     init(
         presenter: FirstAidKitsViewControllerOutput?,
-        resultManager: IFirstAidKitsFetchedResultsManager
+        resultManager: IFirstAidKitsFetchedResultsManager,
+        logger: DTLogger
     ) {
         self.presenter = presenter
         self.fetchedResultManager = resultManager
+        self.logger = logger
     }
     
     // MARK: - Private methods
@@ -43,7 +46,7 @@ final class FirstAidKitsDataSourceProvider: NSObject, IFirstAidKitsDataSourcePro
         guard let firstAidKit = fetchedResultManager.fetchedResultsController.object(
             at: indexPath
         ) as? DBFirstAidKit else {
-            SystemLogger.error("Ошибка каста object к DBFirstAidKit")
+            logger.log(.error, "Ошибка каста object к DBFirstAidKit")
             return nil
         }
         

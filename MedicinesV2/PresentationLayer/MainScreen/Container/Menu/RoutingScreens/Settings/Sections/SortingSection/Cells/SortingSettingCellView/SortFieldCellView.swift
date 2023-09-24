@@ -12,6 +12,11 @@ import DTLogger
 final class SortFieldCellView: BaseView {
     typealias SortField = SortingSettingCellModel.FieldSorting
     
+    // MARK: - Dependencies
+    
+    // TODO: (MEDIC-48) Подумать как избавится от синглтона если это возможно и пробросить зависимость
+    private let logger: DTLogger = DTLogger.shared
+    
     // MARK: - Private properties
     
     /// Действие, которое будет выполнено после выбора поля сортировки
@@ -69,7 +74,7 @@ final class SortFieldCellView: BaseView {
         let dateCreated = UIAction(title: SortField.dateCreated.description) { [weak self] _ in
             self?.sortingButton.setTitle(SortField.dateCreated.description, for: .normal)
             guard let selectAction = self?.selectSortingAction else {
-                SystemLogger.error("Действие не было передано на вью ячейки")
+                self?.logger.log(.error, "Действие не было передано на вью ячейки")
                 return
             }
             
@@ -79,7 +84,7 @@ final class SortFieldCellView: BaseView {
         let name = UIAction(title: SortField.title.description) { [weak self] _ in
             self?.sortingButton.setTitle(SortField.title.description, for: .normal)
             guard let selectAction = self?.selectSortingAction else {
-                SystemLogger.error("Действие не было передано на вью ячейки")
+                self?.logger.log(.error, "Действие не было передано на вью ячейки")
                 return
             }
             
@@ -89,7 +94,7 @@ final class SortFieldCellView: BaseView {
         let expiryDate = UIAction(title: SortField.expiryDate.description) { [weak self] _ in
             self?.sortingButton.setTitle(SortField.expiryDate.description, for: .normal)
             guard let selectAction = self?.selectSortingAction else {
-                SystemLogger.error("Действие не было передано на вью ячейки")
+                self?.logger.log(.error, "Действие не было передано на вью ячейки")
                 return
             }
             

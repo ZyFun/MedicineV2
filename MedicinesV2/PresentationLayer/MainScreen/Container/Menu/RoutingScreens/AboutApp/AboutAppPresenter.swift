@@ -25,6 +25,10 @@ final class AboutAppPresenter {
     
     weak var view: AboutAppView?
     
+    // MARK: - Dependencies
+    
+    var logger: DTLogger?
+    
     // MARK: - Private properties
     
     private let infoModel: AboutAppInfoModel
@@ -50,7 +54,7 @@ extension AboutAppPresenter: AboutAppPresentationLogic {
     
     func openTGUrl() {
         guard let urlString = infoModel.tgUrl else {
-            SystemLogger.error("URL в модели отсутствует")
+            logger?.log(.error, "URL в модели отсутствует")
             return
         }
         
@@ -61,7 +65,7 @@ extension AboutAppPresenter: AboutAppPresentationLogic {
     
     func openVKUrl() {
         guard let urlString = infoModel.vkUrl else {
-            SystemLogger.error("URL в модели отсутствует")
+            logger?.log(.error, "URL в модели отсутствует")
             return
         }
         

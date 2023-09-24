@@ -11,6 +11,11 @@ import DTLogger
 final class TimeCellView: BaseView {
     typealias TimeNotification = NotificationSettingCellModel.TimeNotification
     
+    // MARK: - Dependencies
+    
+    // TODO: (MEDIC-48) Подумать как избавится от синглтона если это возможно и пробросить зависимость
+    private let logger: DTLogger = DTLogger.shared
+    
     // MARK: - Private properties
     
     private var selectTimeAction: ((TimeNotification) -> Void)?
@@ -54,7 +59,7 @@ final class TimeCellView: BaseView {
         let morning = UIAction(title: TimeNotification.morning.description) { [weak self] _ in
             self?.timeButton.setTitle(TimeNotification.morning.description, for: .normal)
             guard let selectTimeAction = self?.selectTimeAction else {
-                SystemLogger.error("Действие не было передано на вью ячейки")
+                self?.logger.log(.error, "Действие не было передано на вью ячейки")
                 return
             }
             
@@ -65,7 +70,7 @@ final class TimeCellView: BaseView {
             self?.timeButton.setTitle(TimeNotification.day.description, for: .normal)
             
             guard let selectTimeAction = self?.selectTimeAction else {
-                SystemLogger.error("Действие не было передано на вью ячейки")
+                self?.logger.log(.error, "Действие не было передано на вью ячейки")
                 return
             }
             
@@ -76,7 +81,7 @@ final class TimeCellView: BaseView {
             self?.timeButton.setTitle(TimeNotification.evening.description, for: .normal)
             
             guard let selectTimeAction = self?.selectTimeAction else {
-                SystemLogger.error("Действие не было передано на вью ячейки")
+                self?.logger.log(.error, "Действие не было передано на вью ячейки")
                 return
             }
             

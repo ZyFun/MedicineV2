@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import DTLogger
 
 /// Конфигурация VIPER модуля
 final class MedicineConfigurator {
     
     private let notificationManager: INotificationMedicineManager
     private let coreDataService: ICoreDataService
+    private let logger: DTLogger
     
     /// Передача текущей аптечки и лекарства на экран с лекарством
     /// - Аптечка используется для привязки лекарства к аптечке.
@@ -21,10 +23,12 @@ final class MedicineConfigurator {
     ///   - medicine: принимает текущее лекарство
     init(
         notificationManager: INotificationMedicineManager,
-        coreDataService: ICoreDataService
+        coreDataService: ICoreDataService,
+        logger: DTLogger
     ) {
         self.notificationManager = notificationManager
         self.coreDataService = coreDataService
+        self.logger = logger
     }
     
     func config(
@@ -47,6 +51,7 @@ final class MedicineConfigurator {
         let router = MedicineRouter(withNavigationController: navigationController)
         
         view.presenter = presenter
+        view.logger = logger
         view.currentFirstAidKit = firstAidKit
         view.medicine = medicine
         presenter.view = view
@@ -55,5 +60,6 @@ final class MedicineConfigurator {
         interactor.presenter = presenter
         interactor.notificationManager = notificationManager
         interactor.coreDataService = coreDataService
+        interactor.logger = logger
     }
 }

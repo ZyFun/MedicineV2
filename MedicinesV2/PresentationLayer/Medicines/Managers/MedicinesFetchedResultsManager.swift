@@ -21,12 +21,19 @@ final class MedicinesFetchedResultsManager: NSObject,
     weak var tableView: UITableView?
     var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>
     
+    // MARK: - Dependencies
+    
+    private let logger: DTLogger
+    
     // MARK: - Initializer
     
     init(
-        fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>
+        fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>,
+        logger: DTLogger
     ) {
         self.fetchedResultsController = fetchedResultsController
+        self.logger = logger
+        
         super.init()
         self.fetchedResultsController.delegate = self
     }
@@ -76,7 +83,7 @@ extension MedicinesFetchedResultsManager: NSFetchedResultsControllerDelegate {
                 )
             }
         @unknown default:
-            SystemLogger.error("Что то пошло не так в NSFetchedResultsControllerDelegate")
+            logger.log(.error, "Что то пошло не так в NSFetchedResultsControllerDelegate")
         }
     }
     
