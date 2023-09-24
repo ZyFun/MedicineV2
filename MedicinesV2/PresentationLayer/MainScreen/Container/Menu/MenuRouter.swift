@@ -35,12 +35,16 @@ final class MenuRouter: MenuRoutingLogic {
         case .aboutApp:
             // Создание ViewController
             let view = AboutAppViewController()
+            if let sheet = view.sheetPresentationController {
+                sheet.detents = [.medium()]
+                sheet.prefersGrabberVisible = true
+                sheet.preferredCornerRadius = Constants.CornerRadius.mainView
+            }
             
             // Конфигурация модуля для инжектирования зависимостей
             PresentationAssembly().aboutApp.config(view: view)
             
             // Навигация
-            view.modalPresentationStyle = .pageSheet
             navigationController?.present(view, animated: true)
         case .settings:
             // Создание ViewController

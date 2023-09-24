@@ -90,7 +90,7 @@
 		2CDDB5F22A24CBBB00BBA817 /* SortingSectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDDB5F12A24CBBB00BBA817 /* SortingSectionViewModel.swift */; };
 		2CDDB5F72A24CC7E00BBA817 /* SortingSettingCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDDB5F62A24CC7E00BBA817 /* SortingSettingCellModel.swift */; };
 		2CDDB5F92A24CFF200BBA817 /* SortAscendingCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDDB5F82A24CFF200BBA817 /* SortAscendingCellView.swift */; };
-		2CDDB5FB2A24D13200BBA817 /* Paddings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDDB5FA2A24D13200BBA817 /* Paddings.swift */; };
+		2CDDB5FB2A24D13200BBA817 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDDB5FA2A24D13200BBA817 /* Constants.swift */; };
 		2CDDB5FD2A24D79700BBA817 /* SortingSettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDDB5FC2A24D79700BBA817 /* SortingSettingCell.swift */; };
 		2CDDB5FF2A24DB8000BBA817 /* SortingSettingCellBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDDB5FE2A24DB8000BBA817 /* SortingSettingCellBuilder.swift */; };
 		2CDDB6012A24DC6A00BBA817 /* SortingSectionConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDDB6002A24DC6A00BBA817 /* SortingSectionConfigurator.swift */; };
@@ -220,7 +220,7 @@
 		2CDDB5F12A24CBBB00BBA817 /* SortingSectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingSectionViewModel.swift; sourceTree = "<group>"; };
 		2CDDB5F62A24CC7E00BBA817 /* SortingSettingCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingSettingCellModel.swift; sourceTree = "<group>"; };
 		2CDDB5F82A24CFF200BBA817 /* SortAscendingCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortAscendingCellView.swift; sourceTree = "<group>"; };
-		2CDDB5FA2A24D13200BBA817 /* Paddings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paddings.swift; sourceTree = "<group>"; };
+		2CDDB5FA2A24D13200BBA817 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		2CDDB5FC2A24D79700BBA817 /* SortingSettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingSettingCell.swift; sourceTree = "<group>"; };
 		2CDDB5FE2A24DB8000BBA817 /* SortingSettingCellBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingSettingCellBuilder.swift; sourceTree = "<group>"; };
 		2CDDB6002A24DC6A00BBA817 /* SortingSectionConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingSectionConfigurator.swift; sourceTree = "<group>"; };
@@ -519,7 +519,7 @@
 				2C67351629D97BB900876547 /* Colors.swift */,
 				2C67351329D9777C00876547 /* SystemIcons.swift */,
 				2C8A0E202A175AB1009081AE /* Fonts.swift */,
-				2CDDB5FA2A24D13200BBA817 /* Paddings.swift */,
+				2CDDB5FA2A24D13200BBA817 /* Constants.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -1053,7 +1053,7 @@
 				2C67351929D9B3E200876547 /* UIColor+Hex.swift in Sources */,
 				2C480C84275FB1FA000CD5CC /* Date+DateFormatter.swift in Sources */,
 				2C26546D2A153F0500CC5C6D /* TableViewAdapter.swift in Sources */,
-				2CDDB5FB2A24D13200BBA817 /* Paddings.swift in Sources */,
+				2CDDB5FB2A24D13200BBA817 /* Constants.swift in Sources */,
 				2C38604128DC82DB003FED87 /* PresentationAssembly.swift in Sources */,
 				2CED30E428F6E47200A6CEE5 /* SplashViewController.swift in Sources */,
 				2C40442D2975921F00965DE4 /* Bundle+AppInfo.swift in Sources */,
