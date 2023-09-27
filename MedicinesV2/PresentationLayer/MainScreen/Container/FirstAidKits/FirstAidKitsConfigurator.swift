@@ -14,28 +14,32 @@ final class FirstAidKitsConfigurator {
     private let coreDataService: ICoreDataService
     private let fetchedResultManager: IFirstAidKitsFetchedResultsManager
     private let splashPresenter: ISplashPresenter
+    private let logger: DTLogger
     
     init(
         notificationManager: INotificationMedicineManager,
         coreDataService: ICoreDataService,
-        splashPresenter: ISplashPresenter
+        splashPresenter: ISplashPresenter,
+        logger: DTLogger
     ) {
         self.notificationManager = notificationManager
         self.coreDataService = coreDataService
         self.splashPresenter = splashPresenter
+        self.logger = logger
         fetchedResultManager = FirstAidKitsFetchedResultsManager(
             fetchedResultsController: coreDataService.fetchResultController(
                 entityName: String(describing: DBFirstAidKit.self),
                 keyForSort: #keyPath(DBFirstAidKit.title),
                 sortAscending: true,
                 currentFirstAidKit: nil
-            )
+            ),
+            logger: logger
         )
     }
     
     func config(view: UIViewController, navigationController: UINavigationController) {
         guard let view = view as? FirstAidKitsViewController else {
-            SystemLogger.error("ViewController аптечки не инициализирован")
+            logger.log(.error, "ViewController аптечки не инициализирован")
             return
         }
         
@@ -44,17 +48,20 @@ final class FirstAidKitsConfigurator {
         let router = FirstAidKitRouter(withNavigationController: navigationController)
         let dataSourceProvider = FirstAidKitsDataSourceProvider(
             presenter: presenter,
-            resultManager: fetchedResultManager
+            resultManager: fetchedResultManager,
+            logger: logger
         )
         
         view.splashPresenter = splashPresenter
         view.presenter = presenter
         view.dataSourceProvider = dataSourceProvider
         view.fetchedResultManager = fetchedResultManager
+        view.logger = logger
         presenter.view = view
         presenter.interactor = interactor
         presenter.router = router
         interactor.presenter = presenter
+        interactor.logger = logger
         interactor.notificationManager = notificationManager
         interactor.coreDataService = coreDataService
     }

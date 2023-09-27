@@ -28,6 +28,10 @@ final class MedicinesViewController: UIViewController {
     var fetchedResultManager: IMedicinesFetchedResultsManager?
     /// Содержит в себе выбранную аптечку
     var currentFirstAidKit: DBFirstAidKit?
+    
+    // MARK: - Dependencies
+    
+    var logger: DTLogger?
 
     // MARK: - IBOutlets
     
@@ -177,7 +181,7 @@ extension MedicinesViewController: UISearchBarDelegate {
         do {
             try fetchedResultManager?.fetchedResultsController.performFetch()
         } catch let error {
-            SystemLogger.error(error.localizedDescription)
+            logger?.log(.error, error.localizedDescription)
         }
         
         medicinesTableView.reloadData()
@@ -195,7 +199,7 @@ extension MedicinesViewController: UISearchBarDelegate {
         do {
             try fetchedResultManager?.fetchedResultsController.performFetch()
         } catch let error {
-            SystemLogger.error(error.localizedDescription)
+            logger?.log(.error, error.localizedDescription)
         }
         
         medicinesTableView.reloadData()

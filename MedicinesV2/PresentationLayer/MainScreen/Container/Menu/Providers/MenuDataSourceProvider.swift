@@ -13,10 +13,22 @@ protocol IMenuDataSourceProvider: UITableViewDelegate, UITableViewDataSource {
 }
 
 final class MenuDataSourceProvider: NSObject, IMenuDataSourceProvider {
+    // MARK: - Private properties
+    
     private var presenter: MenuPresenter
     
-    init(presenter: MenuPresenter) {
+    // MARK: - Dependencies
+    
+    private let logger: DTLogger
+    
+    // MARK: - Initializer
+    
+    init(
+        presenter: MenuPresenter,
+        logger: DTLogger
+    ) {
         self.presenter = presenter
+        self.logger = logger
     }
 }
 
@@ -33,12 +45,12 @@ extension MenuDataSourceProvider: UITableViewDataSource {
             withIdentifier: String(describing: MenuCell.self),
             for: indexPath
         ) as? MenuCell else {
-            SystemLogger.error("Ячейка меню не создана")
+            logger.log(.error, "Ячейка меню не создана")
             return UITableViewCell()
         }
         
         guard let menuModel = MenuModel(rawValue: indexPath.row) else {
-            SystemLogger.error("Меню не собралось")
+            logger.log(.error, "Меню не собралось")
             return UITableViewCell()
         }
         

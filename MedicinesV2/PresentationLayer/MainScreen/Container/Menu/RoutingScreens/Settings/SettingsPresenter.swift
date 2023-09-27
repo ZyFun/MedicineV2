@@ -20,8 +20,12 @@ final class SettingsPresenter {
     // MARK: - Public Properties
     
     weak var view: SettingsView?
+    
+    // MARK: - Dependencies
+    
     var notificationSettingService: NotificationSettings?
     var sortingSettingService: SortableSettings?
+    var logger: DTLogger?
     
     // MARK: - Private properties
     
@@ -58,7 +62,7 @@ extension SettingsPresenter: SettingsPresentationLogic {
         do {
             notificationSettingModel = try notificationSettingService?.getNotificationSettings()
         } catch {
-            SystemLogger.error(error.localizedDescription)
+            logger?.log(.error, error.localizedDescription)
         }
         
         // Задаём время уведомления из модели
@@ -67,8 +71,7 @@ extension SettingsPresenter: SettingsPresentationLogic {
             case 0...9: timeName = .morning
             case 10...14: timeName = .day
             case 15...23: timeName = .evening
-            default:
-                SystemLogger.warning("Пользователь еще не сохранял настройки, значение задано по умолчанию")
+            default: logger?.log(.warning, "Пользователь еще не сохранял настройки, значение задано по умолчанию")
             }
         }
         
@@ -144,7 +147,7 @@ extension SettingsPresenter: SettingsPresentationLogic {
                 isRepeat: isRepeatNotification
             )
         } catch {
-            SystemLogger.error(error.localizedDescription)
+            logger?.log(.error, error.localizedDescription)
         }
     }
     
@@ -171,12 +174,12 @@ extension SettingsPresenter: SettingsPresentationLogic {
 
 extension SettingsPresenter: NotificationCellDelegate {
     func didSelectTimeNotification(time: TimeNotification) {
-        SystemLogger.info("Уведомления настроены на \(time.value) часов")
+        logger?.log(.info, "Уведомления настроены на \(time.value) часов")
         timeName = time
     }
     
     func didToggleSwitched(isRepeat: Bool) {
-        SystemLogger.info("Повторять уведомления после отображения: \(isRepeat)")
+        logger?.log(.info, "Повторять уведомления после отображения: \(isRepeat)")
         isRepeatNotification = isRepeat
     }
 }
@@ -185,12 +188,12 @@ extension SettingsPresenter: NotificationCellDelegate {
 
 extension SettingsPresenter: SortingCellDelegate {
     func didSelectSort(ascending: SortAscending) {
-        SystemLogger.info("Направление сортировки: \(ascending.description)")
+        logger?.log(.info, "Направление сортировки: \(ascending.description)")
         ascendingName = ascending
     }
     
     func didSelectSort(field: SortField) {
-        SystemLogger.info("Поле сортировки: \(field.rawValue)")
+        logger?.log(.info, "Поле сортировки: \(field.rawValue)")
         fieldName = field
     }
 }

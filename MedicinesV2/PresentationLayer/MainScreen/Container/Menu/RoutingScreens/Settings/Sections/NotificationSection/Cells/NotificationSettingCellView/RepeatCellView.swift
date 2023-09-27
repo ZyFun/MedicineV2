@@ -10,6 +10,11 @@ import DTLogger
 
 final class RepeatCellView: BaseView {
     
+    // MARK: - Dependencies
+    
+    // TODO: (MEDIC-48) Подумать как избавится от инициализации синглтона, если это возможно
+    private let logger: DTLogger = DTLogger.shared
+    
     // MARK: - Private properties
     
     private var toggleAction: ((Bool) -> Void)?
@@ -55,7 +60,7 @@ final class RepeatCellView: BaseView {
     
     private func didChangedValueSwitch() {
         guard let toggleAction = self.toggleAction else {
-            SystemLogger.error("Действие не было передано на вью ячейки")
+            logger.log(.error, "Действие не было передано на вью ячейки")
             return
         }
         

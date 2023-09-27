@@ -33,8 +33,12 @@ final class MedicinesInteractor {
     
     /// Ссылка на презентер
     weak var presenter: MedicinesPresentationLogiс?
+    
+    // MARK: - Dependencies
+    
     var coreDataService: ICoreDataService?
     var notificationManager: INotificationMedicineManager?
+    var logger: DTLogger?
     
     /// Свойство текущей аптечки
     /// - необходимо для фильтрации лекарств в текущей аптечке и обновления плейсхолдера
@@ -65,7 +69,7 @@ extension MedicinesInteractor: MedicinesBusinessLogic {
                     
                     self.updatePlaceholder(for: firstAidKit)
                 case .failure(let error):
-                    SystemLogger.error(error.localizedDescription)
+                    self.logger?.log(.error, error.localizedDescription)
                 }
             }
         }
@@ -93,30 +97,30 @@ extension MedicinesInteractor: MedicinesBusinessLogic {
     ) -> DBFirstAidKit? {
         
         guard let currentFirstAidKitID = currentFirstAidKit?.objectID else {
-            SystemLogger.error("Не удалось найти ID объекта")
+            logger?.log(.error, "Не удалось найти ID объекта")
             return nil
         }
         
         if let firstAidKit = firstAidKits.filter({ $0.objectID == currentFirstAidKitID }).first {
             return firstAidKit
         } else {
-            SystemLogger.warning("Объект не найден")
+            logger?.log(.warning, "Объект не найден")
             return nil
         }
     }
     
     func updatePlaceholder(for currentFirstAidKit: DBFirstAidKit?) {
         guard let currentFirstAidKit = currentFirstAidKit else {
-            SystemLogger.error("Аптечка не была передана")
+            logger?.log(.error, "Аптечка не была передана")
             return
         }
         
         if currentFirstAidKit.medicines == [] {
             presenter?.showPlaceholder()
-            SystemLogger.info("Лекарств в аптечке нет. Плейсхолдер отображен")
+            logger?.log(.info, "Лекарств в аптечке нет. Плейсхолдер отображен")
         } else {
             presenter?.hidePlaceholder()
-            SystemLogger.info("Лекарства в аптечке есть. Плейсхолдер скрыт")
+            logger?.log(.info, "Лекарства в аптечке есть. Плейсхолдер скрыт")
         }
     }
 }

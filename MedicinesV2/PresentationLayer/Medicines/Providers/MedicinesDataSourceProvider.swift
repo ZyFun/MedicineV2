@@ -23,16 +23,22 @@ final class MedicinesDataSourceProvider: NSObject, IMedicinesDataSourceProvider 
     private let presenter: MedicinesViewControllerOutput?
     private let currentFirstAidKit: DBFirstAidKit
     
+    // MARK: - Dependencies
+    
+    private let logger: DTLogger
+    
     // MARK: - Initializer
     
     init(
         presenter: MedicinesViewControllerOutput?,
         resultManager: IMedicinesFetchedResultsManager,
-        currentFirstAidKit: DBFirstAidKit
+        currentFirstAidKit: DBFirstAidKit,
+        logger: DTLogger
     ) {
         self.presenter = presenter
         self.fetchedResultManager = resultManager
         self.currentFirstAidKit = currentFirstAidKit
+        self.logger = logger
     }
     
     // MARK: - Private methods
@@ -45,7 +51,7 @@ final class MedicinesDataSourceProvider: NSObject, IMedicinesDataSourceProvider 
         guard let medicine = fetchedResultManager.fetchedResultsController.object(
             at: indexPath
         ) as? DBMedicine else {
-            SystemLogger.error("Ошибка каста object к DBMedicine")
+            logger.log(.error, "Ошибка каста object к DBMedicine")
             return nil
         }
         

@@ -28,6 +28,10 @@ final class MedicineViewController: UITableViewController {
     /// Содержит в себе выбранную аптечку, для её связи с лекарствами
     var currentFirstAidKit: DBFirstAidKit?
     
+    // MARK: - Dependencies
+    
+    var logger: DTLogger?
+    
     // MARK: - Private Properties
     
     private var datePicker: UIDatePicker!
@@ -184,11 +188,11 @@ private extension MedicineViewController {
     /// Конфигурирование степпера
     func setupStepperMedicine() {
         guard let value = medicineAmountTextField.text?.doubleValue else {
-            SystemLogger.error("Нет значения для степпера")
+            logger?.log(.error, "Нет значения для степпера")
             return
         }
         guard let stepValue = medicineCountStepsTextField.text?.doubleValue else {
-            SystemLogger.error("Нет значения для шага степпера")
+            logger?.log(.error, "Нет значения для шага степпера")
             return
         }
         
@@ -314,7 +318,7 @@ private extension MedicineViewController {
         
         if textField == medicineCountStepsTextField {
             guard var amountMedicine = textField.text?.doubleValue else {
-                SystemLogger.error("Нет значения количества лекарств")
+                logger?.log(.error, "Нет значения количества лекарств")
                 return
             }
             
@@ -337,7 +341,7 @@ private extension MedicineViewController {
         
         if textField == medicineAmountTextField {
             guard let amountMedicine = textField.text?.doubleValue else {
-                SystemLogger.error("Нет значения количества лекарств")
+                logger?.log(.error, "Нет значения количества лекарств")
                 return
             }
             textField.text = String(format: "%.2f", amountMedicine)

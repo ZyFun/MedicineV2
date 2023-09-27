@@ -19,6 +19,10 @@ final class SettingsViewController: UIViewController {
     
     var presenter: SettingsPresenter?
     
+    // MARK: - Dependencies
+    
+    var logger: DTLogger?
+    
     // MARK: - Private property
     
     private var factory: SettingsFactory?
@@ -102,7 +106,7 @@ private extension SettingsViewController {
     
     private func setupButtonsAction() {
         let cancelButtonTapped = UIAction { [weak self] _ in
-            SystemLogger.info("Выход без сохранения")
+            self?.logger?.log(.info, "Выход без сохранения")
             self?.dismiss(animated: true)
         }
         

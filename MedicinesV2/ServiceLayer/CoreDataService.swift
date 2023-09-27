@@ -35,11 +35,9 @@ protocol ICoreDataService {
     func delete(_ currentObject: NSManagedObject, context: NSManagedObjectContext)
 }
  
-/// Все действия с базой данных происходят через экземпляр этого класса (Singleton)
+///  Класс для работы с CoreData
 final class CoreDataService {
-    
-    /// Глобальная точка доступа к созданному экземпляру класса (pattern Singleton)
-    static let shared = CoreDataService()
+    private let logger: DTLogger
     
     // MARK: - Core Data stack
     
@@ -47,9 +45,9 @@ final class CoreDataService {
         let container = NSPersistentContainer(name: "Medicines")
         container.loadPersistentStores { storeDescription, error in
             if let error = error {
-                SystemLogger.error("\(error)")
+                self.logger.log(.error, "\(error)")
             } else {
-                SystemLogger.info("\(storeDescription)")
+                self.logger.log(.info, "\(storeDescription)")
             }
         }
         return container
@@ -67,7 +65,9 @@ final class CoreDataService {
         return context
     }()
     
-    private init() {}
+    init(logger: DTLogger) {
+        self.logger = logger
+    }
 }
 
 // MARK: - CRUD
@@ -101,7 +101,7 @@ extension CoreDataService: ICoreDataService {
         do {
             try fetchResultController.performFetch()
         } catch {
-            SystemLogger.error(error.localizedDescription)
+            logger.log(.error, error.localizedDescription)
         }
         
         return fetchResultController
@@ -115,7 +115,7 @@ extension CoreDataService: ICoreDataService {
         let dbFirstAidKit = DBFirstAidKit(context: context)
         dbFirstAidKit.title = firstAidKit
 
-        SystemLogger.info("Запуск сохранения \(dbFirstAidKit.title ?? "no name")")
+        logger.log(.info, "Запуск сохранения \(dbFirstAidKit.title ?? "no name")")
     }
     
     func create(
@@ -129,7 +129,7 @@ extension CoreDataService: ICoreDataService {
         )
         
         guard let dbMedicine = managedObject as? DBMedicine else {
-            SystemLogger.error("Ошибка каста до DBMedicine")
+            logger.log(.error, "Ошибка каста до DBMedicine")
             return
         }
         
@@ -144,7 +144,8 @@ extension CoreDataService: ICoreDataService {
         if let currentFirstAidKit = currentFirstAidKit {
             currentFirstAidKit.addToMedicines(dbMedicine)
             
-            SystemLogger.info(
+            logger.log(
+                .info,
                 """
                 В базу добавлено новое лекарство.
                 Лекарств в базе: \(currentFirstAidKit.medicines?.count ?? 0)
@@ -187,7 +188,7 @@ extension CoreDataService: ICoreDataService {
         do {
             data = try readContext.fetch(fetchRequest)
         } catch {
-            SystemLogger.error(error.localizedDescription)
+            logger.log(.error, error.localizedDescription)
         }
 
         return data
@@ -196,18 +197,18 @@ extension CoreDataService: ICoreDataService {
     func update(_ currentFirstAidKit: DBFirstAidKit, newName: String, context: NSManagedObjectContext) {
         let objectID = currentFirstAidKit.objectID
         guard let currentObject = context.object(with: objectID) as? DBFirstAidKit else {
-            SystemLogger.error("Не удалось скастить объект до DBFirstAidKit")
+            logger.log(.error, "Не удалось скастить объект до DBFirstAidKit")
             return
         }
         currentObject.title = newName
         
-        SystemLogger.info("Запуск изменения аптечки \(currentFirstAidKit.title ?? "no name")")
+        logger.log(.info, "Запуск изменения аптечки \(currentFirstAidKit.title ?? "no name")")
     }
     
     func update(_ currentMedicine: DBMedicine, newData: MedicineModel, context: NSManagedObjectContext) {
         let objectID = currentMedicine.objectID
         guard let currentObject = context.object(with: objectID) as? DBMedicine else {
-            SystemLogger.error("Не удалось скастить объект до DBMedicine")
+            logger.log(.error, "Не удалось скастить объект до DBMedicine")
             return
         }
         currentObject.title = newData.title
@@ -217,7 +218,7 @@ extension CoreDataService: ICoreDataService {
         currentObject.stepCountForStepper = (newData.stepCountForStepper) as? NSNumber
         currentObject.expiryDate = newData.expiryDate
         
-        SystemLogger.info("Запуск изменения лекарства \(currentMedicine.title ?? "no name")")
+        logger.log(.info, "Запуск изменения лекарства \(currentMedicine.title ?? "no name")")
     }
     
     func delete(
@@ -228,7 +229,7 @@ extension CoreDataService: ICoreDataService {
         let currentObject = context.object(with: objectID)
         context.delete(currentObject)
 
-        SystemLogger.info("Запуск удаления объекта из базы")
+        logger.log(.info, "Запуск удаления объекта из базы")
     }
     
     // MARK: - Save context
@@ -237,34 +238,24 @@ extension CoreDataService: ICoreDataService {
         let context = writeContext
         context.perform { [weak self] in
             block(context)
-            SystemLogger.info(
-                "Проверка контекста на изменение"
-            )
+            self?.logger.log(.info, "Проверка контекста на изменение")
             if context.hasChanges {
-                SystemLogger.info(
-                    "Данные изменены, попытка сохранения"
-                )
+                self?.logger.log(.info, "Данные изменены, попытка сохранения")
                 do {
                     try self?.performSave(in: context)
                 } catch {
-                    SystemLogger.error(error.localizedDescription)
+                    self?.logger.log(.error, error.localizedDescription)
                 }
             } else {
-                SystemLogger.info(
-                    "Изменений нет"
-                )
+                self?.logger.log(.info, "Изменений нет")
             }
             
-            SystemLogger.info(
-                "Проверка контекста на изменение закончена"
-            )
+            self?.logger.log(.info, "Проверка контекста на изменение закончена")
         }
     }
     
     private func performSave(in context: NSManagedObjectContext) throws {
         try context.save()
-        SystemLogger.info(
-            "Данные сохранены"
-        )
+        logger.log(.info, "Данные сохранены")
     }
 }

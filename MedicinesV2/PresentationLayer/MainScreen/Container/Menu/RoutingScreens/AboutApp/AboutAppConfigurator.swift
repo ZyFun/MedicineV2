@@ -6,9 +6,16 @@
 //
 
 import UIKit
+import DTLogger
 
 /// Конфигурация MVP модуля
 final class AboutAppConfigurator {
+    private let logger: DTLogger
+    
+    init(logger: DTLogger) {
+        self.logger = logger
+    }
+    
     func config(
         view: UIViewController
     ) {
@@ -25,5 +32,6 @@ final class AboutAppConfigurator {
         
         view.presenter = presenter
         presenter.view = view
+        presenter.logger = logger
     }
 }

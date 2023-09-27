@@ -21,12 +21,18 @@ final class FirstAidKitsFetchedResultsManager: NSObject,
     weak var tableView: UITableView?
     var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>
     
+    // MARK: - Dependencies
+    
+    let logger: DTLogger
+    
     // MARK: - Initializer
     
     init(
-        fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>
+        fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>,
+        logger: DTLogger
     ) {
         self.fetchedResultsController = fetchedResultsController
+        self.logger = logger
         super.init()
         self.fetchedResultsController.delegate = self
     }
@@ -106,7 +112,7 @@ extension FirstAidKitsFetchedResultsManager: NSFetchedResultsControllerDelegate 
                 )
             }
         @unknown default:
-            SystemLogger.error("Что то пошло не так в NSFetchedResultsControllerDelegate")
+            logger.log(.error, "Что то пошло не так в NSFetchedResultsControllerDelegate")
         }
     }
     
