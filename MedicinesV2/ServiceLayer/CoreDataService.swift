@@ -37,7 +37,9 @@ protocol ICoreDataService {
  
 ///  Класс для работы с CoreData
 final class CoreDataService {
-    private let logger: DTLogger
+    static let shared: ICoreDataService = CoreDataService()
+    
+    private let logger: DTLogger = DTLogger.shared
     
     // MARK: - Core Data stack
     
@@ -65,9 +67,7 @@ final class CoreDataService {
         return context
     }()
     
-    init(logger: DTLogger) {
-        self.logger = logger
-    }
+    private init() {}
 }
 
 // MARK: - CRUD

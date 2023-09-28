@@ -19,7 +19,7 @@ final class ServiceAssembly {
     }()
     
     lazy var coreDataService: ICoreDataService = {
-        return CoreDataService(logger: logger)
+        return CoreDataService.shared
     }()
     
     lazy var sortingService: SortableSettings = {
