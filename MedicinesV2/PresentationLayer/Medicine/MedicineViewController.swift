@@ -85,7 +85,7 @@ private extension MedicineViewController {
         setupTableView()
         setupDataPicker()
         setupTextFields()
-        setDataMedicine()
+        setDataFromDBMedicine()
         setupStepperMedicine()
     }
     
@@ -111,12 +111,16 @@ private extension MedicineViewController {
     
     /// Действие сохранения для кнопки навигационной панели
     @objc func saveButtonPressed() {
+        // Служит для защиты, в случае попытки сохранить текст, который был вставлен
+        // в поле ввода сторонней клавиатурой или копипастом.
+        let medicineDose = medicineCountStepsTextField.text?.doubleValue ?? 1
+        
         presenter?.createMedicine(
             name: medicineNameTextField.text,
             type: medicineTypeTextField.text,
             purpose: medicinePurposeTextField.text,
             amount: medicineAmountTextField.text,
-            countSteps: medicineCountStepsTextField.text,
+            countSteps: "\(medicineDose)",
             expiryDate: medicinesExpiryDateTextField.text,
             currentFirstAidKit: currentFirstAidKit,
             medicine: medicine
@@ -197,7 +201,7 @@ private extension MedicineViewController {
         }
         
         medicineAmountStepper.value = value
-        medicineAmountStepper.stepValue = stepValue
+        medicineAmountStepper.stepValue = setStepper(stepValue: stepValue)
         medicineAmountStepper.minimumValue = 0
         medicineAmountStepper.maximumValue = 999
         
@@ -317,24 +321,10 @@ private extension MedicineViewController {
         }
         
         if textField == medicineCountStepsTextField {
-            guard var amountMedicine = textField.text?.doubleValue else {
-                logger?.log(.error, "Нет значения количества лекарств")
-                return
-            }
+            let amountMedicine = setStepper(
+                stepValue: textField.text?.doubleValue ?? 1
+            )
             
-            // Защита от введения нуля пользователем и расширением NumberFormatter.
-            // При значении 0 у степпера, приложение падает.
-            if amountMedicine == 0 {
-                // Извлечение из переданного с другого экрана значения,
-                // нужно для того, чтобы не возвращать 1 всегда,
-                // при защите от нулевого значения,
-                // так как поле ввода очищается для удобства пользователя.
-                amountMedicine = Double(truncating: medicine?.stepCountForStepper ?? 1)
-            }
-            
-            // Эта строчка нужна для того, чтобы обновить значение в поле ввода
-            // и отобразить введенноё число в формате с точкой,
-            // если было введено целое число
             textField.text = String(format: "%.2f", amountMedicine)
             medicineAmountStepper.stepValue = amountMedicine
         }
@@ -352,14 +342,30 @@ private extension MedicineViewController {
     }
 
     /// Заполнение свойств в поля лекарства из существующего выбранного лекарства
-    func setDataMedicine() {
+    func setDataFromDBMedicine() {
         if let medicine = medicine {
+            let dbDoseMedicine = setStepper(
+                stepValue: medicine.stepCountForStepper as? Double ?? 1
+            )
+            
             medicineNameTextField.text = medicine.title
             medicineTypeTextField.text = medicine.type
             medicinePurposeTextField.text = medicine.purpose
             medicineAmountTextField.text = "\(medicine.amount ?? 0)"
-            medicineCountStepsTextField.text = "\(medicine.stepCountForStepper ?? 1)"
+            medicineCountStepsTextField.text = "\(dbDoseMedicine)"
             medicinesExpiryDateTextField.text = "\(medicine.expiryDate?.toString() ?? "")"
+        }
+    }
+    
+    /// Метод для установки шага степпера
+    /// - Служит для правильного назначения поля с защитой от 0 и отрицательного значения
+    /// - Parameter stepValue: принимает дозу лекарства в качестве шага степпера
+    /// - Returns: возвращает 0 или положительное значение
+    func setStepper(stepValue: Double) -> Double {
+        if stepValue == 0 {
+            return 1
+        } else {
+            return abs(stepValue)
         }
     }
 }
