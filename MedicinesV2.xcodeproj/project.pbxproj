@@ -10,6 +10,7 @@
 		2C03448C2A15006100EE4120 /* UsesAutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C03448B2A15006100EE4120 /* UsesAutoLayout.swift */; };
 		2C0BD41029D5D9BB004F4D77 /* SettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0BD40F29D5D9BB004F4D77 /* SettingsService.swift */; };
 		2C0BD41229D5E006004F4D77 /* SettingsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0BD41129D5E006004F4D77 /* SettingsServiceTests.swift */; };
+		2C1A6B022ACC6EA300D72B38 /* MedicineCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1A6B012ACC6EA300D72B38 /* MedicineCell2.swift */; };
 		2C1D3E6A2760FFD800D01C51 /* String+NumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1D3E692760FFD800D01C51 /* String+NumberFormatter.swift */; };
 		2C24C0A32900689E0047CA3D /* ActionWithMedicine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C24C0A22900689E0047CA3D /* ActionWithMedicine.swift */; };
 		2C2654662A153DA600CC5C6D /* TableViewSectionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2654652A153DA600CC5C6D /* TableViewSectionBuilder.swift */; };
@@ -136,6 +137,7 @@
 		2C03448B2A15006100EE4120 /* UsesAutoLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsesAutoLayout.swift; sourceTree = "<group>"; };
 		2C0BD40F29D5D9BB004F4D77 /* SettingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsService.swift; sourceTree = "<group>"; };
 		2C0BD41129D5E006004F4D77 /* SettingsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsServiceTests.swift; sourceTree = "<group>"; };
+		2C1A6B012ACC6EA300D72B38 /* MedicineCell2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineCell2.swift; sourceTree = "<group>"; };
 		2C1D3E692760FFD800D01C51 /* String+NumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+NumberFormatter.swift"; sourceTree = "<group>"; };
 		2C24C0A22900689E0047CA3D /* ActionWithMedicine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionWithMedicine.swift; sourceTree = "<group>"; };
 		2C2654652A153DA600CC5C6D /* TableViewSectionBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewSectionBuilder.swift; sourceTree = "<group>"; };
@@ -289,6 +291,13 @@
 			path = PropertyWrappers;
 			sourceTree = "<group>";
 		};
+		2C1A6B032ACC703400D72B38 /* UIComponents */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UIComponents;
+			sourceTree = "<group>";
+		};
 		2C24C0A4290076AF0047CA3D /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -300,6 +309,7 @@
 		2C2654622A153C5F00CC5C6D /* App */ = {
 			isa = PBXGroup;
 			children = (
+				2C1A6B032ACC703400D72B38 /* UIComponents */,
 				2C2654632A153C7C00CC5C6D /* Base */,
 			);
 			name = App;
@@ -628,6 +638,7 @@
 			isa = PBXGroup;
 			children = (
 				2C5BBB7429000A6300D821EC /* MedicineCell.swift */,
+				2C1A6B012ACC6EA300D72B38 /* MedicineCell2.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1062,6 +1073,7 @@
 				2CDDB5F72A24CC7E00BBA817 /* SortingSettingCellModel.swift in Sources */,
 				2CAE169A28DA07AF0071E783 /* MedicineModel.swift in Sources */,
 				2CF1B8EB2971BB1300BCF726 /* MenuDataSourceProvider.swift in Sources */,
+				2C1A6B022ACC6EA300D72B38 /* MedicineCell2.swift in Sources */,
 				2CF1EE7B277348330031D79D /* FirstAidKitsConfigurator.swift in Sources */,
 				2CC874D52A1255FB000D16B5 /* NotificationSettingModel.swift in Sources */,
 				2C8A0E2A2A176790009081AE /* BaseTableViewCell.swift in Sources */,

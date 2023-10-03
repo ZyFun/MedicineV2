@@ -19,7 +19,7 @@ final class TableViewSectionHeaderBuilder {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.font = Fonts.settings(.titleSize).font
+        label.font = Fonts.systemNormal(.titleSize).font
         label.textColor = Colors.darkCyan
         return label
     }()

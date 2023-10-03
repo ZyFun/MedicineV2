@@ -76,19 +76,23 @@ extension MedicinesDataSourceProvider: UITableViewDataSource {
     ) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: String(describing: MedicineCell.self),
+            withIdentifier: String(describing: MedicineCell2.self),
             for: indexPath
-        ) as? MedicineCell else { return UITableViewCell() }
+        ) as? MedicineCell2 else { return UITableViewCell() }
         
-        guard let medicine = fetchMedicine(at: indexPath) else { return UITableViewCell() }
+        let medicine = fetchMedicine(at: indexPath)
         
         cell.configure(
-            name: medicine.title ?? "",
-            type: medicine.type,
-            purpose: medicine.purpose,
-            expiryDate: medicine.expiryDate,
-            amount: medicine.amount
+            name: medicine?.title ?? "",
+            type: medicine?.type,
+            purpose: medicine?.purpose,
+            expiryDate: medicine?.expiryDate,
+            amount: medicine?.amount
         )
+        
+        cell.buttonTappedAction = { [weak self] in
+            self?.presenter?.routeToMedicine(with: self?.currentFirstAidKit, by: medicine)
+        }
         
         return cell
     }
@@ -98,13 +102,6 @@ extension MedicinesDataSourceProvider: UITableViewDataSource {
 // MARK: - Table view delegate
 
 extension MedicinesDataSourceProvider: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        guard let currentMedicine = fetchMedicine(at: indexPath) else { return }
-        presenter?.routeToMedicine(with: currentFirstAidKit, by: currentMedicine)
-    }
     
     func tableView(
         _ tableView: UITableView,
