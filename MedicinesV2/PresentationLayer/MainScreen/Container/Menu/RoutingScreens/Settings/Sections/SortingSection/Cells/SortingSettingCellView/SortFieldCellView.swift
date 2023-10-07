@@ -25,7 +25,7 @@ final class SortFieldCellView: BaseView {
     @UsesAutoLayout
     private var nameSettingLabel: UILabel = {
         let label = UILabel()
-        label.font = Fonts.settings(.defaultSize).font
+        label.font = Fonts.systemNormal(.defaultSize).font
         return label
     }()
     

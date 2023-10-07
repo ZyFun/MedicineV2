@@ -14,6 +14,9 @@ enum SystemIcons: String {
     case deleteIcon = "trash"
     case cart = "cart"
     
+    // Default image medicine
+    case pills = "pills.fill"
+    
     // Menu icons
     case gear = "gear"
     case book = "book.fill"

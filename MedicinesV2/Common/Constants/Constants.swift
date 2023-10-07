@@ -16,3 +16,8 @@ struct Constants {
         static let mainView: CGFloat = 20
     }
 }
+
+struct Indents {
+    static let edgeMarginPadding: CGFloat = 19
+    static let elementsPadding: CGFloat = 8
+}
