@@ -106,10 +106,14 @@ extension FirstAidKitsDataSourceProvider: UITableViewDataSource {
         let expiredCount = searchExpiredMedicines(for: firstAidKit)
         
         cell.configure(
-            titleFirstAidKit: firstAidKit.title,
-            amountMedicines: String(currentAmountMedicines ?? 0),
-            expiredCount: expiredCount
+            name: firstAidKit.title ?? "",
+            expiredAmount: expiredCount,
+            amount: currentAmountMedicines
         )
+        
+        cell.buttonTappedAction = { [weak self] in
+            self?.presenter?.routeToMedicines(with: firstAidKit)
+        }
         
         return cell
     }
@@ -119,17 +123,6 @@ extension FirstAidKitsDataSourceProvider: UITableViewDataSource {
 // MARK: - Table view delegate
 
 extension FirstAidKitsDataSourceProvider: UITableViewDelegate {
-    
-    func tableView(
-        _ tableView: UITableView,
-        didSelectRowAt indexPath: IndexPath
-    ) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        guard let currentFirstAidKit = fetchFirstAidKit(at: indexPath) else { return }
-        presenter?.routeToMedicines(with: currentFirstAidKit)
-    }
-    
     func tableView(
         _ tableView: UITableView,
         trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
@@ -185,6 +178,6 @@ extension FirstAidKitsDataSourceProvider: UITableViewDelegate {
 
 private extension FirstAidKitsDataSourceProvider {
     struct Constants {
-        static let diameterActionButton: Double = 35
+        static let diameterActionButton: Double = 38
     }
 }

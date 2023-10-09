@@ -9,10 +9,16 @@ import UIKit
 
 /// Изображения системных иконок
 enum SystemIcons: String {
-    // Cell action button icons
+    // Cell action icons
     case editIcon = "pencil"
     case deleteIcon = "trash"
     case cart = "cart"
+    
+    // Alert icon cell
+    case alert = "exclamationmark.triangle"
+    
+    // Default image first aid kit
+    case firstAidKit = "cross.case"
     
     // Default image medicine
     case pills = "pills.fill"
