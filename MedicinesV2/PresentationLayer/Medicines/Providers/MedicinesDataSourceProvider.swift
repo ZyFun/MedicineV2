@@ -76,9 +76,9 @@ extension MedicinesDataSourceProvider: UITableViewDataSource {
     ) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: String(describing: MedicineCell2.self),
+            withIdentifier: String(describing: MedicineCell.self),
             for: indexPath
-        ) as? MedicineCell2 else { return UITableViewCell() }
+        ) as? MedicineCell else { return UITableViewCell() }
         
         let medicine = fetchMedicine(at: indexPath)
         
@@ -129,7 +129,7 @@ extension MedicinesDataSourceProvider: UITableViewDelegate {
         )?.withTintColor(
             .white,
             renderingMode: .alwaysTemplate
-        ).addBackgroundCircle(color: deleteColor, diameter: 35)
+        ).addBackgroundCircle(color: deleteColor, diameter: 38)
         
         deleteAction.backgroundColor = .systemGray6
         

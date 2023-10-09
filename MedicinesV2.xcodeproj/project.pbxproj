@@ -10,7 +10,7 @@
 		2C03448C2A15006100EE4120 /* UsesAutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C03448B2A15006100EE4120 /* UsesAutoLayout.swift */; };
 		2C0BD41029D5D9BB004F4D77 /* SettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0BD40F29D5D9BB004F4D77 /* SettingsService.swift */; };
 		2C0BD41229D5E006004F4D77 /* SettingsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0BD41129D5E006004F4D77 /* SettingsServiceTests.swift */; };
-		2C1A6B022ACC6EA300D72B38 /* MedicineCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1A6B012ACC6EA300D72B38 /* MedicineCell2.swift */; };
+		2C1A6B022ACC6EA300D72B38 /* MedicineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1A6B012ACC6EA300D72B38 /* MedicineCell.swift */; };
 		2C1D3E6A2760FFD800D01C51 /* String+NumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1D3E692760FFD800D01C51 /* String+NumberFormatter.swift */; };
 		2C24C0A32900689E0047CA3D /* ActionWithMedicine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C24C0A22900689E0047CA3D /* ActionWithMedicine.swift */; };
 		2C2654662A153DA600CC5C6D /* TableViewSectionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2654652A153DA600CC5C6D /* TableViewSectionBuilder.swift */; };
@@ -30,12 +30,12 @@
 		2C47A4FA2936B371000DFB49 /* CoreDataServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C47A4F92936B371000DFB49 /* CoreDataServiceTests.swift */; };
 		2C480C84275FB1FA000CD5CC /* Date+DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C480C83275FB1FA000CD5CC /* Date+DateFormatter.swift */; };
 		2C480C86275FB340000CD5CC /* String+DateFormatter.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C480C85275FB340000CD5CC /* String+DateFormatter.swift.swift */; };
+		2C4FEB6B2AD430DC00B06C60 /* FirstAidKitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4FEB6A2AD430DC00B06C60 /* FirstAidKitCell.swift */; };
 		2C52BDBB273540F400356A63 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C52BDBA273540F400356A63 /* AppDelegate.swift */; };
 		2C52BDC2273540F400356A63 /* MedicineViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C52BDC0273540F400356A63 /* MedicineViewController.storyboard */; };
 		2C52BDC7273540F600356A63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C52BDC6273540F600356A63 /* Assets.xcassets */; };
 		2C52BDCA273540F600356A63 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C52BDC8273540F600356A63 /* LaunchScreen.storyboard */; };
 		2C56E08D29057A02009AAB46 /* UIImage+GraphicsImageRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C56E08C29057A02009AAB46 /* UIImage+GraphicsImageRenderer.swift */; };
-		2C5BBB7529000A6300D821EC /* MedicineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5BBB7429000A6300D821EC /* MedicineCell.swift */; };
 		2C5F113627707CF60040536D /* Medicines.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F113327707CF60040536D /* Medicines.xcdatamodeld */; };
 		2C60890927356B6400E66081 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60890827356B6400E66081 /* CoreDataService.swift */; };
 		2C62A6BD29D480B4008ED3BE /* MenuPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C62A6BC29D480B4008ED3BE /* MenuPresenter.swift */; };
@@ -115,7 +115,6 @@
 		2CF28C7C28DCA24C0017C0A4 /* FirstAidKitsDataSourceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF28C7B28DCA24C0017C0A4 /* FirstAidKitsDataSourceProvider.swift */; };
 		2CF684AB2ABC5DC500C079B0 /* SortFieldCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF684AA2ABC5DC500C079B0 /* SortFieldCellView.swift */; };
 		2CF684AD2ABCAAE600C079B0 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 2CF684AC2ABCAAE600C079B0 /* Localizable.xcstrings */; };
-		2CF7909B28FED8A9009F53AD /* FirstAidKitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF7909A28FED8A9009F53AD /* FirstAidKitCell.swift */; };
 		2CFD714029B899D300EF4353 /* URLProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFD713F29B899D300EF4353 /* URLProvider.swift */; };
 		2CFD714229B89AE600EF4353 /* SocialMediaURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFD714129B89AE600EF4353 /* SocialMediaURL.swift */; };
 		D69BD2AEA467A95327B2355E /* Pods_MedicinesV2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AD6D90920B4CEB0A6846175 /* Pods_MedicinesV2.framework */; };
@@ -137,7 +136,7 @@
 		2C03448B2A15006100EE4120 /* UsesAutoLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsesAutoLayout.swift; sourceTree = "<group>"; };
 		2C0BD40F29D5D9BB004F4D77 /* SettingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsService.swift; sourceTree = "<group>"; };
 		2C0BD41129D5E006004F4D77 /* SettingsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsServiceTests.swift; sourceTree = "<group>"; };
-		2C1A6B012ACC6EA300D72B38 /* MedicineCell2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineCell2.swift; sourceTree = "<group>"; };
+		2C1A6B012ACC6EA300D72B38 /* MedicineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineCell.swift; sourceTree = "<group>"; };
 		2C1D3E692760FFD800D01C51 /* String+NumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+NumberFormatter.swift"; sourceTree = "<group>"; };
 		2C24C0A22900689E0047CA3D /* ActionWithMedicine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionWithMedicine.swift; sourceTree = "<group>"; };
 		2C2654652A153DA600CC5C6D /* TableViewSectionBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewSectionBuilder.swift; sourceTree = "<group>"; };
@@ -158,6 +157,7 @@
 		2C47A4F92936B371000DFB49 /* CoreDataServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataServiceTests.swift; sourceTree = "<group>"; };
 		2C480C83275FB1FA000CD5CC /* Date+DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+DateFormatter.swift"; sourceTree = "<group>"; };
 		2C480C85275FB340000CD5CC /* String+DateFormatter.swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+DateFormatter.swift.swift"; sourceTree = "<group>"; };
+		2C4FEB6A2AD430DC00B06C60 /* FirstAidKitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAidKitCell.swift; sourceTree = "<group>"; };
 		2C52BDB7273540F400356A63 /* MedicinesV2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MedicinesV2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C52BDBA273540F400356A63 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2C52BDC1273540F400356A63 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MedicineViewController.storyboard; sourceTree = "<group>"; };
@@ -166,7 +166,6 @@
 		2C52BDCB273540F600356A63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C56E08B290551E2009AAB46 /* Medicines v4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Medicines v4.xcdatamodel"; sourceTree = "<group>"; };
 		2C56E08C29057A02009AAB46 /* UIImage+GraphicsImageRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+GraphicsImageRenderer.swift"; sourceTree = "<group>"; };
-		2C5BBB7429000A6300D821EC /* MedicineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineCell.swift; sourceTree = "<group>"; };
 		2C5F113427707CF60040536D /* MedicineV2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MedicineV2.xcdatamodel; sourceTree = "<group>"; };
 		2C5F113527707CF60040536D /* Medicines v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Medicines v2.xcdatamodel"; sourceTree = "<group>"; };
 		2C60890827356B6400E66081 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
@@ -249,7 +248,6 @@
 		2CF28C7B28DCA24C0017C0A4 /* FirstAidKitsDataSourceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAidKitsDataSourceProvider.swift; sourceTree = "<group>"; };
 		2CF684AA2ABC5DC500C079B0 /* SortFieldCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortFieldCellView.swift; sourceTree = "<group>"; };
 		2CF684AC2ABCAAE600C079B0 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
-		2CF7909A28FED8A9009F53AD /* FirstAidKitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAidKitCell.swift; sourceTree = "<group>"; };
 		2CFD713F29B899D300EF4353 /* URLProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProvider.swift; sourceTree = "<group>"; };
 		2CFD714129B89AE600EF4353 /* SocialMediaURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialMediaURL.swift; sourceTree = "<group>"; };
 		BE78976F0737B2C246DC20D9 /* Pods-MedicinesV2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MedicinesV2.release.xcconfig"; path = "Target Support Files/Pods-MedicinesV2/Pods-MedicinesV2.release.xcconfig"; sourceTree = "<group>"; };
@@ -413,7 +411,7 @@
 		2C49688F2774956400436C5F /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				2CF7909A28FED8A9009F53AD /* FirstAidKitCell.swift */,
+				2C4FEB6A2AD430DC00B06C60 /* FirstAidKitCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -629,8 +627,7 @@
 		2C925720273D808600DA7284 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				2C5BBB7429000A6300D821EC /* MedicineCell.swift */,
-				2C1A6B012ACC6EA300D72B38 /* MedicineCell2.swift */,
+				2C1A6B012ACC6EA300D72B38 /* MedicineCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1065,7 +1062,7 @@
 				2CDDB5F72A24CC7E00BBA817 /* SortingSettingCellModel.swift in Sources */,
 				2CAE169A28DA07AF0071E783 /* MedicineModel.swift in Sources */,
 				2CF1B8EB2971BB1300BCF726 /* MenuDataSourceProvider.swift in Sources */,
-				2C1A6B022ACC6EA300D72B38 /* MedicineCell2.swift in Sources */,
+				2C1A6B022ACC6EA300D72B38 /* MedicineCell.swift in Sources */,
 				2CF1EE7B277348330031D79D /* FirstAidKitsConfigurator.swift in Sources */,
 				2CC874D52A1255FB000D16B5 /* NotificationSettingModel.swift in Sources */,
 				2C8A0E2A2A176790009081AE /* BaseTableViewCell.swift in Sources */,
@@ -1088,7 +1085,6 @@
 				2C8A0E2C2A17700D009081AE /* NotificationSettingCellBuilder.swift in Sources */,
 				2C0BD41029D5D9BB004F4D77 /* SettingsService.swift in Sources */,
 				2C40442329757CD800965DE4 /* AboutAppPresenter.swift in Sources */,
-				2C5BBB7529000A6300D821EC /* MedicineCell.swift in Sources */,
 				2C24C0A32900689E0047CA3D /* ActionWithMedicine.swift in Sources */,
 				2CF1B8E52971901800BCF726 /* MainContainerAnimator.swift in Sources */,
 				2C6762892757A32300B46E21 /* MedicineViewController.swift in Sources */,
@@ -1112,12 +1108,12 @@
 				2CED30E928F6E6C900A6CEE5 /* SplashAnimator.swift in Sources */,
 				2CDDB5F22A24CBBB00BBA817 /* SortingSectionViewModel.swift in Sources */,
 				2CF1EE77277347980031D79D /* FirstAidKitsRouter.swift in Sources */,
-				2CF7909B28FED8A9009F53AD /* FirstAidKitCell.swift in Sources */,
 				2CB115D82970355300A2846A /* MenuViewController.swift in Sources */,
 				2C56E08D29057A02009AAB46 /* UIImage+GraphicsImageRenderer.swift in Sources */,
 				2CF684AB2ABC5DC500C079B0 /* SortFieldCellView.swift in Sources */,
 				2C925719273D5C4400DA7284 /* MedicinesPresenter.swift in Sources */,
 				2CF1EE75277347800031D79D /* FirstAidKitsInteractor.swift in Sources */,
+				2C4FEB6B2AD430DC00B06C60 /* FirstAidKitCell.swift in Sources */,
 				2CF28C7C28DCA24C0017C0A4 /* FirstAidKitsDataSourceProvider.swift in Sources */,
 				2C92571D273D5CBF00DA7284 /* MedicinesRouter.swift in Sources */,
 				2CDDB6012A24DC6A00BBA817 /* SortingSectionConfigurator.swift in Sources */,

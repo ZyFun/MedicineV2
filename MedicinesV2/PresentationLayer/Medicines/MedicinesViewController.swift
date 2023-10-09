@@ -117,8 +117,8 @@ private extension MedicinesViewController {
     /// Регистрация ячейки
     func registerCell() {
         medicinesTableView?.register(
-            MedicineCell2.self,
-            forCellReuseIdentifier: String(describing: MedicineCell2.identifier)
+            MedicineCell.self,
+            forCellReuseIdentifier: String(describing: MedicineCell.identifier)
         )
     }
     

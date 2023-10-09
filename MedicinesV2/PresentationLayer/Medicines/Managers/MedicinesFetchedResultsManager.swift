@@ -72,7 +72,7 @@ extension MedicinesFetchedResultsManager: NSFetchedResultsControllerDelegate {
         case .update:
             if let indexPath = indexPath {
                 let medicine = fetchedResultsController.object(at: indexPath) as? DBMedicine
-                let cell = tableView?.cellForRow(at: indexPath) as? MedicineCell2
+                let cell = tableView?.cellForRow(at: indexPath) as? MedicineCell
 
                 cell?.configure(
                     name: medicine?.title ?? "",

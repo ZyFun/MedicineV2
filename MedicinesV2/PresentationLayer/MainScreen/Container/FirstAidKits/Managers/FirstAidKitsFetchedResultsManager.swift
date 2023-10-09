@@ -106,9 +106,9 @@ extension FirstAidKitsFetchedResultsManager: NSFetchedResultsControllerDelegate 
                 let expiredCount = searchExpiredMedicines(for: firstAidKit)
                 
                 cell?.configure(
-                    titleFirstAidKit: firstAidKit?.title,
-                    amountMedicines: String(firstAidKit?.medicines?.count ?? 0),
-                    expiredCount: expiredCount
+                    name: firstAidKit?.title ?? "",
+                    expiredAmount: expiredCount,
+                    amount: firstAidKit?.medicines?.count
                 )
             }
         @unknown default:
