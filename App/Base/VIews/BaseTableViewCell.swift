@@ -8,9 +8,7 @@
 import UIKit
 
 /// Протокол для создания идентификатора ячейки
-protocol IdentifiableCell {
-    
-}
+protocol IdentifiableCell {}
 
 extension IdentifiableCell {
     static var identifier: String {

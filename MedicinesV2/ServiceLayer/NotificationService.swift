@@ -42,6 +42,8 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate {
     
     // Создаём экземпляр класса, для управлением уведомлениями. current возвращет обект для центра уведомлений
     var notificationCenter = UNUserNotificationCenter.current()
+    // TODO: (MEDIC-48) Избавится от прямой инициализации синглтона и пробросить зависимость через init
+    let logger = DTLogger.shared
     
     private override init() {
         super.init()
@@ -66,12 +68,12 @@ extension NotificationService: INotificationService {
     func requestAuthorization() {
         // Метод запроса авторизации. options это те уведомления которые мы
         // хотим отправлять. granted обозначает, прошла авторизация или нет
-        notificationCenter.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, _) in
-            SystemLogger.info("Разрешение получено: \(granted)")
+        notificationCenter.requestAuthorization(options: [.alert, .sound, .badge]) { [weak self] (granted, _) in
+            self?.logger.log(.info, "Разрешение получено: \(granted)")
             
             guard granted else { return }
             // Запрашиваем состояние разрешений
-            self.getNotificationsSettings()
+            self?.getNotificationsSettings()
         }
     }
     
@@ -79,8 +81,8 @@ extension NotificationService: INotificationService {
     private func getNotificationsSettings() {
         // Проверяем состояние авторизаций или параметров уведомлений
         // TODO: (#Update) Посмотреть как можно запросить к примеру включить уведомления обратно, если пользователь их отключил
-        notificationCenter.getNotificationSettings { (settings) in
-            SystemLogger.info("Настройки получены: \(settings)")
+        notificationCenter.getNotificationSettings { [weak self] settings in
+            self?.logger.log(.info, "Настройки получены: \(settings)")
         }
     }
     
@@ -121,14 +123,14 @@ extension NotificationService: INotificationService {
         // если имя будет одинаковое.
         let identifier = nameMedicine + dateCreated
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
-        notificationCenter.add(request) { error in
+        notificationCenter.add(request) { [weak self] error in
             if let error = error {
-                SystemLogger.error("Error: \(error.localizedDescription)")
+                self?.logger.log(.error, "Error: \(error.localizedDescription)")
                 // TODO: (#Explore) Принт из примера обработки ошибок, хочу посмотреть что он покажет если что то пойдет не так
-                SystemLogger.error("\(error as Any)")
+                self?.logger.log(.error, "\(error as Any)")
             }
             
-            SystemLogger.info("Добавлено уведомление для лекарства: \(identifier)")
+            self?.logger.log(.info, "Добавлено уведомление для лекарства: \(identifier)")
         }
     }
     

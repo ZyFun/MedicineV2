@@ -40,31 +40,42 @@ protocol INotificationMedicineManager {
 
 final class NotificationMedicineManager {
     
+    // MARK: - Dependencies
+    
     let notificationService: INotificationService
     let notificationSettingService: NotificationSettings
+    private let logger: DTLogger
+    
+    // MARK: - Private properties
     
     private var hourNotifiable: Int
     private var isRepeat: Bool
     
+    // MARK: - Initializer
+    
     /// - Parameters:
     ///   - notificationService: сервис уведомлений
     ///   - notificationSettingService: сервис настроек
+    ///   - logger: сервис ведения логов
     ///   - hourNotifiable: час отображения уведомлений. По умолчанию установлено на 20 часов
     ///   - isRepeat: настройка повторения уведомления. По умолчанию true и уведомления повторяются
     init(
         notificationService: INotificationService,
         notificationSettingService: NotificationSettings,
+        logger: DTLogger,
         hourNotifiable: Int = 20,
         isRepeat: Bool = true
+        
     ) {
         self.notificationService = notificationService
         self.notificationSettingService = notificationSettingService
+        self.logger = logger
         self.hourNotifiable = hourNotifiable
         self.isRepeat = isRepeat
     }
 }
 
-// MARK: - Interface
+// MARK: - INotificationMedicineManager
 
 extension NotificationMedicineManager: INotificationMedicineManager {
     func deleteNotification(for medicine: DBMedicine) {
@@ -79,7 +90,7 @@ extension NotificationMedicineManager: INotificationMedicineManager {
                 withIdentifiers: [identifier]
             )
             
-            SystemLogger.info("Уведомление для лекарства \(identifier) удалено из очереди")
+            logger.log(.info, "Уведомление для лекарства \(identifier) удалено из очереди")
         }
     }
     
@@ -118,7 +129,7 @@ extension NotificationMedicineManager: INotificationMedicineManager {
             hourNotifiable = data.hourNotifiable
             isRepeat = data.isRepeat
         } catch {
-            SystemLogger.error(error.localizedDescription)
+            logger.log(.error, error.localizedDescription)
             // TODO: () Доделать обработку ошибок и уведомлять о ней пользователя
         }
     }
@@ -129,14 +140,14 @@ extension NotificationMedicineManager: INotificationMedicineManager {
         do {
             try notificationSettingService.saveNotificationSettings(hourNotifiable: hourNotifiable, isRepeat: isRepeat)
         } catch {
-            SystemLogger.error(error.localizedDescription)
+            logger.log(.error, error.localizedDescription)
             // TODO: () Доделать обработку ошибок и уведомлять о ней пользователя
         }
     }
     
     func setupBadgeForAppIcon(data: [DBMedicine]?) {
         guard let data = data else {
-            SystemLogger.warning("В базе еще нет лекарств")
+            logger.log(.warning, "В базе еще нет лекарств")
             return
         }
         
@@ -151,6 +162,6 @@ extension NotificationMedicineManager: INotificationMedicineManager {
         }
         notificationService.setupBadge(count: expiredMedicinesCount)
         
-        SystemLogger.info("Бейдж на иконке приложения обновлён")
+        logger.log(.info, "Бейдж на иконке приложения обновлён")
     }
 }

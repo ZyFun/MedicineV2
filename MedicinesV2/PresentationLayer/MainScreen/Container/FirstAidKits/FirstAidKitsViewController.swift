@@ -41,9 +41,13 @@ final class FirstAidKitsViewController: UIViewController {
     
     /// Ссылка на presenter
     var presenter: FirstAidKitsViewControllerOutput?
+    
+    // MARK: - Dependencies
+    
     var splashPresenter: ISplashPresenter?
     var dataSourceProvider: IFirstAidKitsDataSourceProvider?
     var fetchedResultManager: IFirstAidKitsFetchedResultsManager?
+    var logger: DTLogger?
     
     // TODO: (#Refactor) сделать презентер, для контейнера с меню, и управление через него
     weak var delegate: FirstAidKitsControllerDelegate?
@@ -250,7 +254,7 @@ extension FirstAidKitsViewController: UISearchBarDelegate {
         do {
             try fetchedResultManager?.fetchedResultsController.performFetch()
         } catch let error {
-            SystemLogger.error(error.localizedDescription)
+            logger?.log(.error, error.localizedDescription)
         }
         
         firstAidKitsTableView.reloadData()
@@ -263,7 +267,7 @@ extension FirstAidKitsViewController: UISearchBarDelegate {
         do {
             try fetchedResultManager?.fetchedResultsController.performFetch()
         } catch let error {
-            SystemLogger.error(error.localizedDescription)
+            logger?.log(.error, error.localizedDescription)
         }
         
         firstAidKitsTableView.reloadData()

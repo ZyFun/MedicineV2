@@ -46,9 +46,13 @@ final class FirstAidKitInteractor {
     
     /// Ссылка на презентер
     weak var presenter: FirstAidKitsPresentationLogic?
+    
+    // MARK: - Dependencies
+    
     /// Сервис UserNotifications
     var notificationManager: INotificationMedicineManager!
     var coreDataService: ICoreDataService?
+    var logger: DTLogger?
     
     // MARK: - Private methods
     
@@ -58,7 +62,7 @@ final class FirstAidKitInteractor {
     private func deleteNotifications(for firstAidKit: DBFirstAidKit) {
         firstAidKit.medicines?.forEach { medicine in
             guard let medicine = medicine as? DBMedicine else {
-                SystemLogger.error("Ошибка каста до DBMedicine")
+                logger?.log(.error, "Ошибка каста до DBMedicine")
                 return
             }
             
@@ -77,7 +81,7 @@ extension FirstAidKitInteractor: FirstAidKitsBusinessLogic {
         guard let data = coreDataService?.fetchRequest(
             String(describing: DBFirstAidKit.self)
         ) else {
-            SystemLogger.error("Не удалось получить аптечки из базы")
+            logger?.log(.error, "Не удалось получить аптечки из базы")
             return
         }
         
@@ -109,7 +113,7 @@ extension FirstAidKitInteractor: FirstAidKitsBusinessLogic {
         coreDataService?.performSave { [weak self] context in
             self?.coreDataService?.create(firstAidKitName, context: context)
             self?.presenter?.hidePlaceholder()
-            SystemLogger.info("Плейсхолдер скрыт после добавления аптечки")
+            self?.logger?.log(.info, "Плейсхолдер скрыт после добавления аптечки")
         }
     }
 
@@ -130,7 +134,7 @@ extension FirstAidKitInteractor: FirstAidKitsBusinessLogic {
                     self?.updatePlaceholder(for: firstAidKits)
                     self?.updateNotificationBadge()
                 case .failure(let error):
-                    SystemLogger.error(error.localizedDescription)
+                    self?.logger?.log(.error, error.localizedDescription)
                 }
             }
         }
@@ -139,7 +143,7 @@ extension FirstAidKitInteractor: FirstAidKitsBusinessLogic {
     private func updatePlaceholder(for firstAidKits: [DBFirstAidKit]) {
         if firstAidKits.isEmpty {
             presenter?.showPlaceholder()
-            SystemLogger.info("Плейсхолдер отображен после удаления аптечки")
+            logger?.log(.info, "Плейсхолдер отображен после удаления аптечки")
         }
     }
     
@@ -162,10 +166,10 @@ extension FirstAidKitInteractor: FirstAidKitsBusinessLogic {
                     dbFirstAidKits.forEach { dbFirstAidKit in
                         dbFirstAidKit.medicines?.forEach { medicine in
                             guard let medicine = medicine as? DBMedicine else {
-                                SystemLogger.error("Ошибка каста до DBMedicine")
+                                self?.logger?.log(.error, "Ошибка каста до DBMedicine")
                                 return
                             }
-                            SystemLogger.info("Уведомление в очереди для `\(medicine.title ?? "⚠️")` будет обновлено")
+                            self?.logger?.log(.info, "Уведомление в очереди для `\(medicine.title ?? "⚠️")` будет обновлено")
                             self?.notificationManager.addToQueueNotificationExpiredMedicine(
                                 data: medicine
                             )
@@ -174,7 +178,7 @@ extension FirstAidKitInteractor: FirstAidKitsBusinessLogic {
                     
                     self?.presenter?.dismissSplashScreen()
                 case .failure(let error):
-                    SystemLogger.error(error.localizedDescription)
+                    self?.logger?.log(.error, error.localizedDescription)
                 }
             }
         }

@@ -6,10 +6,11 @@
 //
 
 import XCTest
+import DTLogger
 @testable import MedicinesV2
 
 final class NotificationSettingServiceTests: XCTestCase {
-    private let notificationSettingService: NotificationSettings = SettingsService.shared
+    private let notificationSettingService: NotificationSettings = SettingsService(logger: DTLogger.shared)
     
     override func setUp() {
         super.setUp()

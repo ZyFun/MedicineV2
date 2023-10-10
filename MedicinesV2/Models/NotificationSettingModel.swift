@@ -23,7 +23,6 @@ extension NotificationSettingModel {
         do {
             return try encoder.encode(self)
         } catch {
-            SystemLogger.error("Не удалось кодировать настройки уведомлений")
             throw error
         }
     }
@@ -37,7 +36,6 @@ extension NotificationSettingModel {
         do {
             return try decoder.decode(NotificationSettingModel.self, from: data)
         } catch {
-            SystemLogger.error("Не удалось декодировать настройки уведомлений")
             throw error
         }
     }

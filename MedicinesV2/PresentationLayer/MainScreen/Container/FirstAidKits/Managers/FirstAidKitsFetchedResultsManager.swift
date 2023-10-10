@@ -21,12 +21,18 @@ final class FirstAidKitsFetchedResultsManager: NSObject,
     weak var tableView: UITableView?
     var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>
     
+    // MARK: - Dependencies
+    
+    let logger: DTLogger
+    
     // MARK: - Initializer
     
     init(
-        fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>
+        fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>,
+        logger: DTLogger
     ) {
         self.fetchedResultsController = fetchedResultsController
+        self.logger = logger
         super.init()
         self.fetchedResultsController.delegate = self
     }
@@ -100,13 +106,13 @@ extension FirstAidKitsFetchedResultsManager: NSFetchedResultsControllerDelegate 
                 let expiredCount = searchExpiredMedicines(for: firstAidKit)
                 
                 cell?.configure(
-                    titleFirstAidKit: firstAidKit?.title,
-                    amountMedicines: String(firstAidKit?.medicines?.count ?? 0),
-                    expiredCount: expiredCount
+                    name: firstAidKit?.title ?? "",
+                    expiredAmount: expiredCount,
+                    amount: firstAidKit?.medicines?.count
                 )
             }
         @unknown default:
-            SystemLogger.error("Что то пошло не так в NSFetchedResultsControllerDelegate")
+            logger.log(.error, "Что то пошло не так в NSFetchedResultsControllerDelegate")
         }
     }
     

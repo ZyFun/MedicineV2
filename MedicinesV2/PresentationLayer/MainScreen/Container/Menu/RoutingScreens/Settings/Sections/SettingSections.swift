@@ -7,4 +7,5 @@
 
 enum SettingSections {
     case notification(NotificationSectionViewModel)
+    case sorting(SortingSectionViewModel)
 }

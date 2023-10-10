@@ -25,7 +25,8 @@ final class PresentationAssembly {
     lazy var notificationMedicineManager: INotificationMedicineManager = {
         return NotificationMedicineManager(
             notificationService: notificationService,
-            notificationSettingService: notificationSettingService
+            notificationSettingService: notificationSettingService,
+            logger: serviceAssembly.logger
         )
     }()
     
@@ -34,24 +35,27 @@ final class PresentationAssembly {
         return FirstAidKitsConfigurator(
             notificationManager: notificationMedicineManager,
             coreDataService: coreDataService,
-            splashPresenter: SplashPresenter()
+            splashPresenter: SplashPresenter(),
+            logger: serviceAssembly.logger
         )
     }()
     
     /// Инжектирование зависимостей в ``MenuConfigurator``
     lazy var menu: MenuConfigurator = {
-        return MenuConfigurator()
+        return MenuConfigurator(logger: serviceAssembly.logger)
     }()
     
     /// Инжектирование зависимостей в ``AboutAppConfigurator``
     lazy var aboutApp: AboutAppConfigurator = {
-        return AboutAppConfigurator()
+        return AboutAppConfigurator(logger: serviceAssembly.logger)
     }()
     
     /// Инжектирование зависимостей в ``SettingsConfigurator``
     lazy var settings: SettingsConfigurator = {
         return SettingsConfigurator(
-            notificationSettingService: notificationSettingService
+            notificationSettingService: notificationSettingService,
+            sortingSettingService: sortingService,
+            logger: serviceAssembly.logger
         )
     }()
     
@@ -60,7 +64,8 @@ final class PresentationAssembly {
         return MedicinesConfigurator(
             notificationManager: notificationMedicineManager,
             coreDataService: coreDataService,
-            sortingService: sortingService
+            sortingService: sortingService,
+            logger: serviceAssembly.logger
         )
     }()
     
@@ -68,6 +73,8 @@ final class PresentationAssembly {
     lazy var medicine: MedicineConfigurator = {
         return MedicineConfigurator(
             notificationManager: notificationMedicineManager,
-            coreDataService: coreDataService)
+            coreDataService: coreDataService,
+            logger: serviceAssembly.logger
+        )
     }()
 }

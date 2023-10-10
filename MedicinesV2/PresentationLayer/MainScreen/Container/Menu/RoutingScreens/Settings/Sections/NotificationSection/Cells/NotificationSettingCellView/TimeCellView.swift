@@ -11,6 +11,11 @@ import DTLogger
 final class TimeCellView: BaseView {
     typealias TimeNotification = NotificationSettingCellModel.TimeNotification
     
+    // MARK: - Dependencies
+    
+    // TODO: (MEDIC-48) Подумать как избавится от синглтона если это возможно и пробросить зависимость
+    private let logger: DTLogger = DTLogger.shared
+    
     // MARK: - Private properties
     
     private var selectTimeAction: ((TimeNotification) -> Void)?
@@ -18,7 +23,7 @@ final class TimeCellView: BaseView {
     @UsesAutoLayout
     private var nameSettingLabel: UILabel = {
         let label = UILabel()
-        label.font = Fonts.settings(.defaultSize).font
+        label.font = Fonts.systemNormal(.defaultSize).font
         return label
     }()
     
@@ -54,7 +59,7 @@ final class TimeCellView: BaseView {
         let morning = UIAction(title: TimeNotification.morning.description) { [weak self] _ in
             self?.timeButton.setTitle(TimeNotification.morning.description, for: .normal)
             guard let selectTimeAction = self?.selectTimeAction else {
-                SystemLogger.error("Действие не было передано на вью ячейки")
+                self?.logger.log(.error, "Действие не было передано на вью ячейки")
                 return
             }
             
@@ -65,7 +70,7 @@ final class TimeCellView: BaseView {
             self?.timeButton.setTitle(TimeNotification.day.description, for: .normal)
             
             guard let selectTimeAction = self?.selectTimeAction else {
-                SystemLogger.error("Действие не было передано на вью ячейки")
+                self?.logger.log(.error, "Действие не было передано на вью ячейки")
                 return
             }
             
@@ -76,7 +81,7 @@ final class TimeCellView: BaseView {
             self?.timeButton.setTitle(TimeNotification.evening.description, for: .normal)
             
             guard let selectTimeAction = self?.selectTimeAction else {
-                SystemLogger.error("Действие не было передано на вью ячейки")
+                self?.logger.log(.error, "Действие не было передано на вью ячейки")
                 return
             }
             
@@ -97,22 +102,14 @@ final class TimeCellView: BaseView {
         
         NSLayoutConstraint.activate([
             nameSettingLabel.leadingAnchor
-                .constraint(equalTo: leadingAnchor, constant: Padding.contentInCell),
+                .constraint(equalTo: leadingAnchor, constant: Constants.SettingCell.yPadding),
             nameSettingLabel.centerYAnchor
                 .constraint(equalTo: centerYAnchor),
             
             timeButton.trailingAnchor
-                .constraint(equalTo: trailingAnchor, constant: -Padding.contentInCell),
+                .constraint(equalTo: trailingAnchor, constant: -Constants.SettingCell.yPadding),
             timeButton.centerYAnchor
                 .constraint(equalTo: centerYAnchor)
         ])
-    }
-}
-
-// MARK: - Constants
-
-private extension TimeCellView {
-    struct Padding {
-        static let contentInCell: CGFloat = 16
     }
 }

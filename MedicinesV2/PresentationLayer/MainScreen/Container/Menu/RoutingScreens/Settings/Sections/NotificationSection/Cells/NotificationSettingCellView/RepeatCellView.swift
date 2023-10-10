@@ -10,6 +10,11 @@ import DTLogger
 
 final class RepeatCellView: BaseView {
     
+    // MARK: - Dependencies
+    
+    // TODO: (MEDIC-48) Подумать как избавится от инициализации синглтона, если это возможно
+    private let logger: DTLogger = DTLogger.shared
+    
     // MARK: - Private properties
     
     private var toggleAction: ((Bool) -> Void)?
@@ -17,7 +22,7 @@ final class RepeatCellView: BaseView {
     @UsesAutoLayout
     private var nameSettingLabel: UILabel = {
         let label = UILabel()
-        label.font = Fonts.settings(.defaultSize).font
+        label.font = Fonts.systemNormal(.defaultSize).font
         return label
     }()
     
@@ -55,7 +60,7 @@ final class RepeatCellView: BaseView {
     
     private func didChangedValueSwitch() {
         guard let toggleAction = self.toggleAction else {
-            SystemLogger.error("Действие не было передано на вью ячейки")
+            logger.log(.error, "Действие не было передано на вью ячейки")
             return
         }
         
@@ -72,22 +77,14 @@ final class RepeatCellView: BaseView {
         
         NSLayoutConstraint.activate([
             nameSettingLabel.leadingAnchor
-                .constraint(equalTo: leadingAnchor, constant: Padding.contentInCell),
+                .constraint(equalTo: leadingAnchor, constant: Constants.SettingCell.yPadding),
             nameSettingLabel.centerYAnchor
                 .constraint(equalTo: centerYAnchor),
             
             repeatSwitch.trailingAnchor
-                .constraint(equalTo: trailingAnchor, constant: -Padding.contentInCell),
+                .constraint(equalTo: trailingAnchor, constant: -Constants.SettingCell.yPadding),
             repeatSwitch.centerYAnchor
                 .constraint(equalTo: centerYAnchor)
         ])
-    }
-}
-
-// MARK: - Constants
-
-private extension RepeatCellView {
-    struct Padding {
-        static let contentInCell: CGFloat = 16
     }
 }

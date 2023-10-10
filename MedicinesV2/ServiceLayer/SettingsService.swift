@@ -55,9 +55,15 @@ protocol NotificationSettings {
 }
 
 final class SettingsService {
-    static let shared = SettingsService()
+    // MARK: - Private properties
     
     private let userDefaults = UserDefaults.standard
+    
+    // MARK: - Dependencies
+    
+    private let logger: DTLogger
+    
+    // MARK: - Private struct
     
     /// Ключи для сохранения в ``UserDefaults``
     private enum Key: String {
@@ -66,7 +72,13 @@ final class SettingsService {
         case notification
     }
     
-    private init() {}
+    // MARK: - Initializer
+    
+    init(
+        logger: DTLogger
+    ) {
+        self.logger = logger
+    }
 }
 
 // MARK: - SortableSettings
@@ -110,13 +122,13 @@ extension SettingsService: SortableSettings {
             let key = Key.sortAscending.rawValue
             let value = ascending.isAscending
             self.userDefaults.set(value, forKey: key)
-            SystemLogger.info("Направление сортировки сохранено: \(ascending)")
+            self.logger.log(.info, "Направление сортировки сохранено: \(ascending)")
         }
     }
     
     func getSortAscending() -> Bool {
         if userDefaults.object(forKey: Key.sortAscending.rawValue) == nil {
-            SystemLogger.warning("Установлено направление по умолчанию")
+            logger.log(.warning, "Установлено направление по умолчанию")
             return true
         } else {
             return userDefaults.bool(forKey: Key.sortAscending.rawValue)
@@ -126,14 +138,14 @@ extension SettingsService: SortableSettings {
     func saveSortSetting(field: FieldSorting) {
         DispatchQueue.global(qos: .utility).async {
             self.userDefaults.set(field.type, forKey: Key.sortField.rawValue)
-            SystemLogger.info("Поле сортировки сохранено: \(field)")
+            self.logger.log(.info, "Поле сортировки сохранено: \(field)")
         }
     }
     
     func getSortField() -> String {
         let field = userDefaults.string(forKey: Key.sortField.rawValue)
         guard let field else {
-            SystemLogger.warning("Установлено поле по умолчанию")
+            logger.log(.warning, "Установлено поле по умолчанию")
             return #keyPath(DBMedicine.title)
         }
         
@@ -144,7 +156,7 @@ extension SettingsService: SortableSettings {
         DispatchQueue.global(qos: .utility).async {
             self.userDefaults.removeObject(forKey: Key.sortField.rawValue)
             self.userDefaults.removeObject(forKey: Key.sortAscending.rawValue)
-            SystemLogger.info("Направление сортировки сброшено")
+            self.logger.log(.info, "Направление сортировки сброшено")
         }
     }
 }
@@ -159,7 +171,7 @@ extension SettingsService: NotificationSettings {
             let encoded = try notification.encode()
             DispatchQueue.global(qos: .utility).async {
                 self.userDefaults.set(encoded, forKey: Key.notification.rawValue)
-                SystemLogger.info("Время уведомлений сохранено")
+                self.logger.log(.info, "Время уведомлений сохранено")
             }
         } catch {
             throw error
@@ -168,7 +180,7 @@ extension SettingsService: NotificationSettings {
     
     func getNotificationSettings() throws -> NotificationSettingModel? {
         guard let data = userDefaults.data(forKey: Key.notification.rawValue) else {
-            SystemLogger.warning("Время и повтор уведомлений установлены по умолчанию")
+            logger.log(.warning, "Время и повтор уведомлений установлены по умолчанию")
             return nil
         }
         
@@ -186,7 +198,7 @@ extension SettingsService: NotificationSettings {
     func deleteNotificationSettings() {
         DispatchQueue.global(qos: .utility).async {
             self.userDefaults.removeObject(forKey: Key.notification.rawValue)
-            SystemLogger.info("Время уведомлений сброшено")
+            self.logger.log(.info, "Время уведомлений сброшено")
         }
     }
 }

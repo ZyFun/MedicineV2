@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import DTLogger
 
 /// Конфигурация VIPER модуля
 final class MedicinesConfigurator {
@@ -13,15 +14,18 @@ final class MedicinesConfigurator {
     private let notificationManager: INotificationMedicineManager
     private let coreDataService: ICoreDataService
     private let sortingService: SortableSettings
+    private let logger: DTLogger
     
     init(
         notificationManager: INotificationMedicineManager,
         coreDataService: ICoreDataService,
-        sortingService: SortableSettings
+        sortingService: SortableSettings,
+        logger: DTLogger
     ) {
         self.coreDataService = coreDataService
         self.notificationManager = notificationManager
         self.sortingService = sortingService
+        self.logger = logger
     }
     
     /// Конфигурирование модуля
@@ -47,15 +51,18 @@ final class MedicinesConfigurator {
                 keyForSort: sortingService.getSortField(),
                 sortAscending: sortingService.getSortAscending(),
                 currentFirstAidKit: currentFirstAidKit
-            )
+            ),
+            logger: logger
         )
         let dataSourceProvider = MedicinesDataSourceProvider(
             presenter: presenter,
             resultManager: fetchedResultManager,
-            currentFirstAidKit: currentFirstAidKit
+            currentFirstAidKit: currentFirstAidKit,
+            logger: logger
         )
         
         view.presenter = presenter
+        view.logger = logger
         view.currentFirstAidKit = currentFirstAidKit
         view.dataSourceProvider = dataSourceProvider
         view.fetchedResultManager = fetchedResultManager
