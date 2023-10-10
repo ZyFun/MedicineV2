@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FirstAidKitsViewController" customModule="MedicinesV2" customModuleProvider="target">
+            <connections>
+                <outlet property="firstAidKitsTableView" destination="jeW-iw-ljd" id="2Uo-Tv-CQ9"/>
+                <outlet property="placeholderLabel" destination="Sho-xx-EYG" id="Cc3-79-E0q"/>
+                <outlet property="view" destination="iN0-l3-epB" id="OmD-TM-AUf"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="jeW-iw-ljd">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </tableView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="У вас еще нет аптечек. Для создания новой, нажмите + в правом верхнем углу." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sho-xx-EYG">
+                    <rect key="frame" x="20" y="427.5" width="374" height="41"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" systemColor="systemGrayColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="jeW-iw-ljd" secondAttribute="trailing" id="8Oa-oL-rb6"/>
+                <constraint firstAttribute="bottom" secondItem="jeW-iw-ljd" secondAttribute="bottom" id="9Vo-LF-Cmw"/>
+                <constraint firstItem="jeW-iw-ljd" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="PaR-Ij-Ekj"/>
+                <constraint firstItem="jeW-iw-ljd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Zbm-kf-OfS"/>
+                <constraint firstAttribute="trailing" secondItem="Sho-xx-EYG" secondAttribute="trailing" constant="20" id="iXf-fm-858"/>
+                <constraint firstItem="Sho-xx-EYG" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="rI1-ne-NwW"/>
+                <constraint firstItem="Sho-xx-EYG" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="yDL-8q-d2O"/>
+            </constraints>
+            <point key="canvasLocation" x="-157.97101449275362" y="53.571428571428569"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

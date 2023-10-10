@@ -6,34 +6,76 @@
 //
 
 import Foundation
+import DTLogger
 
 protocol INotificationMedicineManager {
     /// Метод для добавления уведомления о просроченном лекарстве в очередь центра уведомлений
     /// - Parameter data: принимает лекарство, уведомления для которого будут добавлены.
     /// - Метод используется при работе с моделью данных
     func addToQueueNotificationExpiredMedicine(data: MedicineModel)
+    
     /// Метод для добавления уведомления о просроченном лекарстве в очередь центра уведомлений
     /// - Parameter data: принимает лекарство, уведомления для которого будут добавлены.
     /// - Метод используется при работе с базой данных
     func addToQueueNotificationExpiredMedicine(data: DBMedicine)
+    
     /// Метод для удаления уведомления из очереди центра уведомлений
     /// - Parameter medicine: принимает лекарство, уведомление для которого будет удалено.
     func deleteNotification(for medicine: DBMedicine)
+    
     /// Метод установки бейджа с количеством просроченных лекарств на иконку приложения.
     /// - Parameter data: Принимает лекарства для поиска в них просроченных лекарств
     func setupBadgeForAppIcon(data: [DBMedicine]?)
+    
+    /// Метод для установки и сохранения времени уведомления
+    /// - Parameters:
+    ///   - hourNotifiable: принимает час, в который будет приходить уведомление
+    ///   - isRepeat: принимает Bool для возможности настройки повтора уведомления.
+    func setTimeForNotification(hourNotifiable: Int, isRepeat: Bool) throws
+    
+    /// Метод для получения времени уведомления
+    /// - Нужно вызывать перед тем как будет происходить добавление уведомления в очередь уведомлений.
+    func getTimeForNotification() throws
 }
 
 final class NotificationMedicineManager {
     
-    let notificationService: INotificationService
+    // MARK: - Dependencies
     
-    init(notificationService: INotificationService) {
+    let notificationService: INotificationService
+    let notificationSettingService: NotificationSettings
+    private let logger: DTLogger
+    
+    // MARK: - Private properties
+    
+    private var hourNotifiable: Int
+    private var isRepeat: Bool
+    
+    // MARK: - Initializer
+    
+    /// - Parameters:
+    ///   - notificationService: сервис уведомлений
+    ///   - notificationSettingService: сервис настроек
+    ///   - logger: сервис ведения логов
+    ///   - hourNotifiable: час отображения уведомлений. По умолчанию установлено на 20 часов
+    ///   - isRepeat: настройка повторения уведомления. По умолчанию true и уведомления повторяются
+    init(
+        notificationService: INotificationService,
+        notificationSettingService: NotificationSettings,
+        logger: DTLogger,
+        hourNotifiable: Int = 20,
+        isRepeat: Bool = true
+        
+    ) {
         self.notificationService = notificationService
+        self.notificationSettingService = notificationSettingService
+        self.logger = logger
+        self.hourNotifiable = hourNotifiable
+        self.isRepeat = isRepeat
     }
 }
 
-// MARK: - Interface
+// MARK: - INotificationMedicineManager
 
 extension NotificationMedicineManager: INotificationMedicineManager {
     func deleteNotification(for medicine: DBMedicine) {
@@ -48,15 +90,18 @@ extension NotificationMedicineManager: INotificationMedicineManager {
                 withIdentifiers: [identifier]
             )
             
-            CustomLogger.info("Уведомление для лекарства \(identifier) удалено из очереди")
+            logger.log(.info, "Уведомление для лекарства \(identifier) удалено из очереди")
         }
     }
     
     func addToQueueNotificationExpiredMedicine(data: MedicineModel) {
+        try? getTimeForNotification()
         notificationService.sendNotificationExpiredMedicine(
             reminder: data.expiryDate,
             nameMedicine: data.title,
-            dateCreated: data.dateCreated
+            dateCreated: data.dateCreated,
+            isRepeat: isRepeat,
+            hourNotifiable: hourNotifiable
         )
     }
     
@@ -68,16 +113,41 @@ extension NotificationMedicineManager: INotificationMedicineManager {
             fatalError("Дата создания лекарства должна быть обязательной")
         }
         
+        try? getTimeForNotification()
         notificationService.sendNotificationExpiredMedicine(
             reminder: data.expiryDate,
             nameMedicine: title,
-            dateCreated: dateCreated
+            dateCreated: dateCreated,
+            isRepeat: isRepeat,
+            hourNotifiable: hourNotifiable
         )
+    }
+    
+    func getTimeForNotification() throws {
+        do {
+            guard let data = try notificationSettingService.getNotificationSettings() else { return }
+            hourNotifiable = data.hourNotifiable
+            isRepeat = data.isRepeat
+        } catch {
+            logger.log(.error, error.localizedDescription)
+            // TODO: () Доделать обработку ошибок и уведомлять о ней пользователя
+        }
+    }
+    
+    func setTimeForNotification(hourNotifiable: Int, isRepeat: Bool) throws {
+        // TODO: () Дописать вызов для обновления времени обновления для всех лекарств
+        
+        do {
+            try notificationSettingService.saveNotificationSettings(hourNotifiable: hourNotifiable, isRepeat: isRepeat)
+        } catch {
+            logger.log(.error, error.localizedDescription)
+            // TODO: () Доделать обработку ошибок и уведомлять о ней пользователя
+        }
     }
     
     func setupBadgeForAppIcon(data: [DBMedicine]?) {
         guard let data = data else {
-            CustomLogger.warning("В базе еще нет лекарств")
+            logger.log(.warning, "В базе еще нет лекарств")
             return
         }
         
@@ -92,6 +162,6 @@ extension NotificationMedicineManager: INotificationMedicineManager {
         }
         notificationService.setupBadge(count: expiredMedicinesCount)
         
-        CustomLogger.info("Бейдж на иконке приложения обновлён")
+        logger.log(.info, "Бейдж на иконке приложения обновлён")
     }
 }

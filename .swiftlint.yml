@@ -2,6 +2,7 @@ excluded:
   - Pods
   - UnitTests
   - UITests
+  - MedicinesV2Tests
   - DerivedData
 
 warning_threshold: 15

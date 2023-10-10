@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import DTLogger
 
 protocol IMedicinesDataSourceProvider: UITableViewDelegate, UITableViewDataSource {
     var fetchedResultManager: IMedicinesFetchedResultsManager { get set }
@@ -22,16 +23,22 @@ final class MedicinesDataSourceProvider: NSObject, IMedicinesDataSourceProvider 
     private let presenter: MedicinesViewControllerOutput?
     private let currentFirstAidKit: DBFirstAidKit
     
+    // MARK: - Dependencies
+    
+    private let logger: DTLogger
+    
     // MARK: - Initializer
     
     init(
         presenter: MedicinesViewControllerOutput?,
         resultManager: IMedicinesFetchedResultsManager,
-        currentFirstAidKit: DBFirstAidKit
+        currentFirstAidKit: DBFirstAidKit,
+        logger: DTLogger
     ) {
         self.presenter = presenter
         self.fetchedResultManager = resultManager
         self.currentFirstAidKit = currentFirstAidKit
+        self.logger = logger
     }
     
     // MARK: - Private methods
@@ -44,7 +51,7 @@ final class MedicinesDataSourceProvider: NSObject, IMedicinesDataSourceProvider 
         guard let medicine = fetchedResultManager.fetchedResultsController.object(
             at: indexPath
         ) as? DBMedicine else {
-            CustomLogger.error("Ошибка каста object к DBMedicine")
+            logger.log(.error, "Ошибка каста object к DBMedicine")
             return nil
         }
         
@@ -73,15 +80,19 @@ extension MedicinesDataSourceProvider: UITableViewDataSource {
             for: indexPath
         ) as? MedicineCell else { return UITableViewCell() }
         
-        guard let medicine = fetchMedicine(at: indexPath) else { return UITableViewCell() }
+        let medicine = fetchMedicine(at: indexPath)
         
         cell.configure(
-            name: medicine.title ?? "",
-            type: medicine.type,
-            purpose: medicine.purpose,
-            expiryDate: medicine.expiryDate,
-            amount: medicine.amount
+            name: medicine?.title ?? "",
+            type: medicine?.type,
+            purpose: medicine?.purpose,
+            expiryDate: medicine?.expiryDate,
+            amount: medicine?.amount
         )
+        
+        cell.buttonTappedAction = { [weak self] in
+            self?.presenter?.routeToMedicine(with: self?.currentFirstAidKit, by: medicine)
+        }
         
         return cell
     }
@@ -91,13 +102,6 @@ extension MedicinesDataSourceProvider: UITableViewDataSource {
 // MARK: - Table view delegate
 
 extension MedicinesDataSourceProvider: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        guard let currentMedicine = fetchMedicine(at: indexPath) else { return }
-        presenter?.routeToMedicine(with: currentFirstAidKit, by: currentMedicine)
-    }
     
     func tableView(
         _ tableView: UITableView,
@@ -125,7 +129,7 @@ extension MedicinesDataSourceProvider: UITableViewDelegate {
         )?.withTintColor(
             .white,
             renderingMode: .alwaysTemplate
-        ).addBackgroundCircle(color: deleteColor, diameter: 35)
+        ).addBackgroundCircle(color: deleteColor, diameter: 38)
         
         deleteAction.backgroundColor = .systemGray6
         

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import DTLogger
 
 /// Протокол для работы с бизнес логикой модуля
 protocol MedicineBusinessLogic {
@@ -36,11 +37,19 @@ protocol MedicineBusinessLogic {
 }
 
 final class MedicineInteractor {
+    // MARK: - Public properties
+    
     /// Ссылка на презентер
     weak var presenter: MedicinePresentationLogic?
+    
+    // MARK: - Dependencies
+    
     var coreDataService: ICoreDataService?
     var notificationManager: INotificationMedicineManager?
+    var logger: DTLogger?
 }
+
+// MARK: - Business Logic
 
 extension MedicineInteractor: MedicineBusinessLogic {
     func createMedicine(
@@ -88,7 +97,7 @@ extension MedicineInteractor: MedicineBusinessLogic {
                         for: currentFirstAidKit
                     )
                 case .failure(let error):
-                    CustomLogger.error(error.localizedDescription)
+                    self.logger?.log(.error, error.localizedDescription)
                 }
             }
             
@@ -119,14 +128,14 @@ extension MedicineInteractor: MedicineBusinessLogic {
     ) -> DBFirstAidKit? {
         
         guard let currentFirstAidKitID = currentFirstAidKit?.objectID else {
-            CustomLogger.error("Не удалось найти ID объекта")
+            logger?.log(.error, "Не удалось найти ID объекта")
             return nil
         }
         
         if let firstAidKit = firstAidKits.filter({ $0.objectID == currentFirstAidKitID }).first {
             return firstAidKit
         } else {
-            CustomLogger.warning("Объект не найден")
+            logger?.log(.warning, "Объект не найден")
             return nil
         }
     }

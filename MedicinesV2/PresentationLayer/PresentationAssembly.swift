@@ -11,14 +11,23 @@ final class PresentationAssembly {
     
     private let notificationService: INotificationService
     private let coreDataService: ICoreDataService
+    private let sortingService: SortableSettings
+    private let notificationSettingService: NotificationSettings
     
     init() {
         notificationService = serviceAssembly.notificationService
         coreDataService = serviceAssembly.coreDataService
+        sortingService = serviceAssembly.sortingService
+        notificationSettingService = serviceAssembly.notificationSettingService
     }
     
+    /// Инжектирование зависимостей в ``NotificationMedicineManager``
     lazy var notificationMedicineManager: INotificationMedicineManager = {
-        return NotificationMedicineManager(notificationService: notificationService)
+        return NotificationMedicineManager(
+            notificationService: notificationService,
+            notificationSettingService: notificationSettingService,
+            logger: serviceAssembly.logger
+        )
     }()
     
     /// Инжектирование зависимостей в ``FirstAidKitsConfigurator``
@@ -26,7 +35,27 @@ final class PresentationAssembly {
         return FirstAidKitsConfigurator(
             notificationManager: notificationMedicineManager,
             coreDataService: coreDataService,
-            splashPresenter: SplashPresenter()
+            splashPresenter: SplashPresenter(),
+            logger: serviceAssembly.logger
+        )
+    }()
+    
+    /// Инжектирование зависимостей в ``MenuConfigurator``
+    lazy var menu: MenuConfigurator = {
+        return MenuConfigurator(logger: serviceAssembly.logger)
+    }()
+    
+    /// Инжектирование зависимостей в ``AboutAppConfigurator``
+    lazy var aboutApp: AboutAppConfigurator = {
+        return AboutAppConfigurator(logger: serviceAssembly.logger)
+    }()
+    
+    /// Инжектирование зависимостей в ``SettingsConfigurator``
+    lazy var settings: SettingsConfigurator = {
+        return SettingsConfigurator(
+            notificationSettingService: notificationSettingService,
+            sortingSettingService: sortingService,
+            logger: serviceAssembly.logger
         )
     }()
     
@@ -34,7 +63,9 @@ final class PresentationAssembly {
     lazy var medicines: MedicinesConfigurator = {
         return MedicinesConfigurator(
             notificationManager: notificationMedicineManager,
-            coreDataService: coreDataService
+            coreDataService: coreDataService,
+            sortingService: sortingService,
+            logger: serviceAssembly.logger
         )
     }()
     
@@ -42,6 +73,8 @@ final class PresentationAssembly {
     lazy var medicine: MedicineConfigurator = {
         return MedicineConfigurator(
             notificationManager: notificationMedicineManager,
-            coreDataService: coreDataService)
+            coreDataService: coreDataService,
+            logger: serviceAssembly.logger
+        )
     }()
 }

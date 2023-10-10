@@ -28,23 +28,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 private extension AppDelegate {
     /// Создание и отображение стартового ViewController
     func createAndShowStartVC() {
-        let mainVC = FirstAidKitsViewController(
-            nibName: String(describing: FirstAidKitsViewController.self),
-            bundle: nil
-        )
-        
-        let navigationController = UINavigationController(
-            rootViewController: mainVC
-        )
-        
-        // Конфигурирование VIPER модуля для инжектирования зависимостей
-        PresentationAssembly().firstAidKits.config(
-            view: mainVC,
-            navigationController: navigationController
-        )
-        
+        let mainVC = MainContainerViewController()
+
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = navigationController
+        window?.rootViewController = mainVC
         window?.makeKeyAndVisible()
     }
 }

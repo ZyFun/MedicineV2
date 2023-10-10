@@ -2,64 +2,146 @@
 //  MedicineCell.swift
 //  MedicinesV2
 //
-//  Created by Дмитрий Данилин on 19.10.2022.
+//  Created by Дмитрий Данилин on 03.10.2023.
 //
 
 import UIKit
+import DTLogger
 
 /// Ячейка для лекарства
-final class MedicineCell: UITableViewCell {
+final class MedicineCell: UITableViewCell, IdentifiableCell {
     
-    // MARK: - Public properties
-    
-    static let identifier = String(describing: MedicineCell.self)
+    /// Замыкание, которое срабатывает после нажатия на кнопку ``pressedEditButton``
+    /// - Нужно для того, чтобы перейти на следующий экран редактирования лекарства.
+    var buttonTappedAction: (() -> Void)?
     
     // MARK: - Private properties
-    
-    /// Кастомный контейнер
-    /// - В нем содержаться все элементы лекарства
-    /// - нужен для того, чтобы сделать его в виде карточки
-    private let viewContainer: UIView = {
-        let view = UIView()
+
+    private let containerVStackView: UIStackView = {
+        let view = UIStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .systemBackground
-        view.layer.cornerRadius = 16
+        view.axis = .vertical
+        view.spacing = Indents.edgeMarginPadding
+        view.layer.cornerRadius = 30
+        view.isLayoutMarginsRelativeArrangement = true
+        view.layoutMargins = UIEdgeInsets(
+            top: Indents.edgeMarginPadding,
+            left: Indents.edgeMarginPadding,
+            bottom: Indents.edgeMarginPadding,
+            right: Indents.edgeMarginPadding
+        )
         return view
     }()
     
-    /// Стек лейблов
-    /// - Предназначен для: названия лекарства, типа лекарства, назначения, срока годности
-    private var stackMedicineLabels: UIStackView = {
-        let stack = UIStackView()
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.axis = .vertical
-        stack.distribution = .equalSpacing
-        stack.spacing = 4
-        return stack
+    private let titleContentStackView: UIStackView = {
+        let view = UIStackView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "HelveticaNeue", size: 20)
+        label.font = Fonts.systemNormal(.size1).font
         label.numberOfLines = 2
         return label
+    }()
+    
+    private let iconImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.backgroundColor = .systemGray6
+        imageView.layer.cornerRadius = Constants.iconMedecineSize / 2
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
+        return imageView
+    }()
+    
+    private let separatorTopView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .systemGray6
+        return view
     }()
     
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "HelveticaNeue", size: 15)
-        label.textColor = .systemGray3
+        label.font = Fonts.systemNormal(.size2).font
+        label.textColor = .systemGray
         label.numberOfLines = 2
+        return label
+    }()
+    
+    private let calculableContentStackView: UIStackView = {
+        let view = UIStackView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.alignment = .top
+        view.distribution = .fillEqually
+        return view
+    }()
+    
+    private let amountContentStackView: UIStackView = {
+        let view = UIStackView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.axis = .vertical
+        view.alignment = .leading
+        view.spacing = Indents.elementsPadding
+        return view
+    }()
+    
+    private let staticAmountLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = String(localized: "Остаталось")
+        label.font = Fonts.systemNormal(.size3).font
+        return label
+    }()
+    
+    private let amountLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = Fonts.systemNormal(.size2).font
+        return label
+    }()
+    
+    private let expiryDateContentStackView: UIStackView = {
+        let view = UIStackView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.axis = .vertical
+        view.alignment = .trailing
+        view.spacing = Indents.elementsPadding
+        return view
+    }()
+    
+    private let staticExpiryDateLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = String(localized: "Срок годности")
+        label.font = Fonts.systemNormal(.size3).font
         return label
     }()
     
     private let expiryDateLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "HelveticaNeue", size: 15)
+        label.font = Fonts.systemNormal(.size2).font
         return label
+    }()
+    
+    private let separatorBottomView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .systemGray6
+        return view
+    }()
+    
+    private let bottomContentStackView: UIStackView = {
+        let view = UIStackView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.distribution = .equalSpacing
+        return view
     }()
     
     /// Иконка действия
@@ -73,11 +155,23 @@ final class MedicineCell: UITableViewCell {
         return imageView
     }()
     
-    private let amountLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "HelveticaNeue", size: 15)
-        return label
+    private lazy var editButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle(String(localized: "Редактировать"), for: .normal)
+        button.titleLabel?.font = Fonts.systemNormal(.size2).font
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = Colors.darkCyan
+        button.layer.cornerRadius = 15
+        button.accessibilityLabel = "Open Button"
+        
+        let tapAction = UIAction(title: "tap action") { [weak self] _ in
+            self?.pressedEditButton()
+        }
+        
+        button.addAction(tapAction, for: .touchUpInside)
+        
+        return button
     }()
     
     // MARK: - Initializer
@@ -86,64 +180,74 @@ final class MedicineCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setup()
-        
-        contentView.addSubview(viewContainer)
-        viewContainer.addSubview(stackMedicineLabels)
-        stackMedicineLabels.addArrangedSubview(nameLabel)
-        stackMedicineLabels.addArrangedSubview(descriptionLabel)
-        stackMedicineLabels.addArrangedSubview(expiryDateLabel)
-        viewContainer.addSubview(actionIcon)
-        viewContainer.addSubview(amountLabel)
-        
-        NSLayoutConstraint.activate([
-            viewContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
-            viewContainer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            viewContainer.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            viewContainer.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
-            
-            stackMedicineLabels.topAnchor.constraint(equalTo: viewContainer.topAnchor, constant: 8),
-            stackMedicineLabels.leadingAnchor.constraint(equalTo: viewContainer.leadingAnchor, constant: 16),
-            stackMedicineLabels.bottomAnchor.constraint(equalTo: viewContainer.bottomAnchor, constant: -8),
-            
-            actionIcon.widthAnchor.constraint(equalToConstant: 25),
-            actionIcon.heightAnchor.constraint(equalToConstant: 25),
-            actionIcon.topAnchor.constraint(equalTo: viewContainer.topAnchor, constant: 8),
-            actionIcon.leadingAnchor.constraint(equalTo: stackMedicineLabels.trailingAnchor, constant: 8),
-            actionIcon.trailingAnchor.constraint(equalTo: viewContainer.trailingAnchor, constant: -16),
-            actionIcon.bottomAnchor.constraint(lessThanOrEqualTo: amountLabel.topAnchor, constant: -25),
-            
-            amountLabel.trailingAnchor.constraint(equalTo: viewContainer.trailingAnchor, constant: -16),
-            amountLabel.bottomAnchor.constraint(equalTo: viewContainer.bottomAnchor, constant: -8)
-        ])
+        addViews()
+        setupConstraints()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Public method
+    // MARK: - Override Methods
     
-    /// Настройка информации, которая будет отображаться в ячейке лекарства
-    /// - Parameters:
-    ///   - name: принимает название лекарства
-    ///   - type: принимает тип лекарства
-    ///   - expiryDate: принимает дату срока годности лекарства
-    ///   - amount: принимает количество оставшегося лекарства
-    func configure (
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        nameLabel.text = ""
+        iconImageView.image = nil
+        descriptionLabel.isHidden = false
+        descriptionLabel.text = ""
+        amountLabel.text = ""
+        expiryDateLabel.text = ""
+        
+        setImageActionIconDefault()
+    }
+    
+    override func traitCollectionDidChange(
+        _ previousTraitCollection: UITraitCollection?
+    ) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        setupCardShadowColor()
+    }
+    
+    // MARK: - Actions
+    
+    private func pressedEditButton() {
+        buttonTappedAction?()
+    }
+}
+
+// MARK: - Public methods
+
+extension MedicineCell {
+    func configure(
+        image: String? = nil,
         name: String,
         type: String?,
         purpose: String?,
         expiryDate: Date?,
         amount: NSNumber?
     ) {
-        let description = generateDescriptionFrom(type, purpose)
-        
+        setImageActionIconDefault()
+        setImage(from: image)
         nameLabel.text = name
+        
+        let description = generateDescriptionFrom(type, purpose)
         descriptionLabel.text = description
-        expiryDateLabel.text = expiryDate?.toString()
+        
         amountLabel.text = "\(amount ?? 0) шт"
         
-        setImageActionIconDefault()
+        if let expiryDate {
+            expiryDateLabel.text = expiryDate.toString()
+        } else {
+            expiryDateLabel.text = String(localized: "Не задано")
+            expiryDateLabel.textColor = Colors.pinkRed
+        }
+                
+        if description == "" {
+            descriptionLabel.isHidden = true
+        }
         
         if let expiryDate, Date() >= expiryDate {
             setImageActionIcon(need: .thrownOut)
@@ -152,7 +256,38 @@ final class MedicineCell: UITableViewCell {
         }
     }
     
-    // MARK: - Private method
+    // TODO: (Следующий спринт) Будет добавлена установка изображений. 
+    // Пока думаю, брать из сети, или давать это делать пользователю.
+    // Либо встроить иконки в приложение
+    private func setImage(from url: String?) {
+        iconImageView.image = SystemIcons.pills.image
+        iconImageView.tintColor = Colors.lightGreen
+    }
+    
+    /// Настройка иконки предупреждения
+    /// - Parameter need: принимает действие, которое нужно произвести с лекарством
+    /// пользователю
+    private func setImageActionIcon(need: ActionWithMedicine) {
+        switch need {
+        case .buy:
+            actionIcon.image = SystemIcons.cart.image
+            actionIcon.tintColor = Colors.lightGreen
+            amountLabel.textColor = Colors.pinkRed
+        case .thrownOut:
+            actionIcon.image = SystemIcons.deleteIcon.image
+            actionIcon.tintColor = Colors.pinkRed
+            expiryDateLabel.textColor = Colors.pinkRed
+        }
+    }
+    
+    /// Метод для сброса иконки предупреждения
+    /// - используется для сброса расцветки лейблов и иконки в случае их изменения, а так же при
+    /// переиспользовании ячеек, к примеру в процессе поиска.
+    private func setImageActionIconDefault() {
+        actionIcon.image = nil
+        expiryDateLabel.textColor = .label
+        amountLabel.textColor = .label
+    }
     
     /// Метод генерации описания лекарсва из типа и назначения
     /// - Parameters:
@@ -171,46 +306,95 @@ final class MedicineCell: UITableViewCell {
             return nil
         }
     }
-    
-    /// Настройка иконки предупреждения
-    /// - Parameter need: принимает действие, которое нужно произвести с лекарством
-    /// пользователю
-    private func setImageActionIcon(need: ActionWithMedicine) {
-        switch need {
-        case .buy:
-            actionIcon.image = UIImage(systemName: "cart")
-            actionIcon.tintColor = #colorLiteral(red: 0.4078431373, green: 0.8156862745, blue: 0.6823529412, alpha: 1)
-            amountLabel.textColor = #colorLiteral(red: 0.8729341626, green: 0.4694843888, blue: 0.5979845524, alpha: 1)
-        case .thrownOut:
-            actionIcon.image = UIImage(systemName: "trash")
-            actionIcon.tintColor = #colorLiteral(red: 0.8729341626, green: 0.4694843888, blue: 0.5979845524, alpha: 1)
-            expiryDateLabel.textColor = #colorLiteral(red: 0.8729341626, green: 0.4694843888, blue: 0.5979845524, alpha: 1)
-        }
-    }
-    
-    /// Метод для сброса иконки предупреждения
-    /// - используется для сброса расцветки лейблов и иконки в случае их изменения, а так же при
-    /// переиспользовании ячеек, к примеру в процессе поиска.
-    private func setImageActionIconDefault() {
-        actionIcon.image = nil
-        expiryDateLabel.textColor = .label
-        amountLabel.textColor = .label
-    }
 }
 
-// MARK: - Конфигурирование ячейки
+// MARK: - Configuration methods
 
 private extension MedicineCell {
-
-    /// Метод инициализации настроек ячейки
     func setup() {
         setupUI()
     }
     
-    /// Метод для настройки отображения элементов
     func setupUI() {
         selectionStyle = .none
-        contentView.backgroundColor = .clear
         backgroundColor = .clear
+        
+        setupCardShadow()
+    }
+    
+    /// Метод настройки параметров тени карточки
+    func setupCardShadow() {
+        setupCardShadowColor()
+        containerVStackView.layer.shadowOffset = CGSize(width: 0, height: 5)
+        containerVStackView.layer.shadowRadius = 5
+        containerVStackView.layer.shadowOpacity = 0.3
+    }
+    
+    /// Используется для изменения цвета тени карточки лекарства
+    /// - Вынес в отдельный метод, потому что при смене темного и светлого режима
+    /// нужно вызывать в traitCollectionDidChange для изменение цвета. Так как cgColor
+    /// не изменяются сами.
+    func setupCardShadowColor() {
+        containerVStackView.layer.shadowColor = Colors.cardShadow.cgColor
+    }
+    
+    func addViews() {
+        contentView.addSubview(containerVStackView)
+        
+        containerVStackView.addArrangedSubview(titleContentStackView)
+        titleContentStackView.addArrangedSubview(nameLabel)
+        titleContentStackView.addArrangedSubview(iconImageView)
+        
+        containerVStackView.setCustomSpacing(Indents.elementsPadding, after: titleContentStackView)
+        containerVStackView.addArrangedSubview(separatorTopView)
+        
+        containerVStackView.addArrangedSubview(descriptionLabel)
+        
+        containerVStackView.addArrangedSubview(calculableContentStackView)
+        calculableContentStackView.addArrangedSubview(amountContentStackView)
+        amountContentStackView.addArrangedSubview(staticAmountLabel)
+        amountContentStackView.addArrangedSubview(amountLabel)
+        
+        calculableContentStackView.addArrangedSubview(expiryDateContentStackView)
+        expiryDateContentStackView.addArrangedSubview(staticExpiryDateLabel)
+        expiryDateContentStackView.addArrangedSubview(expiryDateLabel)
+        
+        containerVStackView.setCustomSpacing(Indents.elementsPadding, after: calculableContentStackView)
+        containerVStackView.addArrangedSubview(separatorBottomView)
+        
+        containerVStackView.setCustomSpacing(Indents.elementsPadding, after: separatorBottomView)
+        containerVStackView.addArrangedSubview(bottomContentStackView)
+        bottomContentStackView.addArrangedSubview(actionIcon)
+        bottomContentStackView.addArrangedSubview(editButton)
+    }
+    
+    func setupConstraints() {
+        NSLayoutConstraint.activate([
+            containerVStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Indents.edgeMarginPadding),
+            containerVStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Indents.edgeMarginPadding),
+            containerVStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Indents.edgeMarginPadding),
+            containerVStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Indents.edgeMarginPadding),
+                        
+            iconImageView.heightAnchor.constraint(equalToConstant: Constants.iconMedecineSize),
+            iconImageView.widthAnchor.constraint(equalToConstant: Constants.iconMedecineSize),
+            
+            separatorTopView.heightAnchor.constraint(equalToConstant: Constants.heightBorder),
+            separatorBottomView.heightAnchor.constraint(equalToConstant: Constants.heightBorder),
+            
+            actionIcon.widthAnchor.constraint(equalToConstant: Constants.iconActionSize),
+            
+            editButton.heightAnchor.constraint(equalToConstant: Constants.editButtonHeight),
+            editButton.widthAnchor.constraint(equalToConstant: Constants.editBottonWidth)
+        ])
+    }
+}
+
+private extension MedicineCell {
+    struct Constants {
+        static let iconMedecineSize: CGFloat = 48
+        static let iconActionSize: CGFloat = 28
+        static let heightBorder: CGFloat = 2
+        static let editButtonHeight: CGFloat = 50
+        static let editBottonWidth: CGFloat = UIScreen.main.bounds.width * 0.4139 // примерно 178
     }
 }

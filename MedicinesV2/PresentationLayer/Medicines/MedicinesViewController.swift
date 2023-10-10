@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import DTLogger
 
 /// Протокол отображения ViewCintroller-a
 protocol MedicinesDisplayLogic: AnyObject {
@@ -27,6 +28,10 @@ final class MedicinesViewController: UIViewController {
     var fetchedResultManager: IMedicinesFetchedResultsManager?
     /// Содержит в себе выбранную аптечку
     var currentFirstAidKit: DBFirstAidKit?
+    
+    // MARK: - Dependencies
+    
+    var logger: DTLogger?
 
     // MARK: - IBOutlets
     
@@ -69,7 +74,7 @@ private extension MedicinesViewController {
     /// Метод настройки Navigation Bar
     func setupNavigationBar() {
         title = currentFirstAidKit?.title
-        navigationController?.navigationBar.tintColor = #colorLiteral(red: 0.196842283, green: 0.4615264535, blue: 0.4103206396, alpha: 1)
+        navigationController?.navigationBar.tintColor = Colors.darkCyan
         addButtons()
         addSearchController()
     }
@@ -176,7 +181,7 @@ extension MedicinesViewController: UISearchBarDelegate {
         do {
             try fetchedResultManager?.fetchedResultsController.performFetch()
         } catch let error {
-            CustomLogger.error(error.localizedDescription)
+            logger?.log(.error, error.localizedDescription)
         }
         
         medicinesTableView.reloadData()
@@ -194,7 +199,7 @@ extension MedicinesViewController: UISearchBarDelegate {
         do {
             try fetchedResultManager?.fetchedResultsController.performFetch()
         } catch let error {
-            CustomLogger.error(error.localizedDescription)
+            logger?.log(.error, error.localizedDescription)
         }
         
         medicinesTableView.reloadData()
