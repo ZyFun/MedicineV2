@@ -66,7 +66,6 @@
 		2C92571B273D5C9A00DA7284 /* MedicinesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C92571A273D5C9A00DA7284 /* MedicinesInteractor.swift */; };
 		2C92571D273D5CBF00DA7284 /* MedicinesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C92571C273D5CBF00DA7284 /* MedicinesRouter.swift */; };
 		2C92571F273D611800DA7284 /* MedicinesConfigurator.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C92571E273D611800DA7284 /* MedicinesConfigurator.swift.swift */; };
-		2CA3AB1A2906445000763BC5 /* PrivacyPolicy.md in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3AB192906445000763BC5 /* PrivacyPolicy.md */; };
 		2CA75457273BED4100B147B7 /* UIAlerController+CustomController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA75456273BED4100B147B7 /* UIAlerController+CustomController.swift */; };
 		2CAAA0CC2A099AD20073DF78 /* DTLogger in Frameworks */ = {isa = PBXBuildFile; productRef = 2CAAA0CB2A099AD20073DF78 /* DTLogger */; };
 		2CAE169828D9F7E30071E783 /* MedicinesFetchedResultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAE169728D9F7E30071E783 /* MedicinesFetchedResultsManager.swift */; };
@@ -80,14 +79,9 @@
 		2CBD2B1F277C7FA300F857C3 /* MedicineInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBD2B1E277C7FA300F857C3 /* MedicineInteractor.swift */; };
 		2CBD2B21277C7FAF00F857C3 /* MedicineRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBD2B20277C7FAF00F857C3 /* MedicineRouter.swift */; };
 		2CBD2B23277C7FC200F857C3 /* MedicineConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBD2B22277C7FC200F857C3 /* MedicineConfigurator.swift */; };
-		2CBF4DE529080F5500ED297D /* Screenshot001.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CBF4DE229080F5500ED297D /* Screenshot001.png */; };
-		2CBF4DE629080F5500ED297D /* Screenshot000.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CBF4DE329080F5500ED297D /* Screenshot000.png */; };
-		2CBF4DE729080F5500ED297D /* Screenshot002.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CBF4DE429080F5500ED297D /* Screenshot002.png */; };
-		2CBF4DEF2908169700ED297D /* Demo.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2CBF4DEE2908169700ED297D /* Demo.gif */; };
 		2CC874D52A1255FB000D16B5 /* NotificationSettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC874D42A1255FB000D16B5 /* NotificationSettingModel.swift */; };
 		2CC874D72A129E65000D16B5 /* NotificationSettingServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC874D62A129E65000D16B5 /* NotificationSettingServiceTests.swift */; };
 		2CCA5A0227C0DDA1005C7753 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 2CCA5A0127C0DDA1005C7753 /* .gitignore */; };
-		2CDB5E2027A538EF002361F2 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 2CDB5E1F27A538EF002361F2 /* README.md */; };
 		2CDDB5F22A24CBBB00BBA817 /* SortingSectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDDB5F12A24CBBB00BBA817 /* SortingSectionViewModel.swift */; };
 		2CDDB5F72A24CC7E00BBA817 /* SortingSettingCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDDB5F62A24CC7E00BBA817 /* SortingSettingCellModel.swift */; };
 		2CDDB5F92A24CFF200BBA817 /* SortAscendingCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDDB5F82A24CFF200BBA817 /* SortAscendingCellView.swift */; };
@@ -142,6 +136,10 @@
 		2C2654652A153DA600CC5C6D /* TableViewSectionBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewSectionBuilder.swift; sourceTree = "<group>"; };
 		2C2654692A153DDB00CC5C6D /* TableViewSectionProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewSectionProtocols.swift; sourceTree = "<group>"; };
 		2C26546C2A153F0500CC5C6D /* TableViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewAdapter.swift; sourceTree = "<group>"; };
+		2C2C77262AD5B1DB006A138F /* Screenshot003.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Screenshot003.png; sourceTree = "<group>"; };
+		2C2C77272AD5B1DB006A138F /* Screenshot001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Screenshot001.png; sourceTree = "<group>"; };
+		2C2C77282AD5B1DB006A138F /* Screenshot000.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Screenshot000.png; sourceTree = "<group>"; };
+		2C2C77292AD5B1DC006A138F /* Screenshot002.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Screenshot002.png; sourceTree = "<group>"; };
 		2C38603E28DC81FE003FED87 /* ServiceAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAssembly.swift; sourceTree = "<group>"; };
 		2C38604028DC82DB003FED87 /* PresentationAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationAssembly.swift; sourceTree = "<group>"; };
 		2C40442229757CD800965DE4 /* AboutAppPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppPresenter.swift; sourceTree = "<group>"; };
@@ -210,9 +208,6 @@
 		2CBD2B1E277C7FA300F857C3 /* MedicineInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineInteractor.swift; sourceTree = "<group>"; };
 		2CBD2B20277C7FAF00F857C3 /* MedicineRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineRouter.swift; sourceTree = "<group>"; };
 		2CBD2B22277C7FC200F857C3 /* MedicineConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineConfigurator.swift; sourceTree = "<group>"; };
-		2CBF4DE229080F5500ED297D /* Screenshot001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Screenshot001.png; sourceTree = "<group>"; };
-		2CBF4DE329080F5500ED297D /* Screenshot000.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Screenshot000.png; sourceTree = "<group>"; };
-		2CBF4DE429080F5500ED297D /* Screenshot002.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Screenshot002.png; sourceTree = "<group>"; };
 		2CBF4DEE2908169700ED297D /* Demo.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Demo.gif; sourceTree = "<group>"; };
 		2CC874D42A1255FB000D16B5 /* NotificationSettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingModel.swift; sourceTree = "<group>"; };
 		2CC874D62A129E65000D16B5 /* NotificationSettingServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingServiceTests.swift; sourceTree = "<group>"; };
@@ -487,9 +482,10 @@
 		2C52BDDB27355E1700356A63 /* Screenshots */ = {
 			isa = PBXGroup;
 			children = (
-				2CBF4DE329080F5500ED297D /* Screenshot000.png */,
-				2CBF4DE229080F5500ED297D /* Screenshot001.png */,
-				2CBF4DE429080F5500ED297D /* Screenshot002.png */,
+				2C2C77282AD5B1DB006A138F /* Screenshot000.png */,
+				2C2C77272AD5B1DB006A138F /* Screenshot001.png */,
+				2C2C77292AD5B1DC006A138F /* Screenshot002.png */,
+				2C2C77262AD5B1DB006A138F /* Screenshot003.png */,
 				2CBF4DEE2908169700ED297D /* Demo.gif */,
 			);
 			path = Screenshots;
@@ -956,19 +952,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CBF4DE729080F5500ED297D /* Screenshot002.png in Resources */,
 				2C52BDCA273540F600356A63 /* LaunchScreen.storyboard in Resources */,
-				2CBF4DE529080F5500ED297D /* Screenshot001.png in Resources */,
 				2CED30E528F6E47200A6CEE5 /* SplashViewController.xib in Resources */,
 				2C4044292975826600965DE4 /* AboutAppViewController.xib in Resources */,
-				2CBF4DEF2908169700ED297D /* Demo.gif in Resources */,
-				2CBF4DE629080F5500ED297D /* Screenshot000.png in Resources */,
 				2CF28A1E277CAF5E002536F7 /* MedicinesViewController.xib in Resources */,
 				2C52BDC7273540F600356A63 /* Assets.xcassets in Resources */,
 				2C52BDC2273540F400356A63 /* MedicineViewController.storyboard in Resources */,
-				2CDB5E2027A538EF002361F2 /* README.md in Resources */,
 				2CF684AD2ABCAAE600C079B0 /* Localizable.xcstrings in Resources */,
-				2CA3AB1A2906445000763BC5 /* PrivacyPolicy.md in Resources */,
 				2CCA5A0227C0DDA1005C7753 /* .gitignore in Resources */,
 				2C7A5FB82774EFA9002C4702 /* FirstAidKitsViewController.xib in Resources */,
 			);
