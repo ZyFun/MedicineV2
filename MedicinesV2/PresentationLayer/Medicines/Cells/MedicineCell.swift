@@ -229,6 +229,7 @@ extension MedicineCell {
         expiryDate: Date?,
         amount: NSNumber?
     ) {
+        setImageActionIconDefault()
         setImage(from: image)
         nameLabel.text = name
         
