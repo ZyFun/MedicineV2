@@ -43,8 +43,8 @@ final class CoreDataService {
     
     // MARK: - Core Data stack
     
-    private lazy var container: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "Medicines")
+    private lazy var container: NSPersistentCloudKitContainer = {
+        let container = NSPersistentCloudKitContainer(name: "Medicines")
         container.loadPersistentStores { storeDescription, error in
             if let error = error {
                 self.logger.log(.error, "\(error)")
