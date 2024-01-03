@@ -14,6 +14,11 @@ protocol IFirstAidKitsFetchedResultsManager {
     var tableView: UITableView? { get set }
     /// Используется для связи с DataSourceProvider
     var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult> { get set }
+	/// Используется для обновления плейсхолдера после обновления таблицы через NSFetchedResultsControllerDelegate
+	/// - warning: Возможно нарушение архитектуры но хз как по другому.
+	/// - note: Это необходимо для того, чтобы при получении данных из icloud
+	/// в пустое приложение, происходило обновление плейсхолдера
+	var presenter: FirstAidKitsPresentationLogic? { get set }
 }
 
 final class FirstAidKitsFetchedResultsManager: NSObject,
@@ -23,6 +28,7 @@ final class FirstAidKitsFetchedResultsManager: NSObject,
     
     // MARK: - Dependencies
     
+	var presenter: FirstAidKitsPresentationLogic?
     let logger: DTLogger
     
     // MARK: - Initializer
@@ -36,6 +42,15 @@ final class FirstAidKitsFetchedResultsManager: NSObject,
         super.init()
         self.fetchedResultsController.delegate = self
     }
+	
+	private func checkDataIsEmpty() {
+		guard let objects = fetchedResultsController.fetchedObjects else { return }
+		if objects.isEmpty {
+			presenter?.showPlaceholder()
+		} else {
+			presenter?.hidePlaceholder()
+		}
+	}
     
     /// Метод для поиска просроченных лекарств в аптечке
     /// - Parameter currentFirstAidKid: аптечка в которой производится поиск
@@ -118,5 +133,6 @@ extension FirstAidKitsFetchedResultsManager: NSFetchedResultsControllerDelegate 
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView?.endUpdates()
+		checkDataIsEmpty()
     }
 }
