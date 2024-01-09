@@ -3,7 +3,7 @@
 ![IOS](https://img.shields.io/badge/iOS-000000?style=for-the-badge&logo=ios&logoColor=white)
 <br/>
 ![Target](https://img.shields.io/badge/iOS-15.0-blue)
-![Version](https://img.shields.io/badge/version-1.1.0RC-blue)
+![Version](https://img.shields.io/badge/version-1.2.0-blue)
 <br/>
 ![UIKit](https://img.shields.io/badge/-UIKit-blue)
 ![XIB](https://img.shields.io/badge/-XIB-blue)
@@ -49,7 +49,7 @@
 
 
 ## News
-**12.10.2023**
+**09.01.2024**
 <br/>
 Новые возможности:
 - Добавленa синхронизация с iCloud
