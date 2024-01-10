@@ -12,7 +12,7 @@ final class FirstAidKitsConfigurator {
     
     private let notificationManager: INotificationMedicineManager
     private let coreDataService: ICoreDataService
-    private let fetchedResultManager: IFirstAidKitsFetchedResultsManager
+	private var fetchedResultManager: IFirstAidKitsFetchedResultsManager
     private let splashPresenter: ISplashPresenter
     private let logger: DTLogger
     
@@ -46,6 +46,10 @@ final class FirstAidKitsConfigurator {
         let presenter = FirstAidKitsPresenter()
         let interactor = FirstAidKitInteractor()
         let router = FirstAidKitRouter(withNavigationController: navigationController)
+		// !!!: Скорее всего это нарушает архитектуру, но я не знаю как сделать по другому
+		// Мне нужно обновить плейсхолдер когда данные с iCloud будут получены.
+		// поэтому пришлось создать презентер у fetchedResultManager.
+		fetchedResultManager.presenter = presenter
         let dataSourceProvider = FirstAidKitsDataSourceProvider(
             presenter: presenter,
             resultManager: fetchedResultManager,
