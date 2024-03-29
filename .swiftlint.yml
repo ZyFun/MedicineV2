@@ -14,6 +14,7 @@ analyzer_rules:
 disabled_rules:
   - trailing_whitespace
   - todo
+  - private_over_fileprivate
 #  - cyclomatic_complexity
 #  - function_body_length
 
@@ -24,7 +25,6 @@ opt_in_rules:
   - explicit_init
   - force_unwrapping
   - operator_usage_whitespace
-  - anyobject_protocol
   - array_init
   - block_based_kvo
   - closure_body_length
@@ -43,6 +43,13 @@ file_length:
   warning: 500
   error: 700
 
+cyclomatic_complexity:
+  warning: 11
+
+closure_body_length:
+  warning: 50
+  error: 70
+
 type_body_length:
   warning: 400
   error: 450
@@ -50,7 +57,7 @@ type_body_length:
 nesting:
   type_level:
     warning: 3
-  statement_level:
+  function_level:
     warning: 5
 
 identifier_name:
@@ -76,9 +83,9 @@ custom_rules:
 
   wrong_mark_syntax:
     included: ".*\\.swift"
-    regex: '\/\/[\s*]MARK:([^ ]|\s[^\-]| \-[^ ])'
+    regex: '\/\/[\s*]MARK:([^ ])'
     name: "Wrong MARK syntax"
-    message: "Use MARK: - syntax"
+    message: "Use MARK: syntax"
     severity: warning
 
   wrong_todo_syntax:
