@@ -5,7 +5,7 @@
 //  Created by Дмитрий Данилин on 11.11.2021.
 //
 
-import UIKit
+import SwiftUI
 
 /// Протокол логики роутера
 protocol MedicinesRoutingLogiс {
@@ -36,22 +36,14 @@ extension MedicinesRouter: MedicinesRoutingLogiс {
     func routeTo(target: MedicinesRouter.Target) {
         switch target {
         case .medicine(let currentFirstAidKit, let currentMedicine):
-            let storyboard = UIStoryboard(name: "MedicineViewController", bundle: nil)
-            guard let medicineVC = storyboard
-                    .instantiateViewController(
-                        withIdentifier: "medicine"
-                    ) as? MedicineViewController else { return }
-            
-            // Конфигурация VIPER модуля для инжектирования зависимостей
-            PresentationAssembly().medicine.config(
-                view: medicineVC,
-                navigationController: navigationController,
-                firstAidKit: currentFirstAidKit,
-                medicine: currentMedicine
-            )
-            
+			let viewController = PresentationAssembly().medicineSUI.config(
+				navigationController: navigationController,
+				firstAidKit: currentFirstAidKit,
+				medicine: currentMedicine
+			)
+
             // Навигация
-            navigationController?.pushViewController(medicineVC, animated: true)
+            navigationController?.pushViewController(viewController, animated: true)
         }
     }
 }

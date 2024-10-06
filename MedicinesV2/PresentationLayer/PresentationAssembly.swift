@@ -77,4 +77,13 @@ final class PresentationAssembly {
             logger: serviceAssembly.logger
         )
     }()
+
+	/// Инжектирование зависимостей в ``MedicineConfigurator``
+	lazy var medicineSUI: MedicineDetailConfigurator = {
+		return MedicineDetailConfigurator(
+			coreDataService: coreDataService,
+			notificationManager: notificationMedicineManager,
+			logger: serviceAssembly.logger
+		)
+	}()
 }

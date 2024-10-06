@@ -1,6 +1,27 @@
 {
   "sourceLanguage" : "ru",
   "strings" : {
+    "" : {
+
+    },
+    "В наличии" : {
+
+    },
+    "Введите дозу приёма" : {
+
+    },
+    "Введите количество лекарств" : {
+
+    },
+    "Введите название лекарства*" : {
+
+    },
+    "Введите назначение (температура, кашель)" : {
+
+    },
+    "Введите тип (спрей, таблетки, сироп)" : {
+
+    },
     "Время" : {
       "localizations" : {
         "en" : {
@@ -11,26 +32,109 @@
         }
       }
     },
+    "Готово" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done"
+          }
+        }
+      }
+    },
+    "Доза приёма" : {
+
+    },
     "Лекарств в аптечке" : {
+
+    },
+    "Название" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name"
+          }
+        }
+      }
+    },
+    "Назначение" : {
 
     },
     "Не задано" : {
 
     },
-    "Остаталось" : {
+    "Новое лекарство" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New medicine"
+          }
+        }
+      }
+    },
+    "Осталось" : {
 
     },
     "Открыть" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open"
+          }
+        }
+      }
+    },
+    "Принять" : {
 
     },
     "Просрочено" : {
 
     },
     "Редактировать" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit"
+          }
+        }
+      }
+    },
+    "Сохранить" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save"
+          }
+        }
+      }
     },
     "Срок годности" : {
 
+    },
+    "Тип" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Type"
+          }
+        }
+      }
+    },
+    "Удалить" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"
