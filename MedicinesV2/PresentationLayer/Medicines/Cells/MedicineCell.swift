@@ -20,7 +20,7 @@ final class MedicineCell: UITableViewCell, IdentifiableCell {
     private let containerVStackView: UIStackView = {
         let view = UIStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .systemBackground
+		view.backgroundColor = .backgroundMainElement
         view.axis = .vertical
         view.spacing = Indents.edgeMarginPadding
         view.layer.cornerRadius = 30
@@ -45,6 +45,7 @@ final class MedicineCell: UITableViewCell, IdentifiableCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = Fonts.systemNormal(.size1).font
         label.numberOfLines = 2
+		label.textColor = .textMain
         return label
     }()
     
@@ -94,8 +95,9 @@ final class MedicineCell: UITableViewCell, IdentifiableCell {
     private let staticAmountLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = String(localized: "Остаталось")
+        label.text = String(localized: "Осталось")
         label.font = Fonts.systemNormal(.size3).font
+		label.textColor = .textMain
         return label
     }()
     
@@ -103,6 +105,7 @@ final class MedicineCell: UITableViewCell, IdentifiableCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = Fonts.systemNormal(.size2).font
+		label.textColor = .textMain
         return label
     }()
     
@@ -120,6 +123,7 @@ final class MedicineCell: UITableViewCell, IdentifiableCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = String(localized: "Срок годности")
         label.font = Fonts.systemNormal(.size3).font
+		label.textColor = .textMain
         return label
     }()
     
@@ -127,6 +131,7 @@ final class MedicineCell: UITableViewCell, IdentifiableCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = Fonts.systemNormal(.size2).font
+		label.textColor = .textMain
         return label
     }()
     
@@ -285,8 +290,8 @@ extension MedicineCell {
     /// переиспользовании ячеек, к примеру в процессе поиска.
     private func setImageActionIconDefault() {
         actionIcon.image = nil
-        expiryDateLabel.textColor = .label
-        amountLabel.textColor = .label
+		expiryDateLabel.textColor = .textMain
+        amountLabel.textColor = .textMain
     }
     
     /// Метод генерации описания лекарсва из типа и назначения
