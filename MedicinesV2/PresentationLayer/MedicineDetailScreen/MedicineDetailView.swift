@@ -42,6 +42,20 @@ struct MedicineDetailView: View {
 		.tint(.darkCyan)
 		.medFullScreenBackground(.backgroundMain)
 		.hideKeyboard()
+		.medAlertModifier(
+			isShow: $viewModel.isShowAlert,
+			config: $viewModel.configAlert,
+			closeAction: {
+				switch viewModel.screenAction {
+				case .saveMedicine: viewModel.routeTo(.back)
+				case .deleteMedicine: viewModel.routeTo(.back)
+				case .medicineTake: break
+				case .saveError: break
+				case .takeError: break
+				case .dosageZero: break
+				}
+			}
+		)
 	}
 
 	// MARK: - View Builders

@@ -9,6 +9,15 @@ import SwiftUI
 import DTLogger
 
 final class MedicineDetailViewModel: ObservableObject {
+	enum ScreenState {
+		case saveMedicine
+		case saveError
+		case deleteMedicine
+		case medicineTake
+		case takeError
+		case dosageZero
+	}
+
 	// MARK: - Dependencies
 
 	private let router: MedicineDetailRoutingLogic
@@ -26,10 +35,19 @@ final class MedicineDetailViewModel: ObservableObject {
 	@Published var amount: String
 	@Published var dosage: String
 
+	@Published var isShowAlert: Bool = false
+
 	// MARK: - Properties
 
 	let currentFirstAidKit: DBFirstAidKit?
 	let dbMedicine: DBMedicine?
+
+	var configAlert: STAlertConfig = .init(
+		text: "",
+		style: .success,
+		dismissAfter: 0.2
+	)
+	private(set) var screenAction: ScreenState = .medicineTake
 
 	// MARK: - Initializer
 
@@ -52,7 +70,7 @@ final class MedicineDetailViewModel: ObservableObject {
 		self.type = medicine?.type ?? ""
 		self.purpose = medicine?.purpose ?? ""
 		self.expiryDate = medicine?.expiryDate ?? .now
-		self.amount = medicine?.amount?.stringValue ?? ""
+		self.amount = "\(medicine?.amount?.doubleValue ?? 0)"
 		self.dosage = medicine?.stepCountForStepper?.stringValue ?? ""
 	}
 
@@ -62,18 +80,73 @@ final class MedicineDetailViewModel: ObservableObject {
 		router.routeTo(target: screen)
 	}
 
+	private func showAlert(
+		message: LocalizedStringKey,
+		type: STAlertStyle,
+		duration: Double = 3
+	) {
+		configAlert = .init(text: message, style: type, dismissAfter: duration)
+
+		DispatchQueue.main.async {
+			self.isShowAlert = true
+		}
+	}
+
+	/// Метод для запуска действия по окончанию отображения алерта
+	/// - так же этот метод показывает нужный алерт
+	func runAfterUser(action: ScreenState) {
+		screenAction = action
+
+		switch action {
+		case .saveMedicine:
+			showAlert(
+				message: "Данные сохранены",
+				type: .success,
+				duration: 1.5
+			)
+		case .deleteMedicine:
+			showAlert(
+				message: "Лекарство удалено",
+				type: .success,
+				duration: 1.5
+			)
+		case .medicineTake:
+			showAlert(
+				message: "Лекарство было принято",
+				type: .info
+			)
+		case .saveError:
+			showAlert(
+				message: "Поле с названием не должно быть пустым",
+				type: .error
+			)
+		case .takeError:
+			showAlert(
+				message: "Недостаточно лекарства в наличии",
+				type: .error
+			)
+		case .dosageZero:
+			showAlert(
+				message: "Доза приёма не должна быть 0",
+				type: .error
+			)
+		}
+	}
+
 	// MARK: - Internal methods
 
 	func takeMedicine() {
 		var amount = amount.doubleValue
-		if amount >= dosage.doubleValue {
+
+		if dosage.doubleValue == 0 {
+			runAfterUser(action: .dosageZero)
+		} else if amount >= dosage.doubleValue && amount != .zero {
 			amount -= dosage.doubleValue
 			self.amount = String(format: "%.2f", amount)
+			runAfterUser(action: .medicineTake)
 		} else {
-			logger?.log(.warning, "Недостаточно в наличии")
+			runAfterUser(action: .takeError)
 		}
-		// TODO: ПОказать всплывашку что лекарство принято
-		// Добавить задержку и сделать кнопку недоступной на 2 секунды
 	}
 
 	// MARK: - CRUD
@@ -85,8 +158,7 @@ final class MedicineDetailViewModel: ObservableObject {
 	func createMedicine() {
 		// Защита на отсутствие значения
 		if name == "" {
-			// TODO: Показать алерт
-//			presenter?.showError()
+			runAfterUser(action: .saveError)
 			return
 		}
 
@@ -128,7 +200,7 @@ final class MedicineDetailViewModel: ObservableObject {
 			}
 
 			self.notificationManager?.addToQueueNotificationExpiredMedicine(data: medicine)
-			self.routeTo(.back)
+			self.runAfterUser(action: .saveMedicine)
 		}
 	}
 
@@ -175,7 +247,7 @@ final class MedicineDetailViewModel: ObservableObject {
 			self.notificationManager?.deleteNotification(for: dbMedicine)
 			self.coreDataService?.delete(dbMedicine, context: context)
 			self.updateNotificationBadge()
-			self.routeTo(.back)
+			self.runAfterUser(action: .deleteMedicine)
 		}
 	}
 
