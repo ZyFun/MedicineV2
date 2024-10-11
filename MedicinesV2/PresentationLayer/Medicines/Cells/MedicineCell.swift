@@ -241,8 +241,8 @@ extension MedicineCell {
         let description = generateDescriptionFrom(type, purpose)
         descriptionLabel.text = description
         
-        amountLabel.text = "\(amount ?? 0) шт"
-        
+		amountLabel.text = "\(amount?.doubleValue ?? 0) шт"
+
         if let expiryDate {
             expiryDateLabel.text = expiryDate.toString()
         } else {

@@ -39,6 +39,7 @@
 		2C52BDCA273540F600356A63 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C52BDC8273540F600356A63 /* LaunchScreen.storyboard */; };
 		2C56E08D29057A02009AAB46 /* UIImage+GraphicsImageRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C56E08C29057A02009AAB46 /* UIImage+GraphicsImageRenderer.swift */; };
 		2C5F113627707CF60040536D /* Medicines.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F113327707CF60040536D /* Medicines.xcdatamodeld */; };
+		2C5FBC6F2CB9A9EA0037682C /* MEDAlertModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5FBC6E2CB9A9E00037682C /* MEDAlertModifier.swift */; };
 		2C60890927356B6400E66081 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60890827356B6400E66081 /* CoreDataService.swift */; };
 		2C62A6BD29D480B4008ED3BE /* MenuPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C62A6BC29D480B4008ED3BE /* MenuPresenter.swift */; };
 		2C62A6BF29D480F0008ED3BE /* MenuRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C62A6BE29D480F0008ED3BE /* MenuRouter.swift */; };
@@ -83,7 +84,7 @@
 		2CC874D52A1255FB000D16B5 /* NotificationSettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC874D42A1255FB000D16B5 /* NotificationSettingModel.swift */; };
 		2CC874D72A129E65000D16B5 /* NotificationSettingServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC874D62A129E65000D16B5 /* NotificationSettingServiceTests.swift */; };
 		2CCA5A0227C0DDA1005C7753 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 2CCA5A0127C0DDA1005C7753 /* .gitignore */; };
-		2CD8476D2CB33317008316D3 /* DTLogger in Frameworks */ = {isa = PBXBuildFile; productRef = 2CD8476C2CB33317008316D3 /* DTLogger */; };
+		2CD567642CB8855C0065221C /* MEDAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD567632CB8855C0065221C /* MEDAlertView.swift */; };
 		2CDDB5F22A24CBBB00BBA817 /* SortingSectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDDB5F12A24CBBB00BBA817 /* SortingSectionViewModel.swift */; };
 		2CDDB5F72A24CC7E00BBA817 /* SortingSettingCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDDB5F62A24CC7E00BBA817 /* SortingSettingCellModel.swift */; };
 		2CDDB5F92A24CFF200BBA817 /* SortAscendingCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDDB5F82A24CFF200BBA817 /* SortAscendingCellView.swift */; };
@@ -114,6 +115,7 @@
 		2CF6FF872CB5BC5E00569F78 /* View+hideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF6FF862CB5BC5E00569F78 /* View+hideKeyboard.swift */; };
 		2CFD714029B899D300EF4353 /* URLProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFD713F29B899D300EF4353 /* URLProvider.swift */; };
 		2CFD714229B89AE600EF4353 /* SocialMediaURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFD714129B89AE600EF4353 /* SocialMediaURL.swift */; };
+		2CFFC7212CB9E826009D19A6 /* DTLogger in Frameworks */ = {isa = PBXBuildFile; productRef = 2CFFC7202CB9E826009D19A6 /* DTLogger */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -169,6 +171,7 @@
 		2C56E08C29057A02009AAB46 /* UIImage+GraphicsImageRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+GraphicsImageRenderer.swift"; sourceTree = "<group>"; };
 		2C5F113427707CF60040536D /* MedicineV2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MedicineV2.xcdatamodel; sourceTree = "<group>"; };
 		2C5F113527707CF60040536D /* Medicines v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Medicines v2.xcdatamodel"; sourceTree = "<group>"; };
+		2C5FBC6E2CB9A9E00037682C /* MEDAlertModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MEDAlertModifier.swift; sourceTree = "<group>"; };
 		2C60890827356B6400E66081 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		2C62A6BC29D480B4008ED3BE /* MenuPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPresenter.swift; sourceTree = "<group>"; };
 		2C62A6BE29D480F0008ED3BE /* MenuRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRouter.swift; sourceTree = "<group>"; };
@@ -216,6 +219,7 @@
 		2CC874D42A1255FB000D16B5 /* NotificationSettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingModel.swift; sourceTree = "<group>"; };
 		2CC874D62A129E65000D16B5 /* NotificationSettingServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingServiceTests.swift; sourceTree = "<group>"; };
 		2CCA5A0127C0DDA1005C7753 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		2CD567632CB8855C0065221C /* MEDAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MEDAlertView.swift; sourceTree = "<group>"; };
 		2CDB5E1F27A538EF002361F2 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		2CDDB5F12A24CBBB00BBA817 /* SortingSectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingSectionViewModel.swift; sourceTree = "<group>"; };
 		2CDDB5F62A24CC7E00BBA817 /* SortingSettingCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingSettingCellModel.swift; sourceTree = "<group>"; };
@@ -263,7 +267,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CD8476D2CB33317008316D3 /* DTLogger in Frameworks */,
+				2CFFC7212CB9E826009D19A6 /* DTLogger in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -503,6 +507,15 @@
 			path = Recources;
 			sourceTree = "<group>";
 		};
+		2C5FBC6D2CB9A9B00037682C /* MEDAlert */ = {
+			isa = PBXGroup;
+			children = (
+				2C5FBC6E2CB9A9E00037682C /* MEDAlertModifier.swift */,
+				2CD567632CB8855C0065221C /* MEDAlertView.swift */,
+			);
+			path = MEDAlert;
+			sourceTree = "<group>";
+		};
 		2C62A6C029D4816F008ED3BE /* RoutingScreens */ = {
 			isa = PBXGroup;
 			children = (
@@ -653,6 +666,7 @@
 		2CA4778D2CB31F570077A80F /* ViewModifiers */ = {
 			isa = PBXGroup;
 			children = (
+				2C5FBC6D2CB9A9B00037682C /* MEDAlert */,
 				2CA4778E2CB31F620077A80F /* MEDFullScreenBackgroundModifier.swift */,
 			);
 			path = ViewModifiers;
@@ -911,7 +925,7 @@
 			);
 			name = MedicinesV2;
 			packageProductDependencies = (
-				2CD8476C2CB33317008316D3 /* DTLogger */,
+				2CFFC7202CB9E826009D19A6 /* DTLogger */,
 			);
 			productName = MedicineV2;
 			productReference = 2C52BDB7273540F400356A63 /* MedicinesV2.app */;
@@ -947,7 +961,7 @@
 			);
 			mainGroup = 2C52BDAE273540F400356A63;
 			packageReferences = (
-				2CD8476B2CB33317008316D3 /* XCRemoteSwiftPackageReference "DTLogger" */,
+				2CFFC71F2CB9E826009D19A6 /* XCRemoteSwiftPackageReference "DTLogger" */,
 			);
 			productRefGroup = 2C52BDB8273540F400356A63 /* Products */;
 			projectDirPath = "";
@@ -1055,6 +1069,7 @@
 				2CF1B8EB2971BB1300BCF726 /* MenuDataSourceProvider.swift in Sources */,
 				2C1A6B022ACC6EA300D72B38 /* MedicineCell.swift in Sources */,
 				2CF1EE7B277348330031D79D /* FirstAidKitsConfigurator.swift in Sources */,
+				2CD567642CB8855C0065221C /* MEDAlertView.swift in Sources */,
 				2CC874D52A1255FB000D16B5 /* NotificationSettingModel.swift in Sources */,
 				2C8A0E2A2A176790009081AE /* BaseTableViewCell.swift in Sources */,
 				2C8A0E212A175AB1009081AE /* Fonts.swift in Sources */,
@@ -1066,6 +1081,7 @@
 				2C4044282975826600965DE4 /* AboutAppViewController.swift in Sources */,
 				2C52BDBB273540F400356A63 /* AppDelegate.swift in Sources */,
 				2C60890927356B6400E66081 /* CoreDataService.swift in Sources */,
+				2C5FBC6F2CB9A9EA0037682C /* MEDAlertModifier.swift in Sources */,
 				2CB3FAD528C8AA9900E4A378 /* NotificationService.swift in Sources */,
 				2CB115D62970354000A2846A /* MainContainerViewController.swift in Sources */,
 				2C77876E2A13752100115C5F /* SettingsViewController.swift in Sources */,
@@ -1413,7 +1429,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		2CD8476B2CB33317008316D3 /* XCRemoteSwiftPackageReference "DTLogger" */ = {
+		2CFFC71F2CB9E826009D19A6 /* XCRemoteSwiftPackageReference "DTLogger" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ZyFun/DTLogger";
 			requirement = {
@@ -1424,9 +1440,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		2CD8476C2CB33317008316D3 /* DTLogger */ = {
+		2CFFC7202CB9E826009D19A6 /* DTLogger */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2CD8476B2CB33317008316D3 /* XCRemoteSwiftPackageReference "DTLogger" */;
+			package = 2CFFC71F2CB9E826009D19A6 /* XCRemoteSwiftPackageReference "DTLogger" */;
 			productName = DTLogger;
 		};
 /* End XCSwiftPackageProductDependency section */
