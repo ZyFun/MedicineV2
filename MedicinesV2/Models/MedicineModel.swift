@@ -14,5 +14,8 @@ struct MedicineModel {
     let purpose: String?
     let amount: Double?
     let stepCountForStepper: Double?
+	let activeIngredient: String?
+	let manufacturer: String?
     let expiryDate: Date?
+	let userDescription: String?
 }

@@ -12,6 +12,7 @@ struct MedicineDetailView: View {
 
 	@StateObject var viewModel: MedicineDetailViewModel
 	@FocusState private var isFocused
+	@FocusState private var isTextEditorFocused
 
 	// MARK: - Body
 
@@ -22,13 +23,16 @@ struct MedicineDetailView: View {
 	// MARK: - Build methods
 
 	private func buildTest() -> some View {
-		ScrollView {
-			VStack(spacing: 16) {
-				buildDescriptionBlock()
-				buildDrugIntakeBlock()
-				buildButtonBlock()
+		ScrollViewReader { scrollProxy in
+			ScrollView {
+				VStack(spacing: 16) {
+					buildDescriptionBlock()
+					buildDrugIntakeBlock()
+					buildUserDescriptionBlock(scrollProxy)
+					buildButtonBlock()
+				}
+				.padding(16)
 			}
-			.padding(16)
 		}
 		.toolbar {
 			ToolbarItem(placement: .navigation) {
@@ -79,6 +83,18 @@ struct MedicineDetailView: View {
 				title: "Назначение",
 				placeholder: "Введите назначение (температура, кашель)",
 				text: $viewModel.purpose
+			)
+
+			buildFieldLine(
+				title: "Действующее вещество",
+				placeholder: "Введите действующее вещество",
+				text: $viewModel.activeIngredient
+			)
+
+			buildFieldLine(
+				title: "Производитель",
+				placeholder: "Введите производителя лекарства",
+				text: $viewModel.manufacturer
 			)
 
 			buildDateLine()
@@ -180,7 +196,6 @@ struct MedicineDetailView: View {
 					}
 			}
 
-			// TODO: Показать всплывающее уведомление, которое сообщит что лекарство принято
 			MEDMainButton(
 				title: "Принять",
 				style: .secondary,
@@ -192,6 +207,34 @@ struct MedicineDetailView: View {
 		Divider()
 			.padding(.top, 2)
 			.padding(.bottom, 8)
+	}
+
+	func buildUserDescriptionBlock(_ scrollProxy: ScrollViewProxy) -> some View {
+		MEDBlockForElements {
+			Text("Описание")
+				.font(.custom("Helvetica Neue Thin", size: 20))
+				.foregroundStyle(.textMain)
+				.padding(.bottom, 10)
+			TextEditor(text: $viewModel.userDescription)
+				.foregroundStyle(.textMain)
+				.background(.backgroundMainElement)
+				.frame(minHeight: 100)
+				.id("descriptionField")
+				.focused($isTextEditorFocused)
+				.onChange(of: viewModel.userDescription) { _ in
+					withAnimation {
+						scrollProxy.scrollTo("descriptionField", anchor: .bottom)
+					}
+				}
+				.overlay(alignment: .topLeading) {
+					if !isTextEditorFocused && viewModel.userDescription.isEmpty {
+						Text("Введите описание или комментарии")
+							.foregroundStyle(.gray)
+							.padding(.top, 7)
+							.padding(.leading, 1)
+					}
+				}
+		}
 	}
 
 // TODO: () раскомментировать и начать с этим работать после поднятия таргета до 16 версии
@@ -207,5 +250,3 @@ struct MedicineDetailView: View {
 //		}
 //	}
 }
-
-// TODO: После блока приёма разместить описание лекарства. Большой блок с пользовательскими комментариями

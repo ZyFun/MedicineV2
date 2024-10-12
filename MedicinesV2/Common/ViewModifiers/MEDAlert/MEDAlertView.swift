@@ -49,7 +49,7 @@ struct MEDAlertView: View {
 		.clipShape(RoundedRectangle(cornerRadius: 16))
 		.padding(.horizontal, 16)
 		.opacity(isShow ? 1 : 0)
-		.padding(.top, isShow ? 0 : -200)
+		.padding(.top, isShow ? 16 : -200)
 		.animation(.spring, value: isShow)
 		.onChange(of: isShow) { value in
 			guard value else { return }

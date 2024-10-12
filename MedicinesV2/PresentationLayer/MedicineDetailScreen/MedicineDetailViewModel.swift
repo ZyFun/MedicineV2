@@ -30,10 +30,14 @@ final class MedicineDetailViewModel: ObservableObject {
 	@Published var name: String
 	@Published var type: String
 	@Published var purpose: String
+	@Published var activeIngredient: String // TODO: (79) Добавить возможность скрыть если не нужно
+	@Published var manufacturer: String // TODO: (79) Добавить возможность скрыть если не нужно
 	@Published var expiryDate: Date
 
 	@Published var amount: String
 	@Published var dosage: String
+
+	@Published var userDescription: String // TODO: (79) Добавить возможность скрыть если
 
 	@Published var isShowAlert: Bool = false
 
@@ -69,9 +73,12 @@ final class MedicineDetailViewModel: ObservableObject {
 		self.name = medicine?.title ?? ""
 		self.type = medicine?.type ?? ""
 		self.purpose = medicine?.purpose ?? ""
+		self.activeIngredient = medicine?.activeIngredient ?? ""
+		self.manufacturer = medicine?.manufacturer ?? ""
 		self.expiryDate = medicine?.expiryDate ?? .now
 		self.amount = "\(medicine?.amount?.doubleValue ?? 0)"
 		self.dosage = medicine?.stepCountForStepper?.stringValue ?? ""
+		self.userDescription = medicine?.userDescription ?? ""
 	}
 
 	// MARK: - Navigation
@@ -171,7 +178,10 @@ final class MedicineDetailViewModel: ObservableObject {
 			purpose: purpose,
 			amount: amount.doubleValue,
 			stepCountForStepper: dosage.doubleValue,
-			expiryDate: expiryDate
+			activeIngredient: activeIngredient,
+			manufacturer: manufacturer,
+			expiryDate: expiryDate,
+			userDescription: userDescription
 		)
 
 		coreDataService?.performSave { [weak self] context in

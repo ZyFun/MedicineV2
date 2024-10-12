@@ -159,6 +159,8 @@
 		2C47A4F92936B371000DFB49 /* CoreDataServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataServiceTests.swift; sourceTree = "<group>"; };
 		2C480C83275FB1FA000CD5CC /* Date+DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+DateFormatter.swift"; sourceTree = "<group>"; };
 		2C480C85275FB340000CD5CC /* String+DateFormatter.swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+DateFormatter.swift.swift"; sourceTree = "<group>"; };
+		2C4FB4542CBA8C32005C27A9 /* Medicines v5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Medicines v5.xcdatamodel"; sourceTree = "<group>"; };
+		2C4FB45B2CBAF8D8005C27A9 /* Medicines v6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Medicines v6.xcdatamodel"; sourceTree = "<group>"; };
 		2C4FEB6A2AD430DC00B06C60 /* FirstAidKitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAidKitCell.swift; sourceTree = "<group>"; };
 		2C5184782CB5879400F44D50 /* MEDMainButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MEDMainButton.swift; sourceTree = "<group>"; };
 		2C51847A2CB5889E00F44D50 /* MEDDescriptionBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MEDDescriptionBlock.swift; sourceTree = "<group>"; };
@@ -1451,12 +1453,14 @@
 		2C5F113327707CF60040536D /* Medicines.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2C4FB45B2CBAF8D8005C27A9 /* Medicines v6.xcdatamodel */,
+				2C4FB4542CBA8C32005C27A9 /* Medicines v5.xcdatamodel */,
 				2C56E08B290551E2009AAB46 /* Medicines v4.xcdatamodel */,
 				2CE3D70A28D90A00001DA9AF /* Medicines v3.xcdatamodel */,
 				2C5F113427707CF60040536D /* MedicineV2.xcdatamodel */,
 				2C5F113527707CF60040536D /* Medicines v2.xcdatamodel */,
 			);
-			currentVersion = 2C56E08B290551E2009AAB46 /* Medicines v4.xcdatamodel */;
+			currentVersion = 2C4FB45B2CBAF8D8005C27A9 /* Medicines v6.xcdatamodel */;
 			path = Medicines.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
