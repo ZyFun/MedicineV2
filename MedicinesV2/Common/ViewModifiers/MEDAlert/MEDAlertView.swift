@@ -9,6 +9,8 @@ import SwiftUI
 
 struct MEDAlertView: View {
 	@Binding var isShow: Bool
+	// Binding нужен для того, чтобы корректно менялось значение в конфигурации
+	// после того как оно уже было инициализировано.
 	@Binding var config: STAlertConfig
 	var closeAction: (() -> Void)?
 
