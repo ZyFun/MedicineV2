@@ -226,14 +226,15 @@ final class MedicineCell: UITableViewCell, IdentifiableCell {
 // MARK: - Public methods
 
 extension MedicineCell {
-    func configure(
-        image: String? = nil,
-        name: String,
-        type: String?,
-        purpose: String?,
-        expiryDate: Date?,
-        amount: NSNumber?
-    ) {
+	func configure(
+		image: String? = nil,
+		name: String,
+		type: String?,
+		purpose: String?,
+		expiryDate: Date?,
+		amount: NSNumber?,
+		unitType: String?
+	) {
         setImageActionIconDefault()
         setImage(from: image)
         nameLabel.text = name
@@ -241,7 +242,7 @@ extension MedicineCell {
         let description = generateDescriptionFrom(type, purpose)
         descriptionLabel.text = description
         
-		amountLabel.text = "\(amount?.doubleValue ?? 0) шт"
+		amountLabel.text = "\(amount?.doubleValue ?? 0) \(unitType ?? "шт")"
 
         if let expiryDate {
             expiryDateLabel.text = expiryDate.toString()

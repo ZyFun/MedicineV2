@@ -138,6 +138,7 @@ extension CoreDataService: ICoreDataService {
         dbMedicine.type = medicine.type
         dbMedicine.purpose = medicine.purpose
         dbMedicine.amount = (medicine.amount) as? NSNumber
+		dbMedicine.unitType = medicine.unitType
         dbMedicine.stepCountForStepper = (medicine.stepCountForStepper) as? NSNumber
 		dbMedicine.activeIngredient = medicine.activeIngredient
 		dbMedicine.manufacturer = medicine.manufacturer
@@ -218,6 +219,7 @@ extension CoreDataService: ICoreDataService {
         currentObject.type = newData.type
         currentObject.purpose = newData.purpose
         currentObject.amount = (newData.amount) as? NSNumber
+		currentObject.unitType = newData.unitType
         currentObject.stepCountForStepper = (newData.stepCountForStepper) as? NSNumber
 		currentObject.activeIngredient = newData.activeIngredient
 		currentObject.manufacturer = newData.manufacturer

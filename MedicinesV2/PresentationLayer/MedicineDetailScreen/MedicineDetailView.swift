@@ -20,7 +20,7 @@ struct MedicineDetailView: View {
 		buildTest()
 	}
 
-	// MARK: - Build methods
+	// MARK: - View Builders
 
 	private func buildTest() -> some View {
 		ScrollViewReader { scrollProxy in
@@ -62,39 +62,42 @@ struct MedicineDetailView: View {
 		)
 	}
 
-	// MARK: - View Builders
-
 	@ViewBuilder
-	func buildDescriptionBlock() -> some View {
+	private func buildDescriptionBlock() -> some View {
 		MEDBlockForElements {
 			buildFieldLine(
 				title: "Название",
 				placeholder: "Введите название лекарства*",
-				text: $viewModel.name
+				text: $viewModel.name,
+				accessory: {}
 			)
 
 			buildFieldLine(
 				title: "Тип",
 				placeholder: "Введите тип (спрей, таблетки, сироп)",
-				text: $viewModel.type
+				text: $viewModel.type,
+				accessory: {}
 			)
 
 			buildFieldLine(
 				title: "Назначение",
 				placeholder: "Введите назначение (температура, кашель)",
-				text: $viewModel.purpose
+				text: $viewModel.purpose,
+				accessory: {}
 			)
 
 			buildFieldLine(
 				title: "Действующее вещество",
 				placeholder: "Введите действующее вещество",
-				text: $viewModel.activeIngredient
+				text: $viewModel.activeIngredient,
+				accessory: {}
 			)
 
 			buildFieldLine(
 				title: "Производитель",
 				placeholder: "Введите производителя лекарства",
-				text: $viewModel.manufacturer
+				text: $viewModel.manufacturer,
+				accessory: {}
 			)
 
 			buildDateLine()
@@ -102,13 +105,16 @@ struct MedicineDetailView: View {
 	}
 
 	@ViewBuilder
-	func buildDrugIntakeBlock() -> some View {
+	private func buildDrugIntakeBlock() -> some View {
 		MEDBlockForElements {
 			buildFieldLine(
 				title: "В наличии",
 				placeholder: "Введите количество лекарств",
 				text: $viewModel.amount,
-				keyboardTupe: .decimalPad
+				keyboardType: .decimalPad,
+				accessory: {
+					MEDUnitMenu(selectedUnit: $viewModel.unitType)
+				}
 			)
 
 			if viewModel.dbMedicine != nil {
@@ -118,7 +124,7 @@ struct MedicineDetailView: View {
 	}
 
 	@ViewBuilder
-	func buildButtonBlock() -> some View {
+	private func buildButtonBlock() -> some View {
 		Spacer(minLength: 16)
 		
 		MEDMainButton(
@@ -137,31 +143,38 @@ struct MedicineDetailView: View {
 	}
 
 	@ViewBuilder
-	func buildFieldLine(
+	private func buildFieldLine<Content: View>(
 		title: LocalizedStringKey,
 		placeholder: LocalizedStringKey,
 		text: Binding<String>,
-		keyboardTupe: UIKeyboardType = .default
+		keyboardType: UIKeyboardType = .default,
+		@ViewBuilder accessory: () -> Content
 	) -> some View {
 		Text(title)
 			.font(.custom("Helvetica Neue Thin", size: 20))
 			.foregroundStyle(.textMain)
 			.padding(.bottom, 10)
-		TextField(placeholder, text: text)
-			.focused($isFocused)
-			.foregroundStyle(.textMain)
-			.keyboardType(keyboardTupe)
-			.submitLabel(.done)
-			.onChange(of: viewModel.amount) { newValue in
-				viewModel.amount = viewModel.validateInput(newValue)
-			}
+
+		HStack(alignment: .bottom, spacing: 0) {
+			TextField(placeholder, text: text)
+				.focused($isFocused)
+				.foregroundStyle(.textMain)
+				.keyboardType(keyboardType)
+				.submitLabel(.done)
+				.onChange(of: viewModel.amount) { newValue in
+					viewModel.amount = viewModel.validateInput(newValue)
+				}
+			
+				accessory()
+		}
+
 		Divider()
 			.padding(.top, 2)
 			.padding(.bottom, 8)
 	}
 
 	@ViewBuilder
-	func buildDateLine() -> some View {
+	private func buildDateLine() -> some View {
 		HStack(spacing: 0) {
 			Text("Срок годности")
 				.font(.custom("Helvetica Neue Thin", size: 20))
@@ -179,8 +192,8 @@ struct MedicineDetailView: View {
 	}
 
 	@ViewBuilder
-	func buildDrugIntakeLine() -> some View {
-		HStack(spacing: 0) {
+	private func buildDrugIntakeLine() -> some View {
+		HStack(alignment: .bottom, spacing: 0) {
 			VStack(alignment: .leading, spacing: 0) {
 				Text("Доза приёма")
 					.font(.custom("Helvetica Neue Thin", size: 20))
@@ -199,6 +212,7 @@ struct MedicineDetailView: View {
 			MEDMainButton(
 				title: "Принять",
 				style: .secondary,
+				isFullSize: false,
 				isFill: false,
 				action: { viewModel.takeMedicine() }
 			)
@@ -209,7 +223,7 @@ struct MedicineDetailView: View {
 			.padding(.bottom, 8)
 	}
 
-	func buildUserDescriptionBlock(_ scrollProxy: ScrollViewProxy) -> some View {
+	private func buildUserDescriptionBlock(_ scrollProxy: ScrollViewProxy) -> some View {
 		MEDBlockForElements {
 			Text("Описание")
 				.font(.custom("Helvetica Neue Thin", size: 20))
