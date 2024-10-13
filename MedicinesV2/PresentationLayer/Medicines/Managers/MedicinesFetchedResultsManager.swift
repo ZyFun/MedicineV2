@@ -79,7 +79,8 @@ extension MedicinesFetchedResultsManager: NSFetchedResultsControllerDelegate {
                     type: medicine?.type,
                     purpose: medicine?.purpose,
                     expiryDate: medicine?.expiryDate,
-                    amount: medicine?.amount
+					amount: medicine?.amount,
+					unitType: medicine?.unitType
                 )
             }
         @unknown default:

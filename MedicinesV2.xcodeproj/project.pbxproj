@@ -27,6 +27,8 @@
 		2C40442D2975921F00965DE4 /* Bundle+AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C40442C2975921F00965DE4 /* Bundle+AppInfo.swift */; };
 		2C404433297599FE00965DE4 /* AboutAppUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C404432297599FE00965DE4 /* AboutAppUnitTests.swift */; };
 		2C4044362975A5A800965DE4 /* StubAboutAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4044352975A5A800965DE4 /* StubAboutAppView.swift */; };
+		2C4415C02CBC1245001CD49E /* MEDUnitMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4415BF2CBC1245001CD49E /* MEDUnitMenu.swift */; };
+		2C4415C32CBC2A18001CD49E /* UnitTypeMigrateModel.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 2C4415C22CBC2A18001CD49E /* UnitTypeMigrateModel.xcmappingmodel */; };
 		2C47A4EF293682BF000DFB49 /* FirstAidKitsInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C47A4EE293682BF000DFB49 /* FirstAidKitsInteractorTests.swift */; };
 		2C47A4FA2936B371000DFB49 /* CoreDataServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C47A4F92936B371000DFB49 /* CoreDataServiceTests.swift */; };
 		2C480C84275FB1FA000CD5CC /* Date+DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C480C83275FB1FA000CD5CC /* Date+DateFormatter.swift */; };
@@ -153,6 +155,9 @@
 		2C40442C2975921F00965DE4 /* Bundle+AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+AppInfo.swift"; sourceTree = "<group>"; };
 		2C404432297599FE00965DE4 /* AboutAppUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppUnitTests.swift; sourceTree = "<group>"; };
 		2C4044352975A5A800965DE4 /* StubAboutAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubAboutAppView.swift; sourceTree = "<group>"; };
+		2C4415BF2CBC1245001CD49E /* MEDUnitMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MEDUnitMenu.swift; sourceTree = "<group>"; };
+		2C4415C12CBC2707001CD49E /* Medicines v7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Medicines v7.xcdatamodel"; sourceTree = "<group>"; };
+		2C4415C22CBC2A18001CD49E /* UnitTypeMigrateModel.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = UnitTypeMigrateModel.xcmappingmodel; sourceTree = "<group>"; };
 		2C464AD42ADEE8BA00556D47 /* MedicinesV2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MedicinesV2.entitlements; sourceTree = "<group>"; };
 		2C47A4EC293682BF000DFB49 /* MedicinesV2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MedicinesV2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C47A4EE293682BF000DFB49 /* FirstAidKitsInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAidKitsInteractorTests.swift; sourceTree = "<group>"; };
@@ -365,6 +370,14 @@
 				2C4044352975A5A800965DE4 /* StubAboutAppView.swift */,
 			);
 			path = Mock;
+			sourceTree = "<group>";
+		};
+		2C4415BE2CBC123C001CD49E /* UIElements */ = {
+			isa = PBXGroup;
+			children = (
+				2C4415BF2CBC1245001CD49E /* MEDUnitMenu.swift */,
+			);
+			path = UIElements;
 			sourceTree = "<group>";
 		};
 		2C47A4ED293682BF000DFB49 /* MedicinesV2Tests */ = {
@@ -650,6 +663,7 @@
 			isa = PBXGroup;
 			children = (
 				2C5F113327707CF60040536D /* Medicines.xcdatamodeld */,
+				2C4415C22CBC2A18001CD49E /* UnitTypeMigrateModel.xcmappingmodel */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -657,6 +671,7 @@
 		2CA477792CB2DDE80077A80F /* MedicineDetailScreen */ = {
 			isa = PBXGroup;
 			children = (
+				2C4415BE2CBC123C001CD49E /* UIElements */,
 				2CA477842CB2FCA90077A80F /* MedicineDetailView.swift */,
 				2CA477862CB2FD170077A80F /* MedicineDetailViewModel.swift */,
 				2CA4777E2CB2DE7A0077A80F /* MedicineDetailRouter.swift */,
@@ -1048,6 +1063,7 @@
 				2C62A6BF29D480F0008ED3BE /* MenuRouter.swift in Sources */,
 				2CB115DB297050D600A2846A /* MenuCell.swift in Sources */,
 				2C26546A2A153DDB00CC5C6D /* TableViewSectionProtocols.swift in Sources */,
+				2C4415C32CBC2A18001CD49E /* UnitTypeMigrateModel.xcmappingmodel in Sources */,
 				2C5184792CB5879400F44D50 /* MEDMainButton.swift in Sources */,
 				2CE109F82A17D99100E2C83D /* SectionConfigurator.swift in Sources */,
 				2CA477852CB2FCAC0077A80F /* MedicineDetailView.swift in Sources */,
@@ -1113,6 +1129,7 @@
 				2CAE169828D9F7E30071E783 /* MedicinesFetchedResultsManager.swift in Sources */,
 				2CED30E928F6E6C900A6CEE5 /* SplashAnimator.swift in Sources */,
 				2CDDB5F22A24CBBB00BBA817 /* SortingSectionViewModel.swift in Sources */,
+				2C4415C02CBC1245001CD49E /* MEDUnitMenu.swift in Sources */,
 				2CF1EE77277347980031D79D /* FirstAidKitsRouter.swift in Sources */,
 				2CB115D82970355300A2846A /* MenuViewController.swift in Sources */,
 				2C56E08D29057A02009AAB46 /* UIImage+GraphicsImageRenderer.swift in Sources */,
@@ -1330,7 +1347,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = MedicinesV2/MedicinesV2.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B66N983M7Q;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1368,7 +1385,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = MedicinesV2/MedicinesV2.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B66N983M7Q;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1453,6 +1470,7 @@
 		2C5F113327707CF60040536D /* Medicines.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2C4415C12CBC2707001CD49E /* Medicines v7.xcdatamodel */,
 				2C4FB45B2CBAF8D8005C27A9 /* Medicines v6.xcdatamodel */,
 				2C4FB4542CBA8C32005C27A9 /* Medicines v5.xcdatamodel */,
 				2C56E08B290551E2009AAB46 /* Medicines v4.xcdatamodel */,
@@ -1460,7 +1478,7 @@
 				2C5F113427707CF60040536D /* MedicineV2.xcdatamodel */,
 				2C5F113527707CF60040536D /* Medicines v2.xcdatamodel */,
 			);
-			currentVersion = 2C4FB45B2CBAF8D8005C27A9 /* Medicines v6.xcdatamodel */;
+			currentVersion = 2C4415C12CBC2707001CD49E /* Medicines v7.xcdatamodel */;
 			path = Medicines.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

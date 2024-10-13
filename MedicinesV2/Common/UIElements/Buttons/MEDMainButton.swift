@@ -13,6 +13,7 @@ import SwiftUI
 struct MEDMainButton: View {
 	let title: LocalizedStringKey
 	let style: MEDMainButtonStyle
+	var isFullSize = true
 	var isFill: Bool = true
 	let action: () -> Void
 
@@ -24,10 +25,11 @@ struct MEDMainButton: View {
 				Text(title)
 					.frame(maxWidth: isFill ? .infinity : nil)
 			}
-			.padding(16)
+			.padding(.vertical, isFullSize ? 16 : 6)
+			.padding(.horizontal, 16)
 			.foregroundStyle(style.textColor)
 			.background(style.buttonColor)
-			.clipShape(RoundedRectangle(cornerRadius: 16))
+			.clipShape(RoundedRectangle(cornerRadius: isFullSize ? 16 : 8))
 			.shadow(color: .black.opacity(0.15), radius: 10, x: 0, y: 5)
 		}
 	}

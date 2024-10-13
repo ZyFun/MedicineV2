@@ -35,6 +35,7 @@ final class MedicineDetailViewModel: ObservableObject {
 	@Published var expiryDate: Date
 
 	@Published var amount: String
+	@Published var unitType: MEDUnitMenu.UnitType
 	@Published var dosage: String
 
 	@Published var userDescription: String // TODO: (79) Добавить возможность скрыть если
@@ -79,6 +80,7 @@ final class MedicineDetailViewModel: ObservableObject {
 		self.amount = "\(medicine?.amount?.doubleValue ?? 0)"
 		self.dosage = medicine?.stepCountForStepper?.stringValue ?? ""
 		self.userDescription = medicine?.userDescription ?? ""
+		self.unitType = MEDUnitMenu.UnitType(rawValue: medicine?.unitType ?? "шт") ?? .pcs
 	}
 
 	// MARK: - Navigation
@@ -177,6 +179,7 @@ final class MedicineDetailViewModel: ObservableObject {
 			type: type,
 			purpose: purpose,
 			amount: amount.doubleValue,
+			unitType: unitType.rawValue,
 			stepCountForStepper: dosage.doubleValue,
 			activeIngredient: activeIngredient,
 			manufacturer: manufacturer,

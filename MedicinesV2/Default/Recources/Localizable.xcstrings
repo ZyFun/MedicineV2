@@ -41,6 +41,9 @@
         }
       }
     },
+    "г" : {
+
+    },
     "Готово" : {
       "localizations" : {
         "en" : {
@@ -71,6 +74,26 @@
     },
     "Лекарство удалено" : {
 
+    },
+    "мг" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ml"
+          }
+        }
+      }
+    },
+    "мл" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "mg"
+          }
+        }
+      }
     },
     "Название" : {
       "localizations" : {
@@ -168,6 +191,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Delete"
+          }
+        }
+      }
+    },
+    "шт" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "pcs"
           }
         }
       }
