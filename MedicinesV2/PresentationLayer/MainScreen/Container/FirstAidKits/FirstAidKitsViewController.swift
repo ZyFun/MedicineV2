@@ -164,7 +164,8 @@ extension FirstAidKitsViewController {
         
         firstAidKitsTableView.separatorStyle = .none
         firstAidKitsTableView.backgroundColor = .systemGray6
-        
+		firstAidKitsTableView.keyboardDismissMode = .onDrag
+
         fetchedResultManager?.tableView = firstAidKitsTableView
         
         registerCell()

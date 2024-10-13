@@ -68,7 +68,7 @@ private extension MedicinesViewController {
         setupTableView()
         setupPlaceholder()
     }
-    
+
     // MARK: - Setup navigation bar
     
     /// Метод настройки Navigation Bar
@@ -108,7 +108,8 @@ private extension MedicinesViewController {
         
         medicinesTableView.separatorStyle = .none
         medicinesTableView.backgroundColor = .systemGray6
-        
+		medicinesTableView.keyboardDismissMode = .onDrag
+
         fetchedResultManager?.tableView = medicinesTableView
         
         registerCell()
