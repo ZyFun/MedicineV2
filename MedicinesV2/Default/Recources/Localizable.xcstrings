@@ -1,6 +1,36 @@
 {
   "sourceLanguage" : "ru",
   "strings" : {
+    "" : {
+
+    },
+    "В наличии" : {
+
+    },
+    "Введите действующее вещество" : {
+
+    },
+    "Введите дозу приёма" : {
+
+    },
+    "Введите количество лекарств" : {
+
+    },
+    "Введите название лекарства*" : {
+
+    },
+    "Введите назначение (температура, кашель)" : {
+
+    },
+    "Введите описание или комментарии" : {
+
+    },
+    "Введите производителя лекарства" : {
+
+    },
+    "Введите тип (спрей, таблетки, сироп)" : {
+
+    },
     "Время" : {
       "localizations" : {
         "en" : {
@@ -11,26 +41,169 @@
         }
       }
     },
+    "г" : {
+
+    },
+    "Готово" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done"
+          }
+        }
+      }
+    },
+    "Данные сохранены" : {
+
+    },
+    "Действующее вещество" : {
+
+    },
+    "Доза приёма" : {
+
+    },
+    "Доза приёма не должна быть 0" : {
+
+    },
     "Лекарств в аптечке" : {
+
+    },
+    "Лекарство было принято" : {
+
+    },
+    "Лекарство удалено" : {
+
+    },
+    "мг" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ml"
+          }
+        }
+      }
+    },
+    "мл" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "mg"
+          }
+        }
+      }
+    },
+    "Название" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name"
+          }
+        }
+      }
+    },
+    "Назначение" : {
 
     },
     "Не задано" : {
 
     },
-    "Остаталось" : {
+    "Недостаточно лекарства в наличии" : {
+
+    },
+    "Новое лекарство" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New medicine"
+          }
+        }
+      }
+    },
+    "Описание" : {
+
+    },
+    "Осталось" : {
 
     },
     "Открыть" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open"
+          }
+        }
+      }
+    },
+    "Поле с названием не должно быть пустым" : {
+
+    },
+    "Принять" : {
+
+    },
+    "Производитель" : {
 
     },
     "Просрочено" : {
 
     },
     "Редактировать" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit"
+          }
+        }
+      }
+    },
+    "Сохранить" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save"
+          }
+        }
+      }
     },
     "Срок годности" : {
 
+    },
+    "Тип" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Type"
+          }
+        }
+      }
+    },
+    "Удалить" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete"
+          }
+        }
+      }
+    },
+    "шт" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "pcs"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

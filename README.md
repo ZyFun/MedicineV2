@@ -6,16 +6,18 @@
 ![Version](https://img.shields.io/badge/version-1.2.0-blue)
 <br/>
 ![UIKit](https://img.shields.io/badge/-UIKit-blue)
+![SwiftUI](https://img.shields.io/badge/-SwiftUI-blue)
 ![XIB](https://img.shields.io/badge/-XIB-blue)
 ![VIPER](https://img.shields.io/badge/-VIPER-blue)
 ![MVP](https://img.shields.io/badge/-MVP-blue)
+![MVVM](https://img.shields.io/badge/-MVVM-blue)
 ![GCD](https://img.shields.io/badge/-GCD-blue)
 ![CoreData](https://img.shields.io/badge/-CoreData-blue)
-![CocoaPods](https://img.shields.io/badge/-CocoaPods-blue)
-![SPM](https://img.shields.io/badge/-SPM-blue)
-![SwiftLint](https://img.shields.io/badge/-SwiftLint-blue)
 ![AutoLayout](https://img.shields.io/badge/-AutoLayout-blue)
 ![UnitTests](https://img.shields.io/badge/-UnitTests-blue)
+<br/>
+![SPM](https://img.shields.io/badge/-SPM-blue)
+![SwiftLint](https://img.shields.io/badge/-SwiftLint-blue)
 ![XcodeCloudCI](https://img.shields.io/badge/-XcodeCloudCI-blue)
 
 # Аптечка v2
@@ -49,10 +51,24 @@
 
 
 ## News
+**xx.10.2024**
+<br/>
+Новые возможности:
+- Добавлены новые поля ввода информации о лекарстве
+- Добавлены уведомления о действиях или ошибках
+
+Изменение UI:
+- Переработан дизайн экрана детальной информации о лекарстве
+- Обновлен дизайн темной темы
+
+Исправления:
+- Исправлена опечатка на карточке лекарства
+- Исправлена ошибка, из-за которой на карточке лекарства могло появится много знаков после запятой у количества лекарств.
+
 **09.01.2024**
 <br/>
 Новые возможности:
-- Добавленa синхронизация с iCloud
+- Добавлена синхронизация с iCloud
 
 **12.10.2023**
 <br/>
@@ -63,7 +79,7 @@
 
 Исправления:
 - Исправлен алерт, согласно гайдлайнам эпл
-- Исправлена ошибка из-за которой приложение падало, когда шаг установке дозы был отрицательным или текстом
+- Исправлена ошибка из-за которой приложение падало, когда шаг установки дозы был отрицательным или текстом
 
 Изменение UI:
 - Переработан дизайн карточек

@@ -1,0 +1,15 @@
+{
+  "originHash" : "0f874a767f9fffb031493e92ac87411b31d9bc7cc32875526f4070709d9a399d",
+  "pins" : [
+    {
+      "identity" : "dtlogger",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ZyFun/DTLogger.git",
+      "state" : {
+        "revision" : "6d5e9140312a329a672988472288f3638539c154",
+        "version" : "2.0.0"
+      }
+    }
+  ],
+  "version" : 3
+}

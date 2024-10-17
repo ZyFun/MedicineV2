@@ -19,7 +19,7 @@ final class FirstAidKitCell: UITableViewCell, IdentifiableCell {
     private let containerVStackView: UIStackView = {
         let view = UIStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .systemBackground
+		view.backgroundColor = .backgroundMainElement
         view.axis = .vertical
         view.spacing = Indents.edgeMarginPadding
         view.layer.cornerRadius = 30
@@ -44,6 +44,7 @@ final class FirstAidKitCell: UITableViewCell, IdentifiableCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = Fonts.systemNormal(.size1).font
         label.numberOfLines = 2
+		label.textColor = .textMain
         return label
     }()
     
@@ -95,6 +96,7 @@ final class FirstAidKitCell: UITableViewCell, IdentifiableCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = String(localized: "Лекарств в аптечке")
         label.font = Fonts.systemNormal(.size3).font
+		label.textColor = .textMain
         return label
     }()
     
@@ -102,6 +104,7 @@ final class FirstAidKitCell: UITableViewCell, IdentifiableCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = Fonts.systemNormal(.size2).font
+		label.textColor = .textMain
         return label
     }()
     
@@ -119,6 +122,7 @@ final class FirstAidKitCell: UITableViewCell, IdentifiableCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = String(localized: "Просрочено")
         label.font = Fonts.systemNormal(.size3).font
+		label.textColor = .textMain
         return label
     }()
     
@@ -126,6 +130,7 @@ final class FirstAidKitCell: UITableViewCell, IdentifiableCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = Fonts.systemNormal(.size2).font
+		label.textColor = .textMain
         return label
     }()
     

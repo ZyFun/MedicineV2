@@ -87,7 +87,8 @@ extension MedicinesDataSourceProvider: UITableViewDataSource {
             type: medicine?.type,
             purpose: medicine?.purpose,
             expiryDate: medicine?.expiryDate,
-            amount: medicine?.amount
+			amount: medicine?.amount,
+			unitType: medicine?.unitType
         )
         
         cell.buttonTappedAction = { [weak self] in

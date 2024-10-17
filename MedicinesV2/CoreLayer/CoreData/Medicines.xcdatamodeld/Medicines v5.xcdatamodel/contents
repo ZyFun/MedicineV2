@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23231" systemVersion="24A348" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="DBFirstAidKit" representedClassName="DBFirstAidKit" syncable="YES" codeGenerationType="class">
+        <attribute name="title" attributeType="String" defaultValueString="Kit"/>
+        <relationship name="medicines" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="DBMedicine" inverseName="firstAidKit" inverseEntity="DBMedicine"/>
+    </entity>
+    <entity name="DBMedicine" representedClassName="DBMedicine" syncable="YES" codeGenerationType="class">
+        <attribute name="activeIngredient" optional="YES" attributeType="String"/>
+        <attribute name="amount" attributeType="Double" defaultValueString="0" usesScalarValueType="NO"/>
+        <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="expiryDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="manufacturer" optional="YES" attributeType="String"/>
+        <attribute name="purpose" optional="YES" attributeType="String"/>
+        <attribute name="stepCountForStepper" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO"/>
+        <attribute name="title" attributeType="String" defaultValueString="Medicine"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <relationship name="firstAidKit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DBFirstAidKit" inverseName="medicines" inverseEntity="DBFirstAidKit"/>
+    </entity>
+</model>
