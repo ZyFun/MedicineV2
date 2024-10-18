@@ -22,7 +22,10 @@ protocol INotificationMedicineManager {
     /// Метод для удаления уведомления из очереди центра уведомлений
     /// - Parameter medicine: принимает лекарство, уведомление для которого будет удалено.
     func deleteNotification(for medicine: DBMedicine)
-    
+
+	/// Метод для очистки всех уведомлений из очереди
+	func clearAllNotifications()
+
     /// Метод установки бейджа с количеством просроченных лекарств на иконку приложения.
     /// - Parameter data: Принимает лекарства для поиска в них просроченных лекарств
     func setupBadgeForAppIcon(data: [DBMedicine]?)
@@ -78,6 +81,11 @@ final class NotificationMedicineManager {
 // MARK: - INotificationMedicineManager
 
 extension NotificationMedicineManager: INotificationMedicineManager {
+	func clearAllNotifications() {
+		notificationService.notificationCenter.removeAllPendingNotificationRequests()
+		logger.log(.info, "Все уведомления были очищены")
+	}
+
     func deleteNotification(for medicine: DBMedicine) {
         guard let dateCreated = medicine.dateCreated else {
             fatalError("Дата создания лекарства должна быть обязательно")

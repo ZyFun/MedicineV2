@@ -34,8 +34,6 @@ protocol FirstAidKitsBusinessLogic {
     func updateNotificationBadge()
     /// Метод для обновления всех уведомлений
     /// - Используется для обновления всех уведомлений после того, как были сохранены настройки.
-    /// - warning: Сейчас вызывается каждый раз и при запуске приложения, и при возврате с любого экрана.
-    /// Такого быть не должно и это надо изменить. Вызываться должен только по необходимости.
     /// - important: Метод так же закрывает сплешскрин, после того как все уведомления для лекарств были обновлены.
     func updateAllNotifications()
 }
@@ -95,16 +93,14 @@ extension FirstAidKitInteractor: FirstAidKitsBusinessLogic {
     func searchExpiredMedicines() {
         // TODO: (MED-170) Логику ниже делать методом сервиса кордаты
         // к примеру назвать fetchCountExpiredMedicines
-        var expiredMedicinesCount = 0
         let medicines = self.coreDataService?.fetchRequest(String(describing: DBMedicine.self)) as? [DBMedicine]
-
-        medicines?.forEach { medicine in
-            if let expiryDate = medicine.expiryDate, Date() >= expiryDate {
-                expiredMedicinesCount += 1
-            }
-        }
-
-        presenter?.updateExpiredMedicinesLabel()
+		guard let medicines else { return }
+		for medicine in medicines {
+			if let expiryDate = medicine.expiryDate, Date() >= expiryDate {
+				presenter?.updateExpiredMedicinesLabel()
+				return
+			}
+		}
     }
     
     // MARK: - CRUD methods
@@ -122,7 +118,7 @@ extension FirstAidKitInteractor: FirstAidKitsBusinessLogic {
             self.coreDataService?.update(firstAidKit, newName: newName, context: context)
         }
     }
-    
+
     func delete(firstAidKit: DBFirstAidKit) {
         coreDataService?.performSave { [weak self] context in
             self?.deleteNotifications(for: firstAidKit)
@@ -148,39 +144,22 @@ extension FirstAidKitInteractor: FirstAidKitsBusinessLogic {
     }
     
     // MARK: - Notifications
-    
+
     func updateNotificationBadge() {
-        DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 1) {
+		DispatchQueue.global(qos: .utility).asyncAfter(deadline: .now() + 1) {
             let data = self.coreDataService?.fetchRequest(String(describing: DBMedicine.self)) as? [DBMedicine]
             self.notificationManager?.setupBadgeForAppIcon(data: data)
         }
     }
-    
-    // TODO: (#Update) Не самый оптимальный способ в плане алгоритмов. Нужно пересмотреть, возможно есть способ лучше.
-    // FIXME: Получить просто список лекарств без привязки к текущей аптечке.
-    func updateAllNotifications() {
-        coreDataService?.performSave { [weak self] context in
-            self?.coreDataService?.fetch(DBFirstAidKit.self, from: context) { result in
-                switch result {
-                case .success(let dbFirstAidKits):
-                    dbFirstAidKits.forEach { dbFirstAidKit in
-                        dbFirstAidKit.medicines?.forEach { medicine in
-                            guard let medicine = medicine as? DBMedicine else {
-                                self?.logger?.log(.error, "Ошибка каста до DBMedicine")
-                                return
-                            }
-                            self?.logger?.log(.info, "Уведомление в очереди для `\(medicine.title ?? "⚠️")` будет обновлено")
-                            self?.notificationManager.addToQueueNotificationExpiredMedicine(
-                                data: medicine
-                            )
-                        }
-                    }
-                    
-                    self?.presenter?.dismissSplashScreen()
-                case .failure(let error):
-                    self?.logger?.log(.error, error.localizedDescription)
-                }
-            }
-        }
-    }
+
+	func updateAllNotifications() {
+		let medicines = coreDataService?.fetchRequest(String(describing: DBMedicine.self)) as? [DBMedicine]
+		notificationManager.clearAllNotifications()
+		medicines?.forEach { medicine in
+			logger?.log(.info, "Начало обработки уведомления для лекарства: \(medicine.title ?? "NoName")")
+			notificationManager?.addToQueueNotificationExpiredMedicine(data: medicine)
+			logger?.log(.info, "Уведомление в очереди обновлено")
+		}
+		presenter?.dismissSplashScreen()
+	}
 }

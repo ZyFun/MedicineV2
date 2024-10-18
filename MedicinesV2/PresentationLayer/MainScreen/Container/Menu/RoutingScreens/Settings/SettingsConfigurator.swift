@@ -13,19 +13,25 @@ final class SettingsConfigurator {
     
     private let notificationSettingService: NotificationSettings
     private let sortingSettingService: SortableSettings
+	private let coreDataService: ICoreDataService
+	private let notificationManager: INotificationMedicineManager
     private let logger: DTLogger
     
     // MARK: - Initializer
     
-    init(
-        notificationSettingService: NotificationSettings,
-        sortingSettingService: SortableSettings,
-        logger: DTLogger
-    ) {
-        self.notificationSettingService = notificationSettingService
-        self.sortingSettingService = sortingSettingService
-        self.logger = logger
-    }
+	init(
+		notificationSettingService: NotificationSettings,
+		sortingSettingService: SortableSettings,
+		coreDataService: ICoreDataService,
+		notificationManager: INotificationMedicineManager,
+		logger: DTLogger
+	) {
+		self.notificationSettingService = notificationSettingService
+		self.sortingSettingService = sortingSettingService
+		self.coreDataService = coreDataService
+		self.notificationManager = notificationManager
+		self.logger = logger
+	}
     
     // MARK: - Public properties
     
@@ -40,6 +46,8 @@ final class SettingsConfigurator {
         presenter.view = view
         presenter.notificationSettingService = notificationSettingService
         presenter.sortingSettingService = sortingSettingService
+		presenter.coreDataService = coreDataService
+		presenter.notificationManager = notificationManager
         presenter.logger = logger
     }
 }
