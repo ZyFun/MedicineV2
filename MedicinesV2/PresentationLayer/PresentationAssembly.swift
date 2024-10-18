@@ -55,6 +55,8 @@ final class PresentationAssembly {
         return SettingsConfigurator(
             notificationSettingService: notificationSettingService,
             sortingSettingService: sortingService,
+			coreDataService: coreDataService,
+			notificationManager: notificationMedicineManager,
             logger: serviceAssembly.logger
         )
     }()

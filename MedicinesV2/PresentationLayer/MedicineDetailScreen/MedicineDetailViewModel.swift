@@ -77,7 +77,7 @@ final class MedicineDetailViewModel: ObservableObject {
 		self.activeIngredient = medicine?.activeIngredient ?? ""
 		self.manufacturer = medicine?.manufacturer ?? ""
 		self.expiryDate = medicine?.expiryDate ?? .now
-		self.amount = "\(medicine?.amount?.doubleValue ?? 0)"
+		self.amount = "\(medicine?.amount?.stringValue ?? "")"
 		self.dosage = medicine?.stepCountForStepper?.stringValue ?? ""
 		self.userDescription = medicine?.userDescription ?? ""
 		self.unitType = MEDUnitMenu.UnitType(rawValue: medicine?.unitType ?? "шт") ?? .pcs

@@ -17,6 +17,11 @@ protocol ICoreDataService {
         sortAscending: Bool,
         currentFirstAidKit: DBFirstAidKit?
     ) -> NSFetchedResultsController<NSFetchRequestResult>
+	/// Метод получения данных из базы без использования контекста
+	/// - Parameter entityName: имя сущности в базе данных
+	/// - Returns: Возвращает массив с результатом запроса данных
+	/// - important: Использовать только в том случае, если не требуется работа с этими данными в базе.
+	/// Только для добавления в очередь уведомлений и других простых действий.
     func fetchRequest(_ entityName: String) -> [NSFetchRequestResult]
     /// Метод для получения данных из CoreData
     /// - Parameters:
@@ -173,12 +178,7 @@ extension CoreDataService: ICoreDataService {
             completion(.failure(error))
         }
     }
-    
-    // TODO: (#Edit) Это лишний метод, сейчас используется для получения всех лекарств и добавлкния уведомлений.
-    // Нужно отрефакторить этот функционал.
-    /// Метод получения данных из базы
-    /// - Parameter entityName: имя сущности в базе данных
-    /// - Returns: Возвращает массив с результатом запроса данных
+
     func fetchRequest(_ entityName: String) -> [NSFetchRequestResult] {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
 
