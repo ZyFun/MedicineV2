@@ -20,11 +20,7 @@ extension NotificationSettingModel {
     /// - Может выбросить ошибку, если с кодированием что-то пошло не так.
     func encode() throws -> Data {
         let encoder = JSONEncoder()
-        do {
-            return try encoder.encode(self)
-        } catch {
-            throw error
-        }
+		return try encoder.encode(self)
     }
     
     /// Метод для декодирования Data в ``NotificationSettingModel``
@@ -33,10 +29,6 @@ extension NotificationSettingModel {
     /// - Может выбросить ошибку, если с декодированием что-то пошло не так.
     static func decode(from data: Data) throws -> NotificationSettingModel {
         let decoder = JSONDecoder()
-        do {
-            return try decoder.decode(NotificationSettingModel.self, from: data)
-        } catch {
-            throw error
-        }
+		return try decoder.decode(NotificationSettingModel.self, from: data)
     }
 }
