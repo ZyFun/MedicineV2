@@ -19,7 +19,9 @@ struct MEDMainButton: View {
 
 	var body: some View {
 		Button {
-			action()
+			withAnimation {
+				action()
+			}
 		} label: {
 			HStack {
 				Text(title)

@@ -25,6 +25,8 @@ final class SettingsPresenter {
     
     var notificationSettingService: NotificationSettings?
     var sortingSettingService: SortableSettings?
+	var coreDataService: ICoreDataService?
+	var notificationManager: INotificationMedicineManager?
     var logger: DTLogger?
     
     // MARK: - Private properties
@@ -146,6 +148,7 @@ extension SettingsPresenter: SettingsPresentationLogic {
                 hourNotifiable: timeName.value,
                 isRepeat: isRepeatNotification
             )
+			updateAllNotifications()
         } catch {
             logger?.log(.error, error.localizedDescription)
         }
@@ -168,6 +171,16 @@ extension SettingsPresenter: SettingsPresentationLogic {
             sortingSettingService?.saveSortSetting(ascending: .down)
         }
     }
+
+	private func updateAllNotifications() {
+		let medicines = coreDataService?.fetchRequest(String(describing: DBMedicine.self)) as? [DBMedicine]
+		
+		medicines?.forEach { medicine in
+			logger?.log(.info, "Начало обработки уведомления для лекарства: \(medicine.title ?? "NoName")")
+			notificationManager?.addToQueueNotificationExpiredMedicine(data: medicine)
+			logger?.log(.info, "Уведомление в очереди обновлено")
+		}
+	}
 }
 
 // MARK: - NotificationCellDelegate

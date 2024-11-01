@@ -41,6 +41,8 @@ final class MedicineDetailViewModel: ObservableObject {
 	@Published var userDescription: String // TODO: (79) Добавить возможность скрыть если
 
 	@Published var isShowAlert: Bool = false
+	/// Используется только для 17 iOS
+	@Published var isShowCalendar: Bool = false
 
 	// MARK: - Properties
 
@@ -77,7 +79,7 @@ final class MedicineDetailViewModel: ObservableObject {
 		self.activeIngredient = medicine?.activeIngredient ?? ""
 		self.manufacturer = medicine?.manufacturer ?? ""
 		self.expiryDate = medicine?.expiryDate ?? .now
-		self.amount = "\(medicine?.amount?.doubleValue ?? 0)"
+		self.amount = "\(medicine?.amount?.stringValue ?? "")"
 		self.dosage = medicine?.stepCountForStepper?.stringValue ?? ""
 		self.userDescription = medicine?.userDescription ?? ""
 		self.unitType = MEDUnitMenu.UnitType(rawValue: medicine?.unitType ?? "шт") ?? .pcs
@@ -279,7 +281,7 @@ final class MedicineDetailViewModel: ObservableObject {
 
 	/// Метод для ограничения ввода символов и точек с запятыми
 	func validateInput(_ text: String) -> String {
-		let regex = "^[0-9]{1,6}([.,][0-9]{0,2})?$"
+		let regex = "^[0-9]{1,6}([.,][0-9]{0,2})?$" // TODO: (MEDIC-86) Вместо строки обернуть в //
 		if text.range(of: regex, options: .regularExpression) != nil {
 			return text
 		} else {

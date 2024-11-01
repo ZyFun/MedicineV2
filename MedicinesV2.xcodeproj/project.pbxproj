@@ -19,6 +19,7 @@
 		2C26546D2A153F0500CC5C6D /* TableViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C26546C2A153F0500CC5C6D /* TableViewAdapter.swift */; };
 		2C38603F28DC81FE003FED87 /* ServiceAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C38603E28DC81FE003FED87 /* ServiceAssembly.swift */; };
 		2C38604128DC82DB003FED87 /* PresentationAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C38604028DC82DB003FED87 /* PresentationAssembly.swift */; };
+		2C3A7B0A2CD52ABD00FF6F7B /* MEDCalendarModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3A7B092CD52ABD00FF6F7B /* MEDCalendarModal.swift */; };
 		2C40442329757CD800965DE4 /* AboutAppPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C40442229757CD800965DE4 /* AboutAppPresenter.swift */; };
 		2C40442529757DFC00965DE4 /* AboutAppInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C40442429757DFC00965DE4 /* AboutAppInfoModel.swift */; };
 		2C4044282975826600965DE4 /* AboutAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4044262975826600965DE4 /* AboutAppViewController.swift */; };
@@ -114,7 +115,7 @@
 		2CF28C7C28DCA24C0017C0A4 /* FirstAidKitsDataSourceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF28C7B28DCA24C0017C0A4 /* FirstAidKitsDataSourceProvider.swift */; };
 		2CF684AB2ABC5DC500C079B0 /* SortFieldCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF684AA2ABC5DC500C079B0 /* SortFieldCellView.swift */; };
 		2CF684AD2ABCAAE600C079B0 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 2CF684AC2ABCAAE600C079B0 /* Localizable.xcstrings */; };
-		2CF6FF872CB5BC5E00569F78 /* View+hideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF6FF862CB5BC5E00569F78 /* View+hideKeyboard.swift */; };
+		2CF6FF872CB5BC5E00569F78 /* HideKeyboardModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF6FF862CB5BC5E00569F78 /* HideKeyboardModifier.swift */; };
 		2CFD714029B899D300EF4353 /* URLProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFD713F29B899D300EF4353 /* URLProvider.swift */; };
 		2CFD714229B89AE600EF4353 /* SocialMediaURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFD714129B89AE600EF4353 /* SocialMediaURL.swift */; };
 		2CFFC7212CB9E826009D19A6 /* DTLogger in Frameworks */ = {isa = PBXBuildFile; productRef = 2CFFC7202CB9E826009D19A6 /* DTLogger */; };
@@ -147,6 +148,7 @@
 		2C2C77292AD5B1DC006A138F /* Screenshot002.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Screenshot002.png; sourceTree = "<group>"; };
 		2C38603E28DC81FE003FED87 /* ServiceAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAssembly.swift; sourceTree = "<group>"; };
 		2C38604028DC82DB003FED87 /* PresentationAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationAssembly.swift; sourceTree = "<group>"; };
+		2C3A7B092CD52ABD00FF6F7B /* MEDCalendarModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MEDCalendarModal.swift; sourceTree = "<group>"; };
 		2C40442229757CD800965DE4 /* AboutAppPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppPresenter.swift; sourceTree = "<group>"; };
 		2C40442429757DFC00965DE4 /* AboutAppInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppInfoModel.swift; sourceTree = "<group>"; };
 		2C4044262975826600965DE4 /* AboutAppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppViewController.swift; sourceTree = "<group>"; };
@@ -257,7 +259,7 @@
 		2CF28C7B28DCA24C0017C0A4 /* FirstAidKitsDataSourceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAidKitsDataSourceProvider.swift; sourceTree = "<group>"; };
 		2CF684AA2ABC5DC500C079B0 /* SortFieldCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortFieldCellView.swift; sourceTree = "<group>"; };
 		2CF684AC2ABCAAE600C079B0 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
-		2CF6FF862CB5BC5E00569F78 /* View+hideKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+hideKeyboard.swift"; sourceTree = "<group>"; };
+		2CF6FF862CB5BC5E00569F78 /* HideKeyboardModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideKeyboardModifier.swift; sourceTree = "<group>"; };
 		2CFD713F29B899D300EF4353 /* URLProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProvider.swift; sourceTree = "<group>"; };
 		2CFD714129B89AE600EF4353 /* SocialMediaURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialMediaURL.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -375,6 +377,7 @@
 		2C4415BE2CBC123C001CD49E /* UIElements */ = {
 			isa = PBXGroup;
 			children = (
+				2C3A7B092CD52ABD00FF6F7B /* MEDCalendarModal.swift */,
 				2C4415BF2CBC1245001CD49E /* MEDUnitMenu.swift */,
 			);
 			path = UIElements;
@@ -463,7 +466,6 @@
 				2C06CAB92BB6C31F00B38317 /* PrivacyInfo.xcprivacy */,
 				2CB3FAD128C89DD100E4A378 /* Common */,
 				2CB3FAD028C89D4700E4A378 /* Default */,
-				2C52BDD827355DA400356A63 /* Supports */,
 				2C52BDD727355CA600356A63 /* Models */,
 				2CB3FACF28C89D1A00E4A378 /* CoreLayer */,
 				2C52BDD927355DEE00356A63 /* ServiceLayer */,
@@ -480,14 +482,6 @@
 				2CC874D42A1255FB000D16B5 /* NotificationSettingModel.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		2C52BDD827355DA400356A63 /* Supports */ = {
-			isa = PBXGroup;
-			children = (
-				2CA75455273BECDA00B147B7 /* Extensions */,
-			);
-			path = Supports;
 			sourceTree = "<group>";
 		};
 		2C52BDD927355DEE00356A63 /* ServiceLayer */ = {
@@ -684,6 +678,7 @@
 			isa = PBXGroup;
 			children = (
 				2C5FBC6D2CB9A9B00037682C /* MEDAlert */,
+				2CF6FF862CB5BC5E00569F78 /* HideKeyboardModifier.swift */,
 				2CA4778E2CB31F620077A80F /* MEDFullScreenBackgroundModifier.swift */,
 			);
 			path = ViewModifiers;
@@ -757,7 +752,7 @@
 			children = (
 				2CF6FF882CB5EBB000569F78 /* UIElements */,
 				2CA4778D2CB31F570077A80F /* ViewModifiers */,
-				2CF6FF852CB5BC5900569F78 /* Extensions */,
+				2CA75455273BECDA00B147B7 /* Extensions */,
 				2C67351529D97B9000876547 /* Constants */,
 				2C03448A2A15004500EE4120 /* PropertyWrappers */,
 				2CFD714329B89E1500EF4353 /* URL */,
@@ -878,14 +873,6 @@
 				2C7A5FB72774EFA9002C4702 /* FirstAidKitsViewController.xib */,
 			);
 			path = FirstAidKits;
-			sourceTree = "<group>";
-		};
-		2CF6FF852CB5BC5900569F78 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				2CF6FF862CB5BC5E00569F78 /* View+hideKeyboard.swift */,
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		2CF6FF882CB5EBB000569F78 /* UIElements */ = {
@@ -1082,6 +1069,7 @@
 				2CA477872CB2FD1A0077A80F /* MedicineDetailViewModel.swift in Sources */,
 				2C51847B2CB5889E00F44D50 /* MEDDescriptionBlock.swift in Sources */,
 				2C925717273D4DE800DA7284 /* MedicinesViewController.swift in Sources */,
+				2C3A7B0A2CD52ABD00FF6F7B /* MEDCalendarModal.swift in Sources */,
 				2CDDB5F72A24CC7E00BBA817 /* SortingSettingCellModel.swift in Sources */,
 				2CAE169A28DA07AF0071E783 /* MedicineModel.swift in Sources */,
 				2CF1B8EB2971BB1300BCF726 /* MenuDataSourceProvider.swift in Sources */,
@@ -1094,7 +1082,7 @@
 				2C8A0E362A17BED8009081AE /* SettingSections.swift in Sources */,
 				2CF1EE71277347580031D79D /* FirstAidKitsViewController.swift in Sources */,
 				2C92571B273D5C9A00DA7284 /* MedicinesInteractor.swift in Sources */,
-				2CF6FF872CB5BC5E00569F78 /* View+hideKeyboard.swift in Sources */,
+				2CF6FF872CB5BC5E00569F78 /* HideKeyboardModifier.swift in Sources */,
 				2C480C86275FB340000CD5CC /* String+DateFormatter.swift.swift in Sources */,
 				2C4044282975826600965DE4 /* AboutAppViewController.swift in Sources */,
 				2C52BDBB273540F400356A63 /* AppDelegate.swift in Sources */,

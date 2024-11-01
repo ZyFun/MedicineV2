@@ -18,4 +18,10 @@ extension Date {
         formatter.dateFormat = format
         return formatter.string(from: self)
     }
+
+	func toMediumString() -> String {
+		let formatter = DateFormatter()
+		formatter.dateStyle = .medium
+		return formatter.string(from: self)
+	}
 }

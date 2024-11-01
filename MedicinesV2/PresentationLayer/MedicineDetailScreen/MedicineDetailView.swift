@@ -60,6 +60,9 @@ struct MedicineDetailView: View {
 				}
 			}
 		)
+		.overlay(
+			buildCalendarModalView()
+		)
 	}
 
 	@ViewBuilder
@@ -182,12 +185,49 @@ struct MedicineDetailView: View {
 
 			Spacer()
 
-			DatePicker(
-				"",
-				selection: $viewModel.expiryDate,
-				displayedComponents: .date
-			)
-			.labelsHidden()
+			// Из за бага 17 iOS приходится использовать кастомный календарь
+			if ProcessInfo.processInfo.operatingSystemVersion.majorVersion == 17 {
+				MEDMainButton(
+					title: "\(viewModel.expiryDate.toMediumString())",
+					style: .main,
+					isFullSize: false,
+					isFill: false,
+					action: {
+						viewModel.isShowCalendar.toggle()
+					}
+				)
+			} else {
+				DatePicker(
+					"",
+					selection: $viewModel.expiryDate,
+					displayedComponents: .date
+				)
+				.labelsHidden()
+			}
+		}
+	}
+
+	/// Метод для отображения кастомного модального окна с календарём
+	/// - Используется только для 17 iOS из-за бага. Из-за него не нажимается календарь
+	@ViewBuilder
+	private func buildCalendarModalView() -> some View {
+		ZStack {
+			if ProcessInfo.processInfo.operatingSystemVersion.majorVersion == 17 {
+				if viewModel.isShowCalendar {
+					Color.black.opacity(0.4)
+						.edgesIgnoringSafeArea(.all)
+						.onTapGesture {
+							withAnimation {
+								viewModel.isShowCalendar = false
+							}
+						}
+
+					MEDCalendarModal(
+						selectedDate: $viewModel.expiryDate,
+						showCalendar: $viewModel.isShowCalendar
+					)
+				}
+			}
 		}
 	}
 
@@ -230,6 +270,7 @@ struct MedicineDetailView: View {
 				.foregroundStyle(.textMain)
 				.padding(.bottom, 10)
 			TextEditor(text: $viewModel.userDescription)
+//				.scrollDisabled(true) // TODO: (MEDIC-84) Выключить скролл после поднятия таргета до 16.
 				.foregroundStyle(.textMain)
 				.background(.backgroundMainElement)
 				.frame(minHeight: 100)
@@ -251,7 +292,7 @@ struct MedicineDetailView: View {
 		}
 	}
 
-// TODO: () раскомментировать и начать с этим работать после поднятия таргета до 16 версии
+// TODO: (MEDIC-85) раскомментировать и начать с этим работать после поднятия таргета до 16 версии
 //	@ToolbarContentBuilder
 //	private func keyboardToolbar(_ needToolBar: Bool) -> some ToolbarContent {
 //		if needToolBar {
