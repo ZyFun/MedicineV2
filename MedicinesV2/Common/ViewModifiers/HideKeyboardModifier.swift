@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  HideKeyboardModifier.swift
 //  MedicinesV2
 //
 //  Created by Дмитрий Данилин on 08.10.2024.
