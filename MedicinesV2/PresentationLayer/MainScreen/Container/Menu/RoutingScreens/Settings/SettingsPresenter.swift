@@ -89,13 +89,13 @@ extension SettingsPresenter: SettingsPresentationLogic {
                 buttonName: timeName
             ),
             NotificationSettingCellModel(
-                settingName: "Повтор",
+                settingName: String(localized: "Повтор"),
                 isRepeat: isRepeatNotification
             )
         ]
         
         let settingSection = NotificationSectionViewModel(
-            titleSection: "Уведомления",
+            titleSection: String(localized: "Уведомления"),
             viewModels: notificationSettingModels
         )
         
@@ -115,17 +115,17 @@ extension SettingsPresenter: SettingsPresentationLogic {
         // Создаём и отображаем ячейки секции
         let sortingSettingModels = [
             SortingSettingCellModel(
-                settingName: "Направление",
+                settingName: String(localized: "Направление"),
                 ascending: ascendingName
             ),
             SortingSettingCellModel(
-                settingName: "Поле",
+                settingName: String(localized: "Поле"),
                 field: fieldName
             )
         ]
         
         let sortingSection = SortingSectionViewModel(
-            titleSection: "Сортировка",
+            titleSection: String(localized: "Сортировка"),
             viewModels: sortingSettingModels
         )
         

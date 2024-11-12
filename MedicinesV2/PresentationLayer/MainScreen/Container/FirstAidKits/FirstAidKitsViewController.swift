@@ -107,7 +107,7 @@ extension FirstAidKitsViewController {
     /// Метод для настройки заголовка navigation bar
     func titleSetup() {
         navigationController?.navigationBar.prefersLargeTitles = true
-        title = "Аптечки"
+		title = String(localized: "Аптечки")
     }
     
     /// Метод для добавления кнопок в navigation bar
@@ -144,7 +144,7 @@ extension FirstAidKitsViewController {
     
     func addSearchController() {
         let searchController = UISearchController(searchResultsController: nil)
-        searchController.searchBar.placeholder = "Введите название аптечки"
+        searchController.searchBar.placeholder = String(localized: "Введите название аптечки")
         searchController.obscuresBackgroundDuringPresentation = false
         navigationItem.searchController = searchController
         
@@ -214,7 +214,9 @@ extension FirstAidKitsViewController: FirstAidKitsDisplayLogic {
     }
     
     func showAlert(for entity: DBFirstAidKit? = nil, by indexPath: IndexPath? = nil) {
-        let title = entity == nil ? "Добавить аптечку" : "Изменить название"
+		let title = entity == nil
+		?  String(localized: "Добавить аптечку")
+		: String(localized: "Изменить название")
         let alert = UIAlertController.createAlertController(with: title)
         
         alert.action(firstAidKit: entity) { [unowned self] firstAidKitName in

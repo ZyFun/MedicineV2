@@ -80,7 +80,7 @@ extension MedicinesFetchedResultsManager: NSFetchedResultsControllerDelegate {
                     purpose: medicine?.purpose,
                     expiryDate: medicine?.expiryDate,
 					amount: medicine?.amount,
-					unitType: medicine?.unitType
+					unitType: NSLocalizedString(medicine?.unitType ?? String(localized: "шт"), comment: "")
                 )
             }
         @unknown default:

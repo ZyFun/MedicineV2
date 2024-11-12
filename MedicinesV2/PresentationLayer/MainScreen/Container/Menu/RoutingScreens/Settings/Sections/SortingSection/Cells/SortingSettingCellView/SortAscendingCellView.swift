@@ -77,7 +77,7 @@ final class SortAscendingCellView: BaseView {
         }
         
         let menu = UIMenu(
-            title: "Направление сортировки",
+			title: String(localized: "Направление сортировки"),
             children: [up, down]
         )
         sortingButton.menu = menu

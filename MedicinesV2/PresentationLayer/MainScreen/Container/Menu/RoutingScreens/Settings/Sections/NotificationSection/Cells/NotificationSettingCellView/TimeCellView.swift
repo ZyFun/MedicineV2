@@ -89,7 +89,7 @@ final class TimeCellView: BaseView {
         }
         
         let menu = UIMenu(
-            title: "Когда показать уведомления?",
+			title: String(localized: "Когда показать уведомления?"),
             children: [morning, day, evening]
         )
         timeButton.menu = menu

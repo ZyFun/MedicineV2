@@ -20,8 +20,8 @@ final class AboutAppConfigurator {
         view: UIViewController
     ) {
         let infoModel = AboutAppInfoModel(
-            version: "Версия: \(Bundle.main.appVersionLong) (\(Bundle.main.appBuild))",
-            developer: "Разработчик: Дмитрий Данилин",
+			version: "\(String(localized: "Версия")): \(Bundle.main.appVersionLong) (\(Bundle.main.appBuild))",
+            developer: "\(String(localized: "Разработчик")): \(String(localized: "Дмитрий Данилин"))",
             discordUrl: nil,
             vkUrl: URLProvider.fetchSocialMediaUrl(with: .vk),
             tgUrl: URLProvider.fetchSocialMediaUrl(with: .telegram)

@@ -82,13 +82,13 @@ private extension AboutAppViewController {
     }
     
     func setupButtons() {
-        tgButton.setTitle("Telegram", for: .normal)
-        
-        vkButton.setTitle("ВКонтакте", for: .normal)
-        
+        tgButton.setTitle(String(localized: "Telegram"), for: .normal)
+
+        vkButton.setTitle(String(localized: "ВКонтакте"), for: .normal)
+
         closeButton.layer.borderWidth = 1
         closeButton.layer.cornerRadius = 16
-        closeButton.setTitle("Закрыть", for: .normal)
+		closeButton.setTitle(String(localized: "Закрыть"), for: .normal)
         closeButton.layer.borderColor = UIColor.systemGray.cgColor
     }
 }

@@ -1,0 +1,24 @@
+{
+  "sourceLanguage" : "ru",
+  "strings" : {
+    "Sho-xx-EYG.text" : {
+      "comment" : "Class = \"UILabel\"; text = \"У вас еще нет аптечек. Для создания новой, нажмите + в правом верхнем углу.\"; ObjectID = \"Sho-xx-EYG\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You don’t have any kits yet. To create a new one, press + in the top right corner."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "У вас еще нет аптечек. Для создания новой, нажмите + в правом верхнем углу."
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

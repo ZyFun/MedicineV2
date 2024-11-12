@@ -1,0 +1,42 @@
+{
+  "sourceLanguage" : "ru",
+  "strings" : {
+    "jFs-rB-EXD.text" : {
+      "comment" : "Class = \"UILabel\"; text = \"Аптечка\"; ObjectID = \"jFs-rB-EXD\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "First aid kit"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Аптечка"
+          }
+        }
+      }
+    },
+    "phq-nF-nl4.text" : {
+      "comment" : "Class = \"UILabel\"; text = \"Идёт загрузка данных\"; ObjectID = \"phq-nF-nl4\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loading data"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Идёт загрузка данных"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

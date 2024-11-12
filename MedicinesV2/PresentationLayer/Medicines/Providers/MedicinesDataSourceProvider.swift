@@ -81,14 +81,14 @@ extension MedicinesDataSourceProvider: UITableViewDataSource {
         ) as? MedicineCell else { return UITableViewCell() }
         
         let medicine = fetchMedicine(at: indexPath)
-        
+
         cell.configure(
             name: medicine?.title ?? "",
-            type: medicine?.type,
+			type: medicine?.type,
             purpose: medicine?.purpose,
             expiryDate: medicine?.expiryDate,
 			amount: medicine?.amount,
-			unitType: medicine?.unitType
+			unitType: NSLocalizedString(medicine?.unitType ?? String(localized: "шт"), comment: "")
         )
         
         cell.buttonTappedAction = { [weak self] in

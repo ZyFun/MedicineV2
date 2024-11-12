@@ -102,7 +102,7 @@ final class SortFieldCellView: BaseView {
         }
         
         let menu = UIMenu(
-            title: "Поле сортировки",
+			title: String(localized: "Поле сортировки"),
             children: [dateCreated, name, expiryDate]
         )
         sortingButton.menu = menu
