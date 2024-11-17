@@ -118,9 +118,6 @@ extension MedicinesInteractor: MedicinesBusinessLogic {
         if currentFirstAidKit.medicines == [] {
             presenter?.showPlaceholder()
             logger?.log(.info, "Лекарств в аптечке нет. Плейсхолдер отображен")
-        } else {
-            presenter?.hidePlaceholder()
-            logger?.log(.info, "Лекарства в аптечке есть. Плейсхолдер скрыт")
         }
     }
 }

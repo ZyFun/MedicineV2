@@ -27,7 +27,8 @@ final class MedicineDetailConfigurator {
 	func config(
 		navigationController: UINavigationController?,
 		firstAidKit: DBFirstAidKit?,
-		medicine: DBMedicine?
+		medicine: DBMedicine?,
+		medicinesPresenterDelegate: MedicinesPresenterDelegate?
 	) -> UIViewController {
 
 		let router = MedicineDetailRouter(withNavigationController: navigationController)
@@ -36,7 +37,8 @@ final class MedicineDetailConfigurator {
 			notificationManager: notificationManager,
 			logger: logger,
 			firstAidKit: firstAidKit,
-			medicine: medicine
+			medicine: medicine,
+			medicinesPresenterDelegate: medicinesPresenterDelegate
 		)
 		let view = MedicineDetailView(viewModel: viewModel)
 		let hostingController = UIHostingController(rootView: view)
