@@ -36,10 +36,13 @@ extension MedicinesRouter: MedicinesRoutingLogiс {
     func routeTo(target: MedicinesRouter.Target) {
         switch target {
         case .medicine(let currentFirstAidKit, let currentMedicine):
+			let medicineViewController = navigationController?.topViewController as? MedicinesViewController
+
 			let viewController = PresentationAssembly().medicineSUI.config(
 				navigationController: navigationController,
 				firstAidKit: currentFirstAidKit,
-				medicine: currentMedicine
+				medicine: currentMedicine,
+				medicinesPresenterDelegate: medicineViewController?.presenter
 			)
 
             // Навигация

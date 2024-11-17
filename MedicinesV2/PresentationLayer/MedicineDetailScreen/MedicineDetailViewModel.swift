@@ -25,6 +25,8 @@ final class MedicineDetailViewModel: ObservableObject {
 	private let notificationManager: INotificationMedicineManager?
 	private let logger: DTLogger?
 
+	private weak var medicinesPresenterDelegate: MedicinesPresenterDelegate?
+
 	// MARK: - Property wrappers
 
 	@Published var name: String
@@ -64,7 +66,8 @@ final class MedicineDetailViewModel: ObservableObject {
 		notificationManager: INotificationMedicineManager?,
 		logger: DTLogger?,
 		firstAidKit: DBFirstAidKit?,
-		medicine: DBMedicine?
+		medicine: DBMedicine?,
+		medicinesPresenterDelegate: MedicinesPresenterDelegate?
 	) {
 		self.coreDataService = coreDataService
 		self.notificationManager = notificationManager
@@ -72,6 +75,7 @@ final class MedicineDetailViewModel: ObservableObject {
 		self.router = router
 		self.currentFirstAidKit = firstAidKit
 		self.dbMedicine = medicine
+		self.medicinesPresenterDelegate = medicinesPresenterDelegate
 
 		self.name = medicine?.title ?? ""
 		self.type = medicine?.type ?? ""
@@ -159,6 +163,13 @@ final class MedicineDetailViewModel: ObservableObject {
 			runAfterUser(action: .takeError)
 		}
 	}
+	
+	/// Метод для скрытия плейсхолдера на предыдущем экране
+	/// - Скрывает плейсхолдер, после успешного сохранения лекарства, если он был отображен и
+	/// список был пустым
+	private func hidePlaceholder() {
+		medicinesPresenterDelegate?.hidePlaceholder()
+	}
 
 	// MARK: - CRUD
 
@@ -212,6 +223,7 @@ final class MedicineDetailViewModel: ObservableObject {
 				self.notificationManager?.deleteNotification(for: dbMedicine)
 			} else {
 				self.coreDataService?.create(medicine, in: firstAidKit, context: context)
+				self.hidePlaceholder()
 			}
 
 			self.notificationManager?.addToQueueNotificationExpiredMedicine(data: medicine)

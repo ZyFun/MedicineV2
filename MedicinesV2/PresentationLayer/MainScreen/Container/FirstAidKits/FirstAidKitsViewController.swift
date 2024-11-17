@@ -217,15 +217,19 @@ extension FirstAidKitsViewController: FirstAidKitsDisplayLogic {
     
     func hidePlaceholder() {
         DispatchQueue.main.async {
-            self.placeholderLabel.isHidden = true
-			self.logger?.log(.info, "Плейсхолдер скрыт")
+			if !self.placeholderLabel.isHidden {
+				self.placeholderLabel.isHidden = true
+				self.logger?.log(.info, "Плейсхолдер скрыт")
+			}
         }
     }
     
     func showPlaceholder() {
         DispatchQueue.main.async {
-            self.placeholderLabel.isHidden = false
-			self.logger?.log(.info, "Плейсхолдер отображен")
+			if self.placeholderLabel.isHidden {
+				self.placeholderLabel.isHidden = false
+				self.logger?.log(.info, "Плейсхолдер отображен")
+			}
         }
     }
     

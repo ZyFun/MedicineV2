@@ -91,7 +91,6 @@ private extension MedicinesViewController {
     @objc func addNewMedicine() {
 		generator.selectionChanged()
         presenter?.routeToMedicine(with: currentFirstAidKit, by: nil)
-        presenter?.updatePlaceholder()
     }
     
     func addSearchController() {
@@ -131,6 +130,7 @@ private extension MedicinesViewController {
     
     func setupPlaceholder() {
         placeholderLabel.textColor = .systemGray
+		placeholderLabel.isHidden = true
     }
 }
 
