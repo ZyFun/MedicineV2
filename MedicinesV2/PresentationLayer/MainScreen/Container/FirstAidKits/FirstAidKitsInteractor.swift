@@ -129,8 +129,10 @@ extension FirstAidKitInteractor: FirstAidKitsBusinessLogic {
                 case .success(let firstAidKits):
                     self?.updatePlaceholder(for: firstAidKits)
                     self?.updateNotificationBadge()
+					self?.presenter?.operationComplete(result: .success(()))
                 case .failure(let error):
                     self?.logger?.log(.error, error.localizedDescription)
+					self?.presenter?.operationComplete(result: .failure(error))
                 }
             }
         }

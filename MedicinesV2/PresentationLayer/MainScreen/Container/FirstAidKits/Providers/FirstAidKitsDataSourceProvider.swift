@@ -23,7 +23,9 @@ final class FirstAidKitsDataSourceProvider: NSObject, IFirstAidKitsDataSourcePro
     // MARK: - Private properties
     
     private let presenter: FirstAidKitsViewControllerOutput?
-    
+
+	private let generator = UINotificationFeedbackGenerator()
+
     // MARK: - Initializer
     
     init(
@@ -147,7 +149,8 @@ extension FirstAidKitsDataSourceProvider: UITableViewDelegate {
             title: ""
         ) { [weak self] _, _, isDone in
             self?.presenter?.delete(firstAidKit)
-            
+			self?.generator.notificationOccurred(.success)
+
             // Возвращаем значение в убегающее замыкание,
             // чтобы отпустить интерфейс при пользовательских действиях с ячейкой
             isDone(true)

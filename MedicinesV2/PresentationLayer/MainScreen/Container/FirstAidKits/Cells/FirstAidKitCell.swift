@@ -218,6 +218,8 @@ final class FirstAidKitCell: UITableViewCell, IdentifiableCell {
     // MARK: - Actions
     
     private func pressedEditButton() {
+		let generator = UISelectionFeedbackGenerator()
+		generator.selectionChanged()
         buttonTappedAction?()
     }
 }
@@ -241,9 +243,9 @@ extension FirstAidKitCell {
             descriptionLabel.text = description
         }
         
-        amountLabel.text = "\(amount ?? 0) шт"
+        amountLabel.text = "\(amount ?? 0)"
         
-        expiredAmountLabel.text = "\(expiredAmount ?? 0) шт"
+        expiredAmountLabel.text = "\(expiredAmount ?? 0)"
         if expiredAmount != 0 {
             alertIcon.isHidden = false
             expiredAmountLabel.textColor = Colors.pinkRed
