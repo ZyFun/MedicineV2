@@ -42,7 +42,6 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate {
     
     // Создаём экземпляр класса, для управлением уведомлениями. current возвращет обект для центра уведомлений
     var notificationCenter = UNUserNotificationCenter.current()
-    // TODO: (MEDIC-48) Избавится от прямой инициализации синглтона и пробросить зависимость через init
     let logger = DTLogger.shared
     
     private override init() {

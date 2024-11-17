@@ -12,7 +12,6 @@ final class RepeatCellView: BaseView {
     
     // MARK: - Dependencies
     
-    // TODO: (MEDIC-48) Подумать как избавится от инициализации синглтона, если это возможно
     private let logger: DTLogger = DTLogger.shared
     
     // MARK: - Private properties
