@@ -14,7 +14,6 @@ final class SortFieldCellView: BaseView {
     
     // MARK: - Dependencies
     
-    // TODO: (MEDIC-48) Подумать как избавится от синглтона если это возможно и пробросить зависимость
     private let logger: DTLogger = DTLogger.shared
     
     // MARK: - Private properties
