@@ -1,0 +1,24 @@
+{
+  "sourceLanguage" : "ru",
+  "strings" : {
+    "5jn-lN-x79.text" : {
+      "comment" : "Class = \"UILabel\"; text = \"У вас еще нет лекарств в этой аптечке. Для добавления нового, нажмите + в правом верхнем углу.\"; ObjectID = \"5jn-lN-x79\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You don’t have any medications in this kit yet. To add a new one, press + in the top right corner."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "У вас еще нет лекарств в этой аптечке. Для добавления нового, нажмите + в правом верхнем углу."
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

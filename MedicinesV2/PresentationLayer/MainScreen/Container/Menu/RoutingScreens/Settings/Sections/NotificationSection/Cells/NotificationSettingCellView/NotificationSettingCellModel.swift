@@ -21,11 +21,11 @@ struct NotificationSettingCellModel {
         var description: String {
             switch self {
             case .morning:
-                return "Утром"
+				return String(localized: "Утром")
             case .day:
-                return "Днём"
+                return String(localized: "Днём")
             case .evening:
-                return "Вечером"
+                return String(localized: "Вечером")
             }
         }
         

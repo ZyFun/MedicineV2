@@ -11,14 +11,14 @@ enum MenuModel: Int, CaseIterable {
     case settings
     case aboutApp
     
-    var title: String {
-        switch self {
-        case .settings:
-            return "Настройки"
-        case .aboutApp:
-            return "О приложении"
-        }
-    }
+	var title: String {
+		switch self {
+		case .settings:
+			return String(localized: "Настройки")
+		case .aboutApp:
+			return String(localized: "О приложении")
+		}
+	}
     
     var iconImage: UIImage {
         switch self {

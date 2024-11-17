@@ -51,7 +51,7 @@ final class SettingsViewController: UIViewController {
     private var saveButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = Colors.darkCyan
-        button.setTitle("Сохранить", for: .normal)
+		button.setTitle(String(localized: "Сохранить"), for: .normal)
         button.layer.cornerRadius = 16
         button.tintColor = .white
         return button
@@ -61,7 +61,7 @@ final class SettingsViewController: UIViewController {
     private var cancelButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = Colors.darkCyan
-        button.setTitle("Отменить", for: .normal)
+        button.setTitle(String(localized: "Отменить"), for: .normal)
         button.layer.cornerRadius = 16
         button.tintColor = .white
         return button
