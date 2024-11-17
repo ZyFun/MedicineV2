@@ -456,7 +456,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Not enough medication in stock\n\n\n\n\n\n\n"
+            "value" : "Not enough medication in stock"
           }
         }
       }

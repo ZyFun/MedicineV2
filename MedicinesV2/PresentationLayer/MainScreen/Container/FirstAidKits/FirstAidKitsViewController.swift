@@ -28,7 +28,11 @@ protocol FirstAidKitsDisplayLogic: AnyObject {
     ///   - index: принимает IndexPath  и используется для обновления конкретной ячейки в таблице
     /// - Метод с входящими данными редактирует выбранную аптечку.
     /// - Метод без входящих данных, создаёт новую аптечку.
-    func showAlert(for entity: DBFirstAidKit?, by indexPath: IndexPath?)
+	func showAlert(for entity: DBFirstAidKit?, by indexPath: IndexPath?)
+	/// Метод действия на завершение операции в кордате.
+	/// - Parameter result: может вернуть ничего, или ошибку, в случае если изменения в базе
+	/// были не успешными
+	func operationComplete(result: Result<Void, Error>)
 }
 
 protocol FirstAidKitsControllerDelegate: AnyObject {
@@ -41,7 +45,12 @@ final class FirstAidKitsViewController: UIViewController {
     
     /// Ссылка на presenter
     var presenter: FirstAidKitsViewControllerOutput?
-    
+
+	// MARK: - Private Properties
+
+	private let selectGenerator = UISelectionFeedbackGenerator()
+	private let feedbackGenerator = UINotificationFeedbackGenerator()
+
     // MARK: - Dependencies
     
     var splashPresenter: ISplashPresenter?
@@ -139,6 +148,7 @@ extension FirstAidKitsViewController {
     /// Метод для добавления новой аптечки.
     /// - Вызывает алерт контроллер, с помощью которого будет производится добавление аптечки
     @objc func addNewFirstAidKit() {
+		selectGenerator.selectionChanged()
         presenter?.showAlert(for: nil, by: nil)
     }
     
@@ -186,6 +196,12 @@ extension FirstAidKitsViewController {
 // MARK: - Логика обновления данных View
 
 extension FirstAidKitsViewController: FirstAidKitsDisplayLogic {
+	func operationComplete(result: Result<Void, any Error>) {
+		switch result {
+		case .success: feedbackGenerator.notificationOccurred(.success)
+		case .failure: feedbackGenerator.notificationOccurred(.error)
+		}
+	}
     
     func updateExpiredMedicinesLabel() {
         firstAidKitsTableView.reloadData()
@@ -215,7 +231,7 @@ extension FirstAidKitsViewController: FirstAidKitsDisplayLogic {
     
     func showAlert(for entity: DBFirstAidKit? = nil, by indexPath: IndexPath? = nil) {
 		let title = entity == nil
-		?  String(localized: "Добавить аптечку")
+		? String(localized: "Добавить аптечку")
 		: String(localized: "Изменить название")
         let alert = UIAlertController.createAlertController(with: title)
         

@@ -49,13 +49,24 @@ extension UIAlertController {
     ///   - firstAidKit: принимает аптечку для редактирования названия или сохранения новой
     ///   - completion: возвращает новое значение названия для аптечки
     func action(firstAidKit: DBFirstAidKit?, completion: @escaping (String) -> Void) {
+		let generator = UINotificationFeedbackGenerator()
+
 		let buttonTitle = firstAidKit == nil
 		? String(localized: "Сохранить")
 		: String(localized: "Обновить")
 
         let saveAction = UIAlertAction(title: buttonTitle, style: .default) { [unowned self] _ in
-            guard let newValue = textFields?.first?.text else { return }
-            guard !newValue.isEmpty else { return }
+			guard let newValue = textFields?.first?.text else {
+				generator.notificationOccurred(.error)
+				return
+			}
+			
+			guard !newValue.isEmpty else {
+				generator.notificationOccurred(.error)
+				return
+			}
+
+			generator.notificationOccurred(.success)
             completion(newValue)
         }
         

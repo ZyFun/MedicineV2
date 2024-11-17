@@ -20,6 +20,8 @@ struct MEDAlertView: View {
 		target: .main
 	)
 
+	private let generator = UINotificationFeedbackGenerator()
+
 	@State private var workItem: DispatchWorkItem?
 
     var body: some View {
@@ -55,6 +57,7 @@ struct MEDAlertView: View {
 		.animation(.spring, value: isShow)
 		.onChange(of: isShow) { value in
 			guard value else { return }
+			generator.notificationOccurred(config.style.hapticType)
 
 			workItem?.cancel()
 			let newWorkItem = DispatchWorkItem {
@@ -92,6 +95,14 @@ enum STAlertStyle {
 		case .success: .lightGreen
 		case .error: .pinkRed
 		case .info: .ripeWheat
+		}
+	}
+
+	var hapticType: UINotificationFeedbackGenerator.FeedbackType {
+		switch self {
+		case .success: .success
+		case .error: .error
+		case .info: .success
 		}
 	}
 }

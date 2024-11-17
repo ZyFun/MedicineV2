@@ -219,6 +219,8 @@ final class MedicineCell: UITableViewCell, IdentifiableCell {
     // MARK: - Actions
     
     private func pressedEditButton() {
+		let generator = UISelectionFeedbackGenerator()
+		generator.selectionChanged()
         buttonTappedAction?()
     }
 }

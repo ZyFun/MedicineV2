@@ -19,19 +19,22 @@ protocol MedicinesDisplayLogic: AnyObject {
 }
 
 final class MedicinesViewController: UIViewController {
-    
+	// MARK: - Dependencies
+
+	/// Ссылка на presenter
+	var presenter: MedicinesViewControllerOutput?
+	var dataSourceProvider: IMedicinesDataSourceProvider?
+	var fetchedResultManager: IMedicinesFetchedResultsManager?
+	var logger: DTLogger?
+
     // MARK: - Public properties
-    
-    /// Ссылка на presenter
-    var presenter: MedicinesViewControllerOutput?
-    var dataSourceProvider: IMedicinesDataSourceProvider?
-    var fetchedResultManager: IMedicinesFetchedResultsManager?
-    /// Содержит в себе выбранную аптечку
-    var currentFirstAidKit: DBFirstAidKit?
-    
-    // MARK: - Dependencies
-    
-    var logger: DTLogger?
+
+	/// Содержит в себе выбранную аптечку
+	var currentFirstAidKit: DBFirstAidKit?
+
+	// MARK: - Private properties
+
+	private let generator = UISelectionFeedbackGenerator()
 
     // MARK: - IBOutlets
     
@@ -86,6 +89,7 @@ private extension MedicinesViewController {
     }
     /// Добавление нового лекарства
     @objc func addNewMedicine() {
+		generator.selectionChanged()
         presenter?.routeToMedicine(with: currentFirstAidKit, by: nil)
         presenter?.updatePlaceholder()
     }
