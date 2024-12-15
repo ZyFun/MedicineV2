@@ -36,6 +36,15 @@ final class MedicinesViewController: UIViewController {
 
 	private let generator = UISelectionFeedbackGenerator()
 
+	/// Массив с названиями полей, для поиска через предикат по CoreData
+	private let searchFields = [
+		"title",
+		"type",
+		"purpose",
+		"activeIngredient",
+		"manufacturer"
+	]
+
     // MARK: - IBOutlets
     
     /// Таблица с лекарствами
@@ -168,12 +177,12 @@ extension MedicinesViewController: UISearchBarDelegate {
         let firstAidKitFilter = NSPredicate(
             format: "%K == %@", "firstAidKit", currentFirstAidKit
         )
-        let medicineFilter = NSPredicate(
-            format: "title CONTAINS[c] %@ OR type CONTAINS[c] %@ OR purpose CONTAINS[c] %@",
-            searchText,
-            searchText,
-            searchText
-        )
+
+		let predicates = searchFields.map {
+			NSPredicate(format: "\($0) CONTAINS[c] %@", searchText)
+		}
+
+		let medicineFilter = NSCompoundPredicate(orPredicateWithSubpredicates: predicates)
         
         fetchedResultManager?.fetchedResultsController
             .fetchRequest.predicate = NSCompoundPredicate(
