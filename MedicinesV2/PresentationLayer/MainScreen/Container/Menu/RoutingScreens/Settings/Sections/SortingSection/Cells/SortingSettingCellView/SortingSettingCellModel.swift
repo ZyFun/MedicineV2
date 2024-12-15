@@ -21,13 +21,13 @@ struct SortingSettingCellModel {
         case expiryDate
         
         /// Содержит полное описание названия кейса
-        var description: String {
-            switch self {
-            case .title: return "По заголовку"
-            case .dateCreated: return "По дате добавления"
-            case .expiryDate: return "По сроку годности"
-            }
-        }
+		var description: String {
+			switch self {
+			case .title: return String(localized: "По заголовку")
+			case .dateCreated: return String(localized: "По дате добавления")
+			case .expiryDate: return String(localized: "По сроку годности")
+			}
+		}
     }
     
     /// Перечисление с направлением сортировки
@@ -37,8 +37,8 @@ struct SortingSettingCellModel {
         
         var description: String {
             switch self {
-            case .up: return "По возрастанию"
-            case .down: return "По убыванию"
+            case .up: return String(localized: "По возрастанию")
+            case .down: return String(localized: "По убыванию")
             }
         }
     }

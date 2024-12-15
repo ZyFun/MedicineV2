@@ -21,6 +21,10 @@ protocol FirstAidKitsPresentationLogic: AnyObject {
     func showPlaceholder()
     /// Метод для обновления лейбла о просроченных лекарствах в аптечке
     func updateExpiredMedicinesLabel()
+	/// Метод действия на завершение операции в кордате.
+	/// - Parameter result: может вернуть ничего, или ошибку, в случае если изменения в базе
+	/// были не успешными
+	func operationComplete(result: Result<Void, Error>)
 }
 
 /// Протокол взаимодействия ViewController-a с презенетром
@@ -123,6 +127,9 @@ extension FirstAidKitsPresenter: FirstAidKitsViewControllerOutput {
 // MARK: - Presentation Logic
 
 extension FirstAidKitsPresenter: FirstAidKitsPresentationLogic {
+	func operationComplete(result: Result<Void, Error>) {
+		view?.operationComplete(result: result)
+	}
     
     func dismissSplashScreen() {
         view?.dismissSplashScreen()

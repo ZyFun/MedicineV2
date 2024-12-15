@@ -219,6 +219,8 @@ final class MedicineCell: UITableViewCell, IdentifiableCell {
     // MARK: - Actions
     
     private func pressedEditButton() {
+		let generator = UISelectionFeedbackGenerator()
+		generator.selectionChanged()
         buttonTappedAction?()
     }
 }
@@ -233,7 +235,7 @@ extension MedicineCell {
 		purpose: String?,
 		expiryDate: Date?,
 		amount: NSNumber?,
-		unitType: String?
+		unitType: String
 	) {
         setImageActionIconDefault()
         setImage(from: image)
@@ -242,7 +244,7 @@ extension MedicineCell {
         let description = generateDescriptionFrom(type, purpose)
         descriptionLabel.text = description
         
-		amountLabel.text = "\(amount?.doubleValue ?? 0) \(unitType ?? "шт")"
+		amountLabel.text = "\(amount?.doubleValue ?? 0) \(unitType)"
 
         if let expiryDate {
             expiryDateLabel.text = expiryDate.toString()

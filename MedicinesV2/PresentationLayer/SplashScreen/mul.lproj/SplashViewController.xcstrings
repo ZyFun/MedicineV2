@@ -1,0 +1,40 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "jFs-rB-EXD.text" : {
+      "comment" : "Class = \"UILabel\"; text = \"Аптечка\"; ObjectID = \"jFs-rB-EXD\";",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pocket MedKit"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Аптечка"
+          }
+        }
+      }
+    },
+    "phq-nF-nl4.text" : {
+      "comment" : "Class = \"UILabel\"; text = \"Идёт загрузка данных\"; ObjectID = \"phq-nF-nl4\";",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loading data"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Идёт загрузка данных"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

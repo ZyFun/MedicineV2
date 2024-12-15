@@ -13,7 +13,6 @@ final class TimeCellView: BaseView {
     
     // MARK: - Dependencies
     
-    // TODO: (MEDIC-48) Подумать как избавится от синглтона если это возможно и пробросить зависимость
     private let logger: DTLogger = DTLogger.shared
     
     // MARK: - Private properties
@@ -89,7 +88,7 @@ final class TimeCellView: BaseView {
         }
         
         let menu = UIMenu(
-            title: "Когда показать уведомления?",
+			title: String(localized: "Когда показать уведомления?"),
             children: [morning, day, evening]
         )
         timeButton.menu = menu

@@ -22,7 +22,9 @@ final class MedicinesDataSourceProvider: NSObject, IMedicinesDataSourceProvider 
     
     private let presenter: MedicinesViewControllerOutput?
     private let currentFirstAidKit: DBFirstAidKit
-    
+
+	private let generator = UINotificationFeedbackGenerator()
+
     // MARK: - Dependencies
     
     private let logger: DTLogger
@@ -81,14 +83,14 @@ extension MedicinesDataSourceProvider: UITableViewDataSource {
         ) as? MedicineCell else { return UITableViewCell() }
         
         let medicine = fetchMedicine(at: indexPath)
-        
+
         cell.configure(
             name: medicine?.title ?? "",
-            type: medicine?.type,
+			type: medicine?.type,
             purpose: medicine?.purpose,
             expiryDate: medicine?.expiryDate,
 			amount: medicine?.amount,
-			unitType: medicine?.unitType
+			unitType: NSLocalizedString(medicine?.unitType ?? String(localized: "шт"), comment: "")
         )
         
         cell.buttonTappedAction = { [weak self] in
@@ -116,7 +118,8 @@ extension MedicinesDataSourceProvider: UITableViewDelegate {
             
             guard let medicine = self?.fetchMedicine(at: indexPath) else { return }
             self?.presenter?.delete(medicine)
-            
+			self?.generator.notificationOccurred(.success)
+
             // Возвращаем значение в убегающее замыкание,
             // чтобы отпустить интерфейс при пользовательских действиях с ячейкой
             isDone(true)
