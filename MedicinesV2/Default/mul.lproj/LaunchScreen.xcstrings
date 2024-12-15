@@ -1,0 +1,24 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "C5z-XV-37S.text" : {
+      "comment" : "Class = \"UILabel\"; text = \"Pocket MedKit\"; ObjectID = \"C5z-XV-37S\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Pocket MedKit"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Аптечка"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

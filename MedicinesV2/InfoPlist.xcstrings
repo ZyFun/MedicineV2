@@ -1,8 +1,8 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "jFs-rB-EXD.text" : {
-      "comment" : "Class = \"UILabel\"; text = \"Аптечка\"; ObjectID = \"jFs-rB-EXD\";",
+    "CFBundleDisplayName" : {
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -18,19 +18,19 @@
         }
       }
     },
-    "phq-nF-nl4.text" : {
-      "comment" : "Class = \"UILabel\"; text = \"Идёт загрузка данных\"; ObjectID = \"phq-nF-nl4\";",
+    "CFBundleName" : {
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Loading data"
+            "value" : "Pocket MedKit"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Идёт загрузка данных"
+            "value" : "Аптечка"
           }
         }
       }
