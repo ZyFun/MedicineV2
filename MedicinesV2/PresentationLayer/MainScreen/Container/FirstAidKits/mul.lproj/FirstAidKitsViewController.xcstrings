@@ -1,9 +1,8 @@
 {
-  "sourceLanguage" : "ru",
+  "sourceLanguage" : "en",
   "strings" : {
     "Sho-xx-EYG.text" : {
       "comment" : "Class = \"UILabel\"; text = \"У вас еще нет аптечек. Для создания новой, нажмите + в правом верхнем углу.\"; ObjectID = \"Sho-xx-EYG\";",
-      "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -13,7 +12,7 @@
         },
         "ru" : {
           "stringUnit" : {
-            "state" : "new",
+            "state" : "translated",
             "value" : "У вас еще нет аптечек. Для создания новой, нажмите + в правом верхнем углу."
           }
         }
