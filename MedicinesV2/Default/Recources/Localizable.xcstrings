@@ -1,5 +1,5 @@
 {
-  "sourceLanguage" : "ru",
+  "sourceLanguage" : "en",
   "strings" : {
     "" : {
       "localizations" : {
@@ -9,7 +9,8 @@
             "value" : ""
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "%@" : {
       "localizations" : {
@@ -19,11 +20,18 @@
             "value" : "%@"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "Ok" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ok"
+          }
+        },
+        "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ok"
@@ -38,6 +46,12 @@
             "state" : "translated",
             "value" : "Telegram"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Telegram"
+          }
         }
       }
     },
@@ -47,6 +61,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "First aid Kits"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Аптечки"
           }
         }
       }
@@ -58,6 +78,12 @@
             "state" : "translated",
             "value" : "In stock"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "В наличии"
+          }
         }
       }
     },
@@ -67,6 +93,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enter active ingredient"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Введите действующее вещество"
           }
         }
       }
@@ -78,6 +110,12 @@
             "state" : "translated",
             "value" : "Enter dosage"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Введите дозу приёма"
+          }
         }
       }
     },
@@ -87,6 +125,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enter medication quantity"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Введите количество лекарств"
           }
         }
       }
@@ -98,6 +142,12 @@
             "state" : "translated",
             "value" : "Enter kit name"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Введите название аптечки"
+          }
         }
       }
     },
@@ -107,6 +157,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enter kit name or location"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Введите название или расположение аптечки"
           }
         }
       }
@@ -118,6 +174,12 @@
             "state" : "translated",
             "value" : "Enter medication name*"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Введите название лекарства*"
+          }
         }
       }
     },
@@ -127,6 +189,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enter the name of the new kit"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Введите название новой аптечки"
           }
         }
       }
@@ -138,6 +206,12 @@
             "state" : "translated",
             "value" : "Enter purpose (fever, cough)"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Введите назначение (температура, кашель)"
+          }
         }
       }
     },
@@ -147,6 +221,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enter the new kit name"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Введите новое название аптечки"
           }
         }
       }
@@ -158,6 +238,12 @@
             "state" : "translated",
             "value" : "Enter description or comments"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Введите описание или комментарии"
+          }
         }
       }
     },
@@ -167,6 +253,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enter medication manufacturer"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Введите производителя лекарства"
           }
         }
       }
@@ -178,6 +270,12 @@
             "state" : "translated",
             "value" : "Enter type (spray, tablets, syrup)"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Введите тип (спрей, таблетки, сироп)"
+          }
         }
       }
     },
@@ -187,6 +285,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Version"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Версия"
           }
         }
       }
@@ -198,6 +302,12 @@
             "state" : "translated",
             "value" : "Evening"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вечером"
+          }
         }
       }
     },
@@ -207,6 +317,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "VK"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ВКонтакте"
           }
         }
       }
@@ -218,6 +334,12 @@
             "state" : "translated",
             "value" : "Time"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Время"
+          }
         }
       }
     },
@@ -227,6 +349,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "g"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "г"
           }
         }
       }
@@ -238,6 +366,12 @@
             "state" : "translated",
             "value" : "Done"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Готово"
+          }
         }
       }
     },
@@ -247,6 +381,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Data saved"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Данные сохранены"
           }
         }
       }
@@ -258,6 +398,12 @@
             "state" : "translated",
             "value" : "Active ingredient"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Действующее вещество"
+          }
         }
       }
     },
@@ -267,6 +413,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dmitriy Danilin"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Дмитрий Данилин"
           }
         }
       }
@@ -278,6 +430,12 @@
             "state" : "translated",
             "value" : "Afternoon"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Днём"
+          }
         }
       }
     },
@@ -287,6 +445,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Add kit"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добавить аптечку"
           }
         }
       }
@@ -298,6 +462,12 @@
             "state" : "translated",
             "value" : "Dosage"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Доза приёма"
+          }
         }
       }
     },
@@ -307,6 +477,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dosage must not be 0"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Доза приёма не должна быть 0"
           }
         }
       }
@@ -318,6 +494,12 @@
             "state" : "translated",
             "value" : "Close"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Закрыть"
+          }
         }
       }
     },
@@ -327,6 +509,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Edit name"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Изменить название"
           }
         }
       }
@@ -338,6 +526,12 @@
             "state" : "translated",
             "value" : "When to show notifications?"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Когда показать уведомления?"
+          }
         }
       }
     },
@@ -347,6 +541,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Medications in the kit"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Лекарств в аптечке"
           }
         }
       }
@@ -358,6 +558,12 @@
             "state" : "translated",
             "value" : "Medication was taken"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Лекарство было принято"
+          }
         }
       }
     },
@@ -367,6 +573,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Medication removed"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Лекарство удалено"
           }
         }
       }
@@ -378,6 +590,12 @@
             "state" : "translated",
             "value" : "ml"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "мг"
+          }
         }
       }
     },
@@ -387,6 +605,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "mg"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "мл"
           }
         }
       }
@@ -398,6 +622,12 @@
             "state" : "translated",
             "value" : "Name"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Название"
+          }
         }
       }
     },
@@ -407,6 +637,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Purpose"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Назначение"
           }
         }
       }
@@ -418,6 +654,12 @@
             "state" : "translated",
             "value" : "Direction"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Направление"
+          }
         }
       }
     },
@@ -427,6 +669,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sorting direction"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Направление сортировки"
           }
         }
       }
@@ -438,6 +686,12 @@
             "state" : "translated",
             "value" : "Settings"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Настройки"
+          }
         }
       }
     },
@@ -447,6 +701,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Not specified"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не задано"
           }
         }
       }
@@ -458,6 +718,12 @@
             "state" : "translated",
             "value" : "Not enough medication in stock"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Недостаточно лекарства в наличии"
+          }
         }
       }
     },
@@ -467,6 +733,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "New medicine"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Новое лекарство"
           }
         }
       }
@@ -478,6 +750,12 @@
             "state" : "translated",
             "value" : "About the app"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "О приложении"
+          }
         }
       }
     },
@@ -487,6 +765,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Update"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Обновить"
           }
         }
       }
@@ -498,6 +782,12 @@
             "state" : "translated",
             "value" : "Description"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Описание"
+          }
         }
       }
     },
@@ -507,6 +797,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Remaining"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Осталось"
           }
         }
       }
@@ -518,6 +814,12 @@
             "state" : "translated",
             "value" : "Open"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Открыть"
+          }
         }
       }
     },
@@ -527,6 +829,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cancel"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отмена"
           }
         }
       }
@@ -538,6 +846,12 @@
             "state" : "translated",
             "value" : "Cancel"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отменить"
+          }
         }
       }
     },
@@ -547,6 +861,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Error"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ошибка"
           }
         }
       }
@@ -558,6 +878,12 @@
             "state" : "translated",
             "value" : "Ascending"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "По возрастанию"
+          }
         }
       }
     },
@@ -567,6 +893,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "By date added"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "По дате добавления"
           }
         }
       }
@@ -578,6 +910,12 @@
             "state" : "translated",
             "value" : "By title"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "По заголовку"
+          }
         }
       }
     },
@@ -587,6 +925,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "By expiration date"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "По сроку годности"
           }
         }
       }
@@ -598,6 +942,12 @@
             "state" : "translated",
             "value" : "Descending"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "По убыванию"
+          }
         }
       }
     },
@@ -607,6 +957,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Repeat"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Повтор"
           }
         }
       }
@@ -618,6 +974,12 @@
             "state" : "translated",
             "value" : "Field"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поле"
+          }
         }
       }
     },
@@ -627,6 +989,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "The name field must not be empty"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поле с названием не должно быть пустым"
           }
         }
       }
@@ -638,6 +1006,12 @@
             "state" : "translated",
             "value" : "Sorting field"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поле сортировки"
+          }
         }
       }
     },
@@ -647,6 +1021,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Apply"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Применить"
           }
         }
       }
@@ -658,6 +1038,12 @@
             "state" : "translated",
             "value" : "Take"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Принять"
+          }
         }
       }
     },
@@ -667,6 +1053,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Manufacturer"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Производитель"
           }
         }
       }
@@ -678,6 +1070,12 @@
             "state" : "translated",
             "value" : "Expired"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Просрочено"
+          }
         }
       }
     },
@@ -687,6 +1085,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Developer"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Разработчик"
           }
         }
       }
@@ -698,6 +1102,12 @@
             "state" : "translated",
             "value" : "Edit"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Редактировать"
+          }
         }
       }
     },
@@ -707,6 +1117,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sorting"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сортировка"
           }
         }
       }
@@ -718,6 +1134,12 @@
             "state" : "translated",
             "value" : "Save"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сохранить"
+          }
         }
       }
     },
@@ -727,6 +1149,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Expiration date"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Срок годности"
           }
         }
       }
@@ -738,6 +1166,12 @@
             "state" : "translated",
             "value" : "Type"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тип"
+          }
         }
       }
     },
@@ -747,6 +1181,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Notifications"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Уведомления"
           }
         }
       }
@@ -758,6 +1198,12 @@
             "state" : "translated",
             "value" : "Delete"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Удалить"
+          }
         }
       }
     },
@@ -768,6 +1214,12 @@
             "state" : "translated",
             "value" : "Morning"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Утром"
+          }
         }
       }
     },
@@ -777,6 +1229,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "pcs"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "шт"
           }
         }
       }
